@@ -1,0 +1,8 @@
+package com.ge.code.generate.request.service;
+
+import org.springframework.stereotype.Service;
+
+public interface CodeGenRequestService {
+	public String getAllCodeGenRequests();
+	public void addCodeGenRequest();
+}

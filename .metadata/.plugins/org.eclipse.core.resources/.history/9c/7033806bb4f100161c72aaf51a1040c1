@@ -1,0 +1,44 @@
+package com.ge.code.generate.request.repository.entity;
+
+import javax.persistence.Entity;
+
+@Entity(name = "btch_cntl_master")
+public class BatchControlMaster {
+
+	 //`SOURCE`
+	 private String source;
+	 //SRC_TBL_N
+	 private String sourceTableName;
+	 //COLS
+	 private String sourceColumnName;
+	 //INCR_COL_N
+	 private String calculateDeltaOn;
+	 WHRE_COL
+	 ARC_LIM
+	 WRTE_MODE
+	 RFSH_TYPE
+	 TARGET
+	 TGT_TBL_N
+	 PRTN_KEY
+	 LAST_KEY
+	 OFFSET_VAL
+	 ACTV_F
+	 LAST_RUN_BTCH_ID
+	 LAST_RUN_LOAD_TMSP
+	 DFLT_PRLL
+	 TRFM_MRGE_OR_UPDT
+	 DFLT_INS
+	 MAX_RUN_BTCH_ID
+	BTCH_ID
+	 SUBJ_AREA
+	 ROOT_DIR
+	 SRC_SYS
+	 SOURCE_DIR
+	 MASTER_JOB_N
+	 FILLER_1
+	 FILLER_2
+	 FILLER_3
+	 CRTE_TMSP
+	 UPDT_TMSP
+
+}

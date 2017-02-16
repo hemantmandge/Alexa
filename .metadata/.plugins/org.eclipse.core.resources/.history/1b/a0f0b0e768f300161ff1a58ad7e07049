@@ -1,0 +1,14 @@
+package com.ge.code.generate.request.service;
+
+public interface CodeGenRequestService {
+	
+	public String getDataSources();
+	public String getHostDetails();
+	public String getDataBaseDetails();
+	public String getTables();
+	public String getColumns();
+	public String getRequestLoadType();
+	public String getHiveTableType();
+	public String getSFTPSourceDetails();
+	public String getFileType();
+}

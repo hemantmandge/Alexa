@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.ge.RequestController&apos; to &apos;CodeGenRequestController&apos;&#x0D;&#x0A;- Original project: &apos;CodeGenUtility&apos;&#x0D;&#x0A;- Original element: &apos;com.ge.RequestController&apos;&#x0D;&#x0A;- Renamed element: &apos;com.ge.CodeGenRequestController&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;RequestController&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;com.ge{RequestController.java[RequestController" matchStrategy="1" name="CodeGenRequestController" qualified="false" references="true" similarDeclarations="false" stamp="1486547664106" textual="false" version="1.0"/>
+</session>

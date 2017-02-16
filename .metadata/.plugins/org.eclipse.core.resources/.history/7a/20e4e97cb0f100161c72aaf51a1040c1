@@ -1,0 +1,5 @@
+package com.ge.code.generate.request.repository.entity;
+
+public class BatchControlMaster {
+
+}

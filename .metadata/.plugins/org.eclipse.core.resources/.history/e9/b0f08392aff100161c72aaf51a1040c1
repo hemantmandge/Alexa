@@ -1,0 +1,6 @@
+package com.ge.code.generate.request.service;
+
+public interface CodeGenRequestRepository {
+	public String getAllCodeGenRequests();
+	public void addCodeGenRequest();
+}

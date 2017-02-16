@@ -1,0 +1,19 @@
+package com.ge.code.generate.request.service.impl;
+
+import com.ge.code.generate.request.service.CodeGenRequestService;
+
+public class CodeGenRequestServiceImpl implements CodeGenRequestService {
+
+	@Override
+	public String getAllCodeGenRequests() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addCodeGenRequest() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

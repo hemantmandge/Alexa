@@ -1,0 +1,73 @@
+package com.ge.code.generate.request.repository.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "btch_cntl_master")
+public class BatchControlMaster {
+	
+	//`SOURCE`
+	private String source;
+	//SRC_TBL_N
+	private String sourceTableName;
+	//COLS
+	private String sourceColumnName;
+	//INCR_COL_N
+	private String calculateDeltaOn;
+	//WHRE_COL
+	private String whereCondition;
+	//ARC_LIM
+	private String archivePeriod;
+	//WRTE_MODE
+	private String loadType;
+	//RFSH_TYPE
+	private String refreshType;
+	//TARGET
+	private String targetDBName;
+	//TGT_TBL_N
+	private String targetTableName;
+	//PRTN_KEY
+	private String targetPartitionKey;
+	//LAST_KEY
+	private String lastKey;
+	//OFFSET_VAL
+	private int offsetVal;
+	//ACTV_F
+	private String activeFlag;
+	//LAST_RUN_BTCH_ID
+	private long lastRunBatchId;
+	//LAST_RUN_LOAD_TMSP
+	private String lastRunLoadTimestamp;
+	//DFLT_PRLL
+	private String defaultParallel;
+	//TRFM_MRGE_OR_UPDT
+	private String  transformationMergeOrUpdate;
+	//DFLT_INS
+	private String defaultInstance;
+	//MAX_RUN_BTCH_ID
+	private String maxRunBatchId;
+	//BTCH_ID
+	private int batchId;
+	//SUBJ_AREA
+	private String subjectArea;
+	//ROOT_DIR
+	private String rootDirectory;
+	//SRC_SYS
+	private String sourceSystem;
+	//SOURCE_DIR
+	private String sourceDirectory;
+	//MASTER_JOB_N
+	private String masterJobName;
+	//FILLER_1
+	private String fillerOne;
+	//FILLER_2
+	private String fillerTwo;
+	//FILLER_3
+	private String fillerThree;
+	//CRTE_TMSP
+	private String createTimeStamp;
+	//UPDT_TMSP
+	private String updateTimeStamp;
+
+}
