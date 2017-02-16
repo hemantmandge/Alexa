@@ -32,11 +32,10 @@ public class ResourceRequestController {
 	}
 	
 	@RequestMapping("/getSchemaDetails")
-	public String getSchemaDetails() {
-		//return resourceRequestService.getAllCodeGenRequests();
-		return null;
+	public List<String> getSchemaDetails(@RequestParam("userid") String userid, @RequestParam("password") String password,
+			 @RequestParam("host") String host,  @RequestParam("database") String database,  @RequestParam("rdbmsName") String rdbmsName) {
+		return resourceRequestService.getSchemaDetails(userid, password, host, database, rdbmsName);
 	}
-	
 	
 	@RequestMapping("/getTables")
 	public String getTables() {
