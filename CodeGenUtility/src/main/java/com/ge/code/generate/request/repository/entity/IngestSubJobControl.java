@@ -2,50 +2,45 @@ package com.ge.code.generate.request.repository.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity(name = "ingest_sub_job_cntl")
 	public class IngestSubJobControl {
-		
-	//master_job_n
+	
+	@Column(name = "master_job_n")
 	private String masterJobName;
-	//script_n
+	@Column(name = "script_n")
 	private String scriptName;
-	//script_loc
+	@Column(name = "script_loc")
 	private String scriptLocation;
-	//`source`
+	@Column(name = "`source`")
 	private String source;
-	//tgt_tbl_n
+	@Id
+	@Column(name = "tgt_tbl_n")
 	private String targetTableName;
-	//join_key
+	@Column(name = "join_key")
 	private String joinKey;
-	//XREF_VER_COL_N
+	@Column(name = "XREF_VER_COL_N")
 	private String referenceColumnName;
-	
-	//HIVE_SQL_LOC
+	@Column(name = "HIVE_SQL_LOC")
 	private String hiveSQLLocation;
-	
-	//PIG_PROP
+	@Column(name = "PIG_PROP")
 	private String pigProperty;
-	
-	//parm_file_loc
+	@Column(name = "parm_file_loc")
 	private String parameterFileLocation;
-	
-	//EPOC_ID_CURR
+	@Column(name = "EPOC_ID_CURR")
 	private String epocIdCurrent;
-	
-	//EPOC_ID_TEMP
+	@Column(name = "EPOC_ID_TEMP")
 	private String epocIdTemp;
-	
-	//LST_RUN_UPDT_TS
+	@Column(name = "LST_RUN_UPDT_TS")
 	private Date lastUpdatedTimeStamp;
-	
-	//MAXWHER_COLS
+	@Column(name = "MAXWHER_COLS")
 	private String maxWhereColumn;
-	
-	//IGN_BTCH_ID (Ignore Batch ID)
+	@Column(name = "IGN_BTCH_ID")
 	private String ingestBatchId;
-	//THRESHOLD_LIMIT
+	@Column(name = "THRESHOLD_LIMIT")
 	private long thresholdLimit;
 	
 	public String getMasterJobName() {
