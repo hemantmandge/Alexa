@@ -41,7 +41,7 @@ import javax.persistence.Id;
 	@Column(name = "IGN_BTCH_ID")
 	private String ingestBatchId;
 	@Column(name = "THRESHOLD_LIMIT")
-	private long thresholdLimit;
+	private Long thresholdLimit;
 	
 	public String getMasterJobName() {
 		return masterJobName;
@@ -133,10 +133,10 @@ import javax.persistence.Id;
 	public void setIngestBatchId(String ingestBatchId) {
 		this.ingestBatchId = ingestBatchId;
 	}
-	public long getThresholdLimit() {
+	public Long getThresholdLimit() {
 		return thresholdLimit;
 	}
-	public void setThresholdLimit(long thresholdLimit) {
+	public void setThresholdLimit(Long thresholdLimit) {
 		this.thresholdLimit = thresholdLimit;
 	}
 	

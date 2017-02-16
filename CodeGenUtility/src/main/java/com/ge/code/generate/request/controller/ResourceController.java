@@ -13,7 +13,7 @@ public class ResourceController {
 	
 	@Autowired
 	private CodeGenRequestService codeGenRequestService;
-	
+	/*
 	@RequestMapping("/getDataSources")
 	public String getDataSources() {
 		return codeGenRequestService.getAllCodeGenRequests();
@@ -58,5 +58,5 @@ public class ResourceController {
 	@RequestMapping("/getFileType")
 	public String getFileType() {
 		return codeGenRequestService.getAllCodeGenRequests();
-	}
+	}*/
 }

@@ -1,6 +1,10 @@
 package com.ge.code.generate.request.service;
 
+import java.util.List;
+
+import com.ge.code.generate.request.repository.entity.BatchControlMaster;
+
 public interface CodeGenRequestService {
-	public String getAllCodeGenRequests();
+	public List<BatchControlMaster> getAllCodeGenRequests();
 	public void addCodeGenRequest();
 }

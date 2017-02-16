@@ -13,7 +13,7 @@ public class BatchControlMasterPrimaryKey implements Serializable{
 	@Column(name = "TGT_TBL_N", nullable = false)
 	private String targetTableName;
 	@Column(name = "DFLT_INS", nullable = false)
-	private int defaultInstance;
+	private Integer defaultInstance;
 	
 	public String getSubjectArea() {
 		return subjectArea;
@@ -27,10 +27,10 @@ public class BatchControlMasterPrimaryKey implements Serializable{
 	public void setTargetTableName(String targetTableName) {
 		this.targetTableName = targetTableName;
 	}
-	public int getDefaultInstance() {
+	public Integer getDefaultInstance() {
 		return defaultInstance;
 	}
-	public void setDefaultInstance(int defaultInstance) {
+	public void setDefaultInstance(Integer defaultInstance) {
 		this.defaultInstance = defaultInstance;
 	}
 }

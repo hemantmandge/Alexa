@@ -39,11 +39,11 @@ public class BatchControlMaster {
 	@Column(name = "LAST_KEY")
 	private String lastKey;
 	@Column(name = "OFFSET_VAL")
-	private int offsetVal;
+	private Integer offsetVal;
 	@Column(name = "ACTV_F")
 	private String activeFlag;
 	@Column(name = "LAST_RUN_BTCH_ID")
-	private long lastRunBatchId;
+	private Long lastRunBatchId;
 	@Column(name = "LAST_RUN_LOAD_TMSP")
 	private Date lastRunLoadTimestamp;
 	@Column(name = "DFLT_PRLL")
@@ -51,9 +51,9 @@ public class BatchControlMaster {
 	@Column(name = "TRFM_MRGE_OR_UPDT")
 	private String  transformationMergeOrUpdate;
 	@Column(name = "MAX_RUN_BTCH_ID")
-	private long maxRunBatchId;
+	private Long maxRunBatchId;
 	@Column(name = "BTCH_ID")
-	private int batchId;
+	private Integer batchId;
 	@Column(name = "ROOT_DIR")
 	private String rootDirectory;
 	@Column(name = "SRC_SYS")
@@ -138,10 +138,10 @@ public class BatchControlMaster {
 	public void setLastKey(String lastKey) {
 		this.lastKey = lastKey;
 	}
-	public int getOffsetVal() {
+	public Integer getOffsetVal() {
 		return offsetVal;
 	}
-	public void setOffsetVal(int offsetVal) {
+	public void setOffsetVal(Integer offsetVal) {
 		this.offsetVal = offsetVal;
 	}
 	public String getActiveFlag() {
@@ -150,10 +150,10 @@ public class BatchControlMaster {
 	public void setActiveFlag(String activeFlag) {
 		this.activeFlag = activeFlag;
 	}
-	public long getLastRunBatchId() {
+	public Long getLastRunBatchId() {
 		return lastRunBatchId;
 	}
-	public void setLastRunBatchId(long lastRunBatchId) {
+	public void setLastRunBatchId(Long lastRunBatchId) {
 		this.lastRunBatchId = lastRunBatchId;
 	}
 	public Date getLastRunLoadTimestamp() {
@@ -174,16 +174,16 @@ public class BatchControlMaster {
 	public void setTransformationMergeOrUpdate(String transformationMergeOrUpdate) {
 		this.transformationMergeOrUpdate = transformationMergeOrUpdate;
 	}
-	public long getMaxRunBatchId() {
+	public Long getMaxRunBatchId() {
 		return maxRunBatchId;
 	}
-	public void setMaxRunBatchId(long maxRunBatchId) {
+	public void setMaxRunBatchId(Long maxRunBatchId) {
 		this.maxRunBatchId = maxRunBatchId;
 	}
-	public int getBatchId() {
+	public Integer getBatchId() {
 		return batchId;
 	}
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 	public String getRootDirectory() {
