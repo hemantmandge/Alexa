@@ -17,7 +17,7 @@ public class ListOfValues {
 	@Column(name = "NAME")
 	private String name;
 	@Column(name = "VALUE")
-	private Integer value;
+	private String value;
 	public Integer getId() {
 		return id;
 	}
@@ -36,10 +36,10 @@ public class ListOfValues {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getValue() {
+	public String getValue() {
 		return value;
 	}
-	public void setValue(Integer value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 }

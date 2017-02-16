@@ -31,7 +31,7 @@ public class ResourceRequestController {
 		return resourceRequestService.findByTypeAndName(type, name);
 	}
 	
-	@RequestMapping("/getTables")
+	@RequestMapping("/getSchemaDetails")
 	public String getSchemaDetails() {
 		//return resourceRequestService.getAllCodeGenRequests();
 		return null;
