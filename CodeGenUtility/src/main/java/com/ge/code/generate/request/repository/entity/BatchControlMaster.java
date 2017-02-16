@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 public class BatchControlMaster {
 	
 	@EmbeddedId
+	@Id
 	private BatchControlMasterPrimaryKey batchControlMasterPrimaryKey;
 	@Column(name = "`SOURCE`")
 	private String source;

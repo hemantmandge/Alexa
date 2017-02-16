@@ -1,11 +1,13 @@
 package com.ge.code.generate.request.repository.entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class BatchControlMasterPrimaryKey {
+public class BatchControlMasterPrimaryKey implements Serializable{
 	@Column(name = "SUBJ_AREA", nullable = false)
 	private String subjectArea;
 	@Column(name = "TGT_TBL_N", nullable = false)
