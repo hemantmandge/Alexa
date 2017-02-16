@@ -1,6 +1,0 @@
-package com.ge.code.generate.request.repository.impl;
-
-public interface CodeGenRequestRepositoryImpl {
-	public String getAllCodeGenRequests();
-	public void addCodeGenRequest();
-}

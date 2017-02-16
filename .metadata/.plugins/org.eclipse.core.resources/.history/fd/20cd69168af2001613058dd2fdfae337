@@ -1,6 +1,0 @@
-package com.ge.code.generate.request.repository;
-
-import org.springframework.data.repository.CrudRepository;
-
-public interface IngestSubJobControlRepository extends CrudRepository<T, Serializable>{
-}

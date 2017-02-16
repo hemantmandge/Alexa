@@ -1,8 +1,0 @@
-package com.ge.code.generate.request.repository.entity;
-
-import javax.persistence.Entity;
-
-@Entity(name = "btch_cntl_master")
-public class BatchControlMaster {
-
-}

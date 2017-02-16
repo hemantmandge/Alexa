@@ -1,4 +1,0 @@
-package com.ge.code.generate.request.repository;
-
-public interface CodeGenRequestRepository {
-}
