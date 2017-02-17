@@ -38,15 +38,15 @@ public class ResourceRequestController {
 	}
 	
 	@RequestMapping("/getTables")
-	public String getTables() {
-		//return resourceRequestService.getAllCodeGenRequests();
-		return null;
+	public List<String> getTables(@RequestParam("userid") String userid, @RequestParam("password") String password, @RequestParam("host") String host, 
+			@RequestParam("database") String database,  @RequestParam("rdbmsName") String rdbmsName, @RequestParam("schema") String schema) {
+		return resourceRequestService.getTables(userid, password, host, database, rdbmsName, schema);
 	}
 	
 	@RequestMapping("/getColumns")
-	public String getColumns() {
-		//return resourceRequestService.getAllCodeGenRequests();
-		return null;
+	public List<String> getColumns(@RequestParam("userid") String userid, @RequestParam("password") String password, @RequestParam("host") String host, 
+			@RequestParam("database") String database,  @RequestParam("rdbmsName") String rdbmsName, @RequestParam("tableName") String tableName) {
+		return resourceRequestService.getColumns(userid, password, host, database, rdbmsName, tableName);
 	}
 	/*
 	@RequestMapping("/getRequestLoadType")

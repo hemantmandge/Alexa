@@ -44,27 +44,28 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 	@Override
 	public List<String> getSchemaDetails(String userid, String password, String host, String database,
 			String rdbmsName) {
-		if (rdbmsName.equalsIgnoreCase("ORACLE")) {
-			Connection connection = getConnection();
-			ResultSet schemas;
-			try {
-				DatabaseMetaData metaData = connection.getMetaData();
-				schemas = metaData.getSchemas();
-				while (schemas.next()) {
-					String tableSchema = schemas.getString(1);    // "TABLE_SCHEM"
-					String tableCatalog = schemas.getString(2); //"TABLE_CATALOG"
-					System.out.println("tableSchema = "+tableSchema);
-					System.out.println("tableCatalog = "+tableCatalog);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		Connection connection = getConnection(userid, password, host, database, rdbmsName);
+		ResultSet schemas;
+		List<String> schemaList = new ArrayList<String>();
+		try {
+			DatabaseMetaData metaData = connection.getMetaData();
+			schemas = metaData.getSchemas();
+			while (schemas.next()) {
+				String tableSchema = schemas.getString(1);    // "TABLE_SCHEM"
+				String tableCatalog = schemas.getString(2); //"TABLE_CATALOG"
+				System.out.println("tableSchema = "+tableSchema);
+				schemaList.add(tableSchema);
+				System.out.println("tableCatalog = "+tableCatalog);
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return null;
+		return schemaList;
 	}
 	
-	private Connection getConnection () {
+	private Connection getConnection (String userid, String password, String host, String database,
+			String rdbmsName) {
 
 
 		System.out.println("-------- Oracle JDBC Connection Testing ------");
@@ -99,6 +100,59 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			System.out.println("Failed to make connection!");
 		}
 		return connection;
+	}
+
+	@Override
+	public List<String> getTables(String userid, String password, String host, String database, String rdbmsName, String schema) {
+		Connection connection = getConnection(userid, password, host, database, rdbmsName);
+		ResultSet tables;
+		List<String> tableList = new ArrayList<String>();
+
+		String   catalog          = null;
+		String   schemaPattern    = null;
+		String   tableNamePattern = null;
+		String[] types            = null;
+		
+		try {
+			DatabaseMetaData metaData = connection.getMetaData();
+			tables = metaData.getTables(catalog, schemaPattern, tableNamePattern, types);
+			while (tables.next()) {
+				String tableName = tables.getString(3);    // "TABLE_SCHEM"
+				System.out.println("tableSchema = "+tableName);
+				tableList.add(tableName);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tableList;
+	}
+
+	@Override
+	public List<String> getColumns(String userid, String password, String host, String database, String rdbmsName,
+			String tableName) {
+		Connection connection = getConnection(userid, password, host, database, rdbmsName);
+		ResultSet columns;
+		List<String> columnsList = new ArrayList<String>();
+
+		String   catalog           = null;
+		String   schemaPattern     = null;
+		String   tableNamePattern  = tableName;
+		String   columnNamePattern = null;
+		
+		try {
+			DatabaseMetaData metaData = connection.getMetaData();
+			columns = metaData.getColumns(catalog, schemaPattern,  tableNamePattern, columnNamePattern);
+			while (columns.next()) {
+				String columnName = columns.getString(4);    // "TABLE_SCHEM"
+				System.out.println("tableSchema = "+columnName);
+				columnsList.add(columnName);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return columnsList;
 	}
 
 }

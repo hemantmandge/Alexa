@@ -2,14 +2,13 @@ package com.ge.code.generate.request.service;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.ge.code.generate.request.repository.entity.ListOfValues;
 
 public interface ResourceRequestService {
 	public List<ListOfValues> findByType(String type);
 	public List<ListOfValues> findByName(String name);
 	public List<ListOfValues> findByTypeAndName(String type, String name);
-	public List<String> getSchemaDetails(@RequestParam("userid") String userid, @RequestParam("password") String password,
-			 @RequestParam("host") String host,  @RequestParam("database") String database,  @RequestParam("rdbmsName") String rdbmsName);
+	public List<String> getSchemaDetails(String userid, String password, String host, String database, String rdbmsName);
+	public List<String> getTables(String userid, String password, String host, String database, String rdbmsName, String schema);
+	public List<String> getColumns(String userid, String password, String host, String database, String rdbmsName, String tableName);
 }
