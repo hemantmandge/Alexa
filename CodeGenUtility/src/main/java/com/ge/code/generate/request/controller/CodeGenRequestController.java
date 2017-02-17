@@ -11,12 +11,13 @@ import com.ge.code.generate.request.repository.entity.BatchControlMaster;
 import com.ge.code.generate.request.service.CodeGenRequestService;
 
 @RestController
+@RequestMapping("/requests")
 public class CodeGenRequestController {
 	
 	@Autowired
 	private CodeGenRequestService codeGenRequestService;
 	
-	@RequestMapping("/codeGenRequests")
+	@RequestMapping("/createCodeGenRequest")
 	public List<BatchControlMaster> getAllCodeGenRequests() {
 		return codeGenRequestService.getAllCodeGenRequests();
 	}
