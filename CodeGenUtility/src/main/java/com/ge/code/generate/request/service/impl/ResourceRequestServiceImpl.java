@@ -86,7 +86,8 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 
 		try {
 
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@10.76.177.167:1521:xe", "admin", "gepoc ");
+			//connection = DriverManager.getConnection("jdbc:oracle:thin:@10.76.177.167:1521:xe", "admin", "gepoc ");
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@" + host + ":" + database, userid, password);
 
 		} catch (SQLException e) {
 
@@ -109,8 +110,8 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		List<String> tableList = new ArrayList<String>();
 
 		String   catalog          = null;
-		String   schemaPattern    = null;
 		String   tableNamePattern = null;
+		String   schemaPattern     = schema;
 		String[] types            = null;
 		
 		try {
