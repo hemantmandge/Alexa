@@ -18,6 +18,7 @@ import com.ge.code.generate.request.repository.entity.BatchControlMaster;
 import com.ge.code.generate.request.repository.entity.BatchControlMasterPrimaryKey;
 import com.ge.code.generate.request.repository.entity.IngestSubJobControl;
 import com.ge.code.generate.request.service.CodeGenRequestService;
+import com.ge.code.generate.request.service.ResourceRequestService;
 import com.ge.code.generate.request.value.object.CodeGenRequest;
 
 @Service
@@ -26,6 +27,8 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 	BatchControlMasterRepository batchControlMasterRepository;
 	@Autowired
 	IngestSubJobControlRepository ingestSubJobControlRepository; 
+	@Autowired
+	ResourceRequestService resourceRequestService;
 
 	@Override
 	public List<BatchControlMaster> getAllCodeGenRequests() {
@@ -75,8 +78,13 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			}
 			batchControlMaster.setSource(codeGenRequest.getSource());// DBschema name
 			batchControlMaster.setSourceTableName(sourceTableName);
-			//TODO Need to get column name a fresh
-			batchControlMaster.setSourceColumnName(codeGenRequest.getSourceColumnNames().toString());
+			if(codeGenRequest.getSourceTableNames().size() > 1) {
+				String columnName = resourceRequestService.getColumns(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
+						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName).toString();
+				batchControlMaster.setSourceColumnName(columnName);
+			} else {
+				batchControlMaster.setSourceColumnName(codeGenRequest.getSourceColumnNames().toString());
+			}
 			batchControlMaster.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
 			batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());
 			batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
@@ -88,7 +96,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setMaxRunBatchId(new Long(0));
 			batchControlMaster.setActiveFlag("Y");
 			batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
-			batchControlMaster.setMasterJobName(codeGenRequest.getDbNameSID() + "-" + ConstantUtils.ORACLE_TEMPLATE);
+			batchControlMaster.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
 
 			// TODO: setoffsetval is int
 			//batchControlMaster.setOffsetVal();
@@ -114,7 +122,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setJoinKey(codeGenRequest.getJoinKeys().toString());
 			ingestSubJobControl.setSource(codeGenRequest.getSourceType());
 			
-			ingestSubJobControl.setMasterJobName(codeGenRequest.getDbNameSID() + "-" + ConstantUtils.ORACLE_TEMPLATE);
+			ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
 			ingestSubJobControl.setScriptName(ConstantUtils.ORACLE_SCRIPT_NAME);
 			ingestSubJobControl.setParameterFileLocation(ConstantUtils.ORACLE_PARAMETER_FILE_LOCATION);
 			Date date;
