@@ -50,8 +50,6 @@ public class CodeGenRequest {
 
 	private String targetPartitionKey;
 
-	private String refreshType;
-	// variables to store the selected value from the list
 
 	/**
 	 * @return the joinKeys
@@ -343,20 +341,4 @@ public class CodeGenRequest {
 	public void setTargetTableNames(String targetTableNames) {
 		this.targetTableNames = targetTableNames;
 	}
-
-	/**
-	 * @return the refreshType
-	 */
-	public String getRefreshType() {
-		return refreshType;
-	}
-
-	/**
-	 * @param refreshType
-	 *            the refreshType to set
-	 */
-	public void setRefreshType(String refreshType) {
-		this.refreshType = refreshType;
-	}
-
 }
