@@ -140,8 +140,8 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setMaxWhereColumn(null);
 			ingestSubJobControl.setIngestBatchId(null);
 			ingestSubJobControl.setThresholdLimit(null);
-			/*ingestSubJobControl.setScriptLocation("");
-			ingestSubJobControl.setHiveSQLLocation("");*/
+			ingestSubJobControl.setScriptLocation("");
+			ingestSubJobControl.setHiveSQLLocation("");
 			
 			batchControlMasterRepository.save(batchControlMaster);
 			ingestSubJobControlRepository.save(ingestSubJobControl);
