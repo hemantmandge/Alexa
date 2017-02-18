@@ -3,27 +3,29 @@ package com.ge.code.generate.request.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ge.code.generate.request.repository.entity.BatchControlMaster;
 import com.ge.code.generate.request.service.CodeGenRequestService;
+import com.ge.code.generate.request.value.object.CodeGenRequest;
 
 @RestController
-@RequestMapping("/requests")
+@RequestMapping("/codeGenRequests")
 public class CodeGenRequestController {
 	
 	@Autowired
 	private CodeGenRequestService codeGenRequestService;
 	
-	@RequestMapping("/createCodeGenRequest")
+	@RequestMapping("/requests")
 	public List<BatchControlMaster> getAllCodeGenRequests() {
 		return codeGenRequestService.getAllCodeGenRequests();
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/codeGenRequests")
-	public void addCodeGenRequest(){
-		
+	@RequestMapping(method = RequestMethod.POST, value = "/create")
+	public void create(@RequestBody CodeGenRequest codeGenRequest){
+		codeGenRequestService.create(codeGenRequest);
 	}
 }

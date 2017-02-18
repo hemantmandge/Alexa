@@ -6,12 +6,22 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "btch_cntl_master")
 public class BatchControlMaster {
+	public BatchControlMaster() {
+		
+	}
+	
+	public BatchControlMaster(BatchControlMasterPrimaryKey batchControlMasterPrimaryKey) {
+		super();
+		this.batchControlMasterPrimaryKey = batchControlMasterPrimaryKey;
+	}
 	
 	@EmbeddedId
 	@Id
@@ -52,6 +62,7 @@ public class BatchControlMaster {
 	private String  transformationMergeOrUpdate;
 	@Column(name = "MAX_RUN_BTCH_ID")
 	private Long maxRunBatchId;
+	@GeneratedValue(strategy=GenerationType.AUTO) 
 	@Column(name = "BTCH_ID")
 	private Integer batchId;
 	@Column(name = "ROOT_DIR")
