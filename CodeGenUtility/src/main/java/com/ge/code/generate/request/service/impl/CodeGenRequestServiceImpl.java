@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,7 +84,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName).toString();
 				batchControlMaster.setSourceColumnName(columnName);
 			} else {
-				batchControlMaster.setSourceColumnName(codeGenRequest.getSourceColumnNames().toString());
+				batchControlMaster.setSourceColumnName(StringUtils.join(codeGenRequest.getSourceColumnNames().toArray(new String[codeGenRequest.getSourceColumnNames().size()]),","));
 			}
 			batchControlMaster.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
 			batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());
@@ -103,13 +104,13 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			// TODO: setLastRunBatchId is long
 			//batchControlMaster.setLastRunBatchId();
 			// TODO: Commenting below code as nothing to be passed.
-			/*batchControlMaster.setDefaultParallel("");
+			batchControlMaster.setDefaultParallel("");
 			batchControlMaster.setTransformationMergeOrUpdate("");
 			batchControlMaster.setSourceDirectory("");
 			batchControlMaster.setFillerOne("");
 			batchControlMaster.setFillerTwo("");
 			batchControlMaster.setFillerThree("");
-			batchControlMaster.setLastKey("");*/
+			batchControlMaster.setLastKey("");
 
 			// TODO: Check if value is incremented
 			// batchControlMaster.setBatchId(null);
@@ -119,7 +120,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			} else {
 				ingestSubJobControl.setTargetTableName(codeGenRequest.getTargetTableNames().toString());
 			}
-			ingestSubJobControl.setJoinKey(codeGenRequest.getJoinKeys().toString());
+			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 			ingestSubJobControl.setSource(codeGenRequest.getSourceType());
 			
 			ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
