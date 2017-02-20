@@ -73,11 +73,10 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
 				batchControlMaster.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
 
-				// TODO: setoffsetval is int
-				//batchControlMaster.setOffsetVal();
-				// TODO: setLastRunBatchId is long
-				//batchControlMaster.setLastRunBatchId();
-				// TODO: Commenting below code as nothing to be passed.
+				// No Need to pass value as default is null
+				//batchControlMaster.setOffsetVal(null);
+				// No Need to pass value as default is null
+				//batchControlMaster.setLastRunBatchId(null);
 				batchControlMaster.setDefaultParallel("");
 				batchControlMaster.setTransformationMergeOrUpdate("");
 				batchControlMaster.setSourceDirectory("");
