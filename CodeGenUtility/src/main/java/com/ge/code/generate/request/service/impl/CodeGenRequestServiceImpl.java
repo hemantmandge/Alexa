@@ -1,12 +1,10 @@
 package com.ge.code.generate.request.service.impl;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,15 +48,17 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 	private void populateDataForOracle(CodeGenRequest codeGenRequest) {
 		BatchControlMaster batchControlMaster;
 		for (String sourceTableName : codeGenRequest.getSourceTableNames()) {
+			String targetTableName;
+			if(codeGenRequest.getSourceTableNames().size() > 1) {
+				targetTableName = sourceTableName;
+			} else {
+				targetTableName = codeGenRequest.getTargetTableNames();
+			}
 			BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
-			IngestSubJobControl ingestSubJobControl = new IngestSubJobControl();
 			batchControlMasterPrimaryKey.setDefaultInstance(1);
 			batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());
-			if(codeGenRequest.getSourceTableNames().size() > 1) {
-				batchControlMasterPrimaryKey.setTargetTableName(sourceTableName);
-			} else {
-				batchControlMasterPrimaryKey.setTargetTableName(codeGenRequest.getTargetTableNames().toString());
-			}
+			batchControlMasterPrimaryKey.setTargetTableName(targetTableName);
+
 			batchControlMaster = batchControlMasterRepository.findOne(batchControlMasterPrimaryKey);
 			if (batchControlMaster == null) {
 				batchControlMaster = new BatchControlMaster(batchControlMasterPrimaryKey);
@@ -66,15 +66,33 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
 				batchControlMaster.setLastRunLoadTimestamp(new Date());
 				batchControlMaster.setCreateTimeStamp(new Date());
-				ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
-				ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
+				
+				//Populate Default Values
+				batchControlMaster.setMaxRunBatchId(new Long(0));
+				batchControlMaster.setActiveFlag("Y");
+				batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
+				batchControlMaster.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
+
+				// TODO: setoffsetval is int
+				//batchControlMaster.setOffsetVal();
+				// TODO: setLastRunBatchId is long
+				//batchControlMaster.setLastRunBatchId();
+				// TODO: Commenting below code as nothing to be passed.
+				batchControlMaster.setDefaultParallel("");
+				batchControlMaster.setTransformationMergeOrUpdate("");
+				batchControlMaster.setSourceDirectory("");
+				batchControlMaster.setFillerOne("");
+				batchControlMaster.setFillerTwo("");
+				batchControlMaster.setFillerThree("");
+				batchControlMaster.setLastKey("");
+
 			} else {
 				if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
-					batchControlMaster.setLoadType("OVERWRITE");
-					batchControlMaster.setRefreshType("FULL");
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
 				} else {
-					batchControlMaster.setLoadType("APPEND");
-					batchControlMaster.setRefreshType("PARTIAL");
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_APPEND);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL);
 				}
 			}
 			batchControlMaster.setSource(codeGenRequest.getSource());// DBschema name
@@ -92,57 +110,43 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
 			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
 			batchControlMaster.setSourceSystem(codeGenRequest.getSourceType());
-			
 			batchControlMaster.setUpdateTimeStamp(new Date());
-			batchControlMaster.setMaxRunBatchId(new Long(0));
-			batchControlMaster.setActiveFlag("Y");
-			batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
-			batchControlMaster.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
-
-			// TODO: setoffsetval is int
-			//batchControlMaster.setOffsetVal();
-			// TODO: setLastRunBatchId is long
-			//batchControlMaster.setLastRunBatchId();
-			// TODO: Commenting below code as nothing to be passed.
-			batchControlMaster.setDefaultParallel("");
-			batchControlMaster.setTransformationMergeOrUpdate("");
-			batchControlMaster.setSourceDirectory("");
-			batchControlMaster.setFillerOne("");
-			batchControlMaster.setFillerTwo("");
-			batchControlMaster.setFillerThree("");
-			batchControlMaster.setLastKey("");
-
+			
 			// TODO: Check if value is incremented
 			// batchControlMaster.setBatchId(null);
+			IngestSubJobControl ingestSubJobControl;
 			
-			if(codeGenRequest.getSourceTableNames().size() > 1) {
-				ingestSubJobControl.setTargetTableName(sourceTableName);
-			} else {
-				ingestSubJobControl.setTargetTableName(codeGenRequest.getTargetTableNames().toString());
+			ingestSubJobControl = ingestSubJobControlRepository.findOne(targetTableName);
+			if (ingestSubJobControl == null) {
+				ingestSubJobControl = new IngestSubJobControl();
+				ingestSubJobControl.setTargetTableName(targetTableName);
+				ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
+				ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
+				
+				ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
+				ingestSubJobControl.setScriptName(ConstantUtils.ORACLE_SCRIPT_NAME);
+				ingestSubJobControl.setParameterFileLocation(ConstantUtils.ORACLE_PARAMETER_FILE_LOCATION);
+				Date date;
+				try {
+					SimpleDateFormat format = new SimpleDateFormat(ConstantUtils.DATE_FORMAT); 
+					date = format.parse(ConstantUtils.DEFAULT_DATE);
+				} catch (ParseException e) {
+					e.printStackTrace();
+					date = new Date();
+				} 
+				ingestSubJobControl.setLastUpdatedTimeStamp(date);
+				// pass null
+				ingestSubJobControl.setReferenceColumnName(null);
+				ingestSubJobControl.setPigProperty(null);
+				ingestSubJobControl.setMaxWhereColumn(null);
+				ingestSubJobControl.setIngestBatchId(null);
+				ingestSubJobControl.setThresholdLimit(null);
+				ingestSubJobControl.setScriptLocation("");
+				ingestSubJobControl.setHiveSQLLocation("");
 			}
+			
 			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 			ingestSubJobControl.setSource(codeGenRequest.getSourceType());
-			
-			ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
-			ingestSubJobControl.setScriptName(ConstantUtils.ORACLE_SCRIPT_NAME);
-			ingestSubJobControl.setParameterFileLocation(ConstantUtils.ORACLE_PARAMETER_FILE_LOCATION);
-			Date date;
-			try {
-				DateFormat format = new SimpleDateFormat(ConstantUtils.DATE_FORMAT, Locale.ENGLISH); 
-				date = format.parse(ConstantUtils.DEFAULT_DATE);
-			} catch (ParseException e) {
-				e.printStackTrace();
-				date = new Date();
-			} 
-			ingestSubJobControl.setLastUpdatedTimeStamp(date);
-			// pass null
-			ingestSubJobControl.setReferenceColumnName(null);
-			ingestSubJobControl.setPigProperty(null);
-			ingestSubJobControl.setMaxWhereColumn(null);
-			ingestSubJobControl.setIngestBatchId(null);
-			ingestSubJobControl.setThresholdLimit(null);
-			ingestSubJobControl.setScriptLocation("");
-			ingestSubJobControl.setHiveSQLLocation("");
 			
 			batchControlMasterRepository.save(batchControlMaster);
 			ingestSubJobControlRepository.save(ingestSubJobControl);

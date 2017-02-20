@@ -60,8 +60,82 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return schemaList;
+	}
+	
+	@Override
+	public List<String> getTables(String userid, String password, String host, String database, String rdbmsName, String schema) {
+		Connection connection = getConnection(userid, password, host, database, rdbmsName);
+		ResultSet tables;
+		List<String> tableList = new ArrayList<String>();
+
+		String   catalog          = null;
+		String   tableNamePattern = null;
+		String   schemaPattern     = schema;
+		String[] types            = null;
+		
+		try {
+			DatabaseMetaData metaData = connection.getMetaData();
+			tables = metaData.getTables(catalog, schemaPattern, tableNamePattern, types);
+			while (tables.next()) {
+				String tableName = tables.getString(3);    // "TABLE_SCHEM"
+				System.out.println("tableSchema = "+tableName);
+				tableList.add(tableName);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return tableList;
+	}
+
+	@Override
+	public List<String> getColumns(String userid, String password, String host, String database, String rdbmsName,
+			String tableName) {
+		Connection connection = getConnection(userid, password, host, database, rdbmsName);
+		ResultSet columns;
+		List<String> columnsList = new ArrayList<String>();
+
+		String   catalog           = null;
+		String   schemaPattern     = null;
+		String   tableNamePattern  = tableName;
+		String   columnNamePattern = null;
+		
+		try {
+			DatabaseMetaData metaData = connection.getMetaData();
+			columns = metaData.getColumns(catalog, schemaPattern,  tableNamePattern, columnNamePattern);
+			while (columns.next()) {
+				String columnName = columns.getString(4);    // "TABLE_SCHEM"
+				System.out.println("tableSchema = "+columnName);
+				columnsList.add(columnName);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return columnsList;
 	}
 	
 	private Connection getConnection (String userid, String password, String host, String database,
@@ -102,58 +176,4 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		}
 		return connection;
 	}
-
-	@Override
-	public List<String> getTables(String userid, String password, String host, String database, String rdbmsName, String schema) {
-		Connection connection = getConnection(userid, password, host, database, rdbmsName);
-		ResultSet tables;
-		List<String> tableList = new ArrayList<String>();
-
-		String   catalog          = null;
-		String   tableNamePattern = null;
-		String   schemaPattern     = schema;
-		String[] types            = null;
-		
-		try {
-			DatabaseMetaData metaData = connection.getMetaData();
-			tables = metaData.getTables(catalog, schemaPattern, tableNamePattern, types);
-			while (tables.next()) {
-				String tableName = tables.getString(3);    // "TABLE_SCHEM"
-				System.out.println("tableSchema = "+tableName);
-				tableList.add(tableName);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return tableList;
-	}
-
-	@Override
-	public List<String> getColumns(String userid, String password, String host, String database, String rdbmsName,
-			String tableName) {
-		Connection connection = getConnection(userid, password, host, database, rdbmsName);
-		ResultSet columns;
-		List<String> columnsList = new ArrayList<String>();
-
-		String   catalog           = null;
-		String   schemaPattern     = null;
-		String   tableNamePattern  = tableName;
-		String   columnNamePattern = null;
-		
-		try {
-			DatabaseMetaData metaData = connection.getMetaData();
-			columns = metaData.getColumns(catalog, schemaPattern,  tableNamePattern, columnNamePattern);
-			while (columns.next()) {
-				String columnName = columns.getString(4);    // "TABLE_SCHEM"
-				System.out.println("tableSchema = "+columnName);
-				columnsList.add(columnName);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return columnsList;
-	}
-
 }

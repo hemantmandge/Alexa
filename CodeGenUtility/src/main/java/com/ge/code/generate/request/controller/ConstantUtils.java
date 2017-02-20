@@ -14,5 +14,5 @@ public interface ConstantUtils {
 	String ORACLE_PARAMETER_FILE_LOCATION = "param_generic.txt";
 	String UNIX_TIME_STAMP = "1483228800";
 	String DEFAULT_DATE = "2017-01-01 00:00:00";
-	String DATE_FORMAT = "yyyy.MM.dd HH:mm:ss";
+	String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
 }
