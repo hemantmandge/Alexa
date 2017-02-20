@@ -44,7 +44,7 @@ public class CodeGenRequest {
 	/**
 	 * hive table name
 	 */
-	private String targetTableNames;
+	private String targetTableName;
 	private String targetConnection;
 	private String hiveTableType;
 
@@ -330,15 +330,15 @@ public class CodeGenRequest {
 	/**
 	 * @return the targetTableName
 	 */
-	public String getTargetTableNames() {
-		return targetTableNames;
+	public String getTargetTableName() {
+		return targetTableName;
 	}
 
 	/**
 	 * @param targetTableName
 	 *            the targetTableName to set
 	 */
-	public void setTargetTableNames(String targetTableNames) {
-		this.targetTableNames = targetTableNames;
+	public void setTargetTableName(String targetTableName) {
+		this.targetTableName = targetTableName;
 	}
 }

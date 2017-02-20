@@ -52,7 +52,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			if(codeGenRequest.getSourceTableNames().size() > 1) {
 				targetTableName = sourceTableName;
 			} else {
-				targetTableName = codeGenRequest.getTargetTableNames();
+				targetTableName = codeGenRequest.getTargetTableName();
 			}
 			BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
 			batchControlMasterPrimaryKey.setDefaultInstance(1);
@@ -98,9 +98,9 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setSource(codeGenRequest.getSource());// DBschema name
 			batchControlMaster.setSourceTableName(sourceTableName);
 			if(codeGenRequest.getSourceTableNames().size() > 1) {
-				String columnName = resourceRequestService.getColumns(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
-						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName).toString();
-				batchControlMaster.setSourceColumnName(columnName);
+				List<String> columns = resourceRequestService.getColumns(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
+						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName);
+				batchControlMaster.setSourceColumnName(StringUtils.join(columns.toArray(new String[columns.size()]),","));
 			} else {
 				batchControlMaster.setSourceColumnName(StringUtils.join(codeGenRequest.getSourceColumnNames().toArray(new String[codeGenRequest.getSourceColumnNames().size()]),","));
 			}
