@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.DbUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 	public List<String> getSchemaDetails(String userid, String password, String host, String database,
 			String rdbmsName) {
 		Connection connection = getConnection(userid, password, host, database, rdbmsName);
-		ResultSet schemas;
+		ResultSet schemas = null;
 		List<String> schemaList = new ArrayList<String>();
 		try {
 			DatabaseMetaData metaData = connection.getMetaData();
@@ -61,13 +62,9 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-				System.out.println("Closing Connection!!!");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			DbUtils.closeQuietly(connection);
+			DbUtils.closeQuietly(schemas);
+			System.out.println("Closing Connection!!!");
 		}
 		return schemaList;
 	}
@@ -75,7 +72,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 	@Override
 	public List<String> getTables(String userid, String password, String host, String database, String rdbmsName, String schema) {
 		Connection connection = getConnection(userid, password, host, database, rdbmsName);
-		ResultSet tables;
+		ResultSet tables = null;
 		List<String> tableList = new ArrayList<String>();
 
 		String   catalog          = null;
@@ -95,13 +92,9 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-				System.out.println("Closing Connection!!!");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			DbUtils.closeQuietly(connection);
+			DbUtils.closeQuietly(tables);
+			System.out.println("Closing Connection!!!");
 		}
 		return tableList;
 	}
@@ -110,7 +103,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 	public List<String> getColumns(String userid, String password, String host, String database, String rdbmsName,
 			String tableName) {
 		Connection connection = getConnection(userid, password, host, database, rdbmsName);
-		ResultSet columns;
+		ResultSet columns = null;
 		List<String> columnsList = new ArrayList<String>();
 
 		String   catalog           = null;
@@ -130,13 +123,9 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-				System.out.println("Closing Connection!!!");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			DbUtils.closeQuietly(connection);
+			DbUtils.closeQuietly(columns);
+			System.out.println("Closing Connection!!!");
 		}
 		return columnsList;
 	}
