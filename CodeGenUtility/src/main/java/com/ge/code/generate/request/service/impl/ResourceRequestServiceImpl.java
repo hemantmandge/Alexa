@@ -63,6 +63,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		} finally {
 			try {
 				connection.close();
+				System.out.println("Closing Connection!!!");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -96,6 +97,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		} finally {
 			try {
 				connection.close();
+				System.out.println("Closing Connection!!!");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -130,6 +132,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		} finally {
 			try {
 				connection.close();
+				System.out.println("Closing Connection!!!");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
