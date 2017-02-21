@@ -11,4 +11,5 @@ public interface ResourceRequestService {
 	public List<String> getSchemaDetails(String userid, String password, String host, String database, String rdbmsName);
 	public List<String> getTables(String userid, String password, String host, String database, String rdbmsName, String schema);
 	public List<String> getColumns(String userid, String password, String host, String database, String rdbmsName, String tableName);
+	public List<String> getPrimaryKey(String userid, String password, String host, String database, String rdbmsName, String tableName);
 }

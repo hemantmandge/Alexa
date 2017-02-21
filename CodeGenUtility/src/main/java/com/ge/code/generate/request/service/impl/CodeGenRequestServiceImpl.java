@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		}
 	}
 
+	@Transactional
 	private void populateDataForOracle(CodeGenRequest codeGenRequest) {
 		BatchControlMaster batchControlMaster;
 		for (String sourceTableName : codeGenRequest.getSourceTableNames()) {
@@ -68,6 +71,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				batchControlMaster.setCreateTimeStamp(new Date());
 				
 				//Populate Default Values
+				batchControlMaster.setBatchId(1);
 				batchControlMaster.setMaxRunBatchId(new Long(0));
 				batchControlMaster.setActiveFlag("Y");
 				batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
@@ -111,8 +115,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setSourceSystem(codeGenRequest.getSourceType());
 			batchControlMaster.setUpdateTimeStamp(new Date());
 			
-			// TODO: Check if value is incremented
-			// batchControlMaster.setBatchId(null);
 			IngestSubJobControl ingestSubJobControl;
 			
 			ingestSubJobControl = ingestSubJobControlRepository.findOne(targetTableName);
@@ -144,7 +146,17 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				ingestSubJobControl.setHiveSQLLocation("");
 			}
 			
-			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
+			if (codeGenRequest.getJoinKeys()!= null && codeGenRequest.getJoinKeys().size() > 0) {
+				ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
+			} else {
+				List<String> primaryKeys = resourceRequestService.getPrimaryKey(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
+						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName);
+				if (primaryKeys != null && primaryKeys.size() > 0) {
+					ingestSubJobControl.setJoinKey(StringUtils.join(primaryKeys.toArray(new String[primaryKeys.size()]), ","));
+				} else {
+					ingestSubJobControl.setJoinKey("PRIMARY");
+				}	
+			}
 			ingestSubJobControl.setSource(codeGenRequest.getSourceType());
 			
 			batchControlMasterRepository.save(batchControlMaster);

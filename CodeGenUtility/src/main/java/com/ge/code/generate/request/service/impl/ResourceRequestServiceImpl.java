@@ -130,6 +130,36 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		return columnsList;
 	}
 	
+	@Override
+	public List<String> getPrimaryKey(String userid, String password, String host, String database, String rdbmsName,
+			String tableName) {
+		Connection connection = getConnection(userid, password, host, database, rdbmsName);
+		ResultSet primaryKey = null;
+		List<String> primarykeyList = new ArrayList<String>();
+
+		String   catalog           = null;
+		String   schemaPattern     = null;
+		String   tableNamePattern  = tableName;
+		
+		try {
+			DatabaseMetaData metaData = connection.getMetaData();
+			primaryKey = metaData.getPrimaryKeys(catalog, schemaPattern, tableNamePattern);
+			while (primaryKey.next()) {
+				String columnName = primaryKey.getString("COLUMN_NAME");    // "COLUMN_NAME"
+				System.out.println("tableSchema = "+columnName);
+				primarykeyList.add(columnName);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DbUtils.closeQuietly(connection);
+			DbUtils.closeQuietly(primaryKey);
+			System.out.println("Closing Connection!!!");
+		}
+		return primarykeyList;
+	}
+	
 	private Connection getConnection (String userid, String password, String host, String database,
 			String rdbmsName) {
 

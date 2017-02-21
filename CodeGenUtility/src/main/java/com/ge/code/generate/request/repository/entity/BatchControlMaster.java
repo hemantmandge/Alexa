@@ -53,7 +53,7 @@ public class BatchControlMaster {
 	@Column(name = "ACTV_F")
 	private String activeFlag;
 	@Column(name = "LAST_RUN_BTCH_ID")
-	private Long lastRunBatchId;
+	private Long lastRunBatchId = new Long(0);
 	@Column(name = "LAST_RUN_LOAD_TMSP")
 	private Date lastRunLoadTimestamp;
 	@Column(name = "DFLT_PRLL")
