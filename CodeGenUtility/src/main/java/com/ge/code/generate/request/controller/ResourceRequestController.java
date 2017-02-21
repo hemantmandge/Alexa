@@ -45,8 +45,8 @@ public class ResourceRequestController {
 	
 	@RequestMapping("/getColumns")
 	public List<String> getColumns(@RequestParam("userid") String userid, @RequestParam("password") String password, @RequestParam("host") String host, 
-			@RequestParam("database") String database,  @RequestParam("rdbmsName") String rdbmsName, @RequestParam("tableName") String tableName) {
-		return resourceRequestService.getColumns(userid, password, host, database, rdbmsName, tableName);
+			@RequestParam("database") String database,  @RequestParam("rdbmsName") String rdbmsName, @RequestParam("tableName") String tableName, @RequestParam("schema") String schema) {
+		return resourceRequestService.getColumns(userid, password, host, database, rdbmsName, tableName, schema);
 	}
 	/*
 	@RequestMapping("/getRequestLoadType")

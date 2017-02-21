@@ -102,7 +102,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setSourceTableName(sourceTableName);
 			if(codeGenRequest.getSourceTableNames().size() > 1) {
 				List<String> columns = resourceRequestService.getColumns(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
-						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName);
+						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName, codeGenRequest.getSource());
 				batchControlMaster.setSourceColumnName(StringUtils.join(columns.toArray(new String[columns.size()]),","));
 			} else {
 				batchControlMaster.setSourceColumnName(StringUtils.join(codeGenRequest.getSourceColumnNames().toArray(new String[codeGenRequest.getSourceColumnNames().size()]),","));
@@ -150,7 +150,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 			} else {
 				List<String> primaryKeys = resourceRequestService.getPrimaryKey(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
-						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName);
+						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName, codeGenRequest.getSource());
 				if (primaryKeys != null && primaryKeys.size() > 0) {
 					ingestSubJobControl.setJoinKey(StringUtils.join(primaryKeys.toArray(new String[primaryKeys.size()]), ","));
 				} else {

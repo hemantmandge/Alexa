@@ -101,13 +101,13 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 
 	@Override
 	public List<String> getColumns(String userid, String password, String host, String database, String rdbmsName,
-			String tableName) {
+			String tableName, String schema) {
 		Connection connection = getConnection(userid, password, host, database, rdbmsName);
 		ResultSet columns = null;
 		List<String> columnsList = new ArrayList<String>();
 
 		String   catalog           = null;
-		String   schemaPattern     = null;
+		String   schemaPattern     = schema;
 		String   tableNamePattern  = tableName;
 		String   columnNamePattern = null;
 		
@@ -132,13 +132,13 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 	
 	@Override
 	public List<String> getPrimaryKey(String userid, String password, String host, String database, String rdbmsName,
-			String tableName) {
+			String tableName, String schema) {
 		Connection connection = getConnection(userid, password, host, database, rdbmsName);
 		ResultSet primaryKey = null;
 		List<String> primarykeyList = new ArrayList<String>();
 
 		String   catalog           = null;
-		String   schemaPattern     = null;
+		String   schemaPattern     = schema;
 		String   tableNamePattern  = tableName;
 		
 		try {
