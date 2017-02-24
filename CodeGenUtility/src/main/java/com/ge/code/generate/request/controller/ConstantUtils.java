@@ -2,6 +2,9 @@ package com.ge.code.generate.request.controller;
 
 public interface ConstantUtils {
 	String ORACLE = "ORACLE";
+	String MSSQL = "MSSQL";
+	String TERADATA = "TERADATA";
+	String GREENPLUM = "GREENPLUM";
 	String LOAD_TYPE_FULL_LOAD = "FULL LOAD";
 	String LOAD_TYPE_INCREMENTAL_LOAD = "INCREMENTAL LOAD";
 	String LOAD_TYPE_OVERWRITE = "OVERWRITE";

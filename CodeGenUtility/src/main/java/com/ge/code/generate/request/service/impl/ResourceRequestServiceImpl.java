@@ -12,6 +12,7 @@ import org.apache.commons.dbutils.DbUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ge.code.generate.request.controller.ConstantUtils;
 import com.ge.code.generate.request.repository.ListOfValuesRepository;
 import com.ge.code.generate.request.repository.entity.ListOfValues;
 import com.ge.code.generate.request.service.ResourceRequestService;
@@ -164,15 +165,21 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			String rdbmsName) {
 
 
-		System.out.println("-------- Oracle JDBC Connection Testing ------");
+		System.out.println("-------- JDBC Connection Testing ------");
 
 		try {
-
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-
+			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.MSSQL)) {
+				Class.forName("com.microsoft.sqlserver.jdbc.SqlServerDriver");
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
+				Class.forName("com.teradata.jdbc.TeraDriver");
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+			}  
 		} catch (ClassNotFoundException e) {
 
-			System.out.println("Where is your Oracle JDBC Driver?");
+			System.out.println("JDBC Driver ?");
 			e.printStackTrace();
 		}
 
@@ -181,10 +188,15 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		Connection connection = null;
 
 		try {
-
-			//connection = DriverManager.getConnection("jdbc:oracle:thin:@10.76.177.167:1521:xe", "admin", "gepoc ");
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@" + host + ":" + database, userid, password);
-
+			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
+				connection = DriverManager.getConnection("jdbc:oracle:thin:@" + host + ":" + database, userid, password);
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.MSSQL)) {
+				connection = DriverManager.getConnection("jdbc:sqlserver://" + host + ";databaseName=" + database, userid, password);
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
+				connection = DriverManager.getConnection("jdbc:teradata://" + host, userid, password);
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
+				connection = DriverManager.getConnection("jdbc:oracle:thin:@" + host + ":" + database, userid, password);
+			} 
 		} catch (SQLException e) {
 
 			System.out.println("Connection Failed! Check output console");

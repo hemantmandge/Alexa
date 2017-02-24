@@ -61,6 +61,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.teradata.jdbc</groupId>
+			<artifactId>terajdbc4</artifactId>
+			<version>15.00.00.20</version>
+		</dependency>
+		<dependency>
+			<groupId>com.teradata.jdbc</groupId>
+			<artifactId>tdgssconfig</artifactId>
+			<version>15.00.00.20</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
 		<dependency>
 			<groupId>commons-dbutils</groupId>
