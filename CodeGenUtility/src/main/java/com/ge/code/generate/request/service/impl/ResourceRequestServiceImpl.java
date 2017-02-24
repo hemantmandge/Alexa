@@ -166,7 +166,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 
 
 		System.out.println("-------- JDBC Connection Testing ------");
-
+/*
 		try {
 			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -184,7 +184,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		}
 
 		System.out.println("Oracle JDBC Driver Registered!");
-
+*/
 		Connection connection = null;
 
 		try {
