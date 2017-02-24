@@ -1,0 +1,157 @@
+<div class="container">
+<!-- Breadcrumb and page-related tools reside here: -->
+
+
+    
+     
+
+        <div class="bs-example">
+		<ul class="breadcrumb">
+			
+			<li class="breadcrumb-item"> <a href="login" class="breadcrumb-link">Login</a></li>
+          <li class="breadcrumb-item"> <a href="home" class="breadcrumb-link">Home</a></li>
+          <li class="breadcrumb-item"> <a href="Hadoop" class="breadcrumb-link active">New Hadoop Request</a></li>
+		
+		</ul>
+	</div>
+         <div class="col-md-12"><legend class="toptxt">Source</legend></div>
+        <div class="col-md-12">
+            <div class="col-md-6 ">
+               <div class="form-group required"> 
+                    <div class="col-md-6"> <label for="datasrc" class="control-label">Data Source</label></div>
+                    <div class="col-md-6"><input type="text" class="form-control " id="datasrc" placeholder="DataSource" required></div>
+                </div>
+                  <div class="form-group  hd-chkbox"> 
+                        <div class="col-md-6"> 
+                            <label for="rowtag" class="control-label col-md-10">Ingest from Target cluster</label>
+                            <div class="col-md-2"><input type="radio" name="optradio"></div>
+                       </div>     
+
+                       <div class="col-md-6"> 
+                            <label for="rowtag" class="control-label col-md-10">Ingest from Different Cluster</label>
+                            <div class="col-md-2"><input type="radio" name="optradio"></div>
+                       </div>        
+                </div>
+                <div class="form-group required"> 
+                      <div class="col-md-6"> <label   class="control-label" for="fileschema">Host Namenode:Port </label></div>
+                     <div class="col-md-6"><input type="text" class="form-control" id="fileschema" placeholder="Enter Host Namenode:Port"></div>
+                </div>
+                <div class="form-group required "> 
+                    <div class="col-md-6"> <label for="filepath" class="control-label" >File Path</label></div>
+                    <div class="col-md-6"><input type="text" class="form-control" id="filepath" placeholder="Enter File Path"></div>
+                   
+                </div>    
+                <div class="form-group required"> 
+                      <div class="col-md-6"> <label   class="control-label" for="filetype">File Type  </label></div>
+                     <div class="col-md-6"><input type="text" class="form-control" id="filetype" placeholder="Enter File Type"></div>
+                </div>
+                <div class="form-group required"> 
+                      <div class="col-md-6"> <label   class="control-label" for="filedelimiter">File Delimiter </label></div>
+                     <div class="col-md-6"><input type="text" class="form-control" id="filedelimiter" placeholder="Enter File Delimiter "></div>
+                </div>
+                <div class="form-group required"> 
+                      <div class="col-md-6"> <label   class="control-label" for="srcdbname">Source DB Name  </label></div>
+                     <div class="col-md-6"><input type="text" class="form-control" id="srcdbname" placeholder="Enter Source DB Name  "></div>
+                </div>
+                <div class="form-group required "> 
+               <div class="col-md-6"> <label for="srccol" class="control-label">Source Columns</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="srccol" placeholder="Enter Source Columns"></div>   
+              </div>
+                
+
+             </div>  
+            <div class="col-md-6">
+              
+              <div class="form-group required "> 
+               <div class="col-md-6"> <label for="srctype" class="control-label">Source Type</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="srctype" placeholder="Enter Source Type"></div>   
+              </div>
+              
+              <div class="form-group required "> 
+               <div class="col-md-6"> <label for="rowtag" class="control-label">Row Tag</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="rowtag" placeholder="Enter Row Tag"></div>   
+              </div>
+               <div class="form-group required"> 
+                      <div class="col-md-6"> <label   class="control-label" for="srctable">Source Tables   </label></div>
+                     <div class="col-md-6"><input type="text" class="form-control" id="srctable" placeholder="Enter Source Tables   "></div>
+                </div>
+
+                <div class="form-group required">
+                     <div class="col-md-6"> <label for="CalculateDelta">Calculate Delta On </label></div>
+                    <div class="col-md-6"><input type="text" class="form-control" id="CalculateDelta" placeholder="Calculate Delta On "></div>  
+              
+                </div>
+              
+            </div>  
+        </div>
+  
+ 
+
+<div class="row"><!-- Target-->
+<fieldset>
+        <div class="col-md-12"><legend class="toptxt">Target</legend></div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+             <div class="form-group required "> 
+            <div class="col-md-6"> <label for="targettype">Target Type</label></div>
+               <div class="col-md-6">
+                            <label class="radio-inline col-md-3"><input type="radio" name="optradio">HDFS Only</label>
+                           <label class="radio-inline col-md-3"><input type="radio" name="optradio">HIVE &HIVE</label>
+                        
+                </div>   
+             </div>
+             <div class="form-group required ">
+                     <div class="col-md-6"> <label for="loadtype">Load Type</label></div>
+                     <div class="col-md-6"><select  class="form-control" id="loadtype">
+                            <option>Load Type1</option>
+                            <option>Load Type2</option>
+                        </select>
+                </div>   
+
+                </div>    
+               
+
+               <div class="col-md-6"> <label for="hivedb">Hive DB Name</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="hivedb" placeholder="Hive Db name"></div>   
+              
+               <div class="col-md-6"> <label for="hivetable">Hive Table Name</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="hivetable" placeholder="Hive Table name"></div>   
+               
+                <div class="form-group required ">
+                   <div class="col-md-6"> <label for="hivetabletype">Hive Table Type</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="hivetabletype" placeholder="Hive Table Type"></div>    
+                </div>
+      
+             </div>  
+            
+            <div class="col-md-6">
+                
+            <div class="form-group required "> 
+                <div class="col-md-6"> <label for="tarport">Target Name Node port</label></div>
+                    <div class="col-md-6"><input type="text" class="form-control" id="tarport" placeholder="Target NameNode port"></div>   
+                </div>   
+            <div class="form-group required "> 
+               <div class="col-md-6"> <label for="filepatht">File Path</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="filepatht" placeholder="Filepath"></div>   
+            </div>   
+            <div class="form-group required ">
+               <div class="col-md-6"> <label for="FileDelimiter">File Delimiter</label></div>
+               <div class="col-md-6"><input type="text" class="form-control" id="FileDelimiter" placeholder="FileDelimiter"></div>   
+            </div>  
+
+            
+          
+            </div>  
+        </div>
+</fieldset> 
+ </div>
+
+ <div class="row">
+     
+            <div class="col-md-8">
+                <button type="button" class="btn btn-primary ">Submit</button>
+                <button type="button" class="btn btn-primary ">Cancel</button>
+                
+            </div>     
+ </div>    
+    </div>

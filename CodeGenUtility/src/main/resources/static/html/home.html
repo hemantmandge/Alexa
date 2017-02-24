@@ -1,0 +1,38 @@
+
+  <div class="" style="width:auto;height:500px;overflow-x: hidden;">
+    <div class="row clearfix">
+    <div class="col-md-4  login-wraper">
+        <form action="" id="loginForm">
+            <div class="form-group required homebt ">     
+               <div class="col-md-12 pull-left" style="text-align: left"> <label for="hivedb">Choose Source Type</label></div>
+                 
+               </div>
+              
+            <div class="col-md-6 ">
+                    <div class="radio mrRight">
+                        <label><input type="radio" name="optradio" ng-model="datasrc" ng-value='"RDBMS"'  >RDBMS</label>
+                        </div>
+                        <div class="radio mrRight">
+                        <label><input type="radio" name="optradio" ng-model="datasrc" ng-value='"Hadoop"'>Hadoop</label>
+                        </div>
+                        
+            </div>
+             <div class="col-md-6">
+                <div class="radio" >
+                        <label class="margin-left15"><input type="radio"  name="optradio" ng-model="datasrc" ng-value='"Files"'>Files</label>
+                        </div>
+                        <div class="radio " style="margin-top: 30px;">
+                        <label class="margin-left15"><input type="radio" name="optradio"  ng-model="datasrc" ng-value='"S3"'>S3</label>
+                </div>
+             </div>   
+             <div class="col-md-8  col-md-offset-2">
+                 <div class="form-group">
+                     <button type="button" class="btn btn-primary btn-block homesub"  ng-click="submitResult(datasrc)">Create New Request</button>
+                 </div>
+             </div>
+
+             
+        </form>        
+      </div>  
+    </div>    
+

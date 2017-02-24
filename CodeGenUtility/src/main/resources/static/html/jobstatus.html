@@ -1,0 +1,64 @@
+<div class="container">
+
+  <div class="row">
+      <!-- Breadcrumb and page-related tools reside here: -->
+	<div class="bs-example">
+		<ul class="breadcrumb">
+		
+			<li class="breadcrumb-item"> <a href="home" class="breadcrumb-link">Home</a></li>
+			<li class="breadcrumb-item"> <a href="RDBMS" class="breadcrumb-link ">New RDBMS Request</a></li>
+			<li class="breadcrumb-item"> <a href="job" class="breadcrumb-link active">Job Status</a></li>
+		</ul>
+	</div>
+	  
+
+  </div>  
+  	<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th ng-click="sort('id')">Job ID
+								<span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('first_name')">Created Date
+								<span class="glyphicon sort-icon" ng-show="sortKey=='first_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('last_name')">Status
+								<span class="glyphicon sort-icon" ng-show="sortKey=='last_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('hobby')">Data Source
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('hobby')">Metadata File
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('hobby')">Target Table
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('hobby')">Load Type
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('hobby')">User Name
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr dir-paginate="user in users|filter:search|itemsPerPage:10">
+							<td>{{user.id}}</td>
+							<td>{{user.first_name}}</td>
+							<td>{{user.last_name}}</td>
+							<td>{{user.hobby}}</td>
+							<td>{{user.id}}</td>
+							<td>{{user.first_name}}</td>
+							<td>{{user.last_name}}</td>
+							<td>{{user.hobby}}</td>
+						</tr>
+					</tbody>
+				</table> 
+				<dir-pagination-controls ng-if="users.length>10"
+					max-size="5"
+					direction-links="true"
+					boundary-links="true" >
+				</dir-pagination-controls>
+
+</div>  
