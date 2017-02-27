@@ -200,6 +200,9 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setTransformationMergeOrUpdate("");
 			batchControlMaster.setLastKey("");
 			batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());
+			batchControlMaster.setSource(ConstantUtils.FILE);// DBschema name
+			batchControlMaster.setSourceTableName("");
+			batchControlMaster.setSourceColumnName("");
 
 		} else {
 			if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
@@ -215,9 +218,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
 		batchControlMaster.setFillerTwo(codeGenRequest.getFileDelimeter());
 		batchControlMaster.setFillerThree(codeGenRequest.getRowTag());
-		batchControlMaster.setSource(ConstantUtils.FILE);// DBschema name
-		batchControlMaster.setSourceTableName("");
-		batchControlMaster.setSourceColumnName("");
 		
 		//No Need to pass value as default is null
 		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());
