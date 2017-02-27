@@ -8,67 +8,176 @@
        <li class="breadcrumb-item"> <a href="Files" class="breadcrumb-link active">New File Request</a></li>
     </ul>
 </div>
-
+<form class="form-horizontal"  role="form" name="fileForm" novalidate>
     <div class="row">
-         <form class="form-horizontal">  
+         
          <div class="col-md-12"><legend class="toptxt">Source</legend></div>
         <div class="col-md-12">
             <div class="col-md-6 ">
                <div class="form-group required"> 
                     <div class="col-md-6"> <label for="datasrc" class="control-label">Data Source</label></div>
-                    <div class="col-md-6"><input type="text" class="form-control " id="datasrc" placeholder="DataSource" required></div>
+                    <div class="col-md-6"><input type="text" class="form-control " id="datasrc" ng-model="file.sourceType" placeholder="DataSource" required></div>
                 </div>
                 <div class="form-group required"> 
                       <div class="col-md-6"> <label   class="control-label" for="filepath">File Path</label></div>
-                     <div class="col-md-6"><input type="text" class="form-control" id="filepath" placeholder="Enter File path"></div>
+                     <div class="col-md-6"><input type="text" class="form-control" id="filepath"  ng-model="file.filePath"  placeholder="Enter File path"></div>
                 </div>
                 <div class="form-group required"> 
                       <div class="col-md-6"> <label   class="control-label" for="fileschpath">File Schema Path</label></div>
-                     <div class="col-md-6"><input type="text" class="form-control" id="fileschpath" placeholder="Enter File Schema path"></div>
+                     <div class="col-md-6"><input type="text" class="form-control" id="fileschpath"  ng-model="file.fileSchemaPath"  placeholder="Enter File Schema path"></div>
                 </div>
                 <div class="form-group required "> 
                     <div class="col-md-6"> <label for="sel2" class="control-label" >File Type</label></div>
                     <div class="col-md-6">
-                            <select  class="form-control" id="sel2">
+                            <select  class="form-control" id="sel2" ng-model="file.fileType">
                                 <option>File Type1</option>
                                 <option>File Type2</option>
                             </select>
                     </div>
                 </div>    
                 <div class="form-group required "> 
-                    <div class="col-md-6"> <label for="srccol">Source Columns</label></div>
+                    <div class="col-md-6"> <label for="srccol">SFTP Server IP</label></div>
                     <div class="col-md-6">
-                        <select  class="form-control" id="srccol">
+                        <select  class="form-control" id="srccol" ng-model="file.SFTPserverIp">
                                 <option>Source Columns1</option>
                                 <option>Source Columns2</option>
                             </select>
 
                     </div>
-                </div>
+                </div> 
 
              </div>  
             
             <div class="col-md-6">
             <div class="form-group required "> 
                <div class="col-md-6"> <label for="rowtag" class="control-label">Row tag</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="rowtag" placeholder="Enter Row tag"></div>   
+               <div class="col-md-6"><input type="text" class="form-control" id="rowtag" ng-model="file.rowTag" placeholder="Enter Row tag"></div>   
               </div>
              <div class="form-group required "> 
                <div class="col-md-6"> <label for="filedel" class="control-label">File Delimiter</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="filedel" placeholder="Enter File Delimiter"></div>   
+               <div class="col-md-6"><input type="text" class="form-control" id="filedel" ng-model="file.fileDelimeter" placeholder="Enter File Delimiter"></div>   
              </div>
               <div class="form-group required "> 
                 <div class="col-md-6"> <label for="CalculateDelta">Calculate Delta On </label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="CalculateDelta" placeholder="Calculate Delta On "></div>  
+               <div class="col-md-6"><input type="text" class="form-control" id="CalculateDelta" ng-model="file.calculateDeltaOn" placeholder="Calculate Delta On "></div>  
               </div>    
+              
+                  <div class="form-group required "> 
+               <div class="col-md-6"> <label for="archie" class="control-label"> Unique Key</label></div>
+               <div class="col-md-6"><input type="text" name="joinkey" required class="form-control"  id="joinkey" multiple ng-model="file.joinKeys" ></div>   
+              <!-- <div class="col-md-6 errmsg" ng-show="rdbmsForm.archieper.$error.required" >Archive Period  is required.</div>-->
+               <div class="col-md-6">&nbsp;</div> 
+              </div>
+              
+                 <div class="form-group required "> 
+               <div class="col-md-6"> <label for="archie" class="control-label"> Archive Period (days)</label></div>
+               <div class="col-md-6"><input type="text" name="archieper" required class="form-control" id="archie" placeholder="Enter Archive Period" ng-model="file.archivePeriod" ></div>   
+              <!-- <div class="col-md-6 errmsg" ng-show="rdbmsForm.archieper.$error.required" >Archive Period  is required.</div>-->
+               <div class="col-md-6">&nbsp;</div> 
+              </div>
+              
               
             </div>  
         </div>
-         </form>
+    
   
      </div>
 
-<div class="row"><!-- Target-->
+
+<div class="container"> 
+<fieldset>
+        <div class="col-md-12"><legend class="toptxt">Target</legend></div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+           <div class="form-group required ">      
+            <div class="col-md-6"> <label for="targettype">Target Type</label></div>
+              <div class="col-md-6">
+             
+                <div class="margin-bt"  >
+                        <div class="radio  ">  
+                        <input id="HIVE" type="radio" name="HIVE"  ng-model="file.targetType" ng-value="'HIVE'" ng-change="showHiveBlk(file.targetType)" > <label
+                        class="radio-label" for="HIVE" >HDFS &amp; HIVE </label> 
+                        </div>
+                        <div class="radio"> 
+                            <input id="HDFS" type="radio" name="HDFS" ng-model="file.targetType" value="HDFS" ng-value="'HDFS'" ng-change="showHiveBlk(file.targetType)"> <label class="radio-label" for="HDFS">HDFS Only</label>
+                        </div>
+            
+                    </div>       
+                 </div>
+
+           </div>     
+ 
+				<div class="form-group required "> 
+                <div class="col-md-6"> <label class="control-label">Load Type</label></div>
+                <div class="col-md-6"><select  class="form-control" id="loadtype" ng-model="file.loadType">
+                                <option ng-selected= "{{src.value == file.loadType}}"  ng-repeat="src in loadType">{{src.value}}</option>
+                            </select>
+                    </div>   
+                </div> 
+ 
+
+				
+               <div class="form-group required ">     
+               <div class="col-md-6"> <label for="hivedb"  class="control-label">Hive DB Name</label></div>
+               <div class="col-md-6"><input type="text" name="hivedbname"  class="form-control" id="hivedb" required placeholder="Hive Db name" ng-model="file.targetDBName" ng-disabled="disabled" ></div>   
+               <div class="col-md-6">&nbsp;</div> 
+               <!--<div class="col-md-6 errmsg" ng-show="fileForm.hivedbname.$error.required" >Hive DB name  is required.</div>-->
+               
+               </div>
+                <div class="clearfix"></div>
+              
+              <div class="form-group required " > 
+               <div class="col-md-6"> <label for="hivetable"  class="control-label">Hive Table Name</label></div>
+               <div class="col-md-6"><input type="text" name="hivetable" required class="form-control" id="hivetable" placeholder="Hive Table name" value="" ng-model="file.targetTableName" ng-disabled="isdisabled" required></div>   
+               <div class="col-md-6">&nbsp;</div> 
+               <!--<div class="col-md-6 errmsg" ng-show="fileForm.hivetable.$error.required">Hive Table name  is required.</div>-->
+              </div> 
+               
+              
+             </div>  
+            
+            <div class="col-md-6">
+                <div class="form-group required"> 
+                 <div class="col-md-12">
+                       <div class="col-md-6"> &nbsp;</div>
+                        <div class="col-md-6"> &nbsp;</div>
+                        <div class="col-md-6"> &nbsp;</div>
+                        <div class="col-md-6"> &nbsp;</div>
+                 </div>
+              </div>    
+               <div class="form-group required " >
+                    <div class="col-md-6"> <label for="Target" class="control-label" >Target Connection </label></div>
+                    <div class="col-md-6">
+                    <input type="text" class="form-control" name="targetconn" required id="Target"ng-model="file.targetConnection" required  placeholder="Enter Target Connection">
+                     <div class="col-md-6">&nbsp;</div> 
+                    <!--<div class="col-md-6 errmsg" ng-show="fileForm.targetconn.$error.required">Hive Table name  is required.</div>-->   
+                    <!--<select  class="form-control" id="Target" ng-model="file.targetConnection" required>
+                                <option  ng-repeat="src in targetcon">{{src.value}}</option>
+                            </select>-->
+                    
+                    </div>  
+               </div>
+               
+              <div class="form-group required " > 
+               <div class="col-md-6"> <label for="hivetabletype"   class="control-label"   >Hive Table Type</label></div>
+               <div class="col-md-6"><select  class="form-control"  id="hivetabletype" ng-init="loadHiveTableType()"ng-model="file.hiveTableType"  ng-change="changePartitinKey(file.hiveTableType)" ng-disabled="disabled" >
+                                <option  ng-repeat="src in hiveTableType">{{src.value}}</option>
+                            </select></div>   
+              </div> 
+              <div class="form-group " > 
+               <div class="col-md-6"> <label for="hivepartionkey" >Hive Partition Key</label></div>
+               <div class="col-md-6"><select  class="form-control" id="hivepartionkey" ng-model="file.targetPartitionKey" ng-disabled="isdisabled" >
+                                 <option   ng-repeat="field in file.sourceColumnNames " value="{{field}}">{{field}}</option>
+                            </select></div>   
+              </div> 
+         
+          
+            </div>  
+        </div>
+</fieldset> 
+ </div>
+
+<!-- <div class="row">Target
 <fieldset>
         <div class="col-md-12"><legend class="toptxt">Target</legend></div>
         <div class="col-md-12">
@@ -122,14 +231,14 @@
             </div>  
         </div>
 </fieldset> 
- </div>
+ </div> -->
 
  <div class="row">
      
             <div class="col-md-8">
-                  <button type="button" class="btn btn-primary ">Submit</button>
+                  <button type="button" class="btn btn-primary " ng-click="postdataFile(file);">Submit</button>
                  <button type="button" class="btn btn-primary ">Cancel</button>
             </div>     
  </div>    
-
+     </form>
 </div>

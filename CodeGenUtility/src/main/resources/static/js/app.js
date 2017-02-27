@@ -262,6 +262,37 @@ $scope.go =function(){
    $scope.rdbmsForm.$invalid = 'true';
   }
  };
+ 
+ $scope.postdataFile = function(fileData) {
+	  //alert($scope.rdbmsForm.$valid);
+	  if ($scope.fileForm.$valid) {
+	   var data = fileData;
+	    $scope.dataLoading = true;
+	   //Call the services
+	   $http.post('codeGenRequests/create', JSON.stringify(data)).then(function(response) {
+	    if (response.data)
+	     $scope.msg = "Post Data Submitted Successfully!";
+	        $scope.dataLoading = false;
+	    var modalInstance = $uibModal.open({
+	     controller: 'PopupCont',
+	     templateUrl: 'html/successpopup.html',
+	    });
+	   }, function(response) {
+	    $scope.msg = "Service not Exists";
+	    $scope.dataLoading = false;
+	    $scope.statusval = response.status;
+	    $scope.statustext = response.statusText;
+	    $scope.headers = response.headers();
+	    var modalInstance = $uibModal.open({
+	     controller: 'PopupCont',
+	     templateUrl: 'html/errorpopup.html',
+	    });
+	   });
+	  } else {
+	   $scope.fileForm.$invalid = 'true';
+	  }
+	 };
+ 
  $scope.hiveTableType = {};
  $scope.loadHiveTableType = function() {
   $http.get("resources/findByType?type=HIVETABLETYPE").then(function(response) {
