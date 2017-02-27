@@ -49,6 +49,179 @@ public class CodeGenRequest {
 	private String hiveTableType;
 
 	private String targetPartitionKey;
+/**
+ * Value objects for file data source
+ */
+private String fileType;
+private String filePath;
+private String rowTag;
+private String SFTPserverIp;
+private String fileDelimeter;
+private String fileSchemaPath;
+//value object for Hadoop 
+private String hostNameNodePort;
+private String hadoopSourceType;// for source type drop down in the screen 
+//value objects for s3
+private String region;
+private String object;
+private String bucket;
+
+
+
+
+/**
+ * @return the region
+ */
+public String getRegion() {
+	return region;
+}
+
+/**
+ * @param region the region to set
+ */
+public void setRegion(String region) {
+	this.region = region;
+}
+
+/**
+ * @return the object
+ */
+public String getObject() {
+	return object;
+}
+
+/**
+ * @param object the object to set
+ */
+public void setObject(String object) {
+	this.object = object;
+}
+
+/**
+ * @return the bucket
+ */
+public String getBucket() {
+	return bucket;
+}
+
+/**
+ * @param bucket the bucket to set
+ */
+public void setBucket(String bucket) {
+	this.bucket = bucket;
+}
+
+/**
+ * @return the hostNameNodePort
+ */
+public String getHostNameNodePort() {
+	return hostNameNodePort;
+}
+
+/**
+ * @param hostNameNodePort the hostNameNodePort to set
+ */
+public void setHostNameNodePort(String hostNameNodePort) {
+	this.hostNameNodePort = hostNameNodePort;
+}
+
+/**
+ * @return the hadoopSourceType
+ */
+public String getHadoopSourceType() {
+	return hadoopSourceType;
+}
+
+/**
+ * @param hadoopSourceType the hadoopSourceType to set
+ */
+public void setHadoopSourceType(String hadoopSourceType) {
+	this.hadoopSourceType = hadoopSourceType;
+}
+
+/**
+ * @return the fileType
+ */
+public String getFileType() {
+	return fileType;
+}
+
+/**
+ * @param fileType the fileType to set
+ */
+public void setFileType(String fileType) {
+	this.fileType = fileType;
+}
+
+/**
+ * @return the filePath
+ */
+public String getFilePath() {
+	return filePath;
+}
+
+/**
+ * @param filePath the filePath to set
+ */
+public void setFilePath(String filePath) {
+	this.filePath = filePath;
+}
+
+/**
+ * @return the rowTag
+ */
+public String getRowTag() {
+	return rowTag;
+}
+
+/**
+ * @param rowTag the rowTag to set
+ */
+public void setRowTag(String rowTag) {
+	this.rowTag = rowTag;
+}
+
+/**
+ * @return the sFTPserverIp
+ */
+public String getSFTPserverIp() {
+	return SFTPserverIp;
+}
+
+/**
+ * @param sFTPserverIp the sFTPserverIp to set
+ */
+public void setSFTPserverIp(String sFTPserverIp) {
+	SFTPserverIp = sFTPserverIp;
+}
+
+/**
+ * @return the fileDelimeter
+ */
+public String getFileDelimeter() {
+	return fileDelimeter;
+}
+
+/**
+ * @param fileDelimeter the fileDelimeter to set
+ */
+public void setFileDelimeter(String fileDelimeter) {
+	this.fileDelimeter = fileDelimeter;
+}
+
+/**
+ * @return the fileSchemaPath
+ */
+public String getFileSchemaPath() {
+	return fileSchemaPath;
+}
+
+/**
+ * @param fileSchemaPath the fileSchemaPath to set
+ */
+public void setFileSchemaPath(String fileSchemaPath) {
+	this.fileSchemaPath = fileSchemaPath;
+}
 
 
 	/**
