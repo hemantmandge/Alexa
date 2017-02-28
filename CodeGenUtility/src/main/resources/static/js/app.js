@@ -21,7 +21,7 @@ app.controller("utilityCtrl", ['$scope', '$rootScope', '$window', '$location', '
  $scope.rdbms.password = "gepoc";
  $scope.homeShow = false;
  $scope.readonlyAttr = false;
-
+$scope.joinKeysList = [];
 $scope.showbutton=true;
 $scope.showbuttonDisc=false;
 $scope.connectDisble=false;
@@ -331,6 +331,8 @@ if($scope.showbuttonDisc == true){
  
  $scope.postdataFile = function(fileData) {
 	  ////alert($scope.rdbmsForm.$valid);
+	 $scope.joinKeysList.push(fileData.joinKeys);
+	 fileData.joinKeys = $scope.joinKeysList;
 	  if ($scope.fileForm.$valid) {
 	   var data = fileData;
 	    $scope.dataLoading = true;

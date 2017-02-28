@@ -24,8 +24,8 @@
                             </select></div>
                 <span class="errmsg" ng-if="submitted && connectform.username.$error.required">This is Required.</span>              
           </div></div>
-		  <div class="col-md-6">
-		   <div class="form-group required"  ng-show="showDBName"> 
+		  <div class="col-md-6" ng-show="showDBName">
+		   <div class="form-group required"  > 
            <div class="col-md-6">    <label   class="control-label" for="fileschema">DB Name / SID</label></div>
             <div class="col-md-6">   <select name="SID"  required class="form-control"  required id="fileschema" ng-model="rdbms.dbName" ng-readonly="readonlyAttr" ng-disabled="connectDisble">
                                                                 <option  selected="selected" value="">Please Select Option</option>
@@ -59,8 +59,8 @@
          
            <div class="form-group required col-xs-offset-9" >
                <div>&nbsp;</div>
-               <input  ng-show="showbutton" type="button" ng-disabled="connectform.$invalid" class="btn btn-primary " id="" value="Connect" ng-click="connectDB(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType)" >
-                <input  ng-show="showbuttonDisc" type="button" ng-disabled="connectform.$invalid" class="btn btn-primary " id="" value="Disconnect" ng-click="enableForm()" >
+               <input  ng-show="showbutton" type="button"  class="btn btn-primary " id="" value="Connect" ng-click="connectDB(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType)" >
+                <input  ng-show="showbuttonDisc" type="button"  class="btn btn-primary " id="" value="Disconnect" ng-click="enableForm()" >
                             
            </div>  
          </div>   

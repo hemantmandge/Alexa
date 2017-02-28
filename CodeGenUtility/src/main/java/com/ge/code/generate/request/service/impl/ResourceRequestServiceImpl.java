@@ -172,8 +172,8 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
 				connection = DriverManager.getConnection("jdbc:oracle:thin:@" + host + ":" + database, userid, password);
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.MSSQL)) {
-				connection = DriverManager.getConnection("jdbc:sqlserver://" + host + ";databaseName=" + database, userid, password);
-				//connection = DriverManager.getConnection("jdbc:sqlserver://" + host, userid, password);
+				//connection = DriverManager.getConnection("jdbc:sqlserver://" + host + ";databaseName=" + database, userid, password);
+				connection = DriverManager.getConnection("jdbc:sqlserver://" + host, userid, password);
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
 				connection = DriverManager.getConnection("jdbc:teradata://" + host, userid, password);
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
