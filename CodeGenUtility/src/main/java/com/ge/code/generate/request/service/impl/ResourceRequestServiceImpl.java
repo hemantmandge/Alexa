@@ -166,36 +166,19 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 
 
 		System.out.println("-------- JDBC Connection Testing ------");
-/*
-		try {
-			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.MSSQL)) {
-				Class.forName("com.microsoft.sqlserver.jdbc.SqlServerDriver");
-			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
-				Class.forName("com.teradata.jdbc.TeraDriver");
-			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-			}  
-		} catch (ClassNotFoundException e) {
-
-			System.out.println("JDBC Driver ?");
-			e.printStackTrace();
-		}
-
-		System.out.println("Oracle JDBC Driver Registered!");
-*/
 		Connection connection = null;
 
 		try {
 			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
 				connection = DriverManager.getConnection("jdbc:oracle:thin:@" + host + ":" + database, userid, password);
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.MSSQL)) {
-				connection = DriverManager.getConnection("jdbc:sqlserver://" + host + ";databaseName=" + database, userid, password);
+				//connection = DriverManager.getConnection("jdbc:sqlserver://" + host + ";databaseName=" + database, userid, password);
+				connection = DriverManager.getConnection("jdbc:sqlserver://" + host, userid, password);
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
 				connection = DriverManager.getConnection("jdbc:teradata://" + host, userid, password);
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
-				connection = DriverManager.getConnection("jdbc:oracle:thin:@" + host + ":" + database, userid, password);
+				//connection = DriverManager.getConnection("jdbc:postgresql://" + host + "/" + database, userid, password);
+				connection = DriverManager.getConnection("jdbc:postgresql://" + host + "/" , userid, password);
 			} 
 		} catch (SQLException e) {
 
