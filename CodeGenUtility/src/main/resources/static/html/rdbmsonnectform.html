@@ -1,68 +1,71 @@
-<div class="container">    
-      <form class="form-horizontal" role="form" name="connectform" novalidate>  
-         <div class="col-md-12"><legend class="toptxt">Source</legend></div>
-        <div class="col-md-12">
-            <div class="row" >
-              <div class="container connctblk">  
-                <div class="col-md-12">
-                     
-                               <div ng-if="dataLoading" style="text-align: center"><img src="img/loader.gif" width="100" height="150"></div>
-                </div>      
-               <div class="col-md-12"> 
-                <div class="col-md-6 ">
-                    <div class="form-group required" ng-init="pageLoadData()"> 
-                        <div class="col-md-6"> <label for="datasrc" class="control-label"> Database Type</label></div>
-                        <div class="col-md-6"><select name="datasrc" class="form-control" id="datasrc" ng-model="rdbms.sourceType" required ng-readonly="readonlyAttr"  ng-disabled="connectDisble">
-                                 <option  ng-repeat="src in datadbsrc" ng-click="getDB(src.value)">{{src.value}}</option>
-                            </select></div>
-                            <div class="col-md-6">&nbsp;</div>
-                            <div class="col-md-6 errmsg" ng-show="connectform.datasrc.$error.required">Database type is required.</div>
-                    </div>
-                    <div class="form-group required"> 
-                        <div class="col-md-6"> <label   class="control-label" for="username">User Name </label></div>
-                        <div class="col-md-6"><input type="text" name="username"  required class="form-control" id="username" ng-model="rdbms.username" placeholder="Enter User Name" ng-readonly="readonlyAttr"></div>
-                         <div class="col-md-6">&nbsp;</div>
-                        <div class="col-md-6 errmsg" ng-show="connectform.username.$error.required">Username   is required.</div>
-                    </div>
-                    <div class="form-group required "> 
-                        <div class="col-md-6"> <label for="pwd" class="control-label">Password</label></div>
-                        <div class="col-md-6"><input type="password" name="password" required class="form-control" ng-model="rdbms.password" id="pwd" placeholder="Enter Password" ng-readonly="readonlyAttr"></div>   
-                         <div class="col-md-6">&nbsp;</div>
-                        <div class="col-md-6 errmsg"  ng-show="connectform.datasrc.$error.required" >Password  is required.</div>
+<div class="clear"></div>
+<div class="col-md-12 wraper">    
 
-                    </div>
-                   
-                </div>
-                <div class="col-md-6 ">
-                  <div class="form-group required"> 
-                        <div class="col-md-6"> <label   class="control-label" for="srcdbport">DB Connection </label></div>
-                        <div class="col-md-6"><select  name="srcdbport" class="form-control" required id="srcdbport"  ng-model="rdbms.dbConnection" ng-readonly="readonlyAttr" ng-disabled="connectDisble">
+      <form class="form-horizantal"  role="form" name="connectform" novalidate  ng-submit="submitted = true" >  
+         
+         <div class="row">
+		 <div class="col-md-6">
+          <div class="form-group required" ng-init="pageLoadData()"> 
+			<div class="col-md-6"> <label for="datasrc" class="control-label"> Database Type</label> </div>
+            <div class="col-md-6" >   <select name="datasrc" class="form-control" id="datasrc" ng-model="rdbms.sourceType" required ng-readonly="readonlyAttr"  ng-disabled="connectDisble">
+                                <option  selected="selected" value="">Please Select Option</option>
+                                 <option  ng-repeat="src in datadbsrc" ng-click="getDB(src.value)">{{src.value}}</option>
+                            </select>
+			</div>
+              <span class="errmsg" ng-if="submitted && connectform.username.$error.required">This is required.</span>              
+          </div>  
+		 </div>
+		  <div class="col-md-6">
+          <div class="form-group required">
+            <div class="col-md-6">  <label   class="control-label" for="srcdbport">DB Connection </label></div>
+             <div class="col-md-6"> <select  name="srcdbport" class="form-control" required id="srcdbport"  ng-model="rdbms.dbConnection" ng-readonly="readonlyAttr" ng-disabled="connectDisble" >
+                                <option  selected="selected" value="">Please Select Option</option>
                                 <option ng-repeat="src in datadbconn" ng-click="getSID(src.value)">{{src.value}}</option>
                             </select></div>
-                         <div class="col-md-6">&nbsp;</div>    
-                         <div class="col-md-6 errmsg" ng-show="connectform.srcdbport.$error.required" >Database Connection is required.</div>
-                    </div>  
-                 <div class="form-group required"> 
-                        <div class="col-md-6">
-                             <label   class="control-label" for="fileschema">DB Name / SID</label></div>
-                        <div class="col-md-6"><select name="SID"  required class="form-control"  required id="fileschema" ng-model="rdbms.dbName" ng-readonly="readonlyAttr" ng-disabled="connectDisble">
+                <span class="errmsg" ng-if="submitted && connectform.username.$error.required">This is Required.</span>              
+          </div></div>
+		  <div class="col-md-6">
+		   <div class="form-group required"  ng-show="showDBName"> 
+           <div class="col-md-6">    <label   class="control-label" for="fileschema">DB Name / SID</label></div>
+            <div class="col-md-6">   <select name="SID"  required class="form-control"  required id="fileschema" ng-model="rdbms.dbName" ng-readonly="readonlyAttr" ng-disabled="connectDisble">
+                                                                <option  selected="selected" value="">Please Select Option</option>
+
                                 <option  ng-repeat="src in datadbSID" >{{src.value}}</option>
                             </select></div>
-                          <div class="col-md-6">&nbsp;</div>   
-                          <div class="col-md-6 errmsg" ng-show="connectform.SID.$error.required" class="errmsg">DB Name is required.</div>
-                    </div>
-                               
-                              
-                <div class="form-group required"> 
-                    <div class="col-md-6 col-md-offset-9">
-                            <div class="col-md-6 pd-top "> <input  ng-show="showbutton" type="button" ng-disabled="connectform.$invalid" class="btn btn-primary " id="" value="Connect" ng-click="connectDB(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType)" >
-                            <input  ng-show="showbuttonDisc" type="button" ng-disabled="connectform.$invalid" class="btn btn-primary " id="" value="Disconnect" ng-click="enableForm()" >
+                 <span class="errmsg" ng-if="submitted && connectform.username.$error.required">This is Required.</span>             
+           </div>  
+         
+		  </div>
+		  <div class="col-md-6">
+		   <div class="form-group required ">
+            <div class="col-md-6"> <label   class="control-label " for="username">User Name </label></div>
+            <div class="col-md-6" >  <input type="text" name="username"  required class="form-control" id="username" ng-model="rdbms.username" placeholder="Enter User Name" ng-readonly="readonlyAttr"></div>
+                 <span class="errmsg" ng-if="submitted && connectform.username.$error.required">This is Required.</span>
+            </div>     
+           </div>
+          <div class="col-md-6">
+		   <div class="form-group required">
+            <div class="col-md-6" >  <label for="pwd" class="control-label">Password</label></div>
+            <div class="col-md-6" >  <input type="password" name="password"    required class="form-control" ng-model="rdbms.password" id="pwd" placeholder="Enter Password" ng-readonly="readonlyAttr"></div>
+			 <span class="errmsg" ng-if="submitted && connectform.password.$error.required">This is Required.</span>
+          </div>    
+
+		  </div>
+
+         
+          
+          
+         <div class="col-md-6">
+         
+           <div class="form-group required col-xs-offset-9" >
+               <div>&nbsp;</div>
+               <input  ng-show="showbutton" type="button" ng-disabled="connectform.$invalid" class="btn btn-primary " id="" value="Connect" ng-click="connectDB(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType)" >
+                <input  ng-show="showbuttonDisc" type="button" ng-disabled="connectform.$invalid" class="btn btn-primary " id="" value="Disconnect" ng-click="enableForm()" >
                             
-                            </div>
-                            <div class="col-md-6"> &nbsp;</div>
-                    </div>
-              </div>  
-                </div>
-            </div>  </form>
-            </div><!-- Container end here-->
+           </div>  
+         </div>   
+
+    </form>
+</div> 
+</div><!-- Container end here-->
             

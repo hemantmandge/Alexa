@@ -1,180 +1,238 @@
 
-<div class="clear"></div><!-- clear -->
-<div class="container">          
+<div ng-show="loadingBackgronud"  class="loadingBackgronud" ></div>
+<div ng-show="dataLoading"   class="dataLoading" id="loading-indicator"><img src="img/loader.png" width="100" height="150"></i></div>   
+<div class="container">
+<div class="row">
 <div ng-include="'html/rdbmsonnectform.html'"></div>
-<div class="container">   
-      <form class="form-horizontal"  role="form" name="rdbmsForm" novalidate> 
-            <div class="col-md-6 ">
-              
-                 <div class="form-group required "> 
-                    <div class="col-md-6"><label for="srcschema" class="control-label" >DB Schema</label></div>
-                    <div class="col-md-6"><select  name="dbschema" class="form-control"  id="srcschema" ng-model="rdbms.source" >
-            
-                          <option  ng-repeat="src in databaseSchema" ng-click="getTables(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType,src)">{{src}}</option>
-                        </select></div>
-                         <div class="col-md-6">&nbsp;</div>
-                         <div ng-show="rdbmsForm.dbschema.$error.required" class="errmsg">DB Schema is required.</div>
-                   
-                </div>    
-                
-              <div class="form-group required "> 
-               <div class="col-md-6"> <label for="srctable" class="control-label"> Tables  </label></div>
-               <div class="col-md-6"><select name="tables" class="form-control" required id="srctable" multiple ng-model="rdbms.sourceTableNames" ng-click="getCols(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType,rdbms.sourceTableNames,rdbms.source) ; disableDrop(rdbms.sourceTableNames);onSelcted2(rdbms.sourceTableNames);getHiveTableNames(rdbms.sourceTableNames)" ng-class="{warning: (rdbms.sourceTableNames == 'Select All'), ok: (rdbms.sourceTableNames != 'Select All')}">
-                        <!--  <option><input type="checkbox" ng-model="tableSelect" ng-click="selectAlltables(tableSelect)"></option>-->
-                          <option ng-selected="isSelectedFlag" ng-repeat="src in tables">{{src}}</option>
-                        </select></div>   
-                <div class="col-md-6">&nbsp;</div>      
-
-                <!--<div class="col-md-6 errmsg" ng-show="rdbmsForm.tables.$error.required" >Tables is required.</div>-->
-              </div>
-            
-              <div class="form-group required "> 
-               <div class="col-md-6"> <label for="srcclumn" class="control-label"> Columns</label></div>
-               <div class="col-md-6" ><select name="colums"  ng-required="colRequiredchk=='false'" ng-disabled="disabledMultiple" class="form-control" id="srcclumn" multiple ng-model="rdbms.sourceColumnNames" ng-click="onSelctedColumns(rdbms.sourceColumnNames)" ng-class="{warning: (rdbms.sourceColumnNames == 'Select All'), ok: (rdbms.sourceColumnNames != 'Select All')}" >
-                          <option  ng-repeat="src in cols">{{src}}</option>
-                        </select></div>   
-              </div>
-              <div class="col-md-6">&nbsp;</div>  
-             <!-- <div class="col-md-6 errmsg" ng-show="rdbmsForm.colums.$error.required" >Columns is required.</div>-->
-             </div>  
-            
-            <div class="col-md-6">
-               
-                 <div class="form-group required "> 
-                  <div  class="col-md-6"><label for="CalculateDelta" class="control-label">Calculate Delta On </label></div>
-                   <div class="col-md-6"><select  name="CalculateDelta" ng-disabled="disabledMultiple"  ng-required="colRequiredchk=='false'" class="form-control" id="CalculateDelta" ng-model="rdbms.calculateDeltaOn">
-                            <option   ng-repeat="field in rdbms.sourceColumnNames " value="{{field}}">{{field}}</option>
-                        </select></div>  
-                   <div class="col-md-6">&nbsp;</div>       
-                    <div class="col-md-6" ng-show="rdbmsForm.CalculateDelta.$error.required" class="errmsg">Columns is required.</div>
-                </div> 
-                <div class="clear"></div><!-- clear -->
-                 <div class="form-group required"> 
-                      <div class="col-md-6"> <label   class="control-label" for="joinkey">Union Key</label></div>
-                     <div class="col-md-6"><select ng-disabled="disabledMultiple" ng-required="colRequiredchk=='false'" class="form-control" id="joinkey" multiple ng-model="rdbms.joinKeys">
-                           <option   ng-repeat="field in rdbms.sourceColumnNames " value="{{field}}">{{field}}</option>
-                        </select></div>
-                       <div class="col-md-6">&nbsp;</div>   
-                       <div class="col-md-6" ng-show="rdbmsForm.CalculateDelta.$error.required" class="errmsg">Columns is required.</div>   
-                </div>
-                 <div class="clear"></div><!-- clear -->
-                  <div class="form-group "> 
-                      <div class="col-md-6"> <label   class="control-label" for="condition">Where Condition </label></div>
-                     <div class="col-md-6"><input type="text" class="form-control" id="condition"ng-model="rdbms.whereCondition"  placeholder="Enter Where Condition"></div>
-                      <div class="col-md-6">&nbsp;</div> 
-                       <div class="col-md-6">&nbsp;</div> 
-                </div>
-                <div class="form-group required "> 
-               <div class="col-md-6"> <label for="archie" class="control-label"> Archive Period (days)</label></div>
-               <div class="col-md-6"><input type="text" name="archieper" required class="form-control" id="archie" placeholder="Enter Archive Period" ng-model="rdbms.archivePeriod" ></div>   
-              <!-- <div class="col-md-6 errmsg" ng-show="rdbmsForm.archieper.$error.required" >Archive Period  is required.</div>-->
-               <div class="col-md-6">&nbsp;</div> 
-              </div>
-               
-        </div>
-          <div class="clear"></div><!-- clear -->
-
-<div class="container"> 
-<fieldset>
-        <div class="col-md-12"><legend class="toptxt">Target</legend></div>
-        <div class="col-md-12">
-            <div class="col-md-6">
-           <div class="form-group required ">      
-            <div class="col-md-6"> <label for="targettype">Target Type</label></div>
-              <div class="col-md-6">
-             
-                <div class="margin-bt"  >
-                        <div class="radio  ">  
-                        <input id="HIVE" type="radio" name="HIVE"  ng-model="rdbms.targetType" ng-value="'HIVE'" ng-change="showHiveBlk(rdbms.targetType)" > <label
-                        class="radio-label" for="HIVE" >HDFS &amp; HIVE </label> 
-                        </div>
-                        <div class="radio"> 
-                            <input id="HDFS" type="radio" name="HDFS" ng-model="rdbms.targetType" value="HDFS" ng-value="'HDFS'" ng-change="showHiveBlk(rdbms.targetType)"> <label class="radio-label" for="HDFS">HDFS Only</label>
-                        </div>
-            
-                    </div>       
-                 </div>
-
-           </div>     
- 
-				<div class="form-group required "> 
-                <div class="col-md-6"> <label class="control-label">Load Type</label></div>
-                <div class="col-md-6"><select  class="form-control" id="loadtype" ng-model="rdbms.loadType">
-                                <option ng-selected= "{{src.value == rdbms.loadType}}"  ng-repeat="src in loadType">{{src.value}}</option>
-                            </select>
-                    </div>   
-                </div> 
- 
-
-				
-               <div class="form-group required ">     
-               <div class="col-md-6"> <label for="hivedb"  class="control-label">Hive DB Name</label></div>
-               <div class="col-md-6"><input type="text" name="hivedbname"  class="form-control" id="hivedb" required placeholder="Hive Db name" ng-model="rdbms.targetDBName" ng-disabled="disabled" ></div>   
-               <div class="col-md-6">&nbsp;</div> 
-               <!--<div class="col-md-6 errmsg" ng-show="rdbmsForm.hivedbname.$error.required" >Hive DB name  is required.</div>-->
-               
-               </div>
-                <div class="clearfix"></div>
-              
-              <div class="form-group required " > 
-               <div class="col-md-6"> <label for="hivetable"  class="control-label">Hive Table Name</label></div>
-               <div class="col-md-6"><input type="text" name="hivetable" required class="form-control" id="hivetable" placeholder="Hive Table name" value="" ng-model="rdbms.targetTableName" ng-disabled="isdisabled" required></div>   
-               <div class="col-md-6">&nbsp;</div> 
-               <!--<div class="col-md-6 errmsg" ng-show="rdbmsForm.hivetable.$error.required">Hive Table name  is required.</div>-->
-              </div> 
-               
-              
-             </div>  
-            
-            <div class="col-md-6">
-                <div class="form-group required"> 
-                 <div class="col-md-12">
-                       <div class="col-md-6"> &nbsp;</div>
-                        <div class="col-md-6"> &nbsp;</div>
-                        <div class="col-md-6"> &nbsp;</div>
-                        <div class="col-md-6"> &nbsp;</div>
-                 </div>
-              </div>    
-               <div class="form-group required " >
-                    <div class="col-md-6"> <label for="Target" class="control-label" >Target Connection </label></div>
-                    <div class="col-md-6">
-                    <input type="text" class="form-control" name="targetconn" required id="Target"ng-model="rdbms.targetConnection" required  placeholder="Enter Target Connection">
-                     <div class="col-md-6">&nbsp;</div> 
-                    <!--<div class="col-md-6 errmsg" ng-show="rdbmsForm.targetconn.$error.required">Hive Table name  is required.</div>-->   
-                    <!--<select  class="form-control" id="Target" ng-model="rdbms.targetConnection" required>
-                                <option  ng-repeat="src in targetcon">{{src.value}}</option>
-                            </select>-->
-                    
-                    </div>  
-               </div>
-               
-              <div class="form-group required " > 
-               <div class="col-md-6"> <label for="hivetabletype"   class="control-label"   >Hive Table Type</label></div>
-               <div class="col-md-6"><select  class="form-control"  id="hivetabletype" ng-init="loadHiveTableType()"ng-model="rdbms.hiveTableType"  ng-change="changePartitinKey(rdbms.hiveTableType)" ng-disabled="disabled" >
-                                <option  ng-repeat="src in hiveTableType">{{src.value}}</option>
-                            </select></div>   
-              </div> 
-              <div class="form-group " > 
-               <div class="col-md-6"> <label for="hivepartionkey" >Hive Partition Key</label></div>
-               <div class="col-md-6"><select  class="form-control" id="hivepartionkey" ng-model="rdbms.targetPartitionKey" ng-disabled="isdisabled" >
-                                 <option   ng-repeat="field in rdbms.sourceColumnNames " value="{{field}}">{{field}}</option>
-                            </select></div>   
-              </div> 
-         
-          
-            </div>  
-        </div>
-</fieldset> 
- </div>
-
- <div class="row">
-     
-            <div class="col-md-8 col-md-offset-10 column margin-bt">
-                <button type="button" class="btn btn-primary  "  ng-disabled="rdbmsForm.$invalid" ng-click="postdata(rdbms);">Submit</button>
-                 <button type="button" class="btn btn-primary "  ng-click="onCancel();">Cancel</button>
-                 
-            </div>     
-  
- </div>
-</form>
 </div>
+<div class="row"><!--ROw First  -->
+<fieldset>
+<div class="col-md-12">	<legend class="toptxt">Source</legend></div>
+<div class="col-md-6">
+		<div class="form-group required ">
+					<div class="col-md-6">
+						<label for="srcschema" class="control-label" >DB Schema</label>
+					</div>
+					<div class="col-md-6 ">
+						<select  name="dbschema"   class="form-control"  id="srcschema" ng-model="rdbms.source" >
+                            <option  selected="selected" value="">Please Select Option</option>
+							<option  ng-selected= "{{src == rdbms.source}}" ng-repeat="src in databaseSchema" ng-click="getTables(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType,src)">{{src}}</option>
+						</select>
+					</div>
+					<div class="col-md-6">&nbsp;</div>
+					<div ng-show="(rdbmsForm.dbschema.$dirty || submitted )&&  rdbmsForm.dbschema.$error.required" class="errmsg">DB Schema is required.</div>
+		</div>
+</div>
+<div class="col-md-6">
+
+		
+		<div class="form-group required ">
+					<div class="col-md-6">
+						<label for="srctable" class="control-label"> Tables  </label>
+					</div>
+					<div class="col-md-6">
+						<select name="tables" class="form-control" required id="srctable" multiple ng-model="rdbms.sourceTableNames" ng-click="getCols(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType,rdbms.sourceTableNames,rdbms.source) ; disableDrop(rdbms.sourceTableNames);onSelcted2(rdbms.sourceTableNames);getHiveTableNames(rdbms.sourceTableNames)" ng-class="{warning: (rdbms.sourceTableNames == 'Select All'), ok: (rdbms.sourceTableNames != 'Select All')}">
+							 <option  selected="selected" value="">Please Select Option</option>
+                            	<option ng-selected="isSelectedFlag" ng-repeat="src in tables">{{src}}</option>
+						</select>
+					</div>
+					<div class="col-md-6">&nbsp;</div>
+					<div class="col-md-6 errmsg" ng-show="(rdbmsForm.tables.$dirty || submitted ) &&  rdbmsForm.tables.$error.required" >This is required.</div>
+		</div>
+</div>
+<div class="col-md-6">
+<div class="form-group required ">
+					<div class="col-md-6">
+						<label for="srcclumn" class="control-label"> Columns  </label>
+					</div>
+					<div class="col-md-6">
+						<select name="colums"  ng-required="colRequiredchk=='false'" ng-disabled="disabledMultiple" class="form-control" id="srcclumn" multiple ng-model="rdbms.sourceColumnNames" ng-click="onSelctedColumns(rdbms.sourceColumnNames)" ng-class="{warning: (rdbms.sourceColumnNames == 'Select All'), ok: (rdbms.sourceColumnNames != 'Select All')}" >
+							 <option  selected="selected" value="">Please Select Option</option>
+								<option  ng-repeat="src in cols">{{src}}</option>
+						</select>
+					</div>
+					<div class="col-md-6">&nbsp;</div>
+					<div class="col-md-6 errmsg" ng-show="(rdbmsForm.colums.$dirty || submitted ) &&  rdbmsForm.colums.$error.required" >This is required.</div>
+				</div>
+</div>					
+<div class="col-md-6">
+<div class="form-group required ">
+					<div  class="col-md-6">
+						<label for="CalculateDelta"  class="control-label">Calculate Delta On </label>
+					</div>
+					<div class="col-md-6">
+						<select  name="CalculateDelta" ng-disabled="disabledMultiple"  ng-required="colRequiredchk=='false'" class="form-control marleft" id="CalculateDelta" ng-model="rdbms.calculateDeltaOn">
+						<option  selected="selected" value="">Please Select Option</option>
+							<option  ng-selected= "{{field == rdbms.calculateDeltaOn}}" ng-repeat="field in rdbms.sourceColumnNames " value="{{field}}">{{field}}</option>
+						</select>
+					</div>
+					<div class="col-md-6">&nbsp;</div>
+					<div class="col-md-6" ng-show="(rdbmsForm.CalculateDelta.$dirty || submitted ) &&  rdbmsForm.CalculateDelta.$error.required" class="errmsg">This is required.</div>
+	</div>
+</div>
+<div class="col-md-6">
+<div class="form-group required">
+					<div class="col-md-6">
+						<label   class="control-label" for="joinkey">Union Key</label>
+					</div>
+					<div class="col-md-6">
+						<select ng-disabled="disabledMultiple" name="joinkey" ng-required="colRequiredchk=='false'" class="form-control" id="joinkey" multiple ng-model="rdbms.joinKeys">
+							<option  selected="selected" value="">Please Select Option</option>
+							<option   ng-repeat="field in rdbms.sourceColumnNames " value="{{field}}">{{field}}</option>
+						</select>
+					</div>
+					<div class="col-md-6">&nbsp;</div>
+					<div class="col-md-6" ng-show="(rdbmsForm.joinkey.$dirty || submitted ) &&  rdbmsForm.joinkey.$error.required" class="errmsg">This is required.</div>
+				</div
+</div>
+		
+</div>
+<div class="col-md-6">
+<div class="form-group">
+					<div class="col-md-6">
+						<label   class="control-label" for="condition">Where Condition </label>
+					</div>
+					<div class="col-md-6">
+						<input type="text" class="form-control whr" id="condition"ng-model="rdbms.whereCondition"  placeholder="Enter Where Condition">
+						</div>
+						<div class="col-md-6">&nbsp;</div>
+						<div class="col-md-6">&nbsp;</div>
+				 </div>
+
+</div>
+<div class="col-md-6">
+<div class="form-group required">
+					<div class="col-md-6">
+							<label for="archie" class="control-label"> Archive Period(days)</label>
+					</div>
+					<div class="col-md-6">
+							<input type="text"   name="archieper" required class="form-control archleft" id="archie" ng-pattern-restrict="^[0-9]*$"  placeholder="Enter Archive Period" ng-model="rdbms.archivePeriod" >
+						
+							 <div class="col-md-6 errmsg" ng-show="(rdbmsForm.archieper.$dirty || submitted ) &&  rdbmsForm.archieper.$error.required" >This is required.</div>
+							<div class="col-md-6">&nbsp;</div>
+					</div>
+						
+				</div>
+
+
+</div>
+</form>
+</fieldset>
+</div><!---first row ends --->
+
+<div class="row">
+<fieldset>
+		   <div class="col-md-12"><legend class="toptxt">Target</legend></div>
+
+<div class="col-md-12">
+<div class="form-group required ">
+		<div class="col-md-3">
+				<label for="targettype" class="control-label">Target Type</label>
+		</div>
+		<div class="col-md-6">	
+			
+				<label  for="HIVE" ><input id="HIVE" type="radio"  class="margintop" name="HIVE"  ng-model="rdbms.targetType" ng-value="'HIVE'" ng-change="showHiveBlk(rdbms.targetType)" >HDFS &amp; HIVE </label>
+			
+			
+				<label  for="HDFS"><input id="HDFS" type="radio" class="margintop" name="HDFS" ng-model="rdbms.targetType" value="HDFS" ng-value="'HDFS'" ng-change="showHiveBlk(rdbms.targetType)">HDFS Only</label>
+			
+			
+		</div>
+		</div>
+</div>
+<div class="col-md-6">
+<div class="form-group  ">
+		<div class="col-md-6">
+			<label for="loadtype" class="control-label">Load Type</label>
+		</div>
+		<div class="col-md-6">
+			<select  class="form-control" id="loadtype" ng-model="rdbms.loadType">
+				<option  selected="selected"  value="">Please Select Option</option>
+				<option name="loadtype"ng-selected= "{{src.value == rdbms.loadType}}"  ng-repeat="src in loadType">{{src.value}}</option>
+			</select>
+		</div>
+		<div class="col-md-6">&nbsp;</div>
+	
+	</div>
+
+</div>
+
+<div class="col-md-6">
+<div class="form-group required " >
+	<div class="col-md-6">
+		<label for="Target" class="control-label">Target Connection </label>
+	</div>
+	<div class="col-md-6">
+		<input type="text"  class="form-control" name="targetconn" ng-required="requiredHive=='false'" id="Target"ng-model="rdbms.targetConnection" required  placeholder="Enter Target Connection">
+			<div class="col-md-6">&nbsp;</div>
+			<div class="col-md-6 errmsg" ng-show="(rdbmsForm.targetconn.$dirty || submitted ) &&  rdbmsForm.targetconn.$error.required">This  is required.</div>
+			<!--<select  class="form-control" id="Target" ng-model="rdbms.targetConnection" required><option  ng-repeat="src in targetcon">{{src.value}}</option></select>-->
+		</div>
+</div>
+</div>
+<div class="col-md-6">
+	<div class="form-group  required" >
+			<div class="col-md-6">
+				<label for="hivedb"  class="control-label">Hive DB Name</label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" name="hivedbname"  class="form-control" id="hivedb" ng-required="colRequiredchk=='false'" placeholder="Hive Db name" ng-model="rdbms.targetDBName" ng-disabled="disabled" >
+			</div>
+			<div class="col-md-6">&nbsp;</div>
+				<div class="col-md-6 errmsg" ng-show="(rdbmsForm.hivedbname.$dirty || submitted ) &&  rdbmsForm.hivedbname.$error.required" >This is required.</div>
+			
+	</div>
+
+</div>
+
+<div class="col-md-6">
+	<div class="col-md-6">
+		<label for="hivetabletype"   class="control-label"   >Hive Table Type</label>
+	</div>
+	<div class="col-md-6">
+		<select   name="hivetabltt" ng-required="colRequiredchk=='false'" class="form-control"  id="hivetabletype" ng-init="loadHiveTableType()"ng-model="rdbms.hiveTableType"  ng-change="changePartitinKey(rdbms.hiveTableType)" ng-disabled="disabled" >
+									<option  selected="selected" value="">Please Select Option</option>
+									<option  ng-repeat="src in hiveTableType">{{src.value}}</option>
+		</select>
+								
+	</div>
+	<div class="col-md-6">&nbsp;</div>
+	<div class="col-md-6 errmsg" ng-show="(rdbmsForm.hivetable.$dirty || submitted ) && rdbmsForm.hivetable.$error.required">This is required.</div>					
+</div>
+<div class="col-md-6">
+<div class="form-group required ">
+	<div class="col-md-6">
+		<label for="hivetable"  class="control-label">Hive Table Name</label>
+	</div>
+	<div class="col-md-6">
+		<input type="text"  name="hivetable" ng-required="colRequiredchk=='false'" class="form-control" id="hivetable" placeholder="Hive Table name" value="" ng-model="rdbms.targetTableName" ng-disabled="hivetabledisabled" required>
+		</div>
+		<div class="col-md-6">&nbsp;</div>
+		<div class="col-md-6 errmsg" ng-show="(rdbmsForm.hivetable.$dirty || submitted ) && rdbmsForm.hivetable.$error.required">This is required.</div>
+	</div>
+
+</div>
+
+<div class="col-md-6">
+ <div class="form-group " >
+	<div class="col-md-6">
+		<label for="hivepartionkey">Hive Partition Key</label>
+	</div>
+	<div class="col-md-6">
+		<select  class="form-control" ng-required="colRequiredchk=='false'" id="hivepartionkey" ng-model="rdbms.targetPartitionKey" ng-disabled="isdisabled" >
+			<option  selected="selected" value="">Please Select Option</option>
+			<option    ng-repeat="field in rdbms.sourceColumnNames " value="{{field}}">{{field}}</option>
+		</select>
+	</div>
+</div>
+</div>
+<div class="col-md-6 col-md-offset-10 column">
+<div class=" margin-bt">
+					<button type="button" class="btn btn-primary  "  ng-disabled="rdbmsForm.$invalid"  ng-click="postdata(rdbms);">Submit</button>
+					<button type="button" class="btn btn-primary "  ng-click="onCancel();">Cancel</button>
+				</div>
+</div>
+</div>
+</fieldset>
+</div><!-- second row ends-->
+</div><!-- container ends -->
