@@ -177,8 +177,8 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
 				connection = DriverManager.getConnection("jdbc:teradata://" + host, userid, password);
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
-				//connection = DriverManager.getConnection("jdbc:postgresql://" + host + "/" + database, userid, password);
-				connection = DriverManager.getConnection("jdbc:postgresql://" + host + "/" , userid, password);
+				connection = DriverManager.getConnection("jdbc:postgresql://" + host + "/" + database, userid, password);
+				//connection = DriverManager.getConnection("jdbc:postgresql://" + host, userid, password);
 			} 
 		} catch (SQLException e) {
 

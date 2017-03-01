@@ -243,7 +243,7 @@ if($scope.showbuttonDisc == true){
 		 
 	 }
   });
- if(datasrc=="ORACLE")
+ if(datasrc=="ORACLE"||datasrc=="GREENPLUM")
 	 {
 	 //alert("in if ");
 	 

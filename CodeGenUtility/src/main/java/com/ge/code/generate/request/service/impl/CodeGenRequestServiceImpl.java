@@ -42,7 +42,10 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 
 	@Override
 	public void create(CodeGenRequest codeGenRequest) {
-		if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.ORACLE)) {
+		if ((codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.ORACLE)) 
+				|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.MSSQL))
+						|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.TERADATA))
+								|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.GREENPLUM))) {
 			populateDataForOracle(codeGenRequest);
 		} else if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.FILE)) {
 			populateDataForFile(codeGenRequest);
