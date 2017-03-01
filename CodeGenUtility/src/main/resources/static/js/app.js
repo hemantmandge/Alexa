@@ -467,7 +467,7 @@ if($scope.showbuttonDisc == true){
    $scope.hivetabledisabled=true;
    $scope.colRequiredchk = false;
    $scope.isdisabled = true;
-    $scope.rdbms.sourceColumnNames="";
+    $scope.sourceColumnNames=[];
   } else {
    $scope.colRequiredchk = false;
   //alert("outside ifff "+ selectedItem.length);
@@ -514,7 +514,7 @@ $scope.onSelctedColumns = function(selectedItem) {
   if (selectedItem == 'Select All') {
    //alert('m in if');
   
-   $scope.rdbms.sourceColumnNames = $scope.sourceCols;
+   $scope.sourceColumnNames = $scope.sourceCols;
 
    $scope.srcclumn = $scope.sourceCols;
   $scope.joinKeys = $scope.sourceCols;
