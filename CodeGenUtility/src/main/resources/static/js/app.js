@@ -152,12 +152,15 @@ if($scope.showbuttonDisc == true){
   $location.path('/home');
  }
  $scope.pageLoadData = function() {
+	
   $http.get("resources/findByTypeAndName?type=DATASOURCE&name=RDBMS").then(function(response) {
    $scope.datadbsrc = response.data; //ajax request to fetch data into $scope.data
+ 
   });
   $http.get("resources/findByType?type=TARGETCONNECTION").then(function(response) {
    ////alert(response.data);
    $scope.targetcon = response.data; //ajax request to fetch data into $scope.data
+  
   });
   $scope.rdbms.targetType = "HIVE";
   if ($scope.rdbms.targetType == 'HIVE') {
@@ -233,7 +236,12 @@ if($scope.showbuttonDisc == true){
   $scope.datadbconn = []; //declare an empty array
   $http.get("resources/findByName?name=" + datasrc).then(function(response) {
    // //alert(response);
-   $scope.datadbconn = response.data; //ajax request to fetch data into $scope.data
+	 if(response.data) {
+		 $scope.datadbconn = response.data; //ajax request to fetch data into $scope.data
+	 }
+	 else{
+		 
+	 }
   });
  if(datasrc=="ORACLE")
 	 {
@@ -257,6 +265,8 @@ if($scope.showbuttonDisc == true){
   $http.get("resources/findByName?name=" + srctype).then(function(response) {
    //  //alert(response);
    $scope.datadbSID = response.data; //ajax request to fetch data into $scope.data
+	
+	   
   });
  }
  $scope.connectDB = function(username, password, host, dbName, rdbmsName) {
@@ -294,10 +304,13 @@ if($scope.showbuttonDisc == true){
   });
  }
  $scope.getTables = function(username, password, host, database, rdbmsName, dbschema) {
+	 $scope.dataLoading = true;
+	 $scope.loadingBackgronud = true;
   $scope.tables = []; //declare an empty array
   $http.get("resources/getTables?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + database + "&rdbmsName=" + rdbmsName + "&schema=" + dbschema + "").then(function(response) {
-   $scope.tables = response.data; //ajax request to fetch data into $scope.data
-  
+  $scope.tables = response.data; //ajax request to fetch data into $scope.data
+   $scope.dataLoading = false;
+   $scope.loadingBackgronud = false;
    if( $scope.tables.length>1)
 	   {
 	 //  //alert("in if "+response.data);
@@ -310,14 +323,15 @@ if($scope.showbuttonDisc == true){
  $scope.sourceCols={};
  $scope.getCols = function(username, password, host, database, rdbmsName, tableName, dbschema) {
   // //alert(tableName);
-
+ //$scope.dataLoading = true;
+// $scope.loadingBackgronud = true;
   var tbllen =tableName.length;
   $scope.cols = []; //declare an empty array
   if (tableName.length <= 1) {
    $http.get("/resources/getColumns?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + database + "&rdbmsName=" + rdbmsName + "&tableName=" + tableName + "&schema=" + dbschema + "").then(function(response) {
-    //   //alert("http://10.174.132.12:8080/resources/getColumns?userid="+username+"&password="+password+"&host="+host+"&database="+database+"&rdbmsName="+rdbmsName+"&tableName="+tableName+"");
     $scope.cols = response.data; //ajax request to fetch data into $scope.data
- //alert("table length --"+tbllen);
+   // $scope.dataLoading = false;
+	// $scope.loadingBackgronud = false;
     if(tbllen==1&&   $scope.cols.length>1){
     	  //alert("1");
     	   $scope.sourceCols = response.data.slice();
@@ -368,16 +382,20 @@ if($scope.showbuttonDisc == true){
  }
  $scope.postdata = function(rdbmsdata) {
   ////alert($scope.rdbmsForm.$valid);
+	 $scope.dataLoading = true;
+   $scope.loadingBackgronud = true;
    $scope.submitted = true;
   if ($scope.rdbmsForm.$valid) {
 	 
    var data = rdbmsdata;
     $scope.dataLoading = true;
+    $scope.loadingBackgronud=true;
    //Call the services
    $http.post('codeGenRequests/create', JSON.stringify(data)).then(function(response) {
+	   $scope.dataLoading = false;
+	   $scope.loadingBackgronud = false; 
     if (response.data)
      $scope.msg = "Post Data Submitted Successfully!";
-        $scope.dataLoading = false;
     var modalInstance = $uibModal.open({
      controller: 'PopupCont',
      templateUrl: 'html/successpopup.html',
@@ -385,6 +403,7 @@ if($scope.showbuttonDisc == true){
    }, function(response) {
     $scope.msg = "Service not Exists";
     $scope.dataLoading = false;
+    $scope.loadingBackgronud=false;
     $scope.statusval = response.status;
     $scope.statustext = response.statusText;
     $scope.headers = response.headers();
@@ -451,10 +470,10 @@ if($scope.showbuttonDisc == true){
     $scope.rdbms.sourceColumnNames="";
   } else {
    $scope.colRequiredchk = false;
-  // alert("outside ifff "+ selectedItem.length);
+  //alert("outside ifff "+ selectedItem.length);
    if(selectedItem.length==1)
 	   {
-	 //  alert("in ifff "+ selectedItem.length);
+	//   alert("in ifff "+ selectedItem.length);
 	   $scope.hivetabledisabled=false;
 	   }
    else
