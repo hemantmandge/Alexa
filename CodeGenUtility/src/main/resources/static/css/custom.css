@@ -1,4 +1,9 @@
 
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
 @font-face {
 	font-family:font-awesome;
 	src: url(../fonts/fontawesome-webfont.woff);
@@ -6,6 +11,13 @@
  	src: url(../fonts/fontawesome-webfont.ttf);
 	src: url(../fonts/fontawesome-webfont.woff2);
 }
+ .bs-example{
+    	margin: 20px;
+    }
+	/* Fix alignment issue of label on extra small devices in Bootstrap 3.2 */
+    .form-horizontal .control-label{
+        padding-top: 7px;
+    }
 
 li{list-style: none;}
 
@@ -315,7 +327,23 @@ textarea {
     top: 169px;
 }
 
+.wraper{
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  /* border-radius: 15px; */
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  padding: 5px;
+ 
+  margin: 10px;
+  /*margin-left: 20px;*/
+  
 
+}
 .login-wraper {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -1058,6 +1086,49 @@ input[type="submit"].btn.btn-mini {
 
 }
 
+/*
+ADDED FOR TOOL TIP
+  */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* END */
 .mycontent {
     display: block;
 }
@@ -1090,7 +1161,33 @@ input[type="submit"].btn.btn-mini {
 .ok {
     background: #fff;
 }
+
+/*.archleft{
+  margin-left: -28px;
+}
+.marleft{
+  margin-left: -15px;
+}
+.whr{
+      margin-left: -10px;
+    width: 88%;
+}*/
+.radio label{
+  display: inline-block;
+}
+
 .hide{
   display: none;
 }
 .loading { border:1px solid #ddd; padding:20px; margin:40px 5px; width:80px;}
+
+#loading-indicator {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 100;
+}
+	/* Fix alignment issue of label on extra small devices in Bootstrap 3.2 */
+    .form-horizontal .control-label{
+        padding-top: 7px;
+    }

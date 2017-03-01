@@ -3,7 +3,9 @@
 
 <head>
   <title>GE-DatacodeGen Utility</title>
-  <base href="/">
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+ 
+ <!--  <base href="/"> -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -76,11 +78,11 @@
                 <div class="ge-page-sidebar" >
                     <ul class="nav ge-nav ge-nav-width sidebar_menu mycontent"   data-ng-class="{'loaded': !loading}">  
                         <li  ng-show="showHome"> 
-                            <a  ng-href="home" ng-click='go()'><img src="img/rule_admin.png" alt="" ><span>Home</span></a> 
+                            <a  ng-href="#/home" ng-click='navigatePath()'><img src="img/rule_admin.png" alt="" ><span>Home</span></a> 
                         </li>
                         
                         <li >
-                            <a  ng-href="job"><img src="img/upgrade_details.png" alt=""><span> Job Status</span></a>
+                            <a  ng-href="#/job"><img src="img/upgrade_details.png" alt=""><span> Job Status</span></a>
                         </li>
                         
                         

@@ -17,8 +17,11 @@ app.controller("utilityCtrl", ['$scope', '$rootScope', '$window', '$location', '
  $scope.targetType = "";
  $scope.targetcon = {};
  $scope.datasrc = 'RDBMS';
- $scope.rdbms.username = "admin";
- $scope.rdbms.password = "gepoc";
+ $scope.rdbms.username = "sa";
+ $scope.rdbms.password = "Infosys123";
+ $scope.rdbms.archivePeriod="4";
+
+ 
  $scope.homeShow = false;
  $scope.readonlyAttr = false;
 $scope.joinKeysList = [];
@@ -26,12 +29,26 @@ $scope.showbutton=true;
 $scope.showbuttonDisc=false;
 $scope.connectDisble=false;
 $scope.showDBName=true;
+
+$scope.filePath=false;
+$scope.fileSchemaPath=false;
+//$scope.fileType =false;
+$scope.serverIP=false;
+$scope.rowTag=false;
+$scope.fileDelimeter=false;
+$scope.calculateDeltaOn=false;
+$scope.joinKeys=false;
+$scope.archivePeriod =false; 
+
+
+
 /**
  * calling web services for File Data source Start 
  */
 //alert("outsideggtnehayadav06 ");
 $scope.loadFileInitialData=function()
 {
+	
 	 $scope.file.sourceType="FILE";
 	//$scope.sourceType="FILE";
 	//alert("in1 "+$scope.sourceType);
@@ -50,15 +67,64 @@ $scope.loadFileInitialData=function()
 		    $scope.SFTPserverIPList = response.data; //ajax request to fetch data into $scope.data
 		   });
 	  
-	  $scope.rdbms.targetType = "HIVE";
-	  if ($scope.rdbms.targetType == 'HIVE') {
+	  $scope.file.targetType = "HIVE";
+	  if ($scope.file.targetType == 'HIVE') {
 	   //alert("hellp trt ddd"+$scope.rdbms.targetType);
-	   $scope.rdbms.loadType = "FULL";
+	   $scope.file.loadType = "FULL";
 	   $http.get("resources/findByType?type=LOADTYPE").then(function(response) {
 	    $scope.loadType = response.data; //ajax request to fetch data into $scope.data
 	   });
 	  }
 	};
+	
+	$scope.onChangeOfFileType=function()
+	{
+		if($scope.file.fileType=="XML")
+			{
+			//alert("xml");
+		/*	$scope.fileSchemaPath =false;
+			$scope.rowTag=false;*/
+			
+			$scope.filePath=true;
+			$scope.fileSchemaPath=false;
+		//	$scope.fileType =true;
+			$scope.serverIP=true;
+			$scope.rowTag=false;
+			$scope.fileDelimeter=true;
+			$scope.calculateDeltaOn=true;
+			$scope.joinKeys=true;
+			$scope.archivePeriod =true; 
+			}
+		else if($scope.file.fileType=="JSON")
+		{
+			//$scope.fileSchemaPath =false;
+			//alert("jason");
+			
+			$scope.filePath=true;
+			$scope.fileSchemaPath=false;
+		//	$scope.fileType =true;
+			$scope.serverIP=true;
+			$scope.rowTag=true;
+			$scope.fileDelimeter=true;
+			$scope.calculateDeltaOn=true;
+			$scope.joinKeys=true;
+			$scope.archivePeriod =true; 
+		}
+		else
+			{
+		//	alert("in else");
+			$scope.filePath=false;
+			$scope.fileSchemaPath=false;
+			//$scope.fileType =false;
+			$scope.serverIP=false;
+			$scope.rowTag=true;
+			$scope.fileDelimeter=false;
+			$scope.calculateDeltaOn=false;
+			$scope.joinKeys=false;
+			$scope.archivePeriod =false; 
+			}
+	};
+	
 //calling web services for File Data source End
 
 
@@ -174,11 +240,13 @@ if($scope.showbuttonDisc == true){
 	 //alert("in if ");
 	 
 	 $scope.showDBName=true;
+	 $scope.dbNameRequiredchk= true;
 	 }
  else
 	 {
 	 //alert("in else");
 	 $scope.showDBName=false;
+	 $scope.dbNameRequiredchk= false;
 	 }
  }
  $scope.getSID = function(srctype) {
@@ -302,6 +370,7 @@ if($scope.showbuttonDisc == true){
   ////alert($scope.rdbmsForm.$valid);
    $scope.submitted = true;
   if ($scope.rdbmsForm.$valid) {
+	 
    var data = rdbmsdata;
     $scope.dataLoading = true;
    //Call the services
@@ -382,6 +451,18 @@ if($scope.showbuttonDisc == true){
     $scope.rdbms.sourceColumnNames="";
   } else {
    $scope.colRequiredchk = false;
+  // alert("outside ifff "+ selectedItem.length);
+   if(selectedItem.length==1)
+	   {
+	 //  alert("in ifff "+ selectedItem.length);
+	   $scope.hivetabledisabled=false;
+	   }
+   else
+	   {
+	   $scope.hivetabledisabled=true;
+	   }
+   
+   
   }
  }
 

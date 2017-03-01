@@ -3,10 +3,10 @@
 
       <form class="form-horizantal"  role="form" name="connectform" novalidate  ng-submit="submitted = true" >  
          
-         <div class="row">
+         <div class="col-md-12">
 		 <div class="col-md-6">
           <div class="form-group required" ng-init="pageLoadData()"> 
-			<div class="col-md-6"> <label for="datasrc" class="control-label"> Database Type</label> </div>
+			<div class="col-md-6"> <label for="datasrc" class="control-label"> Source Type</label> </div>
             <div class="col-md-6" >   <select name="datasrc" class="form-control" id="datasrc" ng-model="rdbms.sourceType" required ng-readonly="readonlyAttr"  ng-disabled="connectDisble">
                                 <option  selected="selected" value="">Please Select Option</option>
                                  <option  ng-repeat="src in datadbsrc" ng-click="getDB(src.value)">{{src.value}}</option>
@@ -27,7 +27,7 @@
 		  <div class="col-md-6" ng-show="showDBName">
 		   <div class="form-group required"  > 
            <div class="col-md-6">    <label   class="control-label" for="fileschema">DB Name / SID</label></div>
-            <div class="col-md-6">   <select name="SID"  required class="form-control"  required id="fileschema" ng-model="rdbms.dbName" ng-readonly="readonlyAttr" ng-disabled="connectDisble">
+            <div class="col-md-6">   <select name="SID"  required class="form-control"  ng-required="dbNameRequiredchk=='false'" id="fileschema" ng-model="rdbms.dbName" ng-readonly="readonlyAttr" ng-disabled="connectDisble">
                                                                 <option  selected="selected" value="">Please Select Option</option>
 
                                 <option  ng-repeat="src in datadbSID" >{{src.value}}</option>
@@ -57,10 +57,10 @@
           
          <div class="col-md-6">
          
-           <div class="form-group required col-xs-offset-9" >
+           <div class="form-group required col-xs-offset-10" >
                <div>&nbsp;</div>
-               <input  ng-show="showbutton" type="button"  class="btn btn-primary " id="" value="Connect" ng-click="connectDB(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType)" >
-                <input  ng-show="showbuttonDisc" type="button"  class="btn btn-primary " id="" value="Disconnect" ng-click="enableForm()" >
+               <input  ng-show="showbutton" type="button" ng-disabled="connectform.$invalid"  class="btn btn-primary " id="" value="Connect" ng-click="connectDB(rdbms.username,rdbms.password,rdbms.dbConnection,rdbms.dbName,rdbms.sourceType)" >
+                <input  ng-show="showbuttonDisc" type="button" ng-disabled="connectform.$invalid"  class="btn btn-primary " id="" value="Disconnect" ng-click="enableForm()" >
                             
            </div>  
          </div>   
