@@ -45,21 +45,13 @@ $scope.archivePeriod =false;
 /**
  * calling web services for File Data source Start 
  */
-//alert("outsideggtnehayadav06 ");
 $scope.loadFileInitialData=function()
 {
 	
 	 $scope.file.sourceType="FILE";
-	//$scope.sourceType="FILE";
-	//alert("in1 "+$scope.sourceType);
-//	alert("in 2 "+$scope.file.sourceType);
-	
-	//alert("loadFile");
 	
 	  $http.get("resources/findByType?type=FILETYPE").then(function(response) {
-		   //alert(response.data);
 		   $scope.fileType = response.data; //ajax request to fetch data into $scope.data
-		  // $scope.file.fileType= response.data[0];
 		   
 		  });
 	  
@@ -69,7 +61,6 @@ $scope.loadFileInitialData=function()
 	  
 	  $scope.file.targetType = "HIVE";
 	  if ($scope.file.targetType == 'HIVE') {
-	   //alert("hellp trt ddd"+$scope.rdbms.targetType);
 	   $scope.file.loadType = "FULL";
 	   $http.get("resources/findByType?type=LOADTYPE").then(function(response) {
 	    $scope.loadType = response.data; //ajax request to fetch data into $scope.data
@@ -81,13 +72,9 @@ $scope.loadFileInitialData=function()
 	{
 		if($scope.file.fileType=="XML")
 			{
-			//alert("xml");
-		/*	$scope.fileSchemaPath =false;
-			$scope.rowTag=false;*/
 			
 			$scope.filePath=true;
 			$scope.fileSchemaPath=false;
-		//	$scope.fileType =true;
 			$scope.serverIP=true;
 			$scope.rowTag=false;
 			$scope.fileDelimeter=true;
@@ -97,12 +84,8 @@ $scope.loadFileInitialData=function()
 			}
 		else if($scope.file.fileType=="JSON")
 		{
-			//$scope.fileSchemaPath =false;
-			//alert("jason");
-			
 			$scope.filePath=true;
 			$scope.fileSchemaPath=false;
-		//	$scope.fileType =true;
 			$scope.serverIP=true;
 			$scope.rowTag=true;
 			$scope.fileDelimeter=true;
@@ -112,10 +95,8 @@ $scope.loadFileInitialData=function()
 		}
 		else
 			{
-		//	alert("in else");
 			$scope.filePath=false;
 			$scope.fileSchemaPath=false;
-			//$scope.fileType =false;
 			$scope.serverIP=false;
 			$scope.rowTag=true;
 			$scope.fileDelimeter=false;
@@ -125,8 +106,6 @@ $scope.loadFileInitialData=function()
 			}
 	};
 	
-//calling web services for File Data source End
-
 
 $scope.enableForm =function(){
 if($scope.showbuttonDisc == true){
@@ -147,7 +126,6 @@ if($scope.showbuttonDisc == true){
 
  
  $scope.onCancel = function() {
-  //  //alert ("in cancel button");
   $scope.rdbms = {};
   $location.path('/home');
  }
@@ -158,13 +136,11 @@ if($scope.showbuttonDisc == true){
  
   });
   $http.get("resources/findByType?type=TARGETCONNECTION").then(function(response) {
-   ////alert(response.data);
    $scope.targetcon = response.data; //ajax request to fetch data into $scope.data
   
   });
   $scope.rdbms.targetType = "HIVE";
   if ($scope.rdbms.targetType == 'HIVE') {
-   ////alert("hellp trt ddd"+$scope.rdbms.targetType);
    $scope.rdbms.loadType = "FULL";
    $http.get("resources/findByType?type=LOADTYPE").then(function(response) {
     $scope.loadType = response.data; //ajax request to fetch data into $scope.data
@@ -175,10 +151,8 @@ if($scope.showbuttonDisc == true){
   $scope.loading = true;
   $scope.welcome = true;
  }, 1000);
- ////alert(Base_URL);
  $scope.showHiveBlk = function(data) {
   if (data == 'HIVE') {
-   //  //alert(data);
    $scope.disabled = false;
    $scope.isdisabled = false;
    $scope.hivetabledisabled=false;
@@ -186,7 +160,6 @@ if($scope.showbuttonDisc == true){
     $scope.loadType = response.data; //ajax request to fetch data into $scope.data
    });
   } else {
-   ////alert(data);
    $scope.rdbms.targetTableName = "";
    $scope.rdbms.targetDBName = "";
    $scope.rdbms.hiveTableType = "";
@@ -210,7 +183,6 @@ if($scope.showbuttonDisc == true){
  $scope.submitResult = function(datasrc) {
   $scope.homeShow = true;
   $rootScope.showHome=true;
-  // //alert("submitResult" + $scope.neha);
   $scope.datasrc = datasrc;
   if (datasrc == 'RDBMS') {
    $location.path('/RDBMS');
@@ -235,7 +207,6 @@ if($scope.showbuttonDisc == true){
   $scope.datasrc = datasrc;
   $scope.datadbconn = []; //declare an empty array
   $http.get("resources/findByName?name=" + datasrc).then(function(response) {
-   // //alert(response);
 	 if(response.data) {
 		 $scope.datadbconn = response.data; //ajax request to fetch data into $scope.data
 	 }
@@ -245,37 +216,27 @@ if($scope.showbuttonDisc == true){
   });
  if(datasrc=="ORACLE"||datasrc=="GREENPLUM")
 	 {
-	 //alert("in if ");
-	 
 	 $scope.showDBName=true;
 	 $scope.dbNameRequiredchk= true;
 	 }
  else
 	 {
-	 //alert("in else");
 	 $scope.showDBName=false;
 	 $scope.dbNameRequiredchk= false;
 	 }
  }
  $scope.getSID = function(srctype) {
-  // //alert("hjjkhjk"+$scope.dbSID);
   $scope.srcdbport = srctype;
-  ////alert($scope.rdbms.srcdbport);
   $scope.datadbSID = []; //declare an empty array
   $http.get("resources/findByName?name=" + srctype).then(function(response) {
-   //  //alert(response);
    $scope.datadbSID = response.data; //ajax request to fetch data into $scope.data
-	
-	   
   });
  }
  $scope.connectDB = function(username, password, host, dbName, rdbmsName) {
      $scope.dataLoading = true;
     $scope.loadingBackgronud = true;
-    ////alert( $scope.loadingBackgronud);
   $scope.databaseSchema = [];
   $http.get("resources/getSchemaDetails?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + dbName + "&rdbmsName=" + rdbmsName + "").then(function(response) {
-   // //alert("http://10.174.132.12:8080/resources/getSchemaDetails?userid="+username+"&password="+password+"&host="+host+"&database="+database+"&rdbmsName="+rdbmsName+"");
    $scope.databaseSchema = response.data; //ajax request to fetch data into $scope.data
    if (response.data) {
     $scope.dataLoading = false;
@@ -313,7 +274,6 @@ if($scope.showbuttonDisc == true){
    $scope.loadingBackgronud = false;
    if( $scope.tables.length>1)
 	   {
-	 //  //alert("in if "+response.data);
 	   $scope.sourceTables = response.data.slice();
 	   $scope.tables.splice(0, 0, "Select All");
 	   }
@@ -322,18 +282,12 @@ if($scope.showbuttonDisc == true){
  }
  $scope.sourceCols={};
  $scope.getCols = function(username, password, host, database, rdbmsName, tableName, dbschema) {
-  // //alert(tableName);
- //$scope.dataLoading = true;
-// $scope.loadingBackgronud = true;
   var tbllen =tableName.length;
   $scope.cols = []; //declare an empty array
   if (tableName.length <= 1) {
    $http.get("/resources/getColumns?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + database + "&rdbmsName=" + rdbmsName + "&tableName=" + tableName + "&schema=" + dbschema + "").then(function(response) {
     $scope.cols = response.data; //ajax request to fetch data into $scope.data
-   // $scope.dataLoading = false;
-	// $scope.loadingBackgronud = false;
     if(tbllen==1&&   $scope.cols.length>1){
-    	  //alert("1");
     	   $scope.sourceCols = response.data.slice();
       
       $scope.cols.splice(0, 0, "Select All");
@@ -351,21 +305,17 @@ if($scope.showbuttonDisc == true){
   });
  }
  $scope.changePartitinKey = function(tabletype) {
-  ////alert(tabletype);
   console.log('type is', tabletype);
   if (tabletype == 'NON-PARTITIONED') {
-	  //alert("in if");
     $scope.isdisabled = true;
    $scope.hivetabledisabled=false;
   } else {
-	  //alert("in else");
    $scope.isdisabled = false;
  
   }
  }
  $scope.disableDrop = function(selectedItem) {
   if (selectedItem.length >= 2) {
-	  //alert("disableDrop");
    $scope.disabledMultiple = true;
    $scope.isdisabled = true;
    $scope.rdbms.hiveTableType = "NON-PARTITIONED";
@@ -375,13 +325,11 @@ if($scope.showbuttonDisc == true){
     $scope.rdbms.hiveTableType = "";
     $scope.rdbms.targetPartitionKey = "";
    }
-   //$scope.rdbms.hiveTableType=
   } else {
    $scope.disabledMultiple = false;
   }
  }
  $scope.postdata = function(rdbmsdata) {
-  ////alert($scope.rdbmsForm.$valid);
 	 $scope.dataLoading = true;
    $scope.loadingBackgronud = true;
    $scope.submitted = true;
@@ -418,7 +366,6 @@ if($scope.showbuttonDisc == true){
  };
  
  $scope.postdataFile = function(fileData) {
-	  ////alert($scope.rdbmsForm.$valid);
 	 $scope.joinKeysList.push(fileData.joinKeys);
 	 fileData.joinKeys = $scope.joinKeysList;
 	  if ($scope.fileForm.$valid) {
@@ -452,14 +399,12 @@ if($scope.showbuttonDisc == true){
  $scope.hiveTableType = {};
  $scope.loadHiveTableType = function() {
   $http.get("resources/findByType?type=HIVETABLETYPE").then(function(response) {
-   //  //alert(response);
    $scope.hiveTableType = response.data; //ajax request to fetch data into $scope.data
   });
  }
  $scope.colRequiredchk = true;
  $scope.onSelcted2 = function(selectedItem) {
   if (selectedItem == 'Select All') {
-    //alert("onSelcted2");
    $scope.rdbms.hiveTableType = "NON-PARTITIONED";
    $scope.rdbms.sourceTableNames = $scope.sourceTables;
    $scope.selectedAllTables = !$scope.selectedAllTables;
@@ -470,10 +415,8 @@ if($scope.showbuttonDisc == true){
     $scope.sourceColumnNames=[];
   } else {
    $scope.colRequiredchk = false;
-  //alert("outside ifff "+ selectedItem.length);
    if(selectedItem.length==1)
 	   {
-	//   alert("in ifff "+ selectedItem.length);
 	   $scope.hivetabledisabled=false;
 	   }
    else
@@ -505,19 +448,14 @@ if($scope.showbuttonDisc == true){
 		  } else {
 			  myselected = myselected + ',' + value;
 		  }
-	   //  alert(myselected);
 	  });
 	  $scope.rdbms.targetTableName = myselected;
-	  // alert("assigned value is"+  $scope.rdbms.targetTableName);
 	  $scope.myvalue = myselected;
  } 
 
 
 $scope.onSelctedColumns = function(selectedItem) {
-    // alert(selectedItem);
   if (selectedItem == 'Select All') {
-   //alert('m in if');
-  
    $scope.sourceColumnNames = $scope.sourceCols;
 
    $scope.srcclumn = $scope.sourceCols;
