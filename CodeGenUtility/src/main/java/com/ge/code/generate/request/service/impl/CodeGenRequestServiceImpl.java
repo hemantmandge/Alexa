@@ -46,14 +46,14 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.MSSQL))
 						|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.TERADATA))
 								|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.GREENPLUM))) {
-			populateDataForOracle(codeGenRequest);
+			populateDataForRDBMS(codeGenRequest);
 		} else if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.FILE)) {
 			populateDataForFile(codeGenRequest);
 		}
 	}
 
 	@Transactional
-	private void populateDataForOracle(CodeGenRequest codeGenRequest) {
+	private void populateDataForRDBMS(CodeGenRequest codeGenRequest) {
 		BatchControlMaster batchControlMaster;
 		for (String sourceTableName : codeGenRequest.getSourceTableNames()) {
 			String targetTableName;
@@ -129,7 +129,11 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
 				ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 				
-				ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
+				if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.ORACLE)) {
+					ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
+				} else if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.MSSQL)) {
+					ingestSubJobControl.setMasterJobName(ConstantUtils.MSTEST_ORACLE_TEMPLATE);
+				}
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 				ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
 				Date date;

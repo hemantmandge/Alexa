@@ -14,6 +14,7 @@ public interface ConstantUtils {
 	String REFRESH_TYPE_PARTIAL = "PARTIAL";
 	String DATACODEGEN_BASE = "datacodegen/base";
 	String ORACLE_TEMPLATE = "Oracle_Template";
+	String MSTEST_ORACLE_TEMPLATE = "MSTEST-Oracle_Template";
 	String FILE_TEMPLATE = "File Template";
 	String INT = "Int-";
 	String SCRIPT_NAME = "merge.pig";
