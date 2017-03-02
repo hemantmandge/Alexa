@@ -499,14 +499,18 @@ if($scope.showbuttonDisc == true){
  }
  $scope.getHiveTableNames = function(tables) {
   var myselected = "";
-  angular.forEach(tables, function(value) {
-   myselected = myselected + value + ',';
-   //  alert(myselected);
-  });
-  $scope.rdbms.targetTableName = myselected;
-  // alert("assigned value is"+  $scope.rdbms.targetTableName);
-  $scope.myvalue = myselected;
- }
+	  angular.forEach(tables, function(value) {
+		  if (myselected == "") {
+			  myselected = value;
+		  } else {
+			  myselected = myselected + ',' + value;
+		  }
+	   //  alert(myselected);
+	  });
+	  $scope.rdbms.targetTableName = myselected;
+	  // alert("assigned value is"+  $scope.rdbms.targetTableName);
+	  $scope.myvalue = myselected;
+ } 
 
 
 $scope.onSelctedColumns = function(selectedItem) {

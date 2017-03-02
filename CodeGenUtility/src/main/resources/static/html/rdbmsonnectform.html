@@ -24,7 +24,7 @@
                             </select></div>
                 <span class="errmsg" ng-if="submitted && connectform.username.$error.required">This is Required.</span>              
           </div></div>
-		  <div class="col-md-6" ng-show="showDBName">
+		  <div class="col-md-6">
 		   <div class="form-group required"  > 
            <div class="col-md-6">    <label   class="control-label" for="fileschema">DB Name / SID</label></div>
             <div class="col-md-6">   <select name="SID"  required class="form-control"  ng-required="dbNameRequiredchk=='false'" id="fileschema" ng-model="rdbms.dbName" ng-readonly="readonlyAttr" ng-disabled="connectDisble">
