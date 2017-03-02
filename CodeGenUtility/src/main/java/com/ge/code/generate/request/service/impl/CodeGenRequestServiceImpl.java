@@ -129,11 +129,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
 				ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 				
-				if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.ORACLE)) {
-					ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
-				} else if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.MSSQL)) {
-					ingestSubJobControl.setMasterJobName(ConstantUtils.MSTEST_ORACLE_TEMPLATE);
-				}
+				ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 				ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
 				Date date;
