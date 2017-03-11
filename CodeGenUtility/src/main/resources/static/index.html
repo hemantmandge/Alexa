@@ -1,141 +1,91 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="utilityApp" >
+<html lang="en" ng-app="utilityApp">
 
 <head>
-  <title>GE-DatacodeGen Utility</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
- 
- <!--  <base href="/"> -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/custom.css">
-  
+<title>GE-DatacodeGen Utility</title>
+<meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-  <script src="js/angular.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/ng-pattern-restrict.js"></script>
-  <script src="js/angular-route.js"></script>
-  <script src="js/route.js"></script>
-  <script src="lib/dirPagination.js"></script>
-  <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
-   <script src="js/config.js"></script>
+<!--  <base href="/"> -->
+<!-- <meta charset="utf-8"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="css/bootstrap-select.css">
+ -->
+<link rel="stylesheet" href="css/codegen.css">
+<link rel="stylesheet" href="css/custom.css">
 
-   
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ng-pattern-restrict.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/route.js"></script>
+<script src="lib/dirPagination.js"></script>
+<script src="js/config.js"></script>
+<script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
 
- 
-  <style>
-  
-  </style>
-  
-
- 
- 
 </head>
-<body class="ge-pageheader-fixed ge-page-sidebar-closed-hide-logo ge-page-sidebar-closed" ng-controller="utilityCtrl">
+<body ng-controller="utilityCtrl" class="myMainBody">
+	<div class="flex-container">
+		<header>
+			<h4 class="headerMain"><img class="img-circle" src="img/geLogo.png" id="logo-ge"><span style="padding-left: 6px;color: #94a3ac;">Data Ingestion</span></h4>
+		</header>
 
-        	<header >
-       <div class="ge-pageheader navbar navbar-fixed-top">
-            <div class="ge-pageheader-inner">
-                <div class="ge-page-logo">
-                    <div class="ge-menu-toggler ge-sidebar-toggler">
-                        <img src="img/group@2x.png" class="ge-toggler-icon" alt="ge-logo">
-                    </div>
-                    <a class="ge-navbar-brand" href="javascript:;">
-                        <img src="img/GE-logo.png" class="ge-logo" alt="ge-logo">
-                        <dl>
-                            <dt>GE HEALTH CARE</dt>
-                            <dd>Data Codegen</dd>
-                        </dl>
-                    </a>
-                </div>
-                <div class="ge-top-menu welcome" data-ng-class="{'loaded': !loading}">
-                    <a href="" class="ge-user-profile">
-                        <div class="nav ge-nav ge-nav-width sidebar_menu " >
-                            <ul class="nav ge-nav ge-nav-width sidebar_menu"><li><a   href="javavscript:;"><img class="margin-bt" src="img/group-11@2x.png" alt=""></i><span>Logout</span></a></li></ul>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-1 header_user_outer welcome" data-ng-class="{'loaded': !loading}">
-						            <span style="font-size: 18px;" class="person_name">
-						                Welcome !</span> <span style="font-size:17px;" class="person_name ng-binding">
-						                </span>
-		            
-		          </div>
-                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-1 header_user_outer welcome">
-						            <span style="font-size: 18px;" class="person_name">
-						               </span> <span style="font-size:17px;" class="person_name ng-binding">
-						                </span>
-		            
-		          </div>
-            </div>
-        </div>
-        <!-- END HEADER -->
-        <div class="clearfix"></div>
-        <div class="ge-page-container">
-            <div class="ge-page-sidebar-wrapper"  >
-                <div class="ge-page-sidebar" >
-                    <ul class="nav ge-nav ge-nav-width sidebar_menu mycontent"   data-ng-class="{'loaded': !loading}">  
-                        <li  ng-show="showHome"> 
-                            <a  ng-href="#/home" ng-click='navigatePath()'><img src="img/rule_admin.png" alt="" ><span>Home</span></a> 
-                        </li>
-                        
-                        <li >
-                            <a  ng-href="#/job"><img src="img/upgrade_details.png" alt=""><span> Job Status</span></a>
-                        </li>
-                        
-                        
-                    </ul>
-                </div>
-            </div>
-                 
-        </div>
-	</header>
+		<nav class="navbar navbar-default navbar-fixed-side nav">
+			<center>
+			<ul>
+				<li style="padding-top: 28%;height: 56px;">
+					<a>
+						<div class="menuIcon"></div>
+						<div class="menuIcon"></div>
+						<div class="menuIcon"></div> 
+					</a>
+				</li>
+				<li style="height: 58px;padding-top: 23%;" ng-class="activeClass" onclick="">
+					<a href="#" class="btn-lg">
+			          <span class="glyphicon glyphicon-dashboard" style="font-size: 26px;color: white;"></span>
+			        </a>
+				</li>
+				<li style="height: 58px;padding-top: 23%;" ng-class="activeClass">
+					<a href="#" class="btn-lg">
+			          <span class="glyphicon glyphicon-briefcase" style="font-size: 26px;color: white;"></span>
+			        </a>
+			    </li>
+			</ul>
+			</center>
+		</nav>
 
-        	<div  style="width:auto;background:white">
-				<div class="ge-page-content-wrapper" style="overflow: hidden;">
-	                    <div class="ge-select-table col-lg-12 col-md-12 four_menu">
-		
-						
-						
-							
-
-                    </div>
-                <div class="ge-page-content" ng-view>
-					
-                
-                    
-                    
-
-                </div>
-            </div>
+		<div class="article">
+		<!-- <div class="outerContainer" style="padding-bottom:0"> apply for align-->
+			<div class="articleContainer">
+				<div class="row">
+					<div class="col-md-5">
+						<left><div class="titleLeftUp">LOREM IPSUM</div>
+						<div class="titleLeftDown">DOLOR SIT AMET</div> 
+						</left>
+					</div>
+					<div class="col-md-7">
+						<div class="titleCenterMiddle">Ingestion</div> 
+					</div>
+				</div>
 			</div>
-
-		<div class="clearfix"></div>
-        <!-- BEGIN FOOTER -->
-        <footer>
-                  <div class="container-fluid footer_padding">
-                    <div class="row">
-                      
-                      <div class="col-lg-4 col-md-4 footerli_lefts">
-                        <span>&copy; 2017 General Electric</span>
-                      </div>
-                   
-                      <div class="footerli pull-right">  
-                        <ul class="list-inline">
-                            <li class="privacy"><a href="http://www.ge.com/privacy" target="_blank">Privacy Policies</a></li>
-                            <li> |</li> 
-                            <li class="terms"><a href="http://www3.gehealthcare.com/en/footer/terms_and_conditions" target="_blank">Terms and conditions</a></li>
-                         </ul>
-                       </div>
-                    
-                      
-                    </div>
-                </div>
-        </footer>
-
-      
+			<div ng-view></div>
+		</div>
+	</div>
+	<footer class="myFooter">
+		<div class="pull-right">
+			<span><a href="http://www.ge.com/privacy" target="_blank">Privacy</a>&nbsp;</span> 
+			<span>&nbsp;<a href="http://www3.gehealthcare.com/en/footer/terms_and_conditions" target="_blank">Terms</a>&nbsp;</span> 
+			<span>&nbsp;<a href="http://www3.gehealthcare.com/en/about_us/contact_us" target="_blank">Contact</a>&nbsp;</span>
+			<span>&nbsp;<a href="http://www3.gehealthcare.com/en/about_us" target="_blank">Accessibility</a>&nbsp;</span>
+			<span style="padding-right: 28px;">&nbsp;<a href="http://info.evidon.com/pub_info/4841?v=1" target="_blank">Cookies</a>&nbsp;</span>
+			<span class="copyright">&nbsp;©2017 General Electric</span>
+		</div>
+	</footer>
+</body>
 </body>
 
 </html>

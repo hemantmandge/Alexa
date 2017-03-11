@@ -124,12 +124,7 @@ div.well{
 .pd-10{
   padding: 10px;
 }
-.container-fluid {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
+
 .form-group.required .control-label:after { 
    content:"*";
    color:red;
@@ -158,22 +153,7 @@ div.well{
   margin: 10px;
   font-family: ge_bold;
 }
-label{
-  font-family: ge_bold;
-}
-.btn-primary{
-  font-family: fo;
-    font-size: 12px;
-    color: inherit;
-    text-transform: uppercase;
-    padding-top: 10px;
-    padding-left: 10px;
-    background: #005CB9;
-}
 
-legend{
-  margin-bottom: 0px;
-}
 
 .pdleft{
   padding-left: 0px;
@@ -223,7 +203,7 @@ select,
 textarea {
   margin: 0;
   font-size: 100%;
-  vertical-align: middle;
+  vertical-align: sub;
 }
 button,
 input {
@@ -252,16 +232,7 @@ input[type="radio"],
 input[type="checkbox"] {
   cursor: pointer;
 }
-input[type="search"] {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  -webkit-appearance: textfield;
-}
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-}
+
 textarea {
   overflow: auto;
   vertical-align: top;
@@ -367,28 +338,7 @@ textarea {
 }
 
 /*style*/
-.btn {
-  display: inline-block;
-  *display: inline;
-  /* IE7 inline-block hack */
-  *zoom: 1;
-  padding: 4px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  color: #5c5f63;
-  background-color: #f7f8fa;
-  border: 1px solid #e1e2e5;
-  *border: 0;
-  border-bottom-color: #c6c8cd;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  *margin-left: .3em;
-}
+/* 
 .btn:hover,
 .btn:active,
 .btn.active,
@@ -736,7 +686,7 @@ input[type="submit"].btn.btn-mini {
   position: relative;
   display: inline-block;
   *display: inline;
-  /* IE7 inline-block hack */
+  IE7 inline-block hack
   *zoom: 1;
   font-size: 0;
   vertical-align: middle;
@@ -905,7 +855,7 @@ input[type="submit"].btn.btn-mini {
 .btn-group-vertical {
   display: inline-block;
   *display: inline;
-  /* IE7 inline-block hack */
+  IE7 inline-block hack
   *zoom: 1;
 }
 .btn-group-vertical > .btn {
@@ -1000,7 +950,7 @@ input[type="submit"].btn.btn-mini {
   padding-left: 8px;
   padding-right: 8px;
 }
-
+ */
 
 .checkbox label:after, 
 .radio label:after {

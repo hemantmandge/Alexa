@@ -1,137 +1,210 @@
-<div class="container">
-    
-    <div class="row">
-        <div class="bs-example">
-		<ul class="breadcrumb">
-			
-			 <li class="breadcrumb-item"> <a href="login" class="breadcrumb-link">Login</a></li>
-             <li class="breadcrumb-item"> <a href="home" class="breadcrumb-link">Home</a></li>
-              <li class="breadcrumb-item"> <a href="S3" class="breadcrumb-link active">New S3 Request</a></li>
-		</ul>
-	</div>
-         <div class="col-md-12"><legend class="toptxt">Source</legend></div>
-        <div class="col-md-12">
-            <div class="col-md-6 ">
-               <div class="form-group required"> 
-                    <div class="col-md-6"> <label for="datasrc" class="control-label">Data Source</label></div>
-                    <div class="col-md-6"><input type="text" class="form-control " id="datasrc" placeholder="DataSource" required></div>
-                </div>
-                <div class="form-group required"> 
-                      <div class="col-md-6"> <label   class="control-label" for="region">Region</label></div>
-                     <div class="col-md-6"><input type="text" class="form-control" id="region" placeholder="Enter File Region"></div>
-                </div>
-                <div class="form-group required"> 
-                      <div class="col-md-6"> <label   class="control-label" for="Objet">Objet</label></div>
-                     <div class="col-md-6"><input type="text" class="form-control" id="Objet" placeholder="Enter File Objet"></div>
-                </div>
-                <div class="form-group required "> 
-                    <div class="col-md-6"> <label for="sel2" class="control-label" >File Type</label></div>
-                    <div class="col-md-6">
-                            <select  class="form-control" id="sel2">
+<div ng-show="loadingBackgronud" class="loadingBackgronud"></div>
+<div ng-show="dataLoading" class="dataLoading" id="loading-indicator">
+	<img src="img/loader.gif" width="100" height="150">
+</div>
+<div class="container-fluid outerContainer">
+	<div class="innerContainer" ng-init="pageLoadData()">
+		<div class="innerContainer1">
+			<div class="row titleDiv">
+				<div class="col-md-12 titleDesc">
+					SOURCE LOCATION
+					<div style="padding-bottom: 24px"></div>
+					<div class="stroke"></div>
+				</div>
+			</div>
+			<div class="row myRadioBtns">
+				<div class="col-md-3 ">
+					<input class="btnRadio" type="radio" name="optradio"
+						ng-model="datasrc" ng-value='"RDBMS"'><label
+						class="sourcelocationLabel"> RDBMS </label>
+				</div>
+				<div class="col-md-3 ">
+					<input class="btnRadio" type="radio" name="optradio"
+						ng-model="datasrc" ng-value='"Hadoop"'>
+					<label class="sourcelocationLabel"> Hadoop</label>
+				</div>
+				<div class="col-md-3">
+					<input class="btnRadio" type="radio" name="optradio"
+						ng-model="datasrc" ng-value='"Files"'> <label
+						class="sourcelocationLabel"> Files</label>
+				</div>
+				<div class="col-md-3">
+					<input class="btnRadio" type="radio" name="optradio"
+						ng-model="datasrc" ng-value='"S3"'><label
+						class="sourcelocationLabel"> S3</label>
+				</div>
+			</div>
+		</div>
+		<div class="innerContainer2">
+			<form role="form" name="rdbmsForm">
+				<div id="sourceType">
+					<div class="row titleDiv">
+						<div class="col-md-12 titleDesc">
+							SOURCE TYPE
+							<div style="padding-bottom: 24px"></div>
+							<div class="stroke"></div>
+						</div>
+					</div>
+					<div class="row dbConnection">
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">DATA SOURCE</label> 
+							<input type="text" class="customTextBox " id="datasrc" placeholder="Please Enter" required>	
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">REGION</label> 
+							<input type="text" class="customTextBox" id="region" placeholder="Please Enter">
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">OBJECT</label> 
+							<input type="text" class="customTextBox" id="Object" placeholder="Please Enter">
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">BUCKET</label>
+							<input type="text" class="customTextBox" id="Bucket" placeholder="Please Enter">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-3">
+							<label class="labelSubHeader">FILE SCHEMA</label>
+							<input type="text" class="customTextBox" id="fileschema" placeholder="Please Enter">
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader">FILE TYPE</label> 
+							<select  class="customDropDown" id="sel2">
                                 <option>File Type1</option>
                                 <option>File Type2</option>
                             </select>
-                    </div>
-                </div>    
-                <div class="col-md-6"> <label for="srccol">Source Columns</label></div>
-                <div class="col-md-6">
-                    <select  class="form-control" id="srccol">
-                            <option>Source Columns1</option>
-                            <option>Source Columns2</option>
-                        </select>
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader">FILE DELIMITER</label> 
+							<input type="text" class="customTextBox" id="FileDelimiter" placeholder="Please Select">
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader">SOURCE COLUMNS</label> 
+							<select  class="customDropDown" id="srccol">
+	                            <option>Source Columns1</option>
+	                            <option>Source Columns2</option>
+	                        </select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<label class="labelSubHeader">ROW TAG</label>
+							<input type="text" class="customTextBox" id="rowtag" placeholder="Please Enter">
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader">CALCULATE DELTA ON</label> 
+							<input type="text" class="customTextBox" id="deltaOn" placeholder="On/Off">
+						</div>
+					</div>
+				</div>
+				<!-- sourceType div ends -->
 
-                </div>
-                 <div class="form-group required ">
-                    <div class="col-md-6"> <label for="CalculateDelta">Calculate Delta On </label></div>
-               <div class="col-md-6"> <select  class="form-control" id="CalculateDelta">
-                            <option>Source CalculateDelta1</option>
-                            <option>Source CalculateDelta2</option>
-                        </select></div>  
-                </div>
-               
 
-             </div>  
-            
-            <div class="col-md-6">
-            <div class="form-group required "> 
-               <div class="col-md-6"> <label for="Bucket" class="control-label">Bucket</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="Bucket" placeholder="Enter File Bucket"></div>   
-             </div>
-              <div class="form-group required "> 
-               <div class="col-md-6"> <label for="fileschema" class="control-label">File Schema Path</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="fileschema" placeholder="Enter File fileschema"></div>   
-             </div>
-             <div class="form-group required "> 
-               <div class="col-md-6"> <label for="filedel" class="control-label">File Delimiter</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="filedel" placeholder="Enter File Delimiter"></div>   
-             </div>
-              <div class="form-group required "> 
-               <div class="col-md-6"> <label for="rowtag" class="control-label">Row tag</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="rowtag" placeholder="Enter Row tag"></div>   
-              </div>
-              
+				<!-- Common for all sections -->
+				<div id="targetType" class="myRadioBtns">
+					<div class="row titleDiv">
+						<div class="col-md-12 titleDesc">
+							TARGET
+							<div style="padding-bottom: 24px"></div>
+							<div class="stroke"></div>
+						</div>
+					</div>
+					<div class="row dbConnection">
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">TARGET
+								TYPE</label>
+							<div>
+								<input id="HIVE" type="radio" class="btnRadio" name="HIVE"
+									ng-model="codeGenRequest.targetType" ng-value="'HIVE'"
+									ng-change="showHiveBlk(codeGenRequest.targetType)"><label
+									class="sourcelocationLabel">HDFS &amp; HIVE </label> <input
+									id="HDFS" type="radio" class="btnRadio" name="HDFS"
+									ng-model="codeGenRequest.targetType" value="HDFS"
+									ng-value="'HDFS'"
+									ng-change="showHiveBlk(codeGenRequest.targetType)"><label
+									class="sourcelocationLabel">HDFS Only</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">LOAD
+								TYPE</label> 
+							<select class="customDropDown" id="loadtype"
+								ng-model="codeGenRequest.loadType">
+								<option selected="selected" value="">Please Select
+									</option>
+								<option name="loadtype"
+									ng-selected="{{src.value == codeGenRequest.loadType}}"
+									ng-repeat="src in loadType">{{src.value}}</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">TARGET
+								CONNECTION</label> <input type="text" placeholder="Please Enter"
+								class="customTextBox" name="targetconn"
+								ng-required="requiredHive=='false'" id="Target"
+								ng-model="codeGenRequest.targetConnection" required>
+						</div>
+					</div>
 
-            </div>  
-        </div>
-  
-     </div>
+					<div class="row">
+						<div class="col-md-3">
+							<label class="labelSubHeader">HIVE DB NAME</label> <input
+								type="text" name="hivedbname" placeholder="Please Enter"
+								class="customTextBox" id="hivedb"
+								ng-required="colRequiredchk=='false'"
+								ng-model="codeGenRequest.targetDBName" ng-disabled="disabled">
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader">HIVE TABLE TYPE</label> <select
+								name="hivetabltt" ng-required="colRequiredchk=='false'"
+								class="customDropDown" id="hivetabletype"
+								ng-init="loadHiveTableType()"
+								ng-model="codeGenRequest.hiveTableType"
+								ng-change="changePartitinKey(codeGenRequest.hiveTableType)"
+								ng-disabled="disabled">
+								<option selected="selected" value="">Please Select
+									</option>
+								<option ng-repeat="src in hiveTableType">{{src.value}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<label class="labelSubHeader">HIVE TABLE NAME</label> <input
+								type="text" name="hivetable"
+								ng-required="colRequiredchk=='false'" placeholder="Please Enter"
+								class="customTextBox" id="hivetable" value=""
+								ng-model="codeGenRequest.targetTableName"
+								ng-disabled="hivetabledisabled" required>
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader">HIVE PARTITION KEY</label> <select
+								class="customDropDown" ng-required="colRequiredchk=='false'"
+								id="hivepartionkey" ng-model="codeGenRequest.targetPartitionKey"
+								ng-disabled="isdisabled">
+								<option selected="selected" value="">Please Select
+									</option>
+								<option ng-repeat="field in codeGenRequest.sourceColumnNames "
+									value="{{field}}">{{field}}</option>
+							</select>
+							<!-- 			<input type="text"  name="hivetable" ng-required="colRequiredchk=='false'" placeholder="Please Enter" class="customTextBox" id="hivetable"  value="" ng-model="rdbms.targetTableName" ng-disabled="hivetabledisabled" required>
+			 -->
+						</div>
+					</div>
 
-<div class="row"><!-- Target-->
-<fieldset>
-        <div class="col-md-12"><legend class="toptxt">Target</legend></div>
-        <div class="col-md-12">
-            <div class="col-md-6">
-            <div class="col-md-6"> <label for="targettype">Target Type</label></div>
-               <div class="col-md-6">
-                            <label class="radio-inline col-md-3"><input type="radio" name="optradio">HDFS</label>
-                           <label class="radio-inline col-md-3"><input type="radio" name="optradio">HIVE &HIVE</label>
-                        
-                </div>   
+				</div>
+				<!-- sourceType div ends -->
+				<div class="row" style="padding-left: 68.3%;">
+					<button type="button" class="btn targetButton"
+						ng-click="onCancel();">Cancel New Request</button>
+					<span style="padding-right: 2%;"></span>
+					<button type="button" class="btn btn-primary myButton"
+						ng-click="postdata(codeGenRequest);">Create New Request</button>
+				</div>
 
-               <div class="col-md-6"> <label for="loadtype">Load Type</label></div>
-               <div class="col-md-6"><select  class="form-control" id="loadtype">
-                            <option>Load Type1</option>
-                            <option>Load Type2</option>
-                        </select>
-                </div>   
-
-               <div class="col-md-6"> <label for="hivedb">Hive DB Name</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="hivedb" placeholder="Hive Db name"></div>   
-              
-               <div class="col-md-6"> <label for="hivetable">Hive Table Name</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="hivetable" placeholder="Hive Table name"></div>   
-               <div class="form-group required ">
-                   <div class="col-md-6"> <label for="hivetabletype">Hive Table Type</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="hivetabletype" placeholder="Hive Table Type"></div>    
-                </div>
-             
-             </div>  
-            
-            <div class="col-md-6">
-                 <div class="form-group required "> 
-                <div class="col-md-6"> <label for="tarport">Target Name Node port</label></div>
-                    <div class="col-md-6"><input type="text" class="form-control" id="tarport" placeholder="Target NameNode port"></div>   
-                </div>   
-               <div class="col-md-6"> <label for="filepath">File Path</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="filepath" placeholder="Filepath"></div>   
-
-               <div class="col-md-6"> <label for="FileDelimiter">File Delimiter</label></div>
-               <div class="col-md-6"><input type="text" class="form-control" id="FileDelimiter" placeholder="FileDelimiter"></div>   
-
-               
-           
-            </div>  
-        </div>
-</fieldset> 
- </div>
-
- <div class="row">
-     
-            <div class="col-md-8">
-                <button type="button" class="btn btn-primary ">Submit</button>
-               
-                <button type="button" class="btn btn-primary ">Cancel</button>
-            </div>     
- </div>    
-
+			</form>
+		</div>
+	</div>
 </div>

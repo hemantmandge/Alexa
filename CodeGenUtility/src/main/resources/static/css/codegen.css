@@ -1,0 +1,376 @@
+.customTextBox {
+	border-radius: 0px !important;
+	border: 0 !important;
+	outline: 0 !important;
+	background: transparent !important;
+	border-bottom: 1px solid #96a8b2 !important;
+	box-shadow: none !important;
+	padding-bottom: 7px;
+	width: 100%;
+	text-align: left;
+	font-family: GEInspRg;
+	color: rgba(72, 93, 107, 1.0);
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 15px;
+}
+
+.customDropDown {
+	border-radius: 0px !important;
+	border: 0 !important;
+	outline: 0 !important;
+	background: transparent !important;
+	border-bottom: 1px solid #96a8b2 !important;
+	box-shadow: none !important;
+	padding-bottom: 7px;
+	width: 100%;
+	text-align: left;
+	font-family: GEInspRg;
+	color: rgba(72, 93, 107, 1.0);
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 15px;
+}
+
+.customCaret {
+	margin-left: 60%;
+}
+
+div label {
+	padding-top: 4%;
+}
+
+.sourcelocationLabel {
+	padding-left: 3%;
+	font-weight: 500;
+	font-size: 15px;
+}
+
+@font-face {
+	font-family: GEInspRg;
+/* 	src: url(../fonts/GESans-Regular.woff); */
+src: url(../fonts/proximanova-regular.a7942249.woff);
+font-size: bold;
+}
+
+@font-face {
+	font-family: GESans;
+	src: url(../fonts/GESans-Bold.woff);
+}
+
+.stroke {
+	box-sizing: border-box;
+	/* width: 1108px; */
+	height: 0;
+	border: 1px solid #d8d8dd;
+}
+
+.titleDiv {
+	/* width: 1109px; */
+	height: 41px;
+}
+
+.titleDesc {
+	/* 	width: 133px; */
+	height: 19px;
+	font-family: GESans;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 18px;
+	color: #000000;
+}
+
+.innerContainer {
+	/* padding-top: 2%;
+	padding-left: 1.3%;
+	padding-right: 1.3%; */
+	font-family: GEInspRg;
+	/* background:#ffffff; */
+	/* padding-bottom:32px; */
+}
+
+.outerContainer
+{
+/* 	background: #425866;
+ */	padding:5px;
+}
+
+.myRadioBtns {
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+
+.btnRadio {
+	width: 15px;
+	height: 16px;
+}
+
+.dbConnection {
+	padding-top: 24px;
+}
+
+.myButton {
+	width: 178px;
+	height: 33px;
+	font-family: sans-serif;
+	background-color: rgb(49, 112, 225);
+}
+
+.targetButton {
+	width: 178px;
+	height: 33px;
+	font-family: sans-serif;
+	background-color: #ddd;
+	border-color: #ccc;
+}
+
+.labelSubHeader {
+	width: 100%;
+	height: 15px;
+	font-size: 12px;
+	line-height: 14px;
+	color: #748B99;
+	font-weight: normal;
+	padding-top: 10%;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #425866;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+	color: #425866;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+	color: #425866;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+	color: #425866;
+}
+
+.customDropDown option {
+	width: 100%;
+	/* text-align: left; */
+	font-family: GEInspRg;
+	color: rgba(72, 93, 107, 1.0);
+	font-size: 15px;
+	font-weight: 800;
+	/* line-height: 15px; */
+}
+
+.flex-container {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	flex-flow: row wrap;
+/* 	text-align: center;
+ */	padding: 0% 5.4% 2% 5.4%;
+}
+
+.flex-container>* {
+	/* padding: 15px; */
+	-webkit-flex: 1 100%;
+	flex: 1 100%;
+}
+
+.article {
+	text-align: left;
+	background: #425866;
+}
+
+header {
+	background: #2c404c;
+	color: white;
+	padding-top: 11px;
+}
+
+footer {
+	background: #2c404c;
+	color: white;
+}
+
+.nav {
+	background: #eee;
+}
+
+.nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.nav ul a {
+	text-decoration: none;
+}
+
+@media all and (min-width: 768px) {
+	.nav {
+		text-align: left;
+		-webkit-flex: 1 auto;
+		flex: 0 auto;
+		-webkit-order: 1;
+		order: 1;
+		border-radius: 0;
+		padding: 2px;
+		margin-bottom: 0;
+		background: #1b2a33;
+		border: 0;
+	}
+	.article {
+		-webkit-flex: 5 0px;
+		flex: 5 0px;
+		-webkit-order: 2;
+		order: 2;
+	}
+	footer {
+		-webkit-order: 3;
+		order: 3;
+	}
+}
+
+body.myMainBody{
+    background: #2c404c;
+}
+.img-circle {
+    width: 36px;
+}
+.headerMain
+{
+	font-family: GEInspRg;
+	font-size: 20px;
+}
+
+.menuIcon
+{
+	width: 23px;
+    height: 4px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.disabledlabel {
+    color: #cacaca;
+    width: 100%;
+	height: 15px;
+	font-size: 12px;
+	line-height: 14px;
+	font-weight: normal;
+	padding-top: 10%;
+}
+
+.disabledTextBox::-webkit-input-placeholder,
+.disabledDropDown::-webkit-input-placeholder
+{ /* Chrome/Opera/Safari */
+  color: #cacaca;
+}
+.disabledTextBox ::-moz-placeholder,
+.disabledDropDown ::-moz-placeholder
+{ /* Firefox 19+ */
+  color: #cacaca;
+}
+.disabledTextBox :-ms-input-placeholder,
+.disabledDropDown :-ms-input-placeholder
+{ /* IE 10+ */
+  color:#cacaca;
+}
+.disabledTextBox :-moz-placeholder, 
+.disabledDropDown :-moz-placeholder
+{ /* Firefox 18- */
+  color: #cacaca;
+}
+.disabledTextBox {
+	color: #cacaca;
+	border-radius: 0px !important;
+	border: 0 !important;
+	outline: 0 !important;
+	background: transparent !important;
+	border-bottom: 1px solid #cacaca !important;
+	box-shadow: none !important;
+	padding-bottom: 7px;
+	width: 100%;
+	text-align: left;
+	font-family: GEInspRg;
+	font-size: 15px;
+	font-weight: 100;
+	line-height: 15px;
+}
+
+.disabledDropDown {
+	border-radius: 0px !important;
+	border: 0 !important;
+	outline: 0 !important;
+	background: transparent !important;
+	border-bottom: 1px solid #cacaca !important;
+	box-shadow: none !important;
+	padding-bottom: 7px;
+	width: 100%;
+	text-align: left;
+	font-family: GEInspRg;
+	color: #cacaca;
+	font-size: 15px;
+	font-weight: 100;
+	line-height: 15px;
+}
+
+.titleLeftUp
+{
+	font-size: 19px;
+    padding-left: 14px;
+    padding-top: 6px;
+    /* font-size: large; */
+}
+.titleLeftDown
+{
+	font-size: 12px;
+    padding-left: 14px;
+    color: #b5b4b4;
+}
+.articleContainer {
+    font-family: GEInspRg;
+    background: #ffffff;
+    padding-bottom: 6px;
+}
+.titleCenterMiddle
+{
+	font-size: 21px;
+    padding-top: 12px;
+    padding-left: 18px;
+}
+.hoverActiveNav :hover {
+    background-color: #086e87;
+}
+.myFooter
+{
+	padding-bottom: 3%;
+    padding-right: 74px;
+    color: #94a3ac;
+    font-family: GEInspRg;
+    font-size: small;
+}
+.innerContainer1
+{
+	background: white;
+    padding-top: 2%;
+    padding-left: 1.3%;
+    padding-right: 1.3%;
+    font-family: GEInspRg;
+    /* background: #ffffff; */
+    padding-bottom: 8px;
+}
+.innerContainer2
+{
+	background: white;
+    margin-top: 5px;
+    padding-top: 2%;
+    padding-left: 1.3%;
+    padding-right: 1.3%;
+    font-family: GEInspRg;
+    /* background: #ffffff; */
+    padding-bottom: 34px;
+}
+.lastRowDiv
+{
+	padding-top: 24px;
+	padding-bottom: 24px;
+}

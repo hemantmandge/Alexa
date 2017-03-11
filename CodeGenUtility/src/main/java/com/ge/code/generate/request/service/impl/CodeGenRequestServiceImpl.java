@@ -209,8 +209,8 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			//batchControlMaster.setLastKey("");//NA
 			batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());
 	
-			//batchControlMaster.setSourceTableName(""); // NA
-			//batchControlMaster.setSourceColumnName(""); //NA
+			batchControlMaster.setSourceTableName("");
+			batchControlMaster.setSourceColumnName("");
 
 		} else {
 			if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
@@ -281,7 +281,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			//ingestSubJobControl.setMaxWhereColumn(null);//NA
 			//ingestSubJobControl.setIngestBatchId(null);//NA
 		//	ingestSubJobControl.setThresholdLimit(null);//NA
-		//	ingestSubJobControl.setScriptLocation(""); //NA
+			ingestSubJobControl.setScriptLocation(""); //NA
 		//	ingestSubJobControl.setHiveSQLLocation("");//NA
 		}
 		
