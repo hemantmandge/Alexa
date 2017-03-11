@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -19,16 +18,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
 	
 	@Autowired
-	private CustomAuthenticationProvider customAuthenticationProvider;
-
+	private RestAuthenticationFailureHandler restAuthenticationFailureHandler;
+	
 	@Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     	auth.inMemoryAuthentication()
         .withUser("user").password("password").roles("USER");
     }
 
-    @Autowired
-    private RestAuthenticationFailureHandler restAuthenticationFailureHandler;
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/css/**", "/data/**", "/font/**","/img/**", "/js/**","/lib/**","/html/index.html", "/html/login.html");
