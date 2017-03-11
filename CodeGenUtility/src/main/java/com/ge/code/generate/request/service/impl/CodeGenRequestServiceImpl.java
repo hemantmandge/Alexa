@@ -176,7 +176,12 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		targetTableName = codeGenRequest.getTargetTableName();
 		BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
 		batchControlMasterPrimaryKey.setDefaultInstance(1);
-		batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());
+		//todo needs to be changed  
+	
+			batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());	
+		
+			//batchControlMasterPrimaryKey.setSubjectArea(ConstantUtils.SUBJ_AREA_HDFS+codeGenRequest.getTargetDBName());	
+		
 		batchControlMasterPrimaryKey.setTargetTableName(targetTableName);
 
 		batchControlMaster = batchControlMasterRepository.findOne(batchControlMasterPrimaryKey);
@@ -188,23 +193,24 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setCreateTimeStamp(new Date());
 			
 			//Populate Default Values
-			batchControlMaster.setBatchId(batchControlMasterRepository.getMaxBatchId() + 1);
+			
+			batchControlMaster.setBatchId(0);
 			batchControlMaster.setMaxRunBatchId(new Long(0));
-			batchControlMaster.setActiveFlag("Y");
+			batchControlMaster.setActiveFlag(ConstantUtils.ACTIVE_FLAG);
 			batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
 			batchControlMaster.setMasterJobName(ConstantUtils.FILE_TEMPLATE);
 
 			// No Need to pass value as default is null
-			//batchControlMaster.setOffsetVal(null);
+			//batchControlMaster.setOffsetVal(null);//NA
 			// No Need to pass value as default is null
-			//batchControlMaster.setLastRunBatchId(null);
-			batchControlMaster.setDefaultParallel("");
-			batchControlMaster.setTransformationMergeOrUpdate("");
-			batchControlMaster.setLastKey("");
+			//batchControlMaster.setLastRunBatchId(null);//NA but in batch control master its default value is 0
+		//	batchControlMaster.setDefaultParallel("");//NA
+			//batchControlMaster.setTransformationMergeOrUpdate(""); //NA
+			//batchControlMaster.setLastKey("");//NA
 			batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());
-			batchControlMaster.setSource(ConstantUtils.FILE);// DBschema name
-			batchControlMaster.setSourceTableName("");
-			batchControlMaster.setSourceColumnName("");
+	
+			//batchControlMaster.setSourceTableName(""); // NA
+			//batchControlMaster.setSourceColumnName(""); //NA
 
 		} else {
 			if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
@@ -216,17 +222,28 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			}
 			batchControlMaster.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
 		}
+		
+		// this is chaged --> it is moved below and its value be SFTPserverIp
+			batchControlMaster.setSource(codeGenRequest.getSFTPserverIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
+		
+		
 		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
-		batchControlMaster.setFillerTwo(codeGenRequest.getFileDelimeter());
-		batchControlMaster.setFillerThree(codeGenRequest.getRowTag());
+		//this neeed to be row tag 
+		
+		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
+		//todo: this need to be chaged --> it will store file schema path 
+		
+		batchControlMaster.setFillerThree(codeGenRequest.getFileSchemaPath());
+	
 		
 		//No Need to pass value as default is null
-		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());
+		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());//NA
 		batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
 		batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
-		batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
-		batchControlMaster.setSourceSystem(codeGenRequest.getSourceType());
+		//incase of hive it should be in upper case 
+		batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
+		batchControlMaster.setSourceSystem(ConstantUtils.FILE_TYPE+codeGenRequest.getSourceType());
 		batchControlMaster.setUpdateTimeStamp(new Date());
 		
 		IngestSubJobControl ingestSubJobControl;
@@ -238,8 +255,16 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
-			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE);
-			ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
+			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE);//changed to file_template 
+			/*ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);*/
+			if(codeGenRequest.getHiveTableType().equalsIgnoreCase("NON-PARTITIONED"))
+			{
+				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
+			}
+			else
+			{
+				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_PARTIOTION);
+			}
 			ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
 			Date date;
 			try {
@@ -251,19 +276,21 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			} 
 			ingestSubJobControl.setLastUpdatedTimeStamp(date);
 			// pass null
-			ingestSubJobControl.setReferenceColumnName(null);
-			ingestSubJobControl.setPigProperty(null);
-			ingestSubJobControl.setMaxWhereColumn(null);
-			ingestSubJobControl.setIngestBatchId(null);
-			ingestSubJobControl.setThresholdLimit(null);
-			ingestSubJobControl.setScriptLocation("");
-			ingestSubJobControl.setHiveSQLLocation("");
+		//	ingestSubJobControl.setReferenceColumnName(null); //NA
+			//ingestSubJobControl.setPigProperty(null);//NA
+			//ingestSubJobControl.setMaxWhereColumn(null);//NA
+			//ingestSubJobControl.setIngestBatchId(null);//NA
+		//	ingestSubJobControl.setThresholdLimit(null);//NA
+		//	ingestSubJobControl.setScriptLocation(""); //NA
+		//	ingestSubJobControl.setHiveSQLLocation("");//NA
 		}
 		
 		if (codeGenRequest.getJoinKeys()!= null && codeGenRequest.getJoinKeys().size() > 0) {
 			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 		}
-		ingestSubJobControl.setSource(codeGenRequest.getSourceType());
+		
+		//ingestSubJobControl.setSource(codeGenRequest.getSourceType());
+		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getSourceType());
 		
 		batchControlMasterRepository.save(batchControlMaster);
 		ingestSubJobControlRepository.save(ingestSubJobControl);

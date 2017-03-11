@@ -22,4 +22,8 @@ public interface ConstantUtils {
 	String UNIX_TIME_STAMP = "1483228800";
 	String DEFAULT_DATE = "2017-01-01 00:00:00";
 	String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
+	String FILE_TYPE ="FILE_";
+	String SUBJ_AREA_HDFS="HDFS_";
+	String ACTIVE_FLAG="Y";
+	String SCRIPT_NAME_PARTIOTION ="merge_prtn.pig";
 }
