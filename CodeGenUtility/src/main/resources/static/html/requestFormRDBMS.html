@@ -2,41 +2,11 @@
 <div ng-show="dataLoading" class="dataLoading" id="loading-indicator">
 	<img src="img/loader.gif" width="100" height="150">
 </div>
-<div class="container-fluid outerContainer">
+<div class="container-fluid">
 	<div class="innerContainer" ng-init="pageLoadData()">
-		<div class="innerContainer1">
-			<div class="row titleDiv">
-				<div class="col-md-12 titleDesc">
-					SOURCE LOCATION
-					<div style="padding-bottom: 24px"></div>
-					<div class="stroke"></div>
-				</div>
-			</div>
-			<div class="row myRadioBtns">
-				<div class="col-md-3 ">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"RDBMS"'><label
-						class="sourcelocationLabel"> RDBMS </label>
-				</div>
-				<div class="col-md-3 ">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"Hadoop"'> <label
-						class="sourcelocationLabel"> Hadoop</label>
-				</div>
-				<div class="col-md-3">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"Files"'> <label
-						class="sourcelocationLabel"> Files</label>
-				</div>
-				<div class="col-md-3">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"S3"'><label
-						class="sourcelocationLabel"> S3</label>
-				</div>
-			</div>
-		</div>
+	
 		<div class="innerContainer2">
-			<form role="form" name="rdbmsForm" novalidate>
+			<form role="form" name="codeGenRequest.rdbmsForm" novalidate>
 				<div id="sourceType">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
@@ -58,7 +28,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="rdbmsForm.datasrc.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.datasrc.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -77,7 +47,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="rdbmsForm.dbConnection.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.dbConnection.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -93,7 +63,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="rdbmsForm.SID.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.SID.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -118,7 +88,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="rdbmsForm.userName.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.userName.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -131,7 +101,7 @@
 						<div ng-show="showValidationErrors">
 							<div style="line-height: 3px">&nbsp;</div>
 							<span class="text-danger"
-								ng-show="rdbmsForm.userName.$error.required">This is
+								ng-show="codeGenRequest.rdbmsForm.userName.$error.required">This is
 								required. </span>
 						</div>
 					</div>
@@ -150,7 +120,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="rdbmsForm.dbschema.$error.required">This is
+										ng-show="codeGenRequest.rdbmsForm.dbschema.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -168,7 +138,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="rdbmsForm.tables.$error.required">This is
+										ng-show="codeGenRequest.rdbmsForm.tables.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -185,7 +155,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="rdbmsForm.colums.$error.required">This is
+										ng-show="codeGenRequest.rdbmsForm.colums.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -201,7 +171,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="rdbmsForm.joinkey.$error.required">This is
+										ng-show="codeGenRequest.rdbmsForm.joinkey.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -222,7 +192,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="rdbmsForm.CalculateDelta.$error.required">This
+										ng-show="codeGenRequest.rdbmsForm.CalculateDelta.$error.required">This
 										is required. </span>
 								</div>
 							</div>
@@ -242,7 +212,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="rdbmsForm.archivePeriod.$error.required">This
+										ng-show="codeGenRequest.rdbmsForm.archivePeriod.$error.required">This
 										is required. </span>
 								</div>
 							</div>
@@ -282,7 +252,7 @@
 						<div class="col-md-3">
 							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'" style="padding-top: 0">LOAD
 								TYPE</label> 
-							<select ng-class="toggleTable ? classdropdown : 'disabledDropDown'" name="loadtype"
+							<select ng-class="toggleTable ? 'customDropDown' : 'disabledDropDown'" name="loadtype"
 								id="loadtype" ng-required="loadTypeRequired"
 								ng-model="codeGenRequest.loadType"
 								ng-disabled="!toggleTable">
@@ -294,7 +264,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="rdbmsForm.loadtype.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.loadtype.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -303,11 +273,11 @@
 								CONNECTION</label> <input type="text" placeholder="Please Enter"
 								class="customTextBox" name="targetconn"
 								ng-required="targetconnRequired" id="targetconn"
-								ng-model="codeGenRequest.targetConnection" required>
+								ng-model="codeGenRequest.targetConnection">
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="rdbmsForm.targetconn.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.targetconn.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -320,18 +290,31 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="rdbmsForm.hivedbname.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.hivedbname.$error.required">This is
 									required. </span>
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
-						
+						<div class="col-md-3">
+							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE TABLE NAME</label> <input
+								type="text" name="hivetableName"
+								ng-required="hiveTableNameRequired" placeholder="Please Enter"
+								ng-class="toggleTable ? 'customTextBox' : 'disabledTextBox'" id="hivetableName"
+								ng-model="codeGenRequest.targetTableName"
+								ng-disabled="toggleTable ? hivetabledisabled : true">
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="text-danger"
+									ng-show="codeGenRequest.rdbmsForm.hivetableName.$error.required">This
+									is required. </span>
+							</div>
+						</div>
 						<div class="col-md-3">
 							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE TABLE TYPE</label> <select
 								name="hivetabltt" ng-required="colRequiredchk=='false'"
-								ng-class="toggleTable ? classdropdown : 'disabledDropDown'" id="hivetabletype"
+								ng-class="toggleTable ? 'customDropDown' : 'disabledDropDown'" id="hivetabletype"
 								ng-init="loadHiveTableType()"
 								ng-model="codeGenRequest.hiveTableType"
 								ng-change="changePartitinKey(codeGenRequest.hiveTableType)"
@@ -341,30 +324,20 @@
 							</select>
 						</div>
 						<div class="col-md-3">
-							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE TABLE NAME</label> <input
-								type="text" name="hivetableName"
-								ng-required="hiveTableNameRequired" placeholder="Please Enter"
-								ng-class="toggleTable ? 'customTextBox' : 'disabledTextBox'" id="hivetableName"
-								ng-model="codeGenRequest.targetTableName"
-								ng-disabled="toggleTable ? hivetabledisabled : true" required>
-							<div ng-show="showValidationErrors">
-								<div style="line-height: 3px">&nbsp;</div>
-								<span class="text-danger"
-									ng-show="rdbmsForm.hivetableName.$error.required">This
-									is required. </span>
-							</div>
-						</div>
-						<div class="col-md-3">
 							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE PARTITION KEY</label> <select
-								ng-class="toggleTable ? classdropdown : 'disabledDropDown'" ng-required="colRequiredchk=='false'"
+								ng-class="toggleTable ? 'customDropDown' : 'disabledDropDown'" ng-required="colRequiredchk=='false'"
 								id="hivepartionkey" ng-model="codeGenRequest.targetPartitionKey"
-								ng-disabled="isdisabled">
+								ng-disabled="toggleTable ? isdisabled : true">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="field in codeGenRequest.sourceColumnNames "
 									value="{{field}}">{{field}}</option>
 							</select>
-							<!-- 			<input type="text"  name="hivetable" ng-required="colRequiredchk=='false'" placeholder="Please Enter" class="customTextBox" id="hivetable"  value="" ng-model="rdbms.targetTableName" ng-disabled="hivetabledisabled" required>
-			 -->
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="text-danger"
+									ng-show="codeGenRequest.rdbmsForm.hivetableName.$error.required">This
+									is required. </span>
+							</div>
 						</div>
 					</div>
 
@@ -372,7 +345,7 @@
 				<!-- sourceType div ends -->
 				<div class="row" style="padding-left: 68.3%;">
 					<button type="button" class="btn targetButton"
-						ng-click="onCancel();">Cancel New Request</button>
+						ng-click="onCancel();">Cancel</button>
 					<span style="padding-right: 2%;"></span>
 					<button type="button" class="btn btn-primary myButton"
 						ng-click="postdata(codeGenRequest);">Create New Request</button>

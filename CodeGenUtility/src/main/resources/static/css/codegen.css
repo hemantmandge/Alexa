@@ -8,11 +8,10 @@
 	padding-bottom: 7px;
 	width: 100%;
 	text-align: left;
-	font-family: GEInspRg;
-	color: rgba(72, 93, 107, 1.0);
-	font-size: 15px;
-	font-weight: 800;
-	line-height: 15px;
+	font-family: GESans;
+    font-size: 16px;
+    line-height: 18px;
+    color: #425866;
 }
 
 .customDropDown {
@@ -25,11 +24,10 @@
 	padding-bottom: 7px;
 	width: 100%;
 	text-align: left;
-	font-family: GEInspRg;
-	color: rgba(72, 93, 107, 1.0);
-	font-size: 15px;
-	font-weight: 800;
-	line-height: 15px;
+	font-family: GESans;
+    font-size: 16px;
+    line-height: 18px;
+    color: #425866;
 }
 
 .customCaret {
@@ -132,6 +130,7 @@ font-size: bold;
 	color: #748B99;
 	font-weight: normal;
 	padding-top: 10%;
+	cursor: default;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -153,11 +152,15 @@ font-size: bold;
 .customDropDown option {
 	width: 100%;
 	/* text-align: left; */
-	font-family: GEInspRg;
+	/* font-family: GEInspRg;
 	color: rgba(72, 93, 107, 1.0);
 	font-size: 15px;
-	font-weight: 800;
+	font-weight: 800; */
 	/* line-height: 15px; */
+	font-family: GESans;
+    font-size: 16px;
+    /* line-height: 18px; */
+    color: #425866;
 }
 
 .flex-container {
@@ -257,6 +260,7 @@ body.myMainBody{
 	line-height: 14px;
 	font-weight: normal;
 	padding-top: 10%;
+	cursor: default;
 }
 
 .disabledTextBox::-webkit-input-placeholder,
@@ -290,10 +294,13 @@ body.myMainBody{
 	padding-bottom: 7px;
 	width: 100%;
 	text-align: left;
-	font-family: GEInspRg;
+/* 	font-family: GEInspRg;
 	font-size: 15px;
 	font-weight: 100;
-	line-height: 15px;
+	line-height: 15px; */
+	font-family: GESans;
+    font-size: 16px;
+    line-height: 18px;
 }
 
 .disabledDropDown {
@@ -306,11 +313,14 @@ body.myMainBody{
 	padding-bottom: 7px;
 	width: 100%;
 	text-align: left;
-	font-family: GEInspRg;
+	/* font-family: GEInspRg; */
 	color: #cacaca;
-	font-size: 15px;
+	/* font-size: 15px;
 	font-weight: 100;
-	line-height: 15px;
+	line-height: 15px; */
+	font-family: GESans;
+    font-size: 16px;
+    line-height: 18px;
 }
 
 .titleLeftUp
@@ -373,4 +383,8 @@ body.myMainBody{
 {
 	padding-top: 24px;
 	padding-bottom: 24px;
+}
+.rightHoverHelp
+{
+	color: #425866;
 }

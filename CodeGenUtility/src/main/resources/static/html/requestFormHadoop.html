@@ -1,40 +1,11 @@
+<!-- 
 <div ng-show="loadingBackgronud" class="loadingBackgronud"></div>
 <div ng-show="dataLoading" class="dataLoading" id="loading-indicator">
 	<img src="img/loader.gif" width="100" height="150">
 </div>
-<div class="container-fluid outerContainer">
+<div class="container-fluid">
 	<div class="innerContainer" ng-init="pageLoadData()">
-		<div class="innerContainer1">
-			<div class="row titleDiv">
-				<div class="col-md-12 titleDesc">
-					SOURCE LOCATION
-					<div style="padding-bottom: 24px"></div>
-					<div class="stroke"></div>
-				</div>
-			</div>
-			<div class="row myRadioBtns">
-				<div class="col-md-3 ">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"RDBMS"'><label
-						class="sourcelocationLabel"> RDBMS </label>
-				</div>
-				<div class="col-md-3 ">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"Hadoop"'>
-					<label class="sourcelocationLabel"> Hadoop</label>
-				</div>
-				<div class="col-md-3">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"Files"'> <label
-						class="sourcelocationLabel"> Files</label>
-				</div>
-				<div class="col-md-3">
-					<input class="btnRadio" type="radio" name="optradio"
-						ng-model="datasrc" ng-value='"S3"'><label
-						class="sourcelocationLabel"> S3</label>
-				</div>
-			</div>
-		</div>
+	
 		<div class="innerContainer2">
 			<form role="form" name="rdbmsForm">
 				<div id="sourceType">
@@ -47,103 +18,111 @@
 					</div>
 					<div class="row dbConnection">
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">HOST NAME PORT</label> 	
-							<select class="customDropDown" id="fileType" ng-change="" name="fileType" 
-									ng-required=""	ng-model="">
-									<option selected="selected" value="">Please Select</option>
-									<option ng-repeat="src in fileType">{{src.value}}</option>
+							<label class="labelSubHeader" style="padding-top: 0">HOST
+								NAME PORT</label> <select class="customDropDown" id="fileType1"
+								ng-change="" name="fileType1" ng-required="" ng-model="">
+								<option selected="selected" value="">Please Select</option>
+								<option ng-repeat="src in fileType1">{{src.value}}</option>
 							</select>
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="fileForm.fileType.$error.required">This is required. </span>
+								<span class="errmsg" ng-show="fileForm.fileType1.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">SOURCE TYPE</label> 
-							<input type="text" class="customTextBox" id="srctype" placeholder="Please Enter"> 
+							<label class="labelSubHeader" style="padding-top: 0">SOURCE
+								TYPE</label> <input type="text" class="customTextBox" id="srctype"
+								placeholder="Please Enter">
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">FILE PATH</label> 
-							<input type="text" class="customTextBox" id="filepath" placeholder="Please Enter">
+							<label class="labelSubHeader" style="padding-top: 0">FILE
+								PATH</label> <input type="text" class="customTextBox" id="filepath"
+								placeholder="Please Enter">
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">FILE SCHEMA PATH</label> 
-							<input type="text" class="customTextBox" id="fileschemapath" placeholder="Please Enter">
+							<label class="labelSubHeader" style="padding-top: 0">FILE
+								SCHEMA PATH</label> <input type="text" class="customTextBox"
+								id="fileschemapath" placeholder="Please Enter">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-3">
-							<label class="labelSubHeader">FILE TYPE</label>
-							<select class="customDropDown" id="fileType" ng-change="" name="fileType" 
-									ng-required="fileTypeRequired"	ng-model="file.fileType">
-									<option selected="selected" value="">Please Select</option>
-									<option ng-repeat="src in fileType">{{src.value}}</option>
+							<label class="labelSubHeader">FILE TYPE</label> <select
+								class="customDropDown" id="fileType2" ng-change=""
+								name="fileType2" ng-required="fileTypeRequired"
+								ng-model="file.fileType2">
+								<option selected="selected" value="">Please Select</option>
+								<option ng-repeat="src in fileType2">{{src.value}}</option>
 							</select>
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="fileForm.fileType.$error.required">This is required. </span>
+								<span class="errmsg" ng-show="fileForm.fileType2.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">FILE DELIMITER</label> 
-							<input type="text" class="customTextBox" id="filedel" name="filedel" ng-required="fileDelimeterRequired" ng-readonly="fileDelimeter"
-									ng-model="file.fileDelimeter" placeholder="Please Enter">
-								<div ng-show="showValidationErrors">
-									<div style="line-height: 3px">&nbsp;</div>
-									<span class="errmsg" ng-show="fileForm.filedel.$error.required">This is required. </span>
-								</div>
+							<label class="labelSubHeader">FILE DELIMITER</label> <input
+								type="text" class="customTextBox" id="filedel" name="filedel"
+								ng-required="fileDelimeterRequired" ng-readonly="fileDelimeter"
+								ng-model="file.fileDelimeter" placeholder="Please Enter">
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="errmsg" ng-show="fileForm.filedel.$error.required">This
+									is required. </span>
+							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">ROW TAG</label> 
-							<input type="text" class="customTextBox" id="rowtag"
-									name="rowtag" ng-required="rowTagRequired" ng-readonly="rowTag" ng-model="file.rowTag"
-									placeholder="Please Enter">
-								<div ng-show="showValidationErrors">
-									<div style="line-height: 3px">&nbsp;</div>
-									<span class="errmsg" ng-show="fileForm.rowtag.$error.required">This
-										is required. </span>
-								</div>
+							<label class="labelSubHeader">ROW TAG</label> <input type="text"
+								class="customTextBox" id="rowtag" name="rowtag"
+								ng-required="rowTagRequired" ng-readonly="rowTag"
+								ng-model="file.rowTag" placeholder="Please Enter">
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="errmsg" ng-show="fileForm.rowtag.$error.required">This
+									is required. </span>
+							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">DB NAME</label>
-							<input type="text" class="customTextBox" id="srccol" placeholder="Please Enter">
+							<label class="labelSubHeader">DB NAME</label> <input type="text"
+								class="customTextBox" id="srccol" placeholder="Please Enter">
 						</div>
 					</div>
 					<div class="row" style="padding-bottom: 24px;">
 						<div class="col-md-3">
-							<label class="labelSubHeader">TABLES</label> 
-							<select name="tables" id="srctable" multiple class="customDropDown"
-									ng-model="codeGenRequest.sourceTableNames">
-									<option selected="selected" value="">Please Select</option>
-									<option ng-selected="isSelectedFlag" ng-repeat="src in tables"
-										ng-click="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceType,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)"
-										ng-class="{warning: (codeGenRequest.sourceTableNames == 'Select All'), ok: (codeGenRequest.sourceTableNames != 'Select All')}">{{src}}</option>
+							<label class="labelSubHeader">TABLES</label> <select
+								name="tables" id="srctable" multiple class="customDropDown"
+								ng-model="codeGenRequest.sourceTableNames">
+								<option selected="selected" value="">Please Select</option>
+								<option ng-selected="isSelectedFlag" ng-repeat="src in tables"
+									ng-click="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceType,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)"
+									ng-class="{warning: (codeGenRequest.sourceTableNames == 'Select All'), ok: (codeGenRequest.sourceTableNames != 'Select All')}">{{src}}</option>
 							</select>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">COLUMNS</label> 
-							<select name="colums"
-									ng-required="colRequiredchk=='false'"
-									ng-disabled="disabledMultiple" class="customDropDown"
-									id="srcclumn" multiple
-									ng-model="codeGenRequest.sourceColumnNames"
-									ng-click="onSelctedColumns(codeGenRequest.sourceColumnNames)">
-									<option selected="selected" value="">Please Select</option>
-									<option ng-repeat="src in cols">{{src}}</option>
-								</select>
+							<label class="labelSubHeader">COLUMNS</label> <select
+								name="colums" ng-required="colRequiredchk=='false'"
+								ng-disabled="disabledMultiple" class="customDropDown"
+								id="srcclumn" multiple
+								ng-model="codeGenRequest.sourceColumnNames"
+								ng-click="onSelctedColumns(codeGenRequest.sourceColumnNames)">
+								<option selected="selected" value="">Please Select</option>
+								<option ng-repeat="src in cols">{{src}}</option>
+							</select>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">CALCULATE DELTA ON</label> 
-							<input type="text" class="customTextBox" id="CalculateDelta" placeholder="Please Enter ">
+							<label class="labelSubHeader">CALCULATE DELTA ON</label> <input
+								type="text" class="customTextBox" id="CalculateDelta"
+								placeholder="Please Enter ">
 						</div>
 					</div>
-					<!-- disabled div ends -->
+					disabled div ends
 				</div>
-				<!-- sourceType div ends -->
+				sourceType div ends
 
 
-				<!-- Common for all sections -->
+				Common for all sections
 				<div id="targetType" class="myRadioBtns">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
@@ -170,8 +149,7 @@
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">LOAD
-								TYPE</label> 
-							<select class="customDropDown" id="loadtype"
+								TYPE</label> <select class="customDropDown" id="loadtype"
 								ng-model="codeGenRequest.loadType">
 								<option selected="selected" value="">Please Select</option>
 								<option name="loadtype"
@@ -227,16 +205,16 @@
 								<option ng-repeat="field in codeGenRequest.sourceColumnNames "
 									value="{{field}}">{{field}}</option>
 							</select>
-							<!-- 			<input type="text"  name="hivetable" ng-required="colRequiredchk=='false'" placeholder="Please Enter" class="customTextBox" id="hivetable"  value="" ng-model="rdbms.targetTableName" ng-disabled="hivetabledisabled" required>
-			 -->
+										<input type="text"  name="hivetable" ng-required="colRequiredchk=='false'" placeholder="Please Enter" class="customTextBox" id="hivetable"  value="" ng-model="rdbms.targetTableName" ng-disabled="hivetabledisabled" required>
+			
 						</div>
 					</div>
 
 				</div>
-				<!-- sourceType div ends -->
+				sourceType div ends
 				<div class="row" style="padding-left: 68.3%;">
 					<button type="button" class="btn targetButton"
-						ng-click="onCancel();">Cancel New Request</button>
+						ng-click="onCancel();">Cancel</button>
 					<span style="padding-right: 2%;"></span>
 					<button type="button" class="btn btn-primary myButton"
 						ng-click="postdata(codeGenRequest);">Create New Request</button>
@@ -245,4 +223,4 @@
 			</form>
 		</div>
 	</div>
-</div>
+</div> -->

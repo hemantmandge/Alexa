@@ -20,7 +20,7 @@ app.controller("utilityCtrl", ['$scope', '$rootScope', '$window', '$location', '
  $scope.isSelectedFlag = false;
  $scope.targetType = "";
  $scope.targetcon = {};
- $scope.datasrc = 'RDBMS';
+ $rootScope.homeRadioBtn = "RDBMS";
  //$scope.codeGenRequest.username = "admin";
  //$scope.codeGenRequest.password = "gepoc";
  //$scope.codeGenRequest.archivePeriod="4";
@@ -76,6 +76,7 @@ $rootScope.hiveTableNameRequired=false;
 //variables for file 
 $scope.filePath=true;
 $scope.fileSchemaPath=true;
+$scope.hivepartionkeydisabled=false;
 //$scope.fileType =false;
 $scope.serverIP=true;
 $scope.rowTag=true;
@@ -102,7 +103,7 @@ $scope.archivePeriodRequired =false;
  */
 $scope.loadFileInitialData=function()
 {
-	
+	  $scope.authenticate(); 
 	 $scope.file.sourceType="FILE";
 	
 	  $http.get("resources/findByType?type=FILETYPE").then(function(response) {
@@ -123,8 +124,32 @@ $scope.loadFileInitialData=function()
 	  
 	};
 	
+	
+	$scope.changeTableType=function(hiveTableType)
+	{
+		console.log(hiveTableType);
+		if  (hiveTableType == 'NON-PARTITIONED')
+			{
+			$scope.hivepartionkeydisabled=true;
+			$scope.file.targetPartitionKey="";
+			}
+		else
+			{
+			$scope.hivepartionkeydisabled=false;
+			}
+	}
+	
 	$scope.onChangeOfFileType=function()
 	{
+		if($scope.file.fileType== undefined || $scope.file.fileType== null || $scope.file.fileType == '')
+			{
+			$scope.fileTypeRequired=true;
+			}
+		else
+			{
+			$scope.fileTypeRequired=false;
+			}
+	
 		if($scope.file.fileType=="XML")
 			{
 			
@@ -259,7 +284,11 @@ $scope.enableForm =function(){
  
  $scope.onCancel = function() {
   $scope.codeGenRequest = {};
+  $scope.file={};
+  $scope.file.sourceType="FILE";
+
   $location.path('/home');
+  $rootScope.homeRadioBtn="RDBMS";
  }
  $scope.pageLoadData = function() {
   $scope.authenticate(); 
@@ -371,22 +400,6 @@ $scope.authenticate = function() {
       $location.path("/login")
     });
   }
- $scope.submitResult = function(datasrc) {
-  $scope.homeShow = true;
-  $rootScope.showHome=true;
-  $scope.datasrc = datasrc;
-  if (datasrc == 'RDBMS') {
-   $location.path('/RDBMS');
-  } else if (datasrc == 'Hadoop') {
-   $location.path('/Hadoop');
-  } else if (datasrc == 'Files') {
-   $location.path('/Files');
-  } else if (datasrc == 'S3') {
-   $location.path('/S3');
-  } else {
-   $location.path('/RDBMS');
-  }
- }
  $scope.postJob = function() {
   $location.path('/job');
  }
@@ -430,7 +443,7 @@ $scope.authenticate = function() {
 	 }
  }
  $scope.getSID = function(srctype) {
-	 console.log(srctype);
+	 // console.log(srctype);
 	 if(srctype !== undefined)
 		 {
 		 	$scope.dbnameDisble=false;
@@ -456,10 +469,10 @@ $scope.authenticate = function() {
 	 $scope.passwordRequired=true;
 	
 
-//	 $scope.dbschemaDisable = false;
+ $scope.dbschemaDisable = false;
 
-	 /*$scope.dbSchemaREquired=false;*/
-	/* $scope.tableRequired=false;
+	 $scope.dbSchemaREquired=false;
+	 $scope.tableRequired=false;
 	 $scope.colRequired=false;
 	 $scope.caculateDeltaRequired=false;
 	 $scope.joinKeyRequired=false;
@@ -467,10 +480,10 @@ $scope.authenticate = function() {
 	 $scope.loadTypeRequired=false;
 	 $scope.targetconnRequired=false;
 	 $scope.hivedbnameRequired=false;
-	 $scope.hiveTableNameRequired=false;*/
-	 //console.log("Inside ConnectDB : $scope.rdbmsForm.$invalid = ",$scope.rdbmsForm.$invalid )
-	 if($scope.rdbmsForm.$invalid){
-		 //console.log("Inside ConnectDB : $scope.rdbmsForm.$invalid = ",$scope.rdbmsForm.$invalid )
+	 $scope.hiveTableNameRequired=false;
+	 //console.log("Inside ConnectDB : $scope.codeGenRequest.rdbmsForm.$invalid = ",$scope.codeGenRequest.rdbmsForm.$invalid )
+	 if($scope.codeGenRequest.rdbmsForm.$invalid){
+		 //console.log("Inside ConnectDB : $scope.codeGenRequest.rdbmsForm.$invalid = ",$scope.codeGenRequest.rdbmsForm.$invalid )
 			$scope.showValidationErrors = true;
 			return false;
 		}
@@ -478,9 +491,9 @@ $scope.authenticate = function() {
 
 	 
      $scope.dataLoading = true;
-    $scope.loadingBackgronud = true;
-  $scope.databaseSchema = [];
-  $http.get("resources/getSchemaDetails?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + dbName + "&rdbmsName=" + rdbmsName + "").then(function(response) {
+     $scope.loadingBackgronud = true;
+	  $scope.databaseSchema = [];
+	  $http.get("resources/getSchemaDetails?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + dbName + "&rdbmsName=" + rdbmsName + "").then(function(response) {
    $scope.databaseSchema = response.data; //ajax request to fetch data into $scope.data
    if (response.data) {
 	   $scope.toggleAll = false;
@@ -503,7 +516,7 @@ $scope.authenticate = function() {
  
     $scope.showbutton=false;
     $scope.showbuttonDisc=true;
-    $scope.rdbmsForm.$invalid = true;
+    $scope.codeGenRequest.rdbmsForm.$invalid = true;
     
     var modalInstance = $uibModal.open({
      controller: 'PopupCont',
@@ -570,7 +583,7 @@ $scope.authenticate = function() {
   });
  }
  $scope.changePartitinKey = function(tabletype) {
-  console.log('type is', tabletype);
+  // console.log('type is', tabletype);
   if (tabletype == 'NON-PARTITIONED') {
 	  $scope.codeGenRequest.targetPartitionKey="";
     $scope.isdisabled = true;
@@ -600,7 +613,7 @@ $scope.authenticate = function() {
 	  }
   if( $scope.codeGenRequest.sourceTableNames.length > 1 || $scope.codeGenRequest.sourceTableNames.indexOf("Select All") > -1)
 	{
-	   console.log("inside if",$scope.codeGenRequest.sourceTableNames);
+	   // console.log("inside if",$scope.codeGenRequest.sourceTableNames);
 	   $scope.toggleTable = false;
 	   //disable some columns
 	}
@@ -612,7 +625,7 @@ $scope.authenticate = function() {
   
  }
  $scope.postdata = function(codeGenRequest) {
-	 console.log("inside pose data");
+	 // console.log("inside pose data");
 	/* $scope.dbconnectionRequired=true;
 	 $scope.dbNameRequired=true;
 	 $scope.userNameRequired=true;
@@ -628,30 +641,7 @@ $scope.authenticate = function() {
 	 $scope.hivedbnameRequired=true;
 	 $scope.hiveTableNameRequired=true;
 	 
-	 console.log("dbSchemaREquired",$scope.codeGenRequest.source,
-	 "tableRequired",$scope.codeGenRequest.sourceTableNames,
-	 "colRequired",$scope.codeGenRequest.sourceColumnNames,
-	 "caculateDeltaRequired",$scope.codeGenRequest.calculateDeltaOn,
-	 "joinKeyRequired",$scope.codeGenRequest.joinKeys,
-	 "archivePeriodRequired",$scope.codeGenRequest.archivePeriod,
-	 "loadTypeRequired",$scope.codeGenRequest.loadType,
-	 "targetconnRequired",$scope.codeGenRequest.targetConnection,
-	 "hivedbnameRequired",$scope.codeGenRequest.targetDBName,
-	 "hiveTableNameRequired",$scope.codeGenRequest.hiveTableType);
-	 console.log("in post data : $scope.rdbmsForm.$invalid =",$scope.rdbmsForm.$invalid);
-	 console.log("in post data : $scope.rdbmsForm.$valid =",$scope.rdbmsForm.$valid);
-		if($scope.rdbmsForm.$invalid){
-			console.log("in post data Invalid Form: $scope.rdbmsForm.$invalid=",$scope.rdbmsForm.$invalid);
-			 console.log("dbSchemaREquired",$scope.codeGenRequest.source,
-					 "tableRequired",$scope.codeGenRequest.sourceTableNames,
-					 "colRequired",$scope.codeGenRequest.sourceColumnNames,
-					 "caculateDeltaRequired",$scope.codeGenRequest.calculateDeltaOn,
-					 "joinKeyRequired",$scope.codeGenRequest.joinKeys,
-					 "archivePeriodRequired",$scope.codeGenRequest.archivePeriod,
-					 "loadTypeRequired",$scope.codeGenRequest.loadType,
-					 "targetconnRequired",$scope.codeGenRequest.targetConnection,
-					 "hivedbnameRequired",$scope.codeGenRequest.targetDBName,
-					 "hiveTableNameRequired",$scope.codeGenRequest.hiveTableType);
+		if($scope.codeGenRequest.rdbmsForm.$invalid){
 			$scope.showValidationErrors = true;
 			return false;
 		}
@@ -665,7 +655,7 @@ $scope.authenticate = function() {
 			    $scope.dataLoading = true;
 			    $scope.loadingBackgronud=true;
 			   //Call the services
-			   $http.post('codeGenRequests/create', JSON.stringify(data)).then(function(response) {
+			   $http.post('codeGenRequests/create', angular.fromJson(data)).then(function(response) {
 				   $scope.dataLoading = false;
 				   $scope.loadingBackgronud = false; 
 			    if (response.data)
@@ -695,47 +685,78 @@ $scope.authenticate = function() {
 						
 				});
 			 /* } else {
-			   $scope.rdbmsForm.$invalid = 'true';
+			   $scope.codeGenRequest.rdbmsForm.$invalid = 'true';
 			  }*/
 			
 
  };
  
- $scope.postdataFile = function(fileData) {
-		/*if($scope.fileForm.$invalid){
-			$scope.showValidationErrors = true;
-			return false;
-		}*/
+ $scope.postdataFile = function(filedata) {
 	 
-	 $scope.joinKeysList.push(fileData.joinKeys);
-	 fileData.joinKeys = $scope.joinKeysList;
-	  if ($scope.fileForm.$valid) {
-	   var data = fileData;
-	    $scope.dataLoading = true;
-	   //Call the services
-	   $http.post('codeGenRequests/create', JSON.stringify(data)).then(function(response) {
-	    if (response.data)
-	     $scope.msg = "Post Data Submitted Successfully!";
-	        $scope.dataLoading = false;
-	    var modalInstance = $uibModal.open({
-	     controller: 'PopupCont',
-	     templateUrl: 'html/successpopup.html',
-	    });
-	   }, function(response) {
-	    $scope.msg = "Service not Exists";
-	    $scope.dataLoading = false;
-	    $scope.statusval = response.status;
-	    $scope.statustext = response.statusText;
-	    $scope.headers = response.headers();
-	    var modalInstance = $uibModal.open({
-	     controller: 'PopupCont',
-	     templateUrl: 'html/errorpopup.html',
-	    });
-	   });
-	  } else {
-	   $scope.fileForm.$invalid = 'true';
-	  }
+	 console.log("inside pose data",filedata);	 
+		 console.log("in post data : $scope.file.fileForm.$invalid =", $scope.file.fileForm.$invalid);
+		 console.log("in post data : $scope.file.fileForm.$valid =", $scope.file.fileForm.$valid);
+		 console.log("in post data : $scope.file.fileForm.$valid =" ,$scope.file.fileForm.$error.required);
+		 
+			
+			  if( $scope.file.fileForm.$invalid){ 
+			 
+				  console.log("in post data Invali Form:  $scope.file.fileForm.$invalid=", $scope.file.fileForm.$invalid);
+			  $scope.showValidationErrors = true; 
+			  return false;
+			  }
+			 
+			
+				 $scope.dataLoading = true;
+				   $scope.loadingBackgronud = true;
+				   $scope.submitted = true;
+				   
+				  /* if ($scope.rdbmsForm.$valid) { */
+				   var data = filedata;
+				   $scope.joinKeysList.push(data.joinKeys);
+				   data.joinKeys = $scope.joinKeysList;
+				   console.log("inside pose data",filedata);	
+				  
+				    $scope.dataLoading = true;
+				    $scope.loadingBackgronud=true;
+				   // Call the services
+				   $http.post('codeGenRequests/create', angular.fromJson(data)).then(function(response) {
+					   $scope.dataLoading = false;
+					   $scope.loadingBackgronud = false; 
+				    if (response.data)
+				     $scope.msg = "Post Data Submitted Successfully!";
+				    var modalInstance = $uibModal.open({
+				     controller: 'PopupCont',
+				     templateUrl: 'html/successpopup.html',
+				    });
+				   }, function(response) {
+				    $scope.msg = "Service not Exists";
+				    $scope.dataLoading = false;
+				    $scope.loadingBackgronud=false;
+				    $scope.statusval = response.status;
+				    $scope.statustext = response.statusText;
+				    $scope.headers = response.headers();
+				    var modalInstance = $uibModal.open({
+				     controller: 'PopupCont',
+				     templateUrl: 'html/errorpopup.html',
+				    });
+				   }).catch(function (data) {
+						  $scope.dataLoading = false;
+						  $scope.loadingBackgronud = false;
+						   var modalInstance = $uibModal.open({
+			                    controller: 'PopupCont',
+			                    templateUrl: 'html/errorpopup.html',
+			                });
+							
+					});
+				 /*
+					 * } else { $scope.rdbmsForm.$invalid = 'true'; }
+					 */
+				
+
 	 };
+ 
+ 
  
  $scope.hiveTableType = {};
  $scope.loadHiveTableType = function() {
@@ -756,23 +777,23 @@ $scope.authenticate = function() {
    $scope.isdisabled = true;
     $scope.sourceColumnNames=[];
     
-  /*  $scope.colRequired=false;
+    $scope.colRequired=false;
     $scope.caculateDeltaRequired=false;
-    //$scope.joinKeyRequired=false;
-*/  } else
+    $scope.joinKeyRequired=false;
+  } else
   {
 	  $scope.isRequired =true;
-	   if(selectedItem.length==1  && $scope.codeGenRequest.targetType != "HDFS")
+	   if(selectedItem.length==1  )
 		   {
 		   		$scope.hivetabledisabled=false;
 		   }
 	   else
 		   {
-		   		$scope.hivetabledisabled=true;
-		/*   $scope.colRequired=false;
+		  $scope.hivetabledisabled=true;
+	   $scope.colRequired=false;
 		    $scope.caculateDeltaRequired=false;
-	//	    $scope.joinKeyRequired=false;
-	*/	   }
+	    $scope.joinKeyRequired=false;
+	   }
 	   
   }
  }
@@ -808,9 +829,6 @@ $scope.onSelctedColumns = function(selectedItem) {
 	console.log(selectedItem);
 	if (selectedItem == 'Select All') {
    $scope.codeGenRequest.sourceColumnNames = $scope.sourceCols;
-   //$scope.srcclumn = $scope.sourceCols;
- // $scope.joinKeys = $scope.sourceCols;
- 
   } 
  };
 
@@ -818,6 +836,12 @@ $scope.onSelctedColumns = function(selectedItem) {
 }]);
 angular.module('utilityApp').controller('PopupCont', ['$scope', '$uibModalInstance', function($scope, $uibModalInstance) {
  $scope.close = function() {
-  $uibModalInstance.dismiss('cancel');
+	  $scope.file={};
+	  $scope.codeGenRequest = {};
+	 $uibModalInstance.dismiss('cancel');
+	
+	
+	 
+ 
  };
 }]);

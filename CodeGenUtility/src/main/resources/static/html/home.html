@@ -1,38 +1,58 @@
-
-  <div class="" style="width:auto;height:500px;overflow-x: hidden;">
-    <div class="row clearfix">
-    <div class="col-md-4  login-wraper">
-        <form action="" id="loginForm">
-            <div class="form-group required homebt ">     
-               <div class="col-md-12 pull-left" style="text-align: left"> <label for="hivedb">Choose Source Type</label></div>
-                 
-               </div>
-              
-            <div class="col-md-6 ">
-                    <div class="radio mrRight">
-                        <label><input type="radio" name="optradio" ng-model="datasrc" ng-value='"RDBMS"'  >RDBMS</label>
-                        </div>
-                        <div class="radio mrRight">
-                        <label><input type="radio" name="optradio" ng-model="datasrc" ng-value='"Hadoop"'>Hadoop</label>
-                        </div>
-                        
-            </div>
-             <div class="col-md-6">
-                <div class="radio" >
-                        <label class="margin-left15"><input type="radio"  name="optradio" ng-model="datasrc" ng-value='"Files"'>Files</label>
-                        </div>
-                        <div class="radio " style="margin-top: 30px;">
-                        <label class="margin-left15"><input type="radio" name="optradio"  ng-model="datasrc" ng-value='"S3"'>S3</label>
-                </div>
-             </div>   
-             <div class="col-md-8  col-md-offset-2">
-                 <div class="form-group">
-                     <button type="button" class="btn btn-primary btn-block homesub"  ng-click="submitResult(datasrc)">Create New Request</button>
-                 </div>
-             </div>
-
-             
-        </form>        
-      </div>  
-    </div>    
-
+<div class="articleContainer">
+	<div class="row">
+		<div class="col-md-5">
+			<left>
+			<div class="titleLeftUp">Data Code Generation Utility</div>
+			<div class="titleLeftDown">GE Healthcare</div>
+			</left>
+		</div>
+		<div class="col-md-7">
+			<div class="titleCenterMiddle"></div>
+			<!-- Data Ingestion</div> -->
+		</div>
+	</div>
+</div>
+<div class="container-fluid outerContainer">
+	<div class="innerContainer1">
+			<div class="row titleDiv">
+				<div class="col-md-12 titleDesc">
+					SOURCE LOCATION
+					<div style="padding-bottom: 24px"></div>
+					<div class="stroke"></div>
+				</div>
+			</div>
+			<div class="row myRadioBtns">
+				<div class="col-md-3 ">
+					<input class="btnRadio" type="radio" 
+						ng-model="homeRadioBtn"  value="RDBMS"><label
+						class="sourcelocationLabel" > RDBMS </label>
+				</div>
+				<div class="col-md-3 ">
+					<input class="btnRadio" type="radio" 
+						ng-model="homeRadioBtn" value="Hadoop"> <label
+						class="sourcelocationLabel"> Hadoop</label>
+				</div>
+				<div class="col-md-3">
+					<input class="btnRadio" type="radio" 
+						ng-model="homeRadioBtn" value="Files"> <label
+						class="sourcelocationLabel"> Files</label>
+				</div>
+				<div class="col-md-3">
+					<input class="btnRadio" type="radio" 
+						ng-model="homeRadioBtn" value="S3" ><label
+						class="sourcelocationLabel"> S3</label>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div ng-if="homeRadioBtn=='RDBMS'" ng-include="'html/requestFormRDBMS.html'"></div>
+				
+		<div ng-if="homeRadioBtn=='Files'" ng-include="'html/requestForm.html'"></div>
+			
+		<div ng-if="homeRadioBtn=='Hadoop'" ng-include="'html/requestFormHadoop.html'"></div>
+		
+		
+		<div  ng-if="homeRadioBtn=='S3'" ng-include="'html/requestFormS3.html'"></div>
+</div>
+		
