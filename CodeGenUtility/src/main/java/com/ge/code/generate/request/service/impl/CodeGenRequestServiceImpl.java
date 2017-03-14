@@ -130,7 +130,13 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 				
 				ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
-				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
+				//ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
+				if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getHiveTableType())) {
+					ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
+				}
+				else {
+					ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_PARTIOTION);
+				}
 				ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
 				Date date;
 				try {
@@ -176,12 +182,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		targetTableName = codeGenRequest.getTargetTableName();
 		BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
 		batchControlMasterPrimaryKey.setDefaultInstance(1);
-		//todo needs to be changed  
-	
-			batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());	
-		
-			//batchControlMasterPrimaryKey.setSubjectArea(ConstantUtils.SUBJ_AREA_HDFS+codeGenRequest.getTargetDBName());	
-		
+		batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());	
 		batchControlMasterPrimaryKey.setTargetTableName(targetTableName);
 
 		batchControlMaster = batchControlMasterRepository.findOne(batchControlMasterPrimaryKey);
@@ -193,7 +194,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setCreateTimeStamp(new Date());
 			
 			//Populate Default Values
-			
 			batchControlMaster.setBatchId(0);
 			batchControlMaster.setMaxRunBatchId(new Long(0));
 			batchControlMaster.setActiveFlag(ConstantUtils.ACTIVE_FLAG);
@@ -204,10 +204,10 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			//batchControlMaster.setOffsetVal(null);//NA
 			// No Need to pass value as default is null
 			//batchControlMaster.setLastRunBatchId(null);//NA but in batch control master its default value is 0
-		//	batchControlMaster.setDefaultParallel("");//NA
+			//batchControlMaster.setDefaultParallel("");//NA
 			//batchControlMaster.setTransformationMergeOrUpdate(""); //NA
 			//batchControlMaster.setLastKey("");//NA
-			batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());
+			//batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());//NA
 	
 			batchControlMaster.setSourceTableName("");
 			batchControlMaster.setSourceColumnName("");
@@ -220,30 +220,19 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_APPEND);
 				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL);
 			}
-			batchControlMaster.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
 		}
 		
-		// this is chaged --> it is moved below and its value be SFTPserverIp
-			batchControlMaster.setSource(codeGenRequest.getSFTPserverIp());
+		batchControlMaster.setSource(codeGenRequest.getSFTPserverIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
-		
-		
 		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
-		//this neeed to be row tag 
-		
 		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
-		//todo: this need to be chaged --> it will store file schema path 
-		
 		batchControlMaster.setFillerThree(codeGenRequest.getFileSchemaPath());
-	
 		
-		//No Need to pass value as default is null
 		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());//NA
 		batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
 		batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
-		//incase of hive it should be in upper case 
 		batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
-		batchControlMaster.setSourceSystem(ConstantUtils.FILE_TYPE+codeGenRequest.getSourceType());
+		batchControlMaster.setSourceSystem(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
 		batchControlMaster.setUpdateTimeStamp(new Date());
 		
 		IngestSubJobControl ingestSubJobControl;
@@ -255,14 +244,11 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
-			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE);//changed to file_template 
-			/*ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);*/
-			if(codeGenRequest.getHiveTableType().equalsIgnoreCase("NON-PARTITIONED"))
-			{
+			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE);
+			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getHiveTableType())) {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 			}
-			else
-			{
+			else {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_PARTIOTION);
 			}
 			ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
@@ -275,14 +261,13 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				date = new Date();
 			} 
 			ingestSubJobControl.setLastUpdatedTimeStamp(date);
-			// pass null
-		//	ingestSubJobControl.setReferenceColumnName(null); //NA
+			ingestSubJobControl.setScriptLocation(""); //NA Field is NA for File but need to pass blank ("") as column has not null constrain
+			//ingestSubJobControl.setReferenceColumnName(null); //NA
 			//ingestSubJobControl.setPigProperty(null);//NA
 			//ingestSubJobControl.setMaxWhereColumn(null);//NA
 			//ingestSubJobControl.setIngestBatchId(null);//NA
-		//	ingestSubJobControl.setThresholdLimit(null);//NA
-			ingestSubJobControl.setScriptLocation(""); //NA
-		//	ingestSubJobControl.setHiveSQLLocation("");//NA
+			//ingestSubJobControl.setThresholdLimit(null);//NA
+			//ingestSubJobControl.setHiveSQLLocation("");//NA
 		}
 		
 		if (codeGenRequest.getJoinKeys()!= null && codeGenRequest.getJoinKeys().size() > 0) {
@@ -290,7 +275,116 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		}
 		
 		//ingestSubJobControl.setSource(codeGenRequest.getSourceType());
-		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getSourceType());
+		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
+		
+		batchControlMasterRepository.save(batchControlMaster);
+		ingestSubJobControlRepository.save(ingestSubJobControl);
+	}
+	
+	@Transactional
+	private void populateDataForHadoop(CodeGenRequest codeGenRequest) {
+		BatchControlMaster batchControlMaster;
+		String targetTableName;
+		targetTableName = codeGenRequest.getTargetTableName();
+		BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
+		batchControlMasterPrimaryKey.setDefaultInstance(1);
+		//todo needs to be changed  
+		batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());	
+		//batchControlMasterPrimaryKey.setSubjectArea(ConstantUtils.SUBJ_AREA_HDFS+codeGenRequest.getTargetDBName());	
+		batchControlMasterPrimaryKey.setTargetTableName(targetTableName);
+
+		batchControlMaster = batchControlMasterRepository.findOne(batchControlMasterPrimaryKey);
+		if (batchControlMaster == null) {
+			batchControlMaster = new BatchControlMaster(batchControlMasterPrimaryKey);
+			batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
+			batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+			batchControlMaster.setLastRunLoadTimestamp(new Date());
+			batchControlMaster.setCreateTimeStamp(new Date());
+			
+			//Populate Default Values
+			batchControlMaster.setBatchId(0);
+			batchControlMaster.setMaxRunBatchId(new Long(0));
+			batchControlMaster.setActiveFlag(ConstantUtils.ACTIVE_FLAG);
+			batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
+			batchControlMaster.setMasterJobName(ConstantUtils.FILE_TEMPLATE);
+
+			// No Need to pass value as default is null
+			//batchControlMaster.setOffsetVal(null);//NA
+			// No Need to pass value as default is null
+			//batchControlMaster.setLastRunBatchId(null);//NA but in batch control master its default value is 0
+			//batchControlMaster.setDefaultParallel("");//NA
+			//batchControlMaster.setTransformationMergeOrUpdate(""); //NA
+			//batchControlMaster.setLastKey("");//NA
+			//batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());//NA
+	
+			batchControlMaster.setSourceTableName("");//Field is NA for Hadoop but need to pass blank ("") as column has not null constrain
+			batchControlMaster.setSourceColumnName("");//Field is NA for Hadoop but need to pass blank ("") as column has not null constrain
+
+		} else {
+			if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
+				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
+				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+			} else {
+				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_APPEND);
+				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL);
+			}
+		}
+		
+		//TODO
+		batchControlMaster.setSource(codeGenRequest.getSFTPserverIp());
+		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
+		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
+		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
+		batchControlMaster.setFillerThree(codeGenRequest.getFileSchemaPath());
+		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());//NA
+		batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
+		batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
+		batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
+		batchControlMaster.setSourceSystem(ConstantUtils.HADOOP_TYPE+codeGenRequest.getFileType());
+		batchControlMaster.setUpdateTimeStamp(new Date());
+		
+		IngestSubJobControl ingestSubJobControl;
+		
+		ingestSubJobControl = ingestSubJobControlRepository.findOne(targetTableName);
+		if (ingestSubJobControl == null) {
+			ingestSubJobControl = new IngestSubJobControl();
+			ingestSubJobControl.setTargetTableName(targetTableName);
+			ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
+			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
+			
+			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE); 
+			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getHiveTableType())) {
+				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
+			}
+			else {
+				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_PARTIOTION);
+			}
+			ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
+			Date date;
+			try {
+				SimpleDateFormat format = new SimpleDateFormat(ConstantUtils.DATE_FORMAT); 
+				date = format.parse(ConstantUtils.DEFAULT_DATE);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				date = new Date();
+			} 
+			ingestSubJobControl.setLastUpdatedTimeStamp(date);
+			ingestSubJobControl.setScriptLocation(""); //NA Field is NA for Hadoop but need to pass blank ("") as column has not null constrain
+			//ingestSubJobControl.setReferenceColumnName(null); //NA
+			//ingestSubJobControl.setPigProperty(null);//NA
+			//ingestSubJobControl.setMaxWhereColumn(null);//NA
+			//ingestSubJobControl.setIngestBatchId(null);//NA
+			//ingestSubJobControl.setThresholdLimit(null);//NA
+			//ingestSubJobControl.setHiveSQLLocation("");//NA
+		}
+		
+		//TODO
+		if (codeGenRequest.getJoinKeys()!= null && codeGenRequest.getJoinKeys().size() > 0) {
+			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
+		}
+		
+		//ingestSubJobControl.setSource(codeGenRequest.getSourceType());
+		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
 		
 		batchControlMasterRepository.save(batchControlMaster);
 		ingestSubJobControlRepository.save(ingestSubJobControl);
