@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/data/**", "/fonts/**","/img/**", "/js/**","/lib/**","/html/index.html", "/html/login.html");
+		web.ignoring().antMatchers("/css/**", "/data/**", "/fonts/**","/img/**", "/js/**","/lib/**","/index.html", "/html/login.html");
 	}
 
 	@Override
@@ -43,12 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			//.authenticationProvider(customAuthenticationProvider)
 			.csrf().disable()
 			.authorizeRequests()
-				.antMatchers("/index.html", "/html/home.html", "/html/login.html", "/").permitAll()
+				.antMatchers("/index.html", "/html/login.html", "/").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginProcessingUrl("/authenticate")
-				.loginPage("/html/login.html").permitAll()
+				.loginPage("/").permitAll()
 				.successForwardUrl("/home")
 				.failureUrl("/")
 				.usernameParameter("username")
