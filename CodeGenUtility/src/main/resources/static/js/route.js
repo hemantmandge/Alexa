@@ -1,33 +1,21 @@
-
-
 app.config(function($routeProvider, $locationProvider){
 	$locationProvider.hashPrefix('');
-	$routeProvider
-		
+	$routeProvider		
        . when('/',{
             templateUrl : 'html/login.html',
             controller:'utilityCtrl'
         })
-        .when('/home',{
-			templateUrl : 'html/home.html',
-            controller:'utilityCtrl'
-		})
-       
-         .when('/login',{
-            templateUrl : 'html/login.html',
-            controller:'utilityCtrl'
+        .when('/Files',{
+            templateUrl : 'html/requestForm.html',
+            controller:'FileController'
         })
-         .when('/RDBMS',{
+        .when('/RDBMS',{
             templateUrl : 'html/requestFormRDBMS.html',
-            controller:'utilityCtrl'
+            controller:'RDBMSController'
         })
         .when('/Hadoop',{
             templateUrl : 'html/requestFormHadoop.html',
-            controller:'utilityCtrl'
-        })
-        .when('/Files',{
-            templateUrl : 'html/requestForm.html',
-            controller:'utilityCtrl'
+            controller:'HadoopController'
         })
         .when('/job',{
             templateUrl : 'html/jobstatus.html',
@@ -37,18 +25,7 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl : 'html/requestFormS3.html',
             controller:'utilityCtrl'
         })
-        .when('/popup',{
-            templateUrl : 'html/successpopup.html',
-            controller:'utilityCtrl'
-        })
-        
 		.otherwise({
 			redirectTo: '/'
 		})
-
-
-    //  $locationProvider.html5Mode(true);
 });
-
-
-

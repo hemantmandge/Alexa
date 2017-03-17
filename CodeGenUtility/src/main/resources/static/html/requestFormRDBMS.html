@@ -3,7 +3,7 @@
 	<img src="img/loader.gif" width="100" height="150">
 </div>
 <div class="container-fluid">
-	<div class="innerContainer" ng-init="pageLoadData()">
+	<div class="innerContainer" ng-init="pageLoadDataRDMS()">
 	
 		<div class="innerContainer2">
 			<form role="form" name="codeGenRequest.rdbmsForm" novalidate>
@@ -28,7 +28,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.datasrc.$error.required">This is
+									ng-show="codeGenRequest.rdbmsForm.srctype.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 								CONNECTION</label> 
 							<select name="dbConnection" ng-class="toggleAll ? classdropdown1 : 'disabledDropDown'"
 								ng-change="getSID(codeGenRequest.dbConnection)"
-								ng-required="dbconnectionRequired" id="dbConnection"
+								required id="dbConnection"
 								ng-model="codeGenRequest.dbConnection"
 								ng-disabled="dbconnectionDisble">
 								<option selected="selected" value="">Please Select</option>
@@ -54,8 +54,8 @@
 						<div class="col-md-3">
 							<label ng-class="toggleAll ? class2 : 'disabledlabel'" style="padding-top: 0">DB
 								NAME / SID</label> 
-							<select name="SID" required  ng-class="toggleAll ? classdropdown2 : 'disabledDropDown'"
-								ng-required="dbNameRequired" id="SID"
+							<select name="SID"   ng-class="toggleAll ? classdropdown2 : 'disabledDropDown'"
+								required id="SID"
 								ng-model="codeGenRequest.dbName" ng-disabled="dbnameDisble">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in datadbSID">{{src.value}}</option>
@@ -82,7 +82,7 @@
 						<div class="col-md-3">
 							<label ng-class="{'labelSubHeader': toggleAll , 'disabledlabel': !toggleAll}">USER NAME</label> <input
 								type="text" id="userName" name="userName" ng-class="{'customTextBox': toggleAll , 'disabledTextBox': !toggleAll}"
-								ng-disabled="connectDisble" ng-required="userNameRequired"
+								ng-disabled="connectDisble" required
 								placeholder="Please Enter" ng-model="codeGenRequest.username"
 								class="customTextBox"></input>
 							<div ng-show="showValidationErrors">
@@ -95,15 +95,16 @@
 						<div class="col-md-3">
 							<label ng-class="{'labelSubHeader': toggleAll , 'disabledlabel': !toggleAll}">PASSWORD</label> <input
 								type="password" id="password" name="password" ng-class="{'customTextBox': toggleAll , 'disabledTextBox': !toggleAll}"
-								ng-disabled="connectDisble" ng-required="passwordRequired"
+								ng-disabled="connectDisble" required
 								placeholder="Please Enter" ng-model="codeGenRequest.password"></input>
-						</div>
-						<div ng-show="showValidationErrors">
+								<div ng-show="showValidationErrors">
 							<div style="line-height: 3px">&nbsp;</div>
 							<span class="text-danger"
-								ng-show="codeGenRequest.rdbmsForm.userName.$error.required">This is
+								ng-show="codeGenRequest.rdbmsForm.password.$error.required">This is
 								required. </span>
 						</div>
+						</div>
+						
 					</div>
 
 					<div id="disabledDiv">
@@ -126,7 +127,7 @@
 							</div>
 							<div class="col-md-3">
 								<label ng-class="class">TABLES</label> 
-								<select name="tables"
+								<select name="tables" style="text-transform: capitalize;"
 									ng-required="tableRequired" id="tables"
 									ng-class="classdropdown" multiple
 									ng-model="codeGenRequest.sourceTableNames"
@@ -144,9 +145,9 @@
 							</div>
 							<div class="col-md-3">
 								<label ng-class="toggleTable ? class : 'disabledlabel'">COLUMNS</label> <select name="colums"
-									ng-required="colRequired" ng-disabled="disabledMultiple"
+									ng-required="toggleTable ? colRequired : false" ng-disabled="disabledMultiple"
 									ng-class="toggleTable ?  classdropdown : 'disabledDropDown'" id="colums" multiple
-									ng-model="codeGenRequest.sourceColumnNames"
+									ng-model="codeGenRequest.sourceColumnNames" style="text-transform: capitalize;"
 									ng-click="onSelctedColumns(codeGenRequest.sourceColumnNames)">
 									<!-- ng-class="{warning: (codeGenRequest.sourceColumnNames == 'Select All'), ok: (codeGenRequest.sourceColumnNames != 'Select All')}" -->
 									<!--<option selected="selected" value="">Please Select</option>-->
@@ -161,8 +162,8 @@
 							</div>
 							<div class="col-md-3">
 								<label ng-class="toggleTable ? class : 'disabledlabel'">UNION KEY</label> <select
-									ng-disabled="disabledMultiple" name="joinkey"
-									ng-required="joinKeyRequired" ng-class="toggleTable ? classdropdown : 'disabledDropDown'"
+									ng-disabled="disabledMultiple" name="joinkey" style="text-transform: capitalize;"
+									ng-required="toggleTable ? joinKeyRequired : false" ng-class="toggleTable ? classdropdown : 'disabledDropDown'"
 									id="joinkey" multiple ng-model="codeGenRequest.joinKeys">
 									<!--<option selected="selected" value="">Please Select</option>-->
 									<option ng-repeat="field in codeGenRequest.sourceColumnNames "
@@ -178,10 +179,10 @@
 						</div>
 						<div class="row" style="padding-bottom: 24px">
 							<div class="col-md-3">
-								<label ng-class="toggleTable ? class : 'disabledlabel'">CALCULATE DELTA ON</label> <select
-									name="CalculateDelta" ng-disabled="toggleDisconnect ? disabledMultiple :  true"
-									ng-required="caculateDeltaRequired" ng-class="toggleTable ? classdropdown : 'disabledDropDown'"
-									id="CalculateDelta" ng-model="codeGenRequest.calculateDeltaOn">
+								<label ng-class="toggleTable ? class : 'disabledlabel'">CALCULATE DELTA ON</label> 
+								<select name="CalculateDelta" ng-disabled="toggleDisconnect ? disabledMultiple :  true"
+									ng-required="toggleTable ? caculateDeltaRequired : false" ng-class="toggleTable ? classdropdown : 'disabledDropDown'"
+									id="CalculateDelta" ng-model="codeGenRequest.calculateDeltaOn" style="text-transform: capitalize;">
 									<option selected="selected" value="">Please Select</option>
 									<option
 										ng-selected="{{field == codeGenRequest.calculateDeltaOn}}"
@@ -203,8 +204,8 @@
 									placeholder="Please Enter"> 
 							</div>
 							<div class="col-md-3">
-								<label ng-class="class">ARCHIVE PERIOD (DAYS)</label> <input
-									type="text" name="archivePeriod"
+								<label ng-class="class">ARCHIVE PERIOD (DAYS)</label> 
+								<input	type="text" name="archivePeriod"
 									ng-required="archivePeriodRequired" ng-class="classtextbox"
 									id="archivePeriod" ng-pattern-restrict="^[0-9]*$" ng-disabled="whereDisabled"
 									placeholder="Please Enter"
@@ -253,11 +254,11 @@
 							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'" style="padding-top: 0">LOAD
 								TYPE</label> 
 							<select ng-class="toggleTable ? 'customDropDown' : 'disabledDropDown'" name="loadtype"
-								id="loadtype" ng-required="loadTypeRequired"
+								id="loadtype" ng-required="toggleTable ? loadTypeRequired : false"
 								ng-model="codeGenRequest.loadType"
 								ng-disabled="!toggleTable">
 								<option selected="selected" value="">Please Select</option>
-								<option name="loadtype"
+								<option
 									ng-selected="{{src.value == codeGenRequest.loadType}}"
 									ng-repeat="src in loadType">{{src.value}}</option>
 							</select>
@@ -300,7 +301,7 @@
 						<div class="col-md-3">
 							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE TABLE NAME</label> <input
 								type="text" name="hivetableName"
-								ng-required="hiveTableNameRequired" placeholder="Please Enter"
+								ng-required="toggleTable ? hiveTableNameRequired : false" placeholder="Please Enter"
 								ng-class="toggleTable ? 'customTextBox' : 'disabledTextBox'" id="hivetableName"
 								ng-model="codeGenRequest.targetTableName"
 								ng-disabled="toggleTable ? hivetabledisabled : true">
@@ -312,8 +313,8 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE TABLE TYPE</label> <select
-								name="hivetabltt" ng-required="colRequiredchk=='false'"
+							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE TABLE TYPE</label> 
+							<select	name="hivetabltt" ng-required="toggleTable ? hiveTableTypeRequired : false"
 								ng-class="toggleTable ? 'customDropDown' : 'disabledDropDown'" id="hivetabletype"
 								ng-init="loadHiveTableType()"
 								ng-model="codeGenRequest.hiveTableType"
@@ -322,11 +323,17 @@
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in hiveTableType">{{src.value}}</option>
 							</select>
+								<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="text-danger"
+									ng-show="codeGenRequest.rdbmsForm.hivetabltt.$error.required">This
+									is required. </span>
+							</div>
 						</div>
 						<div class="col-md-3">
-							<label ng-class="toggleTable ? 'labelSubHeader' : 'disabledlabel'">HIVE PARTITION KEY</label> <select
-								ng-class="toggleTable ? 'customDropDown' : 'disabledDropDown'" ng-required="colRequiredchk=='false'"
-								id="hivepartionkey" ng-model="codeGenRequest.targetPartitionKey"
+							<label ng-class="toggleTable ? hivetableLabel : 'disabledlabel'">HIVE PARTITION KEY</label> <select
+								ng-class="toggleTable ? hivetableDD : 'disabledDropDown'" ng-required="toggleTable ? hivePartitionKeyRequired : false" name="hivePartitionKey"
+								id="hivepartionkey" ng-model="codeGenRequest.targetPartitionKey" style="text-transform: capitalize;"
 								ng-disabled="toggleTable ? isdisabled : true">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="field in codeGenRequest.sourceColumnNames "
@@ -335,7 +342,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.hivetableName.$error.required">This
+									ng-show="codeGenRequest.rdbmsForm.hivePartitionKey.$error.required">This
 									is required. </span>
 							</div>
 						</div>
@@ -347,7 +354,7 @@
 					<button type="button" class="btn targetButton"
 						ng-click="onCancel();">Cancel</button>
 					<span style="padding-right: 2%;"></span>
-					<button type="button" class="btn btn-primary myButton"
+					<button type="button" class="btn btn-primary myButton" ng-disabled="disableCreateButton"
 						ng-click="postdata(codeGenRequest);">Create New Request</button>
 				</div>
 

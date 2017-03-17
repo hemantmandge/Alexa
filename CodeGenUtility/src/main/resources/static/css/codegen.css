@@ -151,15 +151,8 @@ font-size: bold;
 
 .customDropDown option {
 	width: 100%;
-	/* text-align: left; */
-	/* font-family: GEInspRg;
-	color: rgba(72, 93, 107, 1.0);
-	font-size: 15px;
-	font-weight: 800; */
-	/* line-height: 15px; */
 	font-family: GESans;
     font-size: 16px;
-    /* line-height: 18px; */
     color: #425866;
 }
 
@@ -222,7 +215,8 @@ footer {
 	}
 	.article {
 		-webkit-flex: 5 0px;
-		flex: 5 0px;
+		/* flex: 5 0px; */
+		-ms-flex : 5 0px;
 		-webkit-order: 2;
 		order: 2;
 	}
@@ -371,7 +365,9 @@ body.myMainBody{
 .innerContainer2
 {
 	background: white;
-    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom : 5px;
     padding-top: 2%;
     padding-left: 1.3%;
     padding-right: 1.3%;
@@ -388,3 +384,40 @@ body.myMainBody{
 {
 	color: #425866;
 }
+.loginInputField{
+    margin-bottom: 15px;
+    padding: 7px 0 7px 5px;
+    text-align: left;
+    width: 100%;
+    border-color: #96A8B2;
+    background-color: #E2E8ED;
+	font-family: GEInspRg;
+    font-size: 14px;
+    color: #9999A3;
+    box-shadow: none;
+    border: 1px solid #ccc;
+}
+
+.loginDiv{
+	padding: 4% 125px 8% 9%;
+    background: white;
+    margin: 3% 31% 4% 31%;
+}
+.loginbutton{
+    font-size: 15px;
+    text-align: center;
+    line-height: 21px;
+    color: #FFFFFF;
+    width: 100%;
+    padding: 4px 0;
+ }
+ .loginForm
+ {
+     padding-left: 8%;
+     padding-top: 8%;
+ }
+ .form-signin-heading
+ {
+  font-size: 2.37em;
+  margin-bottom: 14px;
+ }

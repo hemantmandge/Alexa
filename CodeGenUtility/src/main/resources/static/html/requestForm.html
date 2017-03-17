@@ -4,7 +4,7 @@
 </div>
 
 <div class="container-fluid">
-	<div class="innerContainer" ng-init="loadFileInitialData()">
+	<div class="innerContainer" ng-init="pageLoadDataFile()">
 
 		<div class="innerContainer2">
 			<form role="form" name="file.fileForm" novalidate>
@@ -18,14 +18,17 @@
 					</div>
 					<div class="row dbConnection">
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">SOURCE
-								TYPE</label> <input type="text" class="customTextBox" 
+							<label
+								ng-class="toggleFileResources  ? 'labelSubHeader' : 'disabledlabel'"
+								style="padding-top: 0">SOURCE TYPE</label> <input type="text"
+								ng-class="toggleFileResources  ? 'customTextBox' : 'disabledTextBox'"
 								name="datasrc" id="datasrc" ng-model="file.sourceType"
 								readonly="readonly" placeholder="Please Enter">
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="file.fileForm.datasrc.$error.required">This
-									is required. </span>
+								<span class="errmsg"
+									ng-show="file.fileForm.datasrc.$error.required">This is
+									required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -39,13 +42,16 @@
 							</select>
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="file.fileForm.fileType.$error.required">This
-									is required. </span>
+								<span class="errmsg"
+									ng-show="file.fileForm.fileType.$error.required">This is
+									required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">SFTP
-								SERVER</label> <select class="customDropDown" id="serverIP"
+							<label ng-class="serverIP  ? 'disabledlabel':'labelSubHeader'"
+								style="padding-top: 0">FILE SERVER CONNECTION</label> <select
+								id="serverIP"
+								ng-class="serverIP ? 'disabledDropDown' :'customDropDown'"
 								name="serverIP" ng-disabled="serverIP"
 								ng-model="file.SFTPserverIp">
 								<option selected="selected" value="">Please Select</option>
@@ -62,88 +68,98 @@
 
 					<div class="row">
 						<div class="col-md-3">
-							<label class="labelSubHeader">FILE DELIMITER <span
+							<label
+								ng-class=" fileDelimeter ? 'disabledlabel' : 'labelSubHeader'">FILE
+								DELIMITER <span
 								class="pull-right glyphicon glyphicon-info-sign rightHoverHelp"
 								data-toggle="tooltip" title="comma(,) , Semicolon(;), Pipe(|)"></span>
-							</label> <input type="text" class="customTextBox" id="filedel"
-								name="filedel" ng-required="fileDelimeterRequired"
+							</label> <input type="text" id="filedel"
+								ng-class="fileDelimeter ? 'disabledTextBox' : 'customTextBox' "
+								name="filedel" ng-required="fileDelimeterRequired" maxlength="1"
 								ng-readonly="fileDelimeter" ng-model="file.fileDelimeter"
 								placeholder="Please Enter">
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="file.fileForm.filedel.$error.required">This
-									is required. </span>
+								<span class="errmsg"
+									ng-show="file.fileForm.filedel.$error.required">This is
+									required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">FILE PATH</label> <input
-								type="text" class="customTextBox" id="filepath" name="filepath"
+							<label ng-class="filePath  ? 'disabledlabel' : 'labelSubHeader'">FILE
+								PATH</label> <input type="text" id="filepath" name="filepath"
+								ng-class="filePath ? 'disabledTextBox' : 'customTextBox'"
 								ng-required="filePathRequired" ng-model="file.filePath"
 								ng-readonly="filePath" placeholder="Please Enter">
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="file.fileForm.filepath.$error.required">This
-									is required. </span>
+								<span class="errmsg"
+									ng-show="file.fileForm.filepath.$error.required">This is
+									required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">FILE SCHEMA PATH</label> <input
-								type="text" class="customTextBox" id="fileschpath"
+							<label
+								ng-class="fileSchemaPath  ?  'disabledlabel' : 'labelSubHeader'">FILE
+								SCHEMA PATH</label> <input type="text" id="fileschpath"
+								ng-class="fileSchemaPath ? 'disabledTextBox' : 'customTextBox'"
 								name="fileschpath" ng-required="fileSchemaPathRequired"
 								ng-model="file.fileSchemaPath" ng-readonly="fileSchemaPath"
 								placeholder="Please Enter">
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
-									ng-show="file.fileForm.fileschpath.$error.required">This is
-									required. </span>
+									ng-show="file.fileForm.fileschpath.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 					</div>
 
 					<div class="row lastRowDiv">
-						<!-- 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">CALCULATE DELTA ON</label> 
-							<input type="text" class="customTextBox" id="CalculateDelta"
-									ng-readonly="calculateDeltaOn" ng-model="file.calculateDeltaOn"
-									placeholder="Please Enter">
-						</div> -->
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">UNIQUE
-								KEY</label> <input type="text" name="joinkey"
-								ng-required="joinKeysRequired" class="customTextBox"
+							<label ng-class="joinKeys  ? 'disabledlabel' : 'labelSubHeader'"
+								style="padding-top: 0">UNIQUE KEY</label> <input type="text"
+								name="joinkey" ng-required="joinKeysRequired"
+								ng-class="joinKeys ? 'disabledTextBox' : 'customTextBox'"
 								id="joinkey" ng-readonly="joinKeys" ng-model="file.joinKeys"
 								placeholder="Please Enter">
 
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="file.fileForm.joinkey.$error.required">This
-									is required. </span>
+								<span class="errmsg"
+									ng-show="file.fileForm.joinkey.$error.required">This is
+									required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">ROW
-								TAG</label> <input type="text" class="customTextBox" id="rowtag"
+							<label ng-class="rowTag  ? 'disabledlabel' : 'labelSubHeader'"
+								style="padding-top: 0">ROW TAG</label> <input type="text"
+								id="rowtag"
+								ng-class="rowTag ? 'disabledTextBox' : 'customTextBox'"
 								name="rowtag" ng-required="rowTagRequired" ng-readonly="rowTag"
 								ng-model="file.rowTag" placeholder="Please Enter">
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="file.fileForm.rowtag.$error.required">This
-									is required. </span>
+								<span class="errmsg"
+									ng-show="file.fileForm.rowtag.$error.required">This is
+									required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">ARCHIVE
-								PERIOD (DAYS)</label> <input type="text" ng-pattern-restrict="^[0-9]*$"
-								name="archiveper" ng-required="archivePeriodRequired"
-								class="customTextBox" ng-readonly="archivePeriod" id="archive"
+							<label
+								ng-class="archivePeriod  ? 'disabledlabel' : 'labelSubHeader'"
+								style="padding-top: 0">ARCHIVE PERIOD (DAYS)</label> <input
+								type="text" ng-pattern-restrict="^[0-9]*$" name="archiveper"
+								ng-required="archivePeriodRequired" ng-readonly="archivePeriod"
+								id="archive"
+								ng-class="archivePeriod ? 'disabledTextBox' : 'customTextBox'"
 								placeholder="Please Enter" ng-model="file.archivePeriod">
 
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
-									ng-show="file.fileForm.archiveper.$error.required">This is
-									required. </span>
+									ng-show="file.fileForm.archiveper.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 					</div>
@@ -173,29 +189,26 @@
 							</select>
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg" ng-show="file.fileForm.loadtype.$error.required">This
-									is required. </span>
+								<span class="errmsg"
+									ng-show="file.fileForm.loadtype.$error.required">This is
+									required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">Target
-								Connection </label>
-							<!--<select class="customDropDown" id="target" required
-								ng-model="file.targetConnection">
+								Connection </label> <select class="customDropDown" id="targetconn"
+								required name="targetconn" ng-model="file.targetConnection">
 								<option selected="selected" value="">Please Select</option>
-								<option name="targetconn"
-									ng-selected="{{src.value == file.targetConnection}}"
-								
-									ng-repeat="src in targetconn">{{src.value}}</option>
-							</select>-->
-							<input type="text" class="customTextBox" name="targetconn"
+								<option ng-repeat="src in targetcon">{{src.value}}</option>
+							</select>
+							<!-- <input type="text" class="customTextBox" name="targetconn"
 								id="Target" ng-model="file.targetConnection" required
-								placeholder="Please Enter">
+								placeholder="Please Enter"> -->
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
-									ng-show="file.fileForm.targetconn.$error.required">This is
-									required. </span>
+									ng-show="file.fileForm.targetconn.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -206,8 +219,8 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
-									ng-show="file.fileForm.hivedbname.$error.required">This is
-									required. </span>
+									ng-show="file.fileForm.hivedbname.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 					</div>
@@ -222,8 +235,8 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
-									ng-show="file.fileForm.hivetable.$error.required">This is
-									required. </span>
+									ng-show="file.fileForm.hivetable.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -239,17 +252,19 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
-									ng-show="file.fileForm.hivetabletype.$error.required">This is
-									required. </span>
+									ng-show="file.fileForm.hivetabletype.$error.required">This
+									is required. </span>
 							</div>
 						</div>
 
 						<div class="col-md-3">
-							<label class="labelSubHeader">HIVE PARTITION KEY</label> <input
-								type="text" class="customTextBox " id="hivepartionkey"
+							<label
+								ng-class="hivepartionkeydisabled ? 'disabledlabel' :'labelSubHeader'">HIVE
+								PARTITION KEY</label> <input type="text" id="hivepartionkey"
+								ng-class="hivepartionkeydisabled ? 'disabledTextBox' :'customTextBox'"
 								ng-disabled="hivepartionkeydisabled" name="hivepartionkey"
 								ng-model="file.targetPartitionKey" placeholder="DataSource"
-								required>
+								ng-required="hivepartionkeyrequired">
 
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
@@ -258,8 +273,6 @@
 									is required. </span>
 							</div>
 
-							<!-- 			<input type="text"  name="hivetable" ng-required="colRequiredchk=='false'" placeholder="Please Enter" class="customTextBox" id="hivetable"  value="" ng-model="rdbms.targetTableName" ng-disabled="hivetabledisabled" required>
-			 -->
 						</div>
 					</div>
 
@@ -267,10 +280,11 @@
 				<!-- sourceType div ends -->
 				<div class="row" style="padding-left: 68.3%;">
 					<button type="button" class="btn targetButton"
-						ng-click="onCancel();">Cancel</button>
+						ng-click="onCancelFile();">Cancel</button>
 					<span style="padding-right: 2%;"></span>
 					<button type="button" class="btn btn-primary myButton"
-						ng-click="postdataFile(file);">Create New Request</button>
+						ng-click="createFileCodeGenRequest(file);">Create New
+						Request</button>
 				</div>
 
 			</form>
