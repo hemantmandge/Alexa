@@ -8,8 +8,7 @@
 	padding-bottom: 7px;
 	width: 100%;
 	text-align: left;
-	font-family: GESans;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 18px;
     color: #425866;
 }
@@ -24,8 +23,7 @@
 	padding-bottom: 7px;
 	width: 100%;
 	text-align: left;
-	font-family: GESans;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 18px;
     color: #425866;
 }
@@ -288,12 +286,7 @@ body.myMainBody{
 	padding-bottom: 7px;
 	width: 100%;
 	text-align: left;
-/* 	font-family: GEInspRg;
-	font-size: 15px;
-	font-weight: 100;
-	line-height: 15px; */
-	font-family: GESans;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 18px;
 }
 
@@ -309,11 +302,7 @@ body.myMainBody{
 	text-align: left;
 	/* font-family: GEInspRg; */
 	color: #cacaca;
-	/* font-size: 15px;
-	font-weight: 100;
-	line-height: 15px; */
-	font-family: GESans;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 18px;
 }
 
@@ -420,4 +409,11 @@ body.myMainBody{
  {
   font-size: 2.37em;
   margin-bottom: 14px;
+ }
+ #logoutButton{
+    float: right;
+    padding-right: 9px;
+    padding-top: 13px;
+    font-weight: bold;
+    color: #94a3ac;
  }

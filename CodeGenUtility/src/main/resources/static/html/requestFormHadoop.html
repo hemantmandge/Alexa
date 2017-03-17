@@ -36,8 +36,8 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">Hadoop
-								Source Connection</label> <select class="customDropDown"
+							<label class="labelSubHeader" style="padding-top: 0">HADOOP
+								SOURCE CONNECTION</label> <select class="customDropDown"
 								id="hadoopSrcConnection" name="hadoopSrcConnection" required
 								ng-model="hadoop.SFTPserverIp">
 								<option selected="selected" value="">Please Select</option>
@@ -191,15 +191,6 @@
 					</div>
 					<div class="row">
 						<div class="col-md-3">
-							<label class="labelSubHeader">HIVE TABLE TYPE</label> <select
-								name="hivetabltt" class="customDropDown" id="hivetabletype"
-								ng-model="hadoop.hiveTableType"
-								ng-change="onChangeTableType(hadoop.hiveTableType)">
-								<option selected="selected" value="">Please Select</option>
-								<option ng-repeat="src in hiveTableType">{{src.value}}</option>
-							</select>
-						</div>
-						<div class="col-md-3">
 							<label class="labelSubHeader">HIVE TABLE NAME</label> <input
 								type="text" name="hivetableName" required
 								placeholder="Please Enter" class="customTextBox" id="hivetable"
@@ -210,6 +201,15 @@
 									ng-show="hadoopForm.hivetableName.$error.required">This
 									is required. </span>
 							</div>
+						</div>
+						<div class="col-md-3">
+							<label class="labelSubHeader">HIVE TABLE TYPE</label> <select
+								name="hivetabltt" class="customDropDown" id="hivetabletype"
+								ng-model="hadoop.hiveTableType"
+								ng-change="onChangeTableType(hadoop.hiveTableType)">
+								<option selected="selected" value="">Please Select</option>
+								<option ng-repeat="src in hiveTableType">{{src.value}}</option>
+							</select>
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader">HIVE PARTITION KEY</label> <input

@@ -12,6 +12,7 @@ angular.module('utilityApp').controller('HadoopController',
 	$scope.joinKeysList = [];
 	
 	$scope.pageLoadHadoopData=function() {
+		$rootScope.homeRadioBtn = "Hadoop";
 		$scope.hadoop.sourceType="Hadoop";
 		$scope.hadoop.loadType="FULL";
 		ResourceService.findByType("FILETYPE").then(function(response) {

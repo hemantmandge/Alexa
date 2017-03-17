@@ -10,7 +10,7 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 	 	}
 	 };
 	function loginSuccessCallback(loginData) {
-		if (loginData) {
+		if (loginData.data.username) {
 			$rootScope.homeRadioBtn = "RDBMS";
 			$scope.error = false;
 			$rootScope.isAuthenticated = true;
@@ -22,8 +22,8 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 			$location.path("/RDBMS");
 		 } else {
 			$scope.error = true;
-			$rootScope.isAuthenticated = false
-			$location.path("/");
+			$rootScope.isAuthenticated = false;
+			$location.path("/");		
 		 }
 	 };
 	 function loginErrorCallback(data){
@@ -31,6 +31,7 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 		$rootScope.isAuthenticated = false;
 		$scope.showLoginValidationErrors = true;
 		$location.path("/");
+		alert("User Name or Password is incorrect.");
 	 }
 	 $rootScope.logout = function(){
 		$http.get("logout").then(function(response) {

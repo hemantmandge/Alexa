@@ -37,8 +37,9 @@
 <body  class="myMainBody">
 	<div class="flex-container">
 		<header>
-			<h4 class="headerMain"><img class="img-circle" src="img/geLogo.png" id="logo-ge"><span style="padding-left: 6px;color: #94a3ac;">Data Ingestion</span></h4>
-			<div class="pull-right"><a href="" ng-click="logout()">Log Out</a></div>
+			<h4 class="headerMain"><img class="img-circle" src="img/geLogo.png" id="logo-ge"><span style="padding-left: 6px;color: #94a3ac;">Data Ingestion</span>
+				<span ng-show="isAuthenticated"><small><a href="" ng-click="logout()" id="logoutButton">Log Out</a></small></span>
+			</h4>
 		</header>
 
 		<nav class="navbar navbar-default navbar-fixed-side nav" ng-show="isAuthenticated">
