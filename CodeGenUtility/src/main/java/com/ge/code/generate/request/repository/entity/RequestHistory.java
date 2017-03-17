@@ -4,10 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity(name = "REQUEST_HIST")
 public class RequestHistory {
 
+	@Id
 	@Column(name = "REQ_ID")
 	private Integer requestId;
 	@Column(name = "SRC_CONN")
