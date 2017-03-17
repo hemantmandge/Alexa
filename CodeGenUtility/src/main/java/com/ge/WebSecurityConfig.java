@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -66,9 +64,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 * "/").permitAll() .anyRequest().authenticated();
 		 */
 	}
-	 private CsrfTokenRepository csrfTokenRepository() {
+	/* private CsrfTokenRepository csrfTokenRepository() {
     	HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
     	repository.setHeaderName("X-XSRF-TOKEN");
     	return repository;
-    }
+    }*/
 }

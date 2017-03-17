@@ -3,6 +3,7 @@ package com.ge.code.generate.request.controller;
 public interface ConstantUtils {
 	String ORACLE = "ORACLE";
 	String FILE = "FILE";
+	String HADOOP = "HADOOP";
 	String MSSQL = "MSSQL";
 	String TERADATA = "TERADATA";
 	String GREENPLUM = "GREENPLUM";

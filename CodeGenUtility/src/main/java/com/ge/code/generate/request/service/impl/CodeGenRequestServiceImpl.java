@@ -42,13 +42,15 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 
 	@Override
 	public void create(CodeGenRequest codeGenRequest) {
-		if ((codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.ORACLE)) 
-				|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.MSSQL))
-						|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.TERADATA))
-								|| (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.GREENPLUM))) {
+		if ((ConstantUtils.ORACLE).equalsIgnoreCase(codeGenRequest.getSourceType()) 
+				|| (ConstantUtils.MSSQL.equalsIgnoreCase(codeGenRequest.getSourceType()))
+						|| (ConstantUtils.TERADATA.equalsIgnoreCase(codeGenRequest.getSourceType()))
+								|| (ConstantUtils.GREENPLUM.equalsIgnoreCase(codeGenRequest.getSourceType()))) {
 			populateDataForRDBMS(codeGenRequest);
-		} else if (codeGenRequest.getSourceType().equalsIgnoreCase(ConstantUtils.FILE)) {
+		} else if (ConstantUtils.FILE.equalsIgnoreCase(codeGenRequest.getSourceType())) {
 			populateDataForFile(codeGenRequest);
+		} else if (ConstantUtils.HADOOP.equalsIgnoreCase(codeGenRequest.getSourceType())) {
+			populateDataForHadoop(codeGenRequest);
 		}
 	}
 
@@ -231,7 +233,12 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());//NA
 		batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
 		batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
-		batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
+		if(null != codeGenRequest.getTargetPartitionKey()) {
+			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase()); 
+		}
+		else {
+			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
+		}
 		batchControlMaster.setSourceSystem(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
 		batchControlMaster.setUpdateTimeStamp(new Date());
 		
@@ -339,7 +346,12 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());//NA
 		batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
 		batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
-		batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
+		if(null != codeGenRequest.getTargetPartitionKey()) {
+			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase()); 
+		}
+		else {
+			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
+		}
 		batchControlMaster.setSourceSystem(ConstantUtils.HADOOP_TYPE+codeGenRequest.getFileType());
 		batchControlMaster.setUpdateTimeStamp(new Date());
 		
