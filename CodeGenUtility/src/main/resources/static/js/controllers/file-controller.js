@@ -34,29 +34,6 @@ angular.module('utilityApp').controller('FileController',
 	 * calling web services for File Data source Start
 	 */
 	$scope.pageLoadDataFile = function() {
-        if ($rootScope.isAuthenticated) { // if user is authenticated and $rootScope.isAuthenticated is not undefined call loadRDBMSData
-        	$rootScope.homeRadioBtn = "Files";
-        	$scope.loadFileInitialData();
-            
-	    } 
-        else { // if $rootScope.isAuthenticated is undefined (It may required to have explicit check for undefined)
-        	if($cookies.getObject('userName'))
-        	{
-        		$rootScope.isAuthenticated = true;
-        		$rootScope.homeRadioBtn = "Files";
-  		      	$location.path("/Files");
-        		$scope.loadFileInitialData();
-        	}
-        	else
-        	{
-        		$rootScope.isAuthenticated = false;
-  		      	$location.path("/");
-        	}
-	    }
-	};
-	
-	$scope.loadFileInitialData = function() {
-	
 		$rootScope.homeRadioBtn = "Files";
 		$scope.file.sourceType = "FILE";
 		$scope.file.loadType = "FULL";
@@ -81,6 +58,7 @@ angular.module('utilityApp').controller('FileController',
 				});
 	
 	};
+	
 	/** 
 	 * THIS FUNCTION IS TO SUBMIT THE FILE DATA 
 	 */

@@ -1,55 +1,43 @@
 var app = angular.module('utilityApp', ['ngRoute', 'angularUtils.directives.dirPagination', 'ui.bootstrap', 'utility.config','ngPatternRestrict','ngCookies']);
 app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$http', '$uibModal','$cookies','$cookieStore',
 	function($scope, $rootScope, $window, $location, $http, $uibModal,$cookies, $cookieStore) {
- $rootScope.loading = false;
- $scope.showLoginValidationErrors = false;
- $scope.loadinitialLogin= function() {
-	 
-	 if ($rootScope.isAuthenticated) { // if user is authenticated and $rootScope.isAuthenticated is not undefined call loadRDBMSData
-		 $rootScope.homeRadioBtn = "RDBMS";
-		 $location.path("/RDBMS");	
-		 $scope.loadLoginInit();
-	    } 
-     else { // if $rootScope.isAuthenticated is undefined (It may required to have explicit check for undefined)
-	    	 if($cookies.getObject('userName')) {
-	     		$rootScope.isAuthenticated = true;
-	     		$rootScope.homeRadioBtn = "RDBMS";
-			    $location.path("/RDBMS");
-			    $scope.loadLoginInit();
-	     	}
-	     	else {
-	     		$rootScope.isAuthenticated = false;
-			    $location.path("/");
-	     	}	
-	    }
+	$rootScope.loading = false;
+	$scope.showLoginValidationErrors = false;
+	$scope.loadinitialLogin= function() {
+	 	if( $rootScope.isAuthenticated ) { 
+	 		$location.path("/RDBMS");
+	 		$rootScope.homeRadioBtn = "RDBMS";
+	 	}
 	 };
-
-     $scope.loadLoginInit = function() {
-    	 if( $rootScope.isAuthenticated )
-    	 { 
-    		 $location.path("/RDBMS");
-    		 $rootScope.homeRadioBtn = "RDBMS";
-    	 }
-     };	
-
-	 function loginSuccessCallback(data){
-		 if (data) {
-			 $rootScope.homeRadioBtn = "RDBMS";
-			 $location.path("/RDBMS");
-			 $scope.error = false;
-			 $rootScope.isAuthenticated = true;
-			 $cookieStore.put('userName',data.data);
+	function loginSuccessCallback(loginData) {
+		if (loginData) {
+			$rootScope.homeRadioBtn = "RDBMS";
+			$scope.error = false;
+			$rootScope.isAuthenticated = true;
+			var today = new Date();
+			var expirationTime = new Date(today);
+			//Set 'expires' option in 15 minute
+			expirationTime.setMinutes(today.getMinutes() + 15);
+			$cookies.putObject('userName',loginData.data, {expires: expirationTime});
+			$location.path("/RDBMS");
 		 } else {
-			 $location.path("/");
-			 $scope.error = true;
-			 $rootScope.isAuthenticated = false
+			$scope.error = true;
+			$rootScope.isAuthenticated = false
+			$location.path("/");
 		 }
 	 };
 	 function loginErrorCallback(data){
-		 $location.path("/");
-		 $scope.error = true;
-		 $rootScope.isAuthenticated = false;
-		 $scope.showLoginValidationErrors = true;
+		$scope.error = true;
+		$rootScope.isAuthenticated = false;
+		$scope.showLoginValidationErrors = true;
+		$location.path("/");
+	 }
+	 $scope.logout = function(credentials){
+		$http.get("logout").then(function(response) {
+			$rootScope.isAuthenticated = false;
+			$cookies.remove("userName");
+			$location.path("/");
+		});
 	 }
  	 $scope.SubmitLogin = function(credentials){
 	 var config = {
@@ -110,7 +98,17 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 	     }
 	 };
 }]);
-
+app.run(['$rootScope', '$cookies', '$location',function ($rootScope, $cookies, $location) {
+	$rootScope.$on('$routeChangeStart', function (event) {
+		if($cookies.getObject('userName')) {
+     		$rootScope.isAuthenticated = true;
+     	}
+     	else {
+     		$rootScope.isAuthenticated = false;
+		    $location.path("/");
+     	}
+	});
+}]);
 angular.module('utilityApp').controller('PopupCont', function($scope, $uibModalInstance){
 	$scope.close = function() {
 	$uibModalInstance.dismiss('cancel');

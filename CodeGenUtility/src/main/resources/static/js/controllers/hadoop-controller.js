@@ -11,30 +11,7 @@ angular.module('utilityApp').controller('HadoopController',
 	$scope.hivePartitionKeyDisable=false;
 	$scope.joinKeysList = [];
 	
-	$scope.pageLoadHadoopData=function()
-	{
-		if ($rootScope.isAuthenticated) { // if user is authenticated and $rootScope.isAuthenticated is not undefined call loadRDBMSData
-        	$rootScope.homeRadioBtn = "Hadoop";
-        	$scope.LoadHadoopData();
-	    } 
-        else { // if $rootScope.isAuthenticated is undefined (It may required to have explicit check for undefined)
-        	if($cookies.getObject('userName'))
-        	{
-        		$rootScope.isAuthenticated = true;
-        		$rootScope.homeRadioBtn = "Hadoop";
-  		      	$location.path("/Hadoop");
-        		$scope.LoadHadoopData();
-        	}
-        	else
-        	{
-        		$rootScope.isAuthenticated = false;
-  		      	$location.path("/");
-        	}
-	    }
-	};
-
-	$scope.LoadHadoopData = function()
-	{
+	$scope.pageLoadHadoopData=function() {
 		$scope.hadoop.sourceType="Hadoop";
 		$scope.hadoop.loadType="FULL";
 		ResourceService.findByType("FILETYPE").then(function(response) {
@@ -50,16 +27,15 @@ angular.module('utilityApp').controller('HadoopController',
 		});
 		
 		ResourceService.findByType("HIVETABLETYPE").then(function(response) {
-			 $scope.hiveTableType = response.data;
+			$scope.hiveTableType = response.data;
 		});
-		ResourceService.findByType("TARGETCONNECTION").then(
-				function(response) {
-					$scope.targetcon = response.data;
-				});
+		ResourceService.findByType("TARGETCONNECTION").then( function(response) {
+			$scope.targetcon = response.data;
+		});
 	};
+
 	
-	$scope.changeFileType=function()
-	{
+	$scope.changeFileType=function() {
 		if($scope.hadoop.fileType=="XML")
 			{
 			$scope.rowTagRequired=true;
@@ -68,16 +44,14 @@ angular.module('utilityApp').controller('HadoopController',
 			$scope.fileDelimeter=true;
 			$scope.hadoop.fileDelimeter="";
 			}
-		else if ($scope.hadoop.fileType=="DELIMITED")
-			{
+		else if ($scope.hadoop.fileType=="DELIMITED") {
 			$scope.fileDelimeter=false;
 			$scope.fileDelimeterRequired=true;
 			$scope.rowtagDisable=true;
 			$scope.hadoop.rowTag="";
 			$scope.rowTagRequired=false;
 			}
-		else
-			{
+		else {
 			$scope.rowtagDisable=true;
 			$scope.fileDelimeter=true;
 			$scope.rowTagRequired=false;

@@ -45,28 +45,7 @@ angular.module('utilityApp').controller(
 			 $scope.srcTypeDisble =false;
 			$scope.disableCreateButton=true;
 
-			$scope.pageLoadDataRDMS = function() {
-                if ($rootScope.isAuthenticated) { // if user is authenticated and $rootScope.isAuthenticated is not undefined call loadRDBMSData
-                	$rootScope.homeRadioBtn = "RDBMS";
-                	$scope.loadRDBMSData();
-			    } 
-                else { // if $rootScope.isAuthenticated is undefined (It may required to have explicit check for undefined)
-                	if($cookies.getObject('userName'))
-                	{
-                		$rootScope.isAuthenticated = true;
-                		$rootScope.homeRadioBtn = "RDBMS";
-          		      	$location.path("/RDBMS");
-                		$scope.loadRDBMSData();
-                	}
-                	else
-                	{
-                		$rootScope.isAuthenticated = false;
-          		      	$location.path("/");
-                	}
-			    }
-			};
-			
-			$scope.loadRDBMSData = function() {
+			$scope.pageLoadDataRDBMS = function() {
                 //load calls for dropdown and init functions
 				$rootScope.homeRadioBtn = "RDBMS";
 				ResourceService.findByTypeAndName("DATASOURCE", "RDBMS").then(
@@ -84,7 +63,6 @@ angular.module('utilityApp').controller(
 					$scope.loadType = response.data;
 				});
 			};
-
 			
 			 $scope.getDB = function(datasource) {
 					 if(datasource!= undefined || datasource!= null || datasource != '')

@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="css/codegen.css">
 <link rel="stylesheet" href="css/custom.css">
 
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<!-- <script src="js/jquery-1.11.3.min.js"></script> -->
+<!-- <script src="js/bootstrap.min.js"></script> -->
 <script src="js/angular.js"></script>
 <script src="js/app.js"></script>
 <script src="js/ng-pattern-restrict.js"></script>
@@ -38,6 +38,7 @@
 	<div class="flex-container">
 		<header>
 			<h4 class="headerMain"><img class="img-circle" src="img/geLogo.png" id="logo-ge"><span style="padding-left: 6px;color: #94a3ac;">Data Ingestion</span></h4>
+			<div class="pull-right"><a ng-click="logout()">Log Out</a></div>
 		</header>
 
 		<nav class="navbar navbar-default navbar-fixed-side nav" ng-show="isAuthenticated">
