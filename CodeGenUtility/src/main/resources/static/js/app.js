@@ -32,7 +32,7 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 		$scope.showLoginValidationErrors = true;
 		$location.path("/");
 	 }
-	 $scope.logout = function(credentials){
+	 $rootScope.logout = function(){
 		$http.get("logout").then(function(response) {
 			$rootScope.isAuthenticated = false;
 			$cookies.remove("userName");
