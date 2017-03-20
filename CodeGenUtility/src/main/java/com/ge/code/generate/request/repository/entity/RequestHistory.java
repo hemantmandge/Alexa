@@ -46,7 +46,7 @@ public class RequestHistory {
 	private String subjectArea;
 	@Column(name = "TARGET")
 	private String targetDBName;
-	@Column(name = "tgt_tbl_n")
+	@Column(name = "TGT_TBL_N")
 	private String targetTableName;
 	@Column(name = "TGT_TBL_TYPE")
 	private String targetTableType;

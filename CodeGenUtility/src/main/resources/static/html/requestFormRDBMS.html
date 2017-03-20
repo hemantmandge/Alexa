@@ -6,7 +6,7 @@
 	<div class="innerContainer" ng-init="pageLoadDataRDBMS()">
 	
 		<div class="innerContainer2">
-			<form role="form" name="codeGenRequest.rdbmsForm" novalidate>
+			<form role="form" name="rdbmsForm" novalidate>
 				<div id="sourceType">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
@@ -28,7 +28,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.srctype.$error.required">This is
+									ng-show="rdbmsForm.srctype.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -47,7 +47,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.dbConnection.$error.required">This is
+									ng-show="rdbmsForm.dbConnection.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.SID.$error.required">This is
+									ng-show="rdbmsForm.SID.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.userName.$error.required">This is
+									ng-show="rdbmsForm.userName.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -100,7 +100,7 @@
 								<div ng-show="showValidationErrors">
 							<div style="line-height: 3px">&nbsp;</div>
 							<span class="text-danger"
-								ng-show="codeGenRequest.rdbmsForm.password.$error.required">This is
+								ng-show="rdbmsForm.password.$error.required">This is
 								required. </span>
 						</div>
 						</div>
@@ -121,7 +121,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="codeGenRequest.rdbmsForm.dbschema.$error.required">This is
+										ng-show="rdbmsForm.dbschema.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -139,7 +139,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="codeGenRequest.rdbmsForm.tables.$error.required">This is
+										ng-show="rdbmsForm.tables.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -156,7 +156,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="codeGenRequest.rdbmsForm.colums.$error.required">This is
+										ng-show="rdbmsForm.colums.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -172,7 +172,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="codeGenRequest.rdbmsForm.joinkey.$error.required">This is
+										ng-show="rdbmsForm.joinkey.$error.required">This is
 										required. </span>
 								</div>
 							</div>
@@ -193,7 +193,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="codeGenRequest.rdbmsForm.CalculateDelta.$error.required">This
+										ng-show="rdbmsForm.CalculateDelta.$error.required">This
 										is required. </span>
 								</div>
 							</div>
@@ -213,7 +213,7 @@
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>
 									<span class="text-danger"
-										ng-show="codeGenRequest.rdbmsForm.archivePeriod.$error.required">This
+										ng-show="rdbmsForm.archivePeriod.$error.required">This
 										is required. </span>
 								</div>
 							</div>
@@ -265,7 +265,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.loadtype.$error.required">This is
+									ng-show="rdbmsForm.loadtype.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -278,7 +278,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.targetconn.$error.required">This is
+									ng-show="rdbmsForm.targetconn.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -291,7 +291,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.hivedbname.$error.required">This is
+									ng-show="rdbmsForm.hivedbname.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -308,7 +308,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.hivetableName.$error.required">This
+									ng-show="rdbmsForm.hivetableName.$error.required">This
 									is required. </span>
 							</div>
 						</div>
@@ -326,7 +326,7 @@
 								<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.hivetabltt.$error.required">This
+									ng-show="rdbmsForm.hivetabltt.$error.required">This
 									is required. </span>
 							</div>
 						</div>
@@ -342,7 +342,7 @@
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
-									ng-show="codeGenRequest.rdbmsForm.hivePartitionKey.$error.required">This
+									ng-show="rdbmsForm.hivePartitionKey.$error.required">This
 									is required. </span>
 							</div>
 						</div>

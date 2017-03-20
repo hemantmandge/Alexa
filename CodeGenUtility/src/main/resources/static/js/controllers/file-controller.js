@@ -4,7 +4,7 @@ angular.module('utilityApp').controller('FileController',
 	var UtilityController = $scope.$new(); 
 	$controller('utilityCtrl',{$scope : UtilityController });
 	$scope.file = {};
-	$scope.joinKeysList = [];
+	//$scope.joinKeysList = [];
 	 $scope.disabled = false;
 	//variables for file 
 	$scope.filePath=true;
@@ -29,7 +29,7 @@ angular.module('utilityApp').controller('FileController',
 	$scope.archivePeriodRequired =false; 
 	$scope.hivepartionkeyrequired=false;
 	
-//	$scope.toggleFileResources = false;
+//	$scope.toggleFileResources = false;v
 	/**
 	 * calling web services for File Data source Start
 	 */
@@ -63,25 +63,61 @@ angular.module('utilityApp').controller('FileController',
 	 * THIS FUNCTION IS TO SUBMIT THE FILE DATA 
 	 */
 	$scope.createFileCodeGenRequest = function(requestData) {
-		if( $scope.file.fileForm.$invalid){
+		if( $scope.fileForm.$invalid){
 			$scope.showValidationErrors = true; 
 			return false;
 		}
 		$rootScope.dataLoading = true;
 		$rootScope.loadingBackgronud = true;
 		$scope.submitted = true;
-   
+		var joinKeysList = [];
 		var data = requestData;
-		$scope.joinKeysList.push(data.joinKeys);
-		data.joinKeys = $scope.joinKeysList;
+		joinKeysList.push(data.joinKeys);
+		data.joinKeys = joinKeysList;
 		ResourceService.createCodeGenRequest(data)
-			.then(UtilityController.createCodeGenRequestSuccess, UtilityController.createCodeGenRequestFailed)
+			.then($scope.fileSuccess, UtilityController.createCodeGenRequestFailed)
 			.catch(UtilityController.catchCreateCodeGenRequestError);
+	
 	};
 	
-	 $scope.onCancelFile = function() {
-		  $scope.file={};
+	$scope.fileSuccess=function(data)
+	{
+		UtilityController.createCodeGenRequestSuccess(data);
+		$scope.file = {};
 		  $scope.file.sourceType="FILE";
+			$scope.file.loadType = "FULL";
+			$scope.showValidationErrors = false; 
+	};
+	
+	
+	 $scope.onCancelFile = function() {
+		 $scope.file = {};
+		 $scope.file.sourceType="FILE";
+			$scope.file.loadType = "FULL";
+			//$scope.joinKeysList = [];
+			 $scope.disabled = false;
+			//variables for file 
+			$scope.filePath=true;
+			$scope.fileSchemaPath=true;
+			$scope.hivepartionkeydisabled=false;
+			//$scope.fileType =false;
+			$scope.serverIP=true;
+			$scope.rowTag=true;
+			$scope.fileDelimeter=true;
+			$scope.calculateDeltaOn=true;
+			$scope.joinKeys=true;
+			$scope.archivePeriod =true; 
+			
+
+			//variables for required check 
+			$scope.fileTypeRequired=true;
+			$scope.filePathRequired=false;
+			$scope.fileSchemaPathRequired=false;
+			$scope.rowTagRequired=false;
+			$scope.fileDelimeterRequired=false;
+			$scope.joinKeysRequired=false;
+			$scope.archivePeriodRequired =false; 
+			$scope.hivepartionkeyrequired=false;
 
 		 }
 	

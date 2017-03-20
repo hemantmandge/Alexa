@@ -1,7 +1,6 @@
-
 <div ng-controller="utilityCtrl" ng-hide="isAuthenticated">
 	<div class="row clearfix">
-		<div class="loginDiv" ng-init="loadinitialLogin()">
+		<div class="col-md-4 col-md-offset-4 loginDiv" ng-init="loadinitialLogin()">
 			<form class="loginForm" name="loginForm" novalidate>
 				<h2 class="form-signin-heading">Data Ingestion</h2>
 				<div>
@@ -10,8 +9,8 @@
 						placeholder="User Name">
 					<div ng-show="showLoginValidationErrors">
 						<div style="line-height: 3px">&nbsp;</div>
-						<span class="errmsg" ng-show="loginForm.username.$error.required">User
-							Name is required. </span>
+						<!-- <span class="errmsg" ng-show="loginForm.username.$error.required">User
+							Name is required. </span> -->
 					</div>
 				</div>
 				<div>
@@ -21,8 +20,8 @@
 						data-validation-required-message="Please enter a message.">
 					<div ng-show="showLoginValidationErrors">
 						<div style="line-height: 3px">&nbsp;</div>
-						<span class="errmsg" ng-show="loginForm.password.$error.required">Password
-							is required. </span>
+						<!-- <span class="errmsg" ng-show="loginForm.password.$error.required">Password
+							is required. </span> -->
 					</div>
 				</div>
 				<button class="btn btn-primary loginbutton" type="submit"

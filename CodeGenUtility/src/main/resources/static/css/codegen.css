@@ -213,7 +213,7 @@ footer {
 	}
 	.article {
 		-webkit-flex: 5 0px;
-		/* flex: 5 0px; */
+		flex: 5 0px;
 		-ms-flex : 5 0px;
 		-webkit-order: 2;
 		order: 2;
@@ -388,9 +388,9 @@ body.myMainBody{
 }
 
 .loginDiv{
-	padding: 4% 125px 8% 9%;
-    background: white;
-    margin: 3% 31% 4% 31%;
+	background: white;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 .loginbutton{
     font-size: 15px;
@@ -402,13 +402,14 @@ body.myMainBody{
  }
  .loginForm
  {
-     padding-left: 8%;
-     padding-top: 8%;
+    padding: 10% 18% 19% 18%;
+    background: white;
  }
  .form-signin-heading
  {
-  font-size: 2.37em;
-  margin-bottom: 14px;
+    font-size: 2.6em;
+    text-align: center;
+    margin-bottom: 14px;
  }
  #logoutButton{
     float: right;
@@ -416,4 +417,7 @@ body.myMainBody{
     padding-top: 13px;
     font-weight: bold;
     color: #94a3ac;
+ }
+ .classLoginScreenFlex{
+ 	padding:0% 5.4% 2% 5.4%;
  }

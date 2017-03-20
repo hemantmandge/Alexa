@@ -18,6 +18,7 @@ import com.ge.code.generate.request.repository.IngestSubJobControlRepository;
 import com.ge.code.generate.request.repository.entity.BatchControlMaster;
 import com.ge.code.generate.request.repository.entity.BatchControlMasterPrimaryKey;
 import com.ge.code.generate.request.repository.entity.IngestSubJobControl;
+import com.ge.code.generate.request.repository.entity.RequestHistory;
 import com.ge.code.generate.request.service.CodeGenRequestService;
 import com.ge.code.generate.request.service.ResourceRequestService;
 import com.ge.code.generate.request.value.object.CodeGenRequest;
@@ -171,6 +172,8 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				}	
 			}
 			ingestSubJobControl.setSource(codeGenRequest.getSourceType());
+			
+			RequestHistory requestHistory = new RequestHistory();
 			
 			batchControlMasterRepository.save(batchControlMaster);
 			ingestSubJobControlRepository.save(ingestSubJobControl);

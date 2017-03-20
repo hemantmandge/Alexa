@@ -212,9 +212,9 @@
 							</select>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader">HIVE PARTITION KEY</label> <input
-								type="text" name="hivetable" placeholder="Please Enter"
-								class="customTextBox" id="hivepartitionKey"
+							<label ng-class="hivePartitionKeyDisable ? 'disabledlabel' : 'labelSubHeader'">HIVE PARTITION KEY</label> 
+							<input	type="text" name="hivetable" placeholder="Please Enter"
+								ng-class="hivePartitionKeyDisable ? 'disabledTextBox' : 'customTextBox'" id="hivepartitionKey"
 								ng-model="hadoop.targetPartitionKey"
 								ng-disabled="hivePartitionKeyDisable">
 

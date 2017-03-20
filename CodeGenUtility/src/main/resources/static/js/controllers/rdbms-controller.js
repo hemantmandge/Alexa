@@ -44,6 +44,8 @@ angular.module('utilityApp').controller(
 			 $scope.connectDisble=false;
 			 $scope.srcTypeDisble =false;
 			$scope.disableCreateButton=true;
+			$scope.dbconnectionDisble=true;
+			 $scope.dbnameDisble=true;
 
 			$scope.pageLoadDataRDBMS = function() {
                 //load calls for dropdown and init functions
@@ -106,14 +108,14 @@ angular.module('utilityApp').controller(
 				 };
 				 
 				 $scope.connectDB = function(username, password, host, dbName, rdbmsName) {
-				//	 console.log($scope.codeGenRequest.rdbmsForm.$error.required);
+				//	 console.log($scope.rdbmsForm.$error.required);
 					//$scope.dbconnectionRequired=true;
 					 //$scope.dbNameRequired=true;
 					// $scope.userNameRequired=true;
 					 //$scope.passwordRequired=true;		
 				  
 					 
-					 if($scope.codeGenRequest.rdbmsForm.$invalid){
+					 if($scope.rdbmsForm.$invalid){
 						 alert("in invalid");
 							$scope.showValidationErrors = true;
 							return false;
@@ -158,7 +160,7 @@ angular.module('utilityApp').controller(
 				 
 				    $scope.showbutton=false;
 				    $scope.showbuttonDisc=true;
-				    $scope.codeGenRequest.rdbmsForm.$invalid = true;
+				    $scope.rdbmsForm.$invalid = true;
 				    //$scope.colRequiredchk=true;
 				    
 				    var modalInstance = $uibModal.open({
@@ -355,7 +357,7 @@ angular.module('utilityApp').controller(
 												 $scope.hiveTableTypeRequired = true;
 												 $scope.hivePartitionKeyRequired = true;
 
-												 if($scope.codeGenRequest.rdbmsForm.$invalid){
+												 if($scope.rdbmsForm.$invalid){
 														$scope.showValidationErrors = true;
 														return false;
 												}
@@ -364,19 +366,33 @@ angular.module('utilityApp').controller(
 														   $rootScope.submitted = true;
 														   var data = codeGenRequest;
 														   ResourceService.createCodeGenRequest(data)
-															.then(UtilityController.createCodeGenRequestSuccess, UtilityController.createCodeGenRequestFailed)
+															.then($scope.RDBMS_success, UtilityController.createCodeGenRequestFailed)
 															.catch(UtilityController.catchCreateCodeGenRequestError);
 											 };
 											 
+												$scope.RDBMS_success=function(data)
+												{
+													UtilityController.createCodeGenRequestSuccess(data);
+													$scope.codeGenRequest = {};
+													  $scope.tables =null;
+													  $scope.cols=null;
+													  $scope.showbuttonDisc=false;
+													  $scope.showbutton=true;
+													  $scope.srcTypeDisble =false;
+													  $scope.connectDisble=false;
+														$scope.codeGenRequest.loadType = "FULL";
+														$scope.showValidationErrors = false; 
+												};
 											 
 										 
 											 $scope.enableForm =function(){
-												// console.log($scope.codeGenRequest.rdbmsForm.$error.required);
+												// console.log($scope.rdbmsForm.$error.required);
+												 $scope.codeGenRequest = {};
 												 $scope.disableCreateButton=true;
 							
 											  
-												/* $scope.tables  ="";
-												 $scope.cols="";*/
+												 $scope.tables  ="";
+												 $scope.cols="";
 												 //ng-required attributes
 												 $scope.dbSchemaREquired=false;
 												 $scope.tableRequired=false;
@@ -411,7 +427,47 @@ angular.module('utilityApp').controller(
 											    
 											};			 
 											 $scope.onCancel = function() {
+												 $scope.disableCreateButton=true;
+												 $scope.dbSchemaREquired=false;
+												 $scope.tableRequired=false;
+												 $scope.colRequired=false;
+												 $scope.caculateDeltaRequired=false;
+												 $scope.joinKeyRequired=false;
+												 $scope.loadTypeRequired=false;
+												 $scope.targetconnRequired=false;
+												 $scope.hivedbnameRequired=false;
+												 $scope.hiveTableNameRequired=false;
+												 $scope.hiveTableTypeRequired = false;
+												 $scope.hivePartitionKeyRequired = false;
+												 //$scope.colRequiredchk=false;
+												 $scope.archivePeriodRequired =false;
+//												 $scope.toggleAll = true;
 												  $scope.codeGenRequest = {};
+												  $scope.tables =null;
+												  $scope.cols=null;
+												  $scope.showbuttonDisc=false;
+												  $scope.showbutton=true;
+												  $scope.srcTypeDisble =false;
+												  $scope.connectDisble=false;
+												  $scope.codeGenRequest.loadType = "FULL";
+												  $scope.disabled = false;
+													 $scope.hivetableLabel = 'labelSubHeader';
+													 $scope.hivetableDD = 'customDropDown';
+													 $scope.class = "disabledlabel";
+													 $scope.classdropdown="disabledDropDown";
+													 $scope.classtextbox="disabledTextBox";
+													 $scope.class1 = "disabledlabel";
+													 $scope.classdropdown1="disabledDropDown";
+													 $scope.class2 = "disabledlabel";
+													 $scope.classdropdown2="disabledDropDown";
+													 $scope.toggleTable = true;
+													 $scope.toggleDisconnect = true;
+													 $scope.tempClass = 'disabledTextBox';
+													 $scope.disabledMultiple=true;
+													 $scope.whereDisabled= true;
+													 $scope.toggleAll = true;
+														$scope.dbconnectionDisble=true;
+														 $scope.dbnameDisble=true;
 												 }
 
 		});

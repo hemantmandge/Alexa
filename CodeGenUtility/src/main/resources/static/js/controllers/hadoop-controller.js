@@ -9,7 +9,7 @@ angular.module('utilityApp').controller('HadoopController',
 	$scope.rowTagRequired=false;
 	$scope.fileDelimeterRequired=false;
 	$scope.hivePartitionKeyDisable=false;
-	$scope.joinKeysList = [];
+
 	
 	$scope.pageLoadHadoopData=function() {
 		$rootScope.homeRadioBtn = "Hadoop";
@@ -77,8 +77,14 @@ angular.module('utilityApp').controller('HadoopController',
 	
 	$scope.onCancelOfHadoop =function()
 	{
-		  $scope.hadoop={};
+		$scope.hadoop={};
+		$scope.rowtagDisable=true;
+		$scope.fileDelimeter=true;
+		$scope.rowTagRequired=false;
+		$scope.fileDelimeterRequired=false;
+		$scope.hivePartitionKeyDisable=false;
 		  $scope.hadoop.sourceType="Hadoop";
+		  $scope.hadoop.loadType = "FULL";
 	};
 	
 	$scope.createHadoopCodeGenRequest = function(requestData) {
@@ -89,13 +95,22 @@ angular.module('utilityApp').controller('HadoopController',
 		$rootScope.dataLoading = true;
 		$rootScope.loadingBackgronud = true;
 		$scope.submitted = true;
-   
+	 var joinKeysList = [];
 		var data = requestData;
-		$scope.joinKeysList.push(data.joinKeys);
-		data.joinKeys = $scope.joinKeysList;
+		joinKeysList.push(data.joinKeys);
+		data.joinKeys = joinKeysList;
 		ResourceService.createCodeGenRequest(data)
-			.then(UtilityController.createCodeGenRequestSuccess, UtilityController.createCodeGenRequestFailed)
+			.then($scope.hadoopSuccess, UtilityController.createCodeGenRequestFailed)
 			.catch(UtilityController.catchCreateCodeGenRequestError);
+	};
+	
+	$scope.hadoopSuccess=function(data)
+	{
+		UtilityController.createCodeGenRequestSuccess(data);
+		$scope.hadoop = {};
+		  $scope.hadoop.sourceType="Hadoop";
+			$scope.hadoop.loadType = "FULL";
+			$scope.showValidationErrors = false; 
 	};
 	
 });
