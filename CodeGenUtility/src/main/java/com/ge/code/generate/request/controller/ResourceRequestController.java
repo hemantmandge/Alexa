@@ -1,7 +1,14 @@
 package com.ge.code.generate.request.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +27,29 @@ public class ResourceRequestController {
 	@Autowired
 	private ResourceRequestService resourceRequestService;
 
+	 @RequestMapping("/jar")
+	    public void downloadPDFResource( HttpServletRequest request, 
+	                                     HttpServletResponse response) 
+	    {
+	        //If user is not authorized - he should be thrown out from here itself
+	         
+	        //Authorized user will download the file
+	        String dataDirectory = "C:/Users/hemant.mandge/workspace/CodeGenUtility/target";
+	        Path file = Paths.get(dataDirectory, "CodeGenUtility-0.0.1-SNAPSHOT.jar");
+	        if (Files.exists(file)) 
+	        {
+	            response.setContentType("application/pdf");
+	            response.addHeader("Content-Disposition", "attachment; filename="+"CodeGenUtility.jar");
+	            try
+	            {
+	                Files.copy(file, response.getOutputStream());
+	                response.getOutputStream().flush();
+	            } 
+	            catch (IOException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+	    }
 	@RequestMapping("/user")
 	public Principal user(Principal user) {
 		return user;
