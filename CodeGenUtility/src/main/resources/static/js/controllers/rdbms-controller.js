@@ -116,7 +116,6 @@ angular.module('utilityApp').controller(
 				  
 					 
 					 if($scope.rdbmsForm.$invalid){
-						 alert("in invalid");
 							$scope.showValidationErrors = true;
 							return false;
 						}

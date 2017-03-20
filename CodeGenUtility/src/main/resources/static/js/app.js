@@ -74,7 +74,7 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 		$rootScope.headers = response.headers();
 		var modalInstance = $uibModal.open({
 			controller: 'PopupCont',
-			templateUrl: 'html/errorpopup.html',
+			templateUrl: 'html/errorPopup.html',
 		});
 	};
 	
@@ -83,7 +83,7 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 		$rootScope.loadingBackgronud = false;
 		var modalInstance = $uibModal.open({
 			controller: 'PopupCont',
-			templateUrl: 'html/errorpopup.html',
+			templateUrl: 'html/errorPopup.html',
         });
 	};
 	
