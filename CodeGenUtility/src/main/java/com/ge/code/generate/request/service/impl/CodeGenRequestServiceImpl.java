@@ -79,7 +79,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				batchControlMaster.setCreateTimeStamp(new Date());
 				
 				//Populate Default Values
-				batchControlMaster.setBatchId(batchControlMasterRepository.getMaxBatchId() + 1);
+				batchControlMaster.setBatchId(0);
 				batchControlMaster.setMaxRunBatchId(new Long(0));
 				batchControlMaster.setActiveFlag("Y");
 				batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);

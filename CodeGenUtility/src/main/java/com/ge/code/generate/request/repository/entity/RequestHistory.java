@@ -6,16 +6,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "REQUEST_HIST")
+@Entity(name = "JOB_REQ")
 public class RequestHistory {
 
 	@Id
 	@Column(name = "REQ_ID")
 	private Integer requestId;
-	@Column(name = "SRC_CONN")
-	private String dbConnection;
+	@Column(name = "SRC")
+	private String src;
 	@Column(name = "SRC_SYS")
 	private String sourceType;
+	@Column(name = "SRC_CONN")
+	private String dbConnection;
 	@Column(name = "DB_NAME")
 	private String dbName;
 	@Column(name = "SOURCE")
@@ -42,8 +44,6 @@ public class RequestHistory {
 	private String fillerThree;
 	@Column(name = "TGT_CONN")
 	private String targetConnection;
-	@Column(name = "SUBJ_AREA")
-	private String subjectArea;
 	@Column(name = "TARGET")
 	private String targetDBName;
 	@Column(name = "TGT_TBL_N")
@@ -65,17 +65,23 @@ public class RequestHistory {
 	public void setRequestId(Integer requestId) {
 		this.requestId = requestId;
 	}
-	public String getDbConnection() {
-		return dbConnection;
+	public String getSrc() {
+		return src;
 	}
-	public void setDbConnection(String dbConnection) {
-		this.dbConnection = dbConnection;
+	public void setSrc(String src) {
+		this.src = src;
 	}
 	public String getSourceType() {
 		return sourceType;
 	}
 	public void setSourceType(String sourceType) {
 		this.sourceType = sourceType;
+	}
+	public String getDbConnection() {
+		return dbConnection;
+	}
+	public void setDbConnection(String dbConnection) {
+		this.dbConnection = dbConnection;
 	}
 	public String getDbName() {
 		return dbName;
@@ -155,12 +161,6 @@ public class RequestHistory {
 	public void setTargetConnection(String targetConnection) {
 		this.targetConnection = targetConnection;
 	}
-	public String getSubjectArea() {
-		return subjectArea;
-	}
-	public void setSubjectArea(String subjectArea) {
-		this.subjectArea = subjectArea;
-	}
 	public String getTargetDBName() {
 		return targetDBName;
 	}
@@ -203,5 +203,4 @@ public class RequestHistory {
 	public void setUpdateTimeStamp(Date updateTimeStamp) {
 		this.updateTimeStamp = updateTimeStamp;
 	}
-
 }
