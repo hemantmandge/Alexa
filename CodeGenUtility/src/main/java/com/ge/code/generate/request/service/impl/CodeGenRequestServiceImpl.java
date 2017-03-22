@@ -61,9 +61,9 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		for (String sourceTableName : codeGenRequest.getSourceTableNames()) {
 			String targetTableName;
 			if(codeGenRequest.getSourceTableNames().size() > 1) {
-				targetTableName = sourceTableName;
+				targetTableName = sourceTableName.toLowerCase();
 			} else {
-				targetTableName = codeGenRequest.getTargetTableName();
+				targetTableName = codeGenRequest.getTargetTableName().toLowerCase();
 			}
 			BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
 			batchControlMasterPrimaryKey.setDefaultInstance(1);
@@ -196,7 +196,16 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			requestHistory.setArchivePeriod(codeGenRequest.getArchivePeriod());
 			requestHistory.setTargetConnection(codeGenRequest.getTargetConnection());
 			requestHistory.setTargetDBName(codeGenRequest.getTargetDBName());
-			requestHistory.setTargetTableName(codeGenRequest.getTargetTableName());
+			/*Replicated below code as user report / request history should show value same as
+			 * that of entered by user. However it is requirement of DNA team to have target
+			 * table name in small case.
+			 * */
+			if(codeGenRequest.getSourceTableNames().size() > 1) {
+				targetTableName = sourceTableName;
+			} else {
+				targetTableName = codeGenRequest.getTargetTableName();
+			}
+			requestHistory.setTargetTableName(targetTableName);
 			requestHistory.setTargetTableType(codeGenRequest.getTargetType());
 			requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
 			requestHistory.setLoadType(batchControlMaster.getLoadType());
@@ -212,7 +221,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 	private void populateDataForFile(CodeGenRequest codeGenRequest) {
 		BatchControlMaster batchControlMaster;
 		String targetTableName;
-		targetTableName = codeGenRequest.getTargetTableName();
+		targetTableName = codeGenRequest.getTargetTableName().toLowerCase();
 		BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
 		batchControlMasterPrimaryKey.setDefaultInstance(1);
 		batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());	
@@ -349,7 +358,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 	private void populateDataForHadoop(CodeGenRequest codeGenRequest) {
 		BatchControlMaster batchControlMaster;
 		String targetTableName;
-		targetTableName = codeGenRequest.getTargetTableName();
+		targetTableName = codeGenRequest.getTargetTableName().toLowerCase();
 		BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
 		batchControlMasterPrimaryKey.setDefaultInstance(1);
 		//todo needs to be changed  

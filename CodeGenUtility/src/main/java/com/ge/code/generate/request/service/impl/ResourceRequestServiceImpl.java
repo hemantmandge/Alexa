@@ -85,7 +85,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			DatabaseMetaData metaData = connection.getMetaData();
 			tables = metaData.getTables(catalog, schemaPattern, tableNamePattern, types);
 			while (tables.next()) {
-				String tableName = tables.getString(3);    // "TABLE_SCHEM"
+				String tableName = tables.getString(3).toUpperCase();    // "TABLE_SCHEM"
 				System.out.println("tableSchema = "+tableName);
 				tableList.add(tableName);
 			}
@@ -116,7 +116,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			DatabaseMetaData metaData = connection.getMetaData();
 			columns = metaData.getColumns(catalog, schemaPattern,  tableNamePattern, columnNamePattern);
 			while (columns.next()) {
-				String columnName = columns.getString(4);    // "TABLE_SCHEM"
+				String columnName = columns.getString(4).toUpperCase();    // "TABLE_SCHEM"
 				System.out.println("tableSchema = "+columnName);
 				columnsList.add(columnName);
 			}
