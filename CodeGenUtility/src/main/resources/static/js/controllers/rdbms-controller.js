@@ -146,7 +146,7 @@ angular.module('utilityApp').controller(
 							 $scope.hivedbnameRequired=true;
 							 $scope.hiveTableNameRequired=true;
 							 $scope.hiveTableTypeRequired = true;
-							 $scope.hivePartitionKeyRequired = true;
+//							 $scope.hivePartitionKeyRequired = true;
 						   
 								$scope.disableCreateButton=false;
 					   $scope.toggleAll = false;
@@ -374,7 +374,7 @@ angular.module('utilityApp').controller(
 												 $scope.hivedbnameRequired=true;
 												 $scope.hiveTableNameRequired=true;
 												 $scope.hiveTableTypeRequired = true;
-												 $scope.hivePartitionKeyRequired = true;
+//												 $scope.hivePartitionKeyRequired = true;
 
 												 if($scope.rdbmsForm.$invalid){
 														$scope.showValidationErrors = true;
@@ -389,16 +389,31 @@ angular.module('utilityApp').controller(
 															.catch(UtilityController.catchCreateCodeGenRequestError);
 											 };
 											 
+											
+											 
 												$scope.RDBMS_success=function(data)
 												{
 													UtilityController.createCodeGenRequestSuccess(data);
+													 var sourceSystem  =$scope.codeGenRequest.sourceSystem;
+													 var dbConnection  = $scope.codeGenRequest.dbConnection;
+													 var dbName  = $scope.codeGenRequest.dbName;
+													 var username  =$scope.codeGenRequest.username;
+													 var password  = $scope.codeGenRequest.password;
 													$scope.codeGenRequest = {};
+													
+													$scope.codeGenRequest.sourceSystem =sourceSystem;
+													$scope.codeGenRequest.dbConnection =dbConnection;
+													$scope.codeGenRequest.dbName=dbName;
+													$scope.codeGenRequest.username =username;
+													$scope.codeGenRequest.password=password;
+													
 													  $scope.tables =null;
 													  $scope.cols=null;
-													  $scope.showbuttonDisc=false;
-													  $scope.showbutton=true;
+													  //$scope.showbuttonDisc=false;
+													 // $scope.showbutton=true;
 													  $scope.srcTypeDisble =false;
 													  $scope.connectDisble=false;
+													  $scope.hivePartitionKeyRequired = false;
 														$scope.codeGenRequest.loadType = "FULL";
 														$scope.showValidationErrors = false; 
 												};
