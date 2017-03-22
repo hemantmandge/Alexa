@@ -150,23 +150,23 @@ angular.module('utilityApp').controller('FileController',
 	
 		if($scope.file.fileType=="XML")
 			{
-			$scope.filePath=true;
+			$scope.filePath=false;
 			$scope.fileSchemaPath=false;
-			$scope.serverIP=true;
+			$scope.serverIP=false;
 			$scope.rowTag=false;
 			$scope.fileDelimeter=true;
 			$scope.calculateDeltaOn=true;
-			$scope.joinKeys=true;
-			$scope.archivePeriod =true; 
+			$scope.joinKeys=false;
+			$scope.archivePeriod =false; 
 			
 			//set the variables to blank todo: for server sftp
-			  $scope.file.filePath="" ;
-			  $scope.file.fileDelimeter="";
-			  $scope.file.calculateDeltaOn="" ;
-			  $scope.file.joinKeys=""; 
-			  $scope.file.SFTPserverIp="";
-			//  $scope.file.rowTag  ="";
-			  $scope.file.archivePeriod="";
+			 $scope.file.filePath="" ;
+			 $scope.file.fileDelimeter="";
+			 $scope.file.calculateDeltaOn="" ;
+			 $scope.file.joinKeys=""; 
+			 $scope.file.serverIP="";
+			 $scope.file.rowTag  ="";
+			 $scope.file.archivePeriod="";
 			
 			//required
 			
@@ -181,28 +181,28 @@ angular.module('utilityApp').controller('FileController',
 			}
 		else if($scope.file.fileType=="JSON")
 		{
-			$scope.filePath=true;
+			$scope.filePath=false;
 			$scope.fileSchemaPath=false;
-			$scope.serverIP=true;
-			$scope.rowTag=true;
+			$scope.serverIP=false;
+			$scope.rowTag=false;
 			$scope.fileDelimeter=true;
 			$scope.calculateDeltaOn=true;
-			$scope.joinKeys=true;
-			$scope.archivePeriod =true; 
+			$scope.joinKeys=false;
+			$scope.archivePeriod =false; 
 			
-//			$scope.file.fileSchemaPath="";
-			  $scope.file.filePath="" ;
-			  $scope.file.fileDelimeter="";
-			  $scope.file.calculateDeltaOn="" ;
-			  $scope.file.joinKeys=""; 
-			  $scope.file.rowTag  ="";
-			  $scope.file.archivePeriod="";
-			  $scope.file.SFTPserverIp="";
+				$scope.file.fileSchemaPath="";
+				$scope.file.filePath="" ;
+				$scope.file.fileDelimeter="";
+				$scope.file.calculateDeltaOn="" ;
+				$scope.file.joinKeys=""; 
+				$scope.file.rowTag  ="";
+				$scope.file.archivePeriod="";
+				$scope.file.serverIP="";
 			
 			//required
 			$scope.filePathRequired=false;
 			$scope.fileSchemaPathRequired=true;
-			$scope.rowTagRequired=false;
+			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.joinKeysRequired=false;
 			$scope.archivePeriodRequired =false; 
@@ -217,7 +217,15 @@ angular.module('utilityApp').controller('FileController',
 			$scope.calculateDeltaOn=false;
 			$scope.joinKeys=false;
 			$scope.archivePeriod =false; 
-			  $scope.file.rowTag  ="";
+			
+			$scope.file.fileSchemaPath="";
+			$scope.file.filePath="" ;
+			$scope.file.fileDelimeter="";
+			$scope.file.calculateDeltaOn="" ;
+			$scope.file.joinKeys=""; 
+			$scope.file.rowTag  ="";
+			$scope.file.archivePeriod="";
+			$scope.file.serverIP="";
 			
 			//required
 			$scope.filePathRequired=true;

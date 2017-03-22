@@ -53,7 +53,7 @@ angular.module('utilityApp').controller('HadoopController',
 			$scope.rowTagRequired=false;
 			}
 		else {
-			$scope.rowtagDisable=true;
+			$scope.rowtagDisable=false;
 			$scope.fileDelimeter=true;
 			$scope.rowTagRequired=false;
 			$scope.fileDelimeterRequired=false;
@@ -68,6 +68,7 @@ angular.module('utilityApp').controller('HadoopController',
 		if  (hiveTableType == 'NON-PARTITIONED')
 			{
 			$scope.hivePartitionKeyDisable=true;
+			$scope.hadoop.targetPartitionKey="";
 			}
 		else
 			{

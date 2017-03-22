@@ -64,6 +64,12 @@ angular.module('utilityApp').controller(
 				ResourceService.findByType("LOADTYPE").then(function(response) {
 					$scope.loadType = response.data;
 				});
+				
+				
+				ResourceService.findByType("TARGETCONNECTION").then(
+						function(response) {
+							$scope.targetcon = response.data;
+						});
 			};
 			
 			 $scope.getDB = function(datasource) {
@@ -203,6 +209,7 @@ angular.module('utilityApp').controller(
 					   $scope.sourceTables = response.data.slice();
 					   $scope.tables.splice(0, 0, "Select All");
 					   }
+				   $scope.cols = null;
 				  });
 				 };
 				 
@@ -230,8 +237,21 @@ angular.module('utilityApp').controller(
 							console.log(selectedItem);
 							if (selectedItem == 'Select All') {
 						   $scope.codeGenRequest.sourceColumnNames = $scope.sourceCols;
-						  } 
+						  }
+							if (selectedItem.length > 1) {
+								$scope.showUnionKeySelectAll=true;
+							} else {
+								$scope.showUnionKeySelectAll=true;
+							}
 						 };
+					$scope.onSelctedJoinKey = function(selectedItem) {
+								console.log(selectedItem);
+								if (selectedItem == 'Select All') {
+									$scope.codeGenRequest.joinKeys = $scope.codeGenRequest.sourceColumnNames;
+							  }
+								
+							 };
+
 						 
 						 $scope.loadHiveTableType = function() {ResourceService.findByType("HIVETABLETYPE").then(function(response) {
 							 $scope.hiveTableType = response.data;
@@ -390,8 +410,8 @@ angular.module('utilityApp').controller(
 												 $scope.disableCreateButton=true;
 							
 											  
-												 $scope.tables  ="";
-												 $scope.cols="";
+												 $scope.tables  =null;
+												 $scope.cols=null;
 												 //ng-required attributes
 												 $scope.dbSchemaREquired=false;
 												 $scope.tableRequired=false;
