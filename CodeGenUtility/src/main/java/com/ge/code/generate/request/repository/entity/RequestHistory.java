@@ -13,7 +13,7 @@ public class RequestHistory {
 	@Column(name = "REQ_ID")
 	private Integer requestId;
 	@Column(name = "SRC")
-	private String src;
+	private String sourceType;
 	@Column(name = "SRC_SYS")
 	private String sourceSystem;
 	@Column(name = "SRC_CONN")
@@ -65,11 +65,11 @@ public class RequestHistory {
 	public void setRequestId(Integer requestId) {
 		this.requestId = requestId;
 	}
-	public String getSrc() {
-		return src;
+	public String getSourceType() {
+		return sourceType;
 	}
-	public void setSrc(String src) {
-		this.src = src;
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
 	}
 	public String getSourceSystem() {
 		return sourceSystem;

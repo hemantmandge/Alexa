@@ -1,6 +1,7 @@
 package com.ge.code.generate.request.controller;
 
 public interface ConstantUtils {
+	String RDBMS = "RDBMS";
 	String ORACLE = "ORACLE";
 	String FILE = "FILE";
 	String HADOOP = "HADOOP";
