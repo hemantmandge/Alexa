@@ -13,7 +13,7 @@ angular.module('utilityApp').controller('HadoopController',
 	
 	$scope.pageLoadHadoopData=function() {
 		$rootScope.homeRadioBtn = "Hadoop";
-		$scope.hadoop.sourceType="Hadoop";
+		$scope.hadoop.sourceSystem="Hadoop";
 		$scope.hadoop.loadType="FULL";
 		ResourceService.findByType("FILETYPE").then(function(response) {
 			$scope.fileTypeHadoop = response.data;
@@ -83,7 +83,7 @@ angular.module('utilityApp').controller('HadoopController',
 		$scope.rowTagRequired=false;
 		$scope.fileDelimeterRequired=false;
 		$scope.hivePartitionKeyDisable=false;
-		  $scope.hadoop.sourceType="Hadoop";
+		  $scope.hadoop.sourceSystem="Hadoop";
 		  $scope.hadoop.loadType = "FULL";
 	};
 	
@@ -108,7 +108,7 @@ angular.module('utilityApp').controller('HadoopController',
 	{
 		UtilityController.createCodeGenRequestSuccess(data);
 		$scope.hadoop = {};
-		  $scope.hadoop.sourceType="Hadoop";
+		  $scope.hadoop.sourceSystem="Hadoop";
 			$scope.hadoop.loadType = "FULL";
 			$scope.showValidationErrors = false; 
 	};
