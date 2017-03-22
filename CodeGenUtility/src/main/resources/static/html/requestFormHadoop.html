@@ -39,7 +39,7 @@
 							<label class="labelSubHeader" style="padding-top: 0">HADOOP
 								SOURCE CONNECTION</label> <select class="customDropDown"
 								id="hadoopSrcConnection" name="hadoopSrcConnection" required
-								ng-model="hadoop.SFTPserverIp">
+								ng-model="hadoop.serverIp">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in SFTPserverIPListHadoop ">{{src.value}}</option>
 							</select>
@@ -128,15 +128,10 @@
 								<label
 									ng-class="archivePeriod  ? 'disabledlabel' : 'labelSubHeader'">ARCHIEVE
 									KEY (DAYS)</label> <input type="text" ng-pattern-restrict="^[0-9]*$"
-									name="archiveperiod" required id="archive"
+									name="archiveperiod"  id="archive"
 									ng-class="archivePeriod ? 'disabledTextBox' : 'customTextBox'"
 									placeholder="Please Enter" ng-model="hadoop.archivePeriod">
-								<div ng-show="showValidationErrors">
-									<div style="line-height: 3px">&nbsp;</div>
-									<span class="errmsg"
-										ng-show="hadoopForm.archiveperiod.$error.required">This
-										is required. </span>
-								</div>
+							
 							</div>
 						</div>
 					</div>

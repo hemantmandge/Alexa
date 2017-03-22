@@ -114,7 +114,7 @@
 								 <select 
 									name="dbschema" id="dbschema" ng-class="classdropdown"
 									ng-change="getTables(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceSystem,codeGenRequest.source)"
-									ng-required="dbSchemaREquired" ng-disabled="toggleDisconnect ? disabledMultiple : true" ng-model="codeGenRequest.source">
+									ng-required="dbSchemaREquired" ng-disabled="whereDisabled" ng-model="codeGenRequest.source">
 									<option selected="selected" >Please Select</option>
 									<option ng-repeat="src in databaseSchema">{{src}}</option>
 								</select>
@@ -131,7 +131,7 @@
 									ng-required="tableRequired" id="tables"
 									ng-class="classdropdown" multiple
 									ng-model="codeGenRequest.sourceTableNames"
-									ng-change="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceSystem,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)">
+									ng-change="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceType,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)">
 									<!--  <option  selected="selected" value="">Please Select Option</option> -->
 									<option ng-selected="isSelectedFlag" ng-repeat="src in tables">{{src}}</option>
 								</select>
@@ -148,7 +148,7 @@
 									ng-required="toggleTable ? colRequired : false" ng-disabled="disabledMultiple"
 									ng-class="toggleTable ?  classdropdown : 'disabledDropDown'" id="colums" multiple
 									ng-model="codeGenRequest.sourceColumnNames" style="text-transform: capitalize;"
-									ng-click="onSelctedColumns(codeGenRequest.sourceColumnNames)">
+									ng-change="onSelctedColumns(codeGenRequest.sourceColumnNames)">
 									<!-- ng-class="{warning: (codeGenRequest.sourceColumnNames == 'Select All'), ok: (codeGenRequest.sourceColumnNames != 'Select All')}" -->
 									<!--<option selected="selected" value="">Please Select</option>-->
 									<option ng-repeat="src in cols">{{src}}</option>
@@ -164,9 +164,11 @@
 								<label ng-class="toggleTable ? class : 'disabledlabel'">UNION KEY</label> <select
 									ng-disabled="disabledMultiple" name="joinkey" style="text-transform: capitalize;"
 									ng-required="toggleTable ? joinKeyRequired : false" ng-class="toggleTable ? classdropdown : 'disabledDropDown'"
-									id="joinkey" multiple ng-model="codeGenRequest.joinKeys">
-									<!--<option selected="selected" value="">Please Select</option>-->
-									<option ng-repeat="field in codeGenRequest.sourceColumnNames "
+									id="joinkey" multiple ng-model="codeGenRequest.joinKeys" ng-change="onSelctedJoinKey(codeGenRequest.joinKeys)">
+							
+									<option ng-if="showUnionKeySelectAll" value="Select All">Select All</option>
+								
+									<option  ng-repeat="field in codeGenRequest.sourceColumnNames "
 										value="{{field}}">{{field}}</option>
 								</select>
 								<div ng-show="showValidationErrors">
@@ -206,23 +208,18 @@
 							<div class="col-md-3">
 								<label ng-class="class">ARCHIVE PERIOD (DAYS)</label> 
 								<input	type="text" name="archivePeriod"
-									ng-required="archivePeriodRequired" ng-class="classtextbox"
+									 ng-class="classtextbox"
 									id="archivePeriod" ng-pattern-restrict="^[0-9]*$" ng-disabled="whereDisabled"
 									placeholder="Please Enter"
 									ng-model="codeGenRequest.archivePeriod">
-								<div ng-show="showValidationErrors">
-									<div style="line-height: 3px">&nbsp;</div>
-									<span class="text-danger"
-										ng-show="rdbmsForm.archivePeriod.$error.required">This
-										is required. </span>
-								</div>
+								
 							</div>
 						</div>
 
 					</div>
 					<!-- disabled div ends -->
 				</div>
-				<!-- sourceSystem div ends -->
+				<!-- sourceType div ends -->
 
 
 				<!-- Common for all sections -->
@@ -271,10 +268,14 @@
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">TARGET
-								CONNECTION</label> <input type="text" placeholder="Please Enter"
-								class="customTextBox" name="targetconn"
-								ng-required="targetconnRequired" id="targetconn"
-								ng-model="codeGenRequest.targetConnection">
+								CONNECTION</label> 
+								
+								<select class="customDropDown" id="targetconn"
+								ng-required="targetconnRequired" name="targetconn" ng-model="codeGenRequest.targetConnection">
+								<option selected="selected" value="">Please Select</option>
+								<option ng-repeat="src in targetcon">{{src.value}}</option>
+							</select>
+									
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="text-danger"
@@ -349,7 +350,7 @@
 					</div>
 
 				</div>
-				<!-- sourceSystem div ends -->
+				<!-- sourceType div ends -->
 				<div class="row" style="padding-left: 68.3%;">
 					<button type="button" class="btn targetButton"
 						ng-click="onCancel();">Cancel</button>

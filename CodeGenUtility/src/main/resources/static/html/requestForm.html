@@ -53,7 +53,7 @@
 								id="serverIP"
 								ng-class="serverIP ? 'disabledDropDown' :'customDropDown'"
 								name="serverIP" ng-disabled="serverIP"
-								ng-model="file.SFTPserverIp">
+								ng-model="file.serverIp">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in SFTPserverIPList">{{src.value}}</option>
 							</select>
@@ -150,17 +150,12 @@
 								ng-class="archivePeriod  ? 'disabledlabel' : 'labelSubHeader'"
 								style="padding-top: 0">ARCHIVE PERIOD (DAYS)</label> <input
 								type="text" ng-pattern-restrict="^[0-9]*$" name="archiveper"
-								ng-required="archivePeriodRequired" ng-readonly="archivePeriod"
+								 ng-readonly="archivePeriod"
 								id="archive"
 								ng-class="archivePeriod ? 'disabledTextBox' : 'customTextBox'"
 								placeholder="Please Enter" ng-model="file.archivePeriod">
 
-							<div ng-show="showValidationErrors">
-								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg"
-									ng-show="fileForm.archiveper.$error.required">This
-									is required. </span>
-							</div>
+							
 						</div>
 					</div>
 
@@ -263,7 +258,7 @@
 								PARTITION KEY</label> <input type="text" id="hivepartionkey"
 								ng-class="hivepartionkeydisabled ? 'disabledTextBox' :'customTextBox'"
 								ng-disabled="hivepartionkeydisabled" name="hivepartionkey"
-								ng-model="file.targetPartitionKey" placeholder="DataSource"
+								ng-model="file.targetPartitionKey" placeholder="Please Enter"
 								ng-required="hivepartionkeyrequired">
 
 							<div ng-show="showValidationErrors">
