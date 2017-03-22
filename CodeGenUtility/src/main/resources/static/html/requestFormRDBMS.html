@@ -130,7 +130,7 @@
 									ng-required="tableRequired" id="tables"
 									ng-class="classdropdown" multiple
 									ng-model="codeGenRequest.sourceTableNames"
-									ng-change="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceType,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)">
+									ng-change="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceSystem,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)">
 									<!--  <option  selected="selected" value="">Please Select Option</option> -->
 									<option ng-selected="isSelectedFlag" ng-repeat="src in tables">{{src}}</option>
 								</select>

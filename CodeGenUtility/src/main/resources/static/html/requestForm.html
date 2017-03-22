@@ -34,16 +34,10 @@
 						<div class="col-md-3">
 							<label
 								ng-class="toggleFileResources  ? 'labelSubHeader' : 'disabledlabel'"
-								style="padding-top: 0">FILE NAME</label> <input type="text" name="fileType"
+								style="padding-top: 0">FILE NAME</label> <input type="text" name="fileName"
 								ng-class="toggleFileResources  ? 'customTextBox' : 'disabledTextBox'"
-								ng-model="file.fileType"
-								readonly="readonly" placeholder="Please Enter">
-							<div ng-show="showValidationErrors">
-								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg"
-									ng-show="fileForm.fileType.$error.required">This is
-									required. </span>
-							</div>
+								ng-model="file.fileName"
+								placeholder="Please Enter">
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">FILE
