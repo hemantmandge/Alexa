@@ -13,14 +13,14 @@
     color: #425866;
 }
 
-.customDropDown {
+.customDropDown{
 	border-radius: 0px !important;
 	border: 0 !important;
 	outline: 0 !important;
 	background: transparent !important;
 	border-bottom: 1px solid #96a8b2 !important;
 	box-shadow: none !important;
-	padding-bottom: 7px;
+	padding-bottom: 5px;
 	width: 100%;
 	text-align: left;
     font-size: 15px;
@@ -92,8 +92,8 @@ font-size: bold;
 }
 
 .myRadioBtns {
-	padding-top: 24px;
-	padding-bottom: 24px;
+	padding-top: 7px;
+	padding-bottom: 20px;
 }
 
 .btnRadio {
@@ -111,7 +111,11 @@ font-size: bold;
 	font-family: sans-serif;
 	background-color: rgb(49, 112, 225);
 }
-
+.myPopups
+{
+	font-family: sans-serif;
+	background-color: rgb(49, 112, 225);
+}
 .targetButton {
 	width: 178px;
 	height: 33px;
@@ -149,8 +153,7 @@ font-size: bold;
 
 .customDropDown option {
 	width: 100%;
-	font-family: GESans;
-    font-size: 16px;
+    font-size: 15px;
     color: #425866;
 }
 
@@ -297,7 +300,7 @@ body.myMainBody{
 	background: transparent !important;
 	border-bottom: 1px solid #cacaca !important;
 	box-shadow: none !important;
-	padding-bottom: 7px;
+	padding-bottom: 5px;
 	width: 100%;
 	text-align: left;
 	/* font-family: GEInspRg; */
@@ -310,7 +313,7 @@ body.myMainBody{
 {
 	font-size: 19px;
     padding-left: 14px;
-    padding-top: 6px;
+    padding-top: 8px;
     /* font-size: large; */
 }
 .titleLeftDown
@@ -393,6 +396,7 @@ body.myMainBody{
     margin-bottom: 5%;
 }
 .loginbutton{
+	font-family: sans-serif;
     font-size: 15px;
     text-align: center;
     line-height: 21px;
@@ -421,3 +425,7 @@ body.myMainBody{
  .classLoginScreenFlex{
  	padding:0% 5.4% 2% 5.4%;
  }
+ .errmsg{
+ /* margin-left: 46px;*/
+  color: red;
+}

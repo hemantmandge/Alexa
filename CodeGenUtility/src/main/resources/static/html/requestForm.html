@@ -11,8 +11,8 @@
 				<div id="sourceSystem">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
-							SOURCE TYPE
-							<div style="padding-bottom: 24px"></div>
+							SOURCE
+							<div style="padding-bottom: 17px"></div>
 							<div class="stroke"></div>
 						</div>
 					</div>
@@ -28,6 +28,20 @@
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
 									ng-show="fileForm.datasrc.$error.required">This is
+									required. </span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label
+								ng-class="toggleFileResources  ? 'labelSubHeader' : 'disabledlabel'"
+								style="padding-top: 0">FILE NAME</label> <input type="text" name="fileType"
+								ng-class="toggleFileResources  ? 'customTextBox' : 'disabledTextBox'"
+								ng-model="file.fileType"
+								readonly="readonly" placeholder="Please Enter">
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="errmsg"
+									ng-show="fileForm.fileType.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -113,12 +127,9 @@
 									is required. </span>
 							</div>
 						</div>
-					</div>
-
-					<div class="row lastRowDiv">
 						<div class="col-md-3">
-							<label ng-class="joinKeys  ? 'disabledlabel' : 'labelSubHeader'"
-								style="padding-top: 0">UNIQUE KEY</label> <input type="text"
+							<label ng-class="joinKeys  ? 'disabledlabel' : 'labelSubHeader'">UNIQUE KEY</label> 
+							<input type="text"
 								name="joinkey" ng-required="joinKeysRequired"
 								ng-class="joinKeys ? 'disabledTextBox' : 'customTextBox'"
 								id="joinkey" ng-readonly="joinKeys" ng-model="file.joinKeys"
@@ -131,6 +142,9 @@
 									required. </span>
 							</div>
 						</div>
+					</div>
+
+					<div class="row lastRowDiv">
 						<div class="col-md-3">
 							<label ng-class="rowTag  ? 'disabledlabel' : 'labelSubHeader'"
 								style="padding-top: 0">ROW TAG</label> <input type="text"
@@ -196,9 +210,6 @@
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in targetcon">{{src.value}}</option>
 							</select>
-							<!-- <input type="text" class="customTextBox" name="targetconn"
-								id="Target" ng-model="file.targetConnection" required
-								placeholder="Please Enter"> -->
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
