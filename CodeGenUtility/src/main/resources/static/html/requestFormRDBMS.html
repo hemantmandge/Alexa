@@ -7,7 +7,7 @@
 	
 		<div class="innerContainer2">
 			<form role="form" name="rdbmsForm" novalidate>
-				<div id="sourceType">
+				<div id="sourceSystem">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
 							SOURCE TYPE
@@ -19,8 +19,8 @@
 						<div class="col-md-3">
 							<label ng-class="{'labelSubHeader': toggleAll , 'disabledlabel': !toggleAll}" style="padding-top: 0">DATABASE
 								TYPE</label> 
-								<select name="srctype" id="srctype" ng-change="getDB(codeGenRequest.sourceType)"
-								ng-model="codeGenRequest.sourceType" required ng-class="{'customDropDown': toggleAll , 'disabledDropDown': !toggleAll}"
+								<select name="srctype" id="srctype" ng-change="getDB(codeGenRequest.sourceSystem)"
+								ng-model="codeGenRequest.sourceSystem" required ng-class="{'customDropDown': toggleAll , 'disabledDropDown': !toggleAll}"
 								ng-disabled="srcTypeDisble">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in datadbsrc" >{{src.value}}</option>
@@ -71,7 +71,7 @@
 							style="float: right; width: 207px; padding-top: 1%;">
 							<input ng-show="showbutton" type="button"
 								class="btn btn-primary myButton" id="" value="Connect"
-								ng-click="connectDB(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceType)">
+								ng-click="connectDB(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceSystem)">
 							<input ng-show="showbuttonDisc" type="button"
 								class="btn btn-primary myButton" id="" value="Disconnect"
 								ng-click="enableForm()">
@@ -113,7 +113,7 @@
 								<label ng-class="class">DB SCHEMA</label>
 								 <select 
 									name="dbschema" id="dbschema" ng-class="classdropdown"
-									ng-change="getTables(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceType,codeGenRequest.source)"
+									ng-change="getTables(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceSystem,codeGenRequest.source)"
 									ng-required="dbSchemaREquired" ng-disabled="toggleDisconnect ? disabledMultiple : true" ng-model="codeGenRequest.source">
 									<option selected="selected" >Please Select</option>
 									<option ng-repeat="src in databaseSchema">{{src}}</option>
@@ -131,7 +131,7 @@
 									ng-required="tableRequired" id="tables"
 									ng-class="classdropdown" multiple
 									ng-model="codeGenRequest.sourceTableNames"
-									ng-change="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceType,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)">
+									ng-change="getCols(codeGenRequest.username,codeGenRequest.password,codeGenRequest.dbConnection,codeGenRequest.dbName,codeGenRequest.sourceSystem,codeGenRequest.sourceTableNames,codeGenRequest.source) ; disableDrop(codeGenRequest.sourceTableNames);onSelcted2(codeGenRequest.sourceTableNames);getHiveTableNames(codeGenRequest.sourceTableNames)">
 									<!--  <option  selected="selected" value="">Please Select Option</option> -->
 									<option ng-selected="isSelectedFlag" ng-repeat="src in tables">{{src}}</option>
 								</select>
@@ -222,7 +222,7 @@
 					</div>
 					<!-- disabled div ends -->
 				</div>
-				<!-- sourceType div ends -->
+				<!-- sourceSystem div ends -->
 
 
 				<!-- Common for all sections -->
@@ -349,7 +349,7 @@
 					</div>
 
 				</div>
-				<!-- sourceType div ends -->
+				<!-- sourceSystem div ends -->
 				<div class="row" style="padding-left: 68.3%;">
 					<button type="button" class="btn targetButton"
 						ng-click="onCancel();">Cancel</button>

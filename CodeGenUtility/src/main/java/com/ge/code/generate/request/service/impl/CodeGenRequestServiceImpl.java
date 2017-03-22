@@ -43,14 +43,14 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 
 	@Override
 	public void create(CodeGenRequest codeGenRequest) {
-		if ((ConstantUtils.ORACLE).equalsIgnoreCase(codeGenRequest.getSourceType()) 
-				|| (ConstantUtils.MSSQL.equalsIgnoreCase(codeGenRequest.getSourceType()))
-						|| (ConstantUtils.TERADATA.equalsIgnoreCase(codeGenRequest.getSourceType()))
-								|| (ConstantUtils.GREENPLUM.equalsIgnoreCase(codeGenRequest.getSourceType()))) {
+		if ((ConstantUtils.ORACLE).equalsIgnoreCase(codeGenRequest.getSourceSystem()) 
+				|| (ConstantUtils.MSSQL.equalsIgnoreCase(codeGenRequest.getSourceSystem()))
+						|| (ConstantUtils.TERADATA.equalsIgnoreCase(codeGenRequest.getSourceSystem()))
+								|| (ConstantUtils.GREENPLUM.equalsIgnoreCase(codeGenRequest.getSourceSystem()))) {
 			populateDataForRDBMS(codeGenRequest);
-		} else if (ConstantUtils.FILE.equalsIgnoreCase(codeGenRequest.getSourceType())) {
+		} else if (ConstantUtils.FILE.equalsIgnoreCase(codeGenRequest.getSourceSystem())) {
 			populateDataForFile(codeGenRequest);
-		} else if (ConstantUtils.HADOOP.equalsIgnoreCase(codeGenRequest.getSourceType())) {
+		} else if (ConstantUtils.HADOOP.equalsIgnoreCase(codeGenRequest.getSourceSystem())) {
 			populateDataForHadoop(codeGenRequest);
 		}
 	}
@@ -110,7 +110,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setSourceTableName(sourceTableName);
 			if(codeGenRequest.getSourceTableNames().size() > 1) {
 				List<String> columns = resourceRequestService.getColumns(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
-						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName, codeGenRequest.getSource());
+						codeGenRequest.getDbName(), codeGenRequest.getSourceSystem(), sourceTableName, codeGenRequest.getSource());
 				batchControlMaster.setSourceColumnName(StringUtils.join(columns.toArray(new String[columns.size()]),","));
 			} else {
 				batchControlMaster.setSourceColumnName(StringUtils.join(codeGenRequest.getSourceColumnNames().toArray(new String[codeGenRequest.getSourceColumnNames().size()]),","));
@@ -120,7 +120,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
 			batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
 			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
-			batchControlMaster.setSourceSystem(codeGenRequest.getSourceType());
+			batchControlMaster.setSourceSystem(codeGenRequest.getSourceSystem());
 			batchControlMaster.setUpdateTimeStamp(new Date());
 			
 			IngestSubJobControl ingestSubJobControl;
@@ -164,14 +164,14 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 			} else {
 				List<String> primaryKeys = resourceRequestService.getPrimaryKey(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
-						codeGenRequest.getDbName(), codeGenRequest.getSourceType(), sourceTableName, codeGenRequest.getSource());
+						codeGenRequest.getDbName(), codeGenRequest.getSourceSystem(), sourceTableName, codeGenRequest.getSource());
 				if (primaryKeys != null && primaryKeys.size() > 0) {
 					ingestSubJobControl.setJoinKey(StringUtils.join(primaryKeys.toArray(new String[primaryKeys.size()]), ","));
 				} else {
 					ingestSubJobControl.setJoinKey("PRIMARY");
 				}	
 			}
-			ingestSubJobControl.setSource(codeGenRequest.getSourceType());
+			ingestSubJobControl.setSource(codeGenRequest.getSourceSystem());
 			
 			RequestHistory requestHistory = new RequestHistory();
 			
@@ -284,7 +284,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 		}
 		
-		//ingestSubJobControl.setSource(codeGenRequest.getSourceType());
+		//ingestSubJobControl.setSource(codeGenRequest.getSourceSystem());
 		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
 		
 		batchControlMasterRepository.save(batchControlMaster);
@@ -398,7 +398,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 		}
 		
-		//ingestSubJobControl.setSource(codeGenRequest.getSourceType());
+		//ingestSubJobControl.setSource(codeGenRequest.getSourceSystem());
 		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
 		
 		batchControlMasterRepository.save(batchControlMaster);

@@ -8,7 +8,7 @@
 
 		<div class="innerContainer2">
 			<form role="form" name="fileForm" novalidate>
-				<div id="sourceType">
+				<div id="sourceSystem">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
 							SOURCE TYPE
@@ -22,7 +22,7 @@
 								ng-class="toggleFileResources  ? 'labelSubHeader' : 'disabledlabel'"
 								style="padding-top: 0">SOURCE TYPE</label> <input type="text"
 								ng-class="toggleFileResources  ? 'customTextBox' : 'disabledTextBox'"
-								name="datasrc" id="datasrc" ng-model="file.sourceType"
+								name="datasrc" id="datasrc" ng-model="file.sourceSystem"
 								readonly="readonly" placeholder="Please Enter">
 							<div ng-show="showValidationErrors">
 								<div style="line-height: 3px">&nbsp;</div>
@@ -165,7 +165,7 @@
 					</div>
 
 				</div>
-				<!-- sourceType div ends -->
+				<!-- sourceSystem div ends -->
 
 
 				<!-- Common for all sections -->
@@ -277,7 +277,7 @@
 					</div>
 
 				</div>
-				<!-- sourceType div ends -->
+				<!-- sourceSystem div ends -->
 				<div class="row" style="padding-left: 68.3%;">
 					<button type="button" class="btn targetButton"
 						ng-click="onCancelFile();">Cancel</button>

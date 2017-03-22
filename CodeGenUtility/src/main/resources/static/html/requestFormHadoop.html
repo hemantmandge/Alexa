@@ -6,7 +6,7 @@
 	<div class="innerContainer" ng-init="pageLoadHadoopData()">
 		<div class="innerContainer2">
 			<form role="form" name="hadoopForm">
-				<div id="sourceType">
+				<div id="sourceSystem">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
 							SOURCE TYPE
@@ -18,7 +18,7 @@
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">SOURCE
 								TYPE</label> <input readonly="readonly" type="text"
-								class="customTextBox" ng-model="hadoop.sourceType">
+								class="customTextBox" ng-model="hadoop.sourceSystem">
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">FILE
@@ -142,7 +142,7 @@
 					</div>
 					<!-- disabled div ends -->
 				</div>
-				<!-- sourceType div ends -->
+				<!-- sourceSystem div ends -->
 				<div id="targetType" class="myRadioBtns">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
@@ -221,7 +221,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- sourceType div ends -->
+				<!-- sourceSystem div ends -->
 				<div class="row" style="padding-left: 68.3%;">
 					<button type="button" class="btn targetButton"
 						ng-click="onCancelOfHadoop();">Cancel</button>

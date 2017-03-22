@@ -15,7 +15,7 @@ public class RequestHistory {
 	@Column(name = "SRC")
 	private String src;
 	@Column(name = "SRC_SYS")
-	private String sourceType;
+	private String sourceSystem;
 	@Column(name = "SRC_CONN")
 	private String dbConnection;
 	@Column(name = "DB_NAME")
@@ -71,11 +71,11 @@ public class RequestHistory {
 	public void setSrc(String src) {
 		this.src = src;
 	}
-	public String getSourceType() {
-		return sourceType;
+	public String getSourceSystem() {
+		return sourceSystem;
 	}
-	public void setSourceType(String sourceType) {
-		this.sourceType = sourceType;
+	public void setSourceSystem(String sourceSystem) {
+		this.sourceSystem = sourceSystem;
 	}
 	public String getDbConnection() {
 		return dbConnection;

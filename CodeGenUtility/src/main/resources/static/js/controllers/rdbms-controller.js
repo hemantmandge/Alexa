@@ -87,21 +87,21 @@ angular.module('utilityApp').controller(
 				
 				 };
 				 
-				 $scope.getSID = function(sourceType) {
-					 // console.log(sourceType);
-					 if(sourceType != undefined || sourceType != null || sourceType != '')
+				 $scope.getSID = function(sourceSystem) {
+					 // console.log(sourceSystem);
+					 if(sourceSystem != undefined || sourceSystem != null || sourceSystem != '')
 						 {
 						 	$scope.dbnameDisble=false;
 							 $scope.class2 = "labelSubHeader";
 							 $scope.classdropdown2="customDropDown";
 						 }
-					 if(sourceType == undefined || sourceType == null || sourceType == '')
+					 if(sourceSystem == undefined || sourceSystem == null || sourceSystem == '')
 				        {
 							 $scope.dbnameDisble=true;
 							 $scope.class2 = "disabledlabel";
 							 $scope.classdropdown2="disabledDropDown";
 						}	 
-				  ResourceService.findByName(sourceType).then(function(response) {
+				  ResourceService.findByName(sourceSystem).then(function(response) {
 					  $scope.datadbSID = response.data;
 					});
 				  

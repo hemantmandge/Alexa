@@ -35,7 +35,7 @@ angular.module('utilityApp').controller('FileController',
 	 */
 	$scope.pageLoadDataFile = function() {
 		$rootScope.homeRadioBtn = "Files";
-		$scope.file.sourceType = "FILE";
+		$scope.file.sourceSystem = "FILE";
 		$scope.file.loadType = "FULL";
 	
 		ResourceService.findByType("FILETYPE").then(function(response) {
@@ -84,7 +84,7 @@ angular.module('utilityApp').controller('FileController',
 	{
 		UtilityController.createCodeGenRequestSuccess(data);
 		$scope.file = {};
-		  $scope.file.sourceType="FILE";
+		  $scope.file.sourceSystem="FILE";
 			$scope.file.loadType = "FULL";
 			$scope.showValidationErrors = false; 
 	};
@@ -92,7 +92,7 @@ angular.module('utilityApp').controller('FileController',
 	
 	 $scope.onCancelFile = function() {
 		 $scope.file = {};
-		 $scope.file.sourceType="FILE";
+		 $scope.file.sourceSystem="FILE";
 			$scope.file.loadType = "FULL";
 			//$scope.joinKeysList = [];
 			 $scope.disabled = false;
