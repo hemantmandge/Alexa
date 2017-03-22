@@ -55,7 +55,7 @@ public class CodeGenRequest {
 	private String fileType;
 	private String filePath;
 	private String rowTag;
-	private String SFTPserverIp;
+	private String serverIP;
 	private String fileDelimeter;
 	private String fileSchemaPath;
 	public String getSourceSystem() {
@@ -190,11 +190,11 @@ public class CodeGenRequest {
 	public void setRowTag(String rowTag) {
 		this.rowTag = rowTag;
 	}
-	public String getSFTPserverIp() {
-		return SFTPserverIp;
+	public String getServerIp() {
+		return serverIP;
 	}
-	public void setSFTPserverIp(String sFTPserverIp) {
-		SFTPserverIp = sFTPserverIp;
+	public void setServerIP(String serverIP) {
+		this.serverIP = serverIP;
 	}
 	public String getFileDelimeter() {
 		return fileDelimeter;

@@ -256,7 +256,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			}
 		}
 		
-		batchControlMaster.setSource(codeGenRequest.getSFTPserverIp());
+		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
 		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
 		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
@@ -319,7 +319,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		RequestHistory requestHistory = new RequestHistory();
 		requestHistory.setSourceType(ConstantUtils.FILE);
 		requestHistory.setSourceSystem(codeGenRequest.getFileType());
-		requestHistory.setDbConnection(codeGenRequest.getSFTPserverIp());
+		requestHistory.setDbConnection(codeGenRequest.getServerIp());
 		//requestHistory.setDbName(codeGenRequest.getDbName()); N.A. for File
 		//requestHistory.setSource(codeGenRequest.getSource()); N.A. for File
 		//requestHistory.setSourceTableName(sourceTableName); N.A. for File
@@ -397,7 +397,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		}
 		
 		//TODO
-		batchControlMaster.setSource(codeGenRequest.getSFTPserverIp());
+		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
 		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
 		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
@@ -460,7 +460,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		RequestHistory requestHistory = new RequestHistory();
 		requestHistory.setSourceType(ConstantUtils.FILE);
 		requestHistory.setSourceSystem(codeGenRequest.getFileType());
-		requestHistory.setDbConnection(codeGenRequest.getSFTPserverIp());
+		requestHistory.setDbConnection(codeGenRequest.getServerIp());
 		//requestHistory.setDbName(codeGenRequest.getDbName()); N.A. for File
 		//requestHistory.setSource(codeGenRequest.getSource()); N.A. for File
 		//requestHistory.setSourceTableName(sourceTableName); N.A. for File
