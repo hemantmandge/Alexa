@@ -6,6 +6,10 @@ public class CodeGenRequest {
 	/**
 	 * to store the selected source type
 	 */
+	private String sourceType;
+	/**
+	 * to store the selected source system
+	 */
 	private String sourceSystem;
 	/**
 	 * to store the DB connection
@@ -58,6 +62,14 @@ public class CodeGenRequest {
 	private String serverIP;
 	private String fileDelimeter;
 	private String fileSchemaPath;
+	private String fileName;
+	
+	public String getSourceType() {
+		return sourceType;
+	}
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
+	}
 	public String getSourceSystem() {
 		return sourceSystem;
 	}
@@ -207,5 +219,11 @@ public class CodeGenRequest {
 	}
 	public void setFileSchemaPath(String fileSchemaPath) {
 		this.fileSchemaPath = fileSchemaPath;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 }

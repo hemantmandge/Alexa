@@ -108,7 +108,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				}
 			}
 			batchControlMaster.setSource(codeGenRequest.getSource());// DBschema name
-			batchControlMaster.setSourceTableName(sourceTableName);
+			batchControlMaster.setSourceTableName(sourceTableName.toUpperCase());
 			String sourceColumnName = "";
 			if(codeGenRequest.getSourceTableNames().size() > 1) {
 				List<String> columns = resourceRequestService.getColumns(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
@@ -117,7 +117,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			} else {
 				sourceColumnName = StringUtils.join(codeGenRequest.getSourceColumnNames().toArray(new String[codeGenRequest.getSourceColumnNames().size()]),",");
 			}
-			batchControlMaster.setSourceColumnName(sourceColumnName);
+			batchControlMaster.setSourceColumnName(sourceColumnName.toUpperCase());
 			batchControlMaster.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
 			batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());
 			batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
@@ -184,8 +184,8 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			requestHistory.setDbConnection(codeGenRequest.getDbConnection());
 			requestHistory.setDbName(codeGenRequest.getDbName());
 			requestHistory.setSource(codeGenRequest.getSource());
-			requestHistory.setSourceTableName(sourceTableName);
-			requestHistory.setSourceColumnName(sourceColumnName);
+			requestHistory.setSourceTableName(sourceTableName.toUpperCase());
+			requestHistory.setSourceColumnName(sourceColumnName.toUpperCase());
 			requestHistory.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
 			requestHistory.setJoinKey(joinKey);
 			requestHistory.setWhereCondition(codeGenRequest.getWhereCondition());
@@ -201,7 +201,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			 * table name in small case.
 			 * */
 			if(codeGenRequest.getSourceTableNames().size() > 1) {
-				targetTableName = sourceTableName;
+				targetTableName = sourceTableName.toUpperCase();
 			} else {
 				targetTableName = codeGenRequest.getTargetTableName();
 			}
@@ -242,6 +242,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setActiveFlag(ConstantUtils.ACTIVE_FLAG);
 			batchControlMaster.setRootDirectory(ConstantUtils.DATACODEGEN_BASE);
 			batchControlMaster.setMasterJobName(ConstantUtils.FILE_TEMPLATE);
+			batchControlMaster.setSourceColumnName("");
 
 			// No Need to pass value as default is null
 			//batchControlMaster.setOffsetVal(null);//NA
@@ -252,8 +253,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			//batchControlMaster.setLastKey("");//NA
 			//batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());//NA
 	
-			batchControlMaster.setSourceTableName("");
-			batchControlMaster.setSourceColumnName("");
 
 		} else {
 			if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
@@ -265,6 +264,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			}
 		}
 		
+		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
 		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
 		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
@@ -329,9 +329,9 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistory.setSourceType(ConstantUtils.FILE);
 		requestHistory.setSourceSystem(codeGenRequest.getFileType());
 		requestHistory.setDbConnection(codeGenRequest.getServerIp());
+		//requestHistory.setSourceTableName(codeGenRequest.getFileName());
 		//requestHistory.setDbName(codeGenRequest.getDbName()); N.A. for File
 		//requestHistory.setSource(codeGenRequest.getSource()); N.A. for File
-		//requestHistory.setSourceTableName(sourceTableName); N.A. for File
 		//requestHistory.setSourceColumnName(sourceColumnName); N.A. for File
 		//requestHistory.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn()); N.A. for File
 		requestHistory.setJoinKey(ingestSubJobControl.getJoinKey());
@@ -392,7 +392,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			//batchControlMaster.setLastKey("");//NA
 			//batchControlMaster.setCalculateDeltaOn(ConstantUtils.INT + codeGenRequest.getCalculateDeltaOn());//NA
 	
-			batchControlMaster.setSourceTableName("");//Field is NA for Hadoop but need to pass blank ("") as column has not null constrain
 			batchControlMaster.setSourceColumnName("");//Field is NA for Hadoop but need to pass blank ("") as column has not null constrain
 
 		} else {
@@ -405,7 +404,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			}
 		}
 		
-		//TODO
+		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
 		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
 		batchControlMaster.setFillerOne(codeGenRequest.getFileDelimeter());
@@ -470,9 +469,9 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistory.setSourceType(ConstantUtils.FILE);
 		requestHistory.setSourceSystem(codeGenRequest.getFileType());
 		requestHistory.setDbConnection(codeGenRequest.getServerIp());
+		//requestHistory.setSourceTableName(codeGenRequest.getFileName());
 		//requestHistory.setDbName(codeGenRequest.getDbName()); N.A. for File
 		//requestHistory.setSource(codeGenRequest.getSource()); N.A. for File
-		//requestHistory.setSourceTableName(sourceTableName); N.A. for File
 		//requestHistory.setSourceColumnName(sourceColumnName); N.A. for File
 		//requestHistory.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn()); N.A. for File
 		requestHistory.setJoinKey(ingestSubJobControl.getJoinKey());

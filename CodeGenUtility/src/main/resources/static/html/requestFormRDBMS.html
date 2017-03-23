@@ -126,7 +126,7 @@
 							</div>
 							<div class="col-md-3">
 								<label ng-class="class">TABLES</label> 
-								<select name="tables" style="text-transform: capitalize;"
+								<select name="tables" style="text-transform:uppercase;"
 									ng-required="tableRequired" id="tables"
 									ng-class="classdropdown" multiple
 									ng-model="codeGenRequest.sourceTableNames"
@@ -146,7 +146,7 @@
 								<label ng-class="toggleTable ? class : 'disabledlabel'">COLUMNS</label> <select name="colums"
 									ng-required="toggleTable ? colRequired : false" ng-disabled="disabledMultiple"
 									ng-class="toggleTable ?  classdropdown : 'disabledDropDown'" id="colums" multiple
-									ng-model="codeGenRequest.sourceColumnNames" style="text-transform: capitalize;"
+									ng-model="codeGenRequest.sourceColumnNames" style="text-transform: uppercase;"
 									ng-change="onSelctedColumns(codeGenRequest.sourceColumnNames)">
 									<!-- ng-class="{warning: (codeGenRequest.sourceColumnNames == 'Select All'), ok: (codeGenRequest.sourceColumnNames != 'Select All')}" -->
 									<!--<option selected="selected" value="">Please Select</option>-->
@@ -161,7 +161,7 @@
 							</div>
 							<div class="col-md-3">
 								<label ng-class="toggleTable ? class : 'disabledlabel'">UNION KEY</label> <select
-									ng-disabled="disabledMultiple" name="joinkey" style="text-transform: capitalize;"
+									ng-disabled="disabledMultiple" name="joinkey" style="text-transform: uppercase;"
 									ng-required="toggleTable ? joinKeyRequired : false" ng-class="toggleTable ? classdropdown : 'disabledDropDown'"
 									id="joinkey" multiple ng-model="codeGenRequest.joinKeys" ng-change="onSelctedJoinKey(codeGenRequest.joinKeys)">
 							
@@ -183,7 +183,7 @@
 								<label ng-class="toggleTable ? class : 'disabledlabel'">CALCULATE DELTA ON</label> 
 								<select name="CalculateDelta" ng-disabled="toggleDisconnect ? disabledMultiple :  true"
 									ng-required="toggleTable ? caculateDeltaRequired : false" ng-class="toggleTable ? classdropdown : 'disabledDropDown'"
-									id="CalculateDelta" ng-model="codeGenRequest.calculateDeltaOn" style="text-transform: capitalize;">
+									id="CalculateDelta" ng-model="codeGenRequest.calculateDeltaOn" style="text-transform: uppercase;">
 									<option selected="selected" value="">Please Select</option>
 									<option
 										ng-selected="{{field == codeGenRequest.calculateDeltaOn}}"
@@ -333,7 +333,7 @@
 						<div class="col-md-3">
 							<label ng-class="toggleTable ? hivetableLabel : 'disabledlabel'">HIVE PARTITION KEY</label> <select
 								ng-class="toggleTable ? hivetableDD : 'disabledDropDown'" ng-required="toggleTable ? hivePartitionKeyRequired : false" name="hivePartitionKey"
-								id="hivepartionkey" ng-model="codeGenRequest.targetPartitionKey" style="text-transform: capitalize;"
+								id="hivepartionkey" ng-model="codeGenRequest.targetPartitionKey" style="text-transform: uppercase;"
 								ng-disabled="toggleTable ? isdisabled : true">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="field in codeGenRequest.sourceColumnNames "

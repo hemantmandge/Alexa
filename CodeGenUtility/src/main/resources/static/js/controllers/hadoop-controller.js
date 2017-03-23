@@ -55,7 +55,7 @@ angular.module('utilityApp').controller('HadoopController',
 		else {
 			$scope.rowtagDisable=false;
 			$scope.fileDelimeter=true;
-			$scope.rowTagRequired=false;
+			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.hadoop.fileDelimeter="";
 			$scope.hadoop.rowTag="";
