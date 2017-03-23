@@ -267,7 +267,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
 		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
-		batchControlMaster.setFillerOne("\\|" + codeGenRequest.getFileDelimeter());
+		batchControlMaster.setFillerOne("\\\\" + codeGenRequest.getFileDelimeter());
 		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
 		batchControlMaster.setFillerThree(codeGenRequest.getFileSchemaPath());
 		
@@ -407,7 +407,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
 		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
-		batchControlMaster.setFillerOne("\\|" + codeGenRequest.getFileDelimeter());
+		batchControlMaster.setFillerOne("\\\\" + codeGenRequest.getFileDelimeter());
 		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
 		batchControlMaster.setFillerThree(codeGenRequest.getFileSchemaPath());
 		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());//NA

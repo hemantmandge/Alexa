@@ -111,10 +111,11 @@ font-size: bold;
 	font-family: sans-serif;
 	background-color: rgb(49, 112, 225);
 }
-.myPopups
-{
+.myPopups {
 	font-family: sans-serif;
-	background-color: rgb(49, 112, 225);
+	background-color: #3276b1; 
+	border-color: #285e8e;
+	color: #fff; 
 }
 .targetButton {
 	width: 178px;
@@ -375,6 +376,7 @@ body.myMainBody{
 .rightHoverHelp
 {
 	color: #425866;
+	cursor: help;
 }
 .loginInputField{
     margin-bottom: 15px;
