@@ -118,11 +118,11 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				sourceColumnName = StringUtils.join(codeGenRequest.getSourceColumnNames().toArray(new String[codeGenRequest.getSourceColumnNames().size()]),",");
 			}
 			batchControlMaster.setSourceColumnName(sourceColumnName.toUpperCase());
-			batchControlMaster.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
+			batchControlMaster.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn().toUpperCase());
 			batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());
 			batchControlMaster.setArchivePeriod(codeGenRequest.getArchivePeriod());
 			batchControlMaster.setTargetDBName(codeGenRequest.getTargetDBName());// hiveDBNAME
-			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
+			batchControlMaster.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
 			batchControlMaster.setSourceSystem(codeGenRequest.getSourceSystem());
 			batchControlMaster.setUpdateTimeStamp(currentDate);
 			
@@ -165,12 +165,12 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			
 			String joinKey = "";
 			if (codeGenRequest.getJoinKeys()!= null && codeGenRequest.getJoinKeys().size() > 0) {
-				joinKey = StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ",");
+				joinKey = StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ",").toUpperCase();
 			} else {
 				List<String> primaryKeys = resourceRequestService.getPrimaryKey(codeGenRequest.getUsername(), codeGenRequest.getPassword(), codeGenRequest.getDbConnection(), 
 						codeGenRequest.getDbName(), codeGenRequest.getSourceSystem(), sourceTableName, codeGenRequest.getSource());
 				if (primaryKeys != null && primaryKeys.size() > 0) {
-					joinKey = StringUtils.join(primaryKeys.toArray(new String[primaryKeys.size()]), ",");
+					joinKey = StringUtils.join(primaryKeys.toArray(new String[primaryKeys.size()]), ",").toUpperCase();
 				} else {
 					joinKey = "PRIMARY";
 				}	
@@ -186,7 +186,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			requestHistory.setSource(codeGenRequest.getSource());
 			requestHistory.setSourceTableName(sourceTableName.toUpperCase());
 			requestHistory.setSourceColumnName(sourceColumnName.toUpperCase());
-			requestHistory.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn());
+			requestHistory.setCalculateDeltaOn(codeGenRequest.getCalculateDeltaOn().toUpperCase());
 			requestHistory.setJoinKey(joinKey);
 			requestHistory.setWhereCondition(codeGenRequest.getWhereCondition());
 			//requestHistory.setSourceDirectory(codeGenRequest.getSourceDirectory()); N.A. for RDBMS
@@ -207,7 +207,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			}
 			requestHistory.setTargetTableName(targetTableName);
 			requestHistory.setTargetTableType(codeGenRequest.getTargetType());
-			requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
+			requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
 			requestHistory.setLoadType(batchControlMaster.getLoadType());
 			requestHistory.setCreateTimeStamp(currentDate);
 			requestHistory.setUpdateTimeStamp(currentDate);
