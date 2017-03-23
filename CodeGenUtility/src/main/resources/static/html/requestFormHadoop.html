@@ -22,7 +22,13 @@
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">FILE NAME</label>
-							<input type="text"	class="customTextBox" ng-model="hadoop.fileName"> 
+							<input type="text"	class="customTextBox" id="fileName" name="fileName" required ng-model="hadoop.fileName"> 
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="errmsg"
+									ng-show="hadoopForm.fileName.$error.required">This is
+									required. </span>
+							</div>
 						</div>
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">FILE

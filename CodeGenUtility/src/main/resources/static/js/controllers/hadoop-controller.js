@@ -58,7 +58,7 @@ angular.module('utilityApp').controller('HadoopController',
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.hadoop.fileDelimeter="";
-			$scope.hadoop.rowTag="";
+		//	$scope.hadoop.rowTag="";
 			}
 		
 	};

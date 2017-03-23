@@ -26,7 +26,7 @@ angular.module('utilityApp').controller('FileController',
 	$scope.rowTagRequired=false;
 	$scope.fileDelimeterRequired=false;
 	$scope.joinKeysRequired=false;
-	$scope.archivePeriodRequired =false; 
+ 
 	$scope.hivepartionkeyrequired=false;
 	
 //	$scope.toggleFileResources = false;v
@@ -116,7 +116,7 @@ angular.module('utilityApp').controller('FileController',
 			$scope.rowTagRequired=false;
 			$scope.fileDelimeterRequired=false;
 			$scope.joinKeysRequired=false;
-			$scope.archivePeriodRequired =false; 
+		 
 			$scope.hivepartionkeyrequired=false;
 
 		 }
@@ -160,13 +160,13 @@ angular.module('utilityApp').controller('FileController',
 			$scope.archivePeriod =false; 
 			
 			//set the variables to blank todo: for server sftp
-			 $scope.file.filePath="" ;
+		//	 $scope.file.filePath="" ;
 			 $scope.file.fileDelimeter="";
 			 $scope.file.calculateDeltaOn="" ;
-			 $scope.file.joinKeys=""; 
-			 $scope.file.serverIP="";
-			 $scope.file.rowTag  ="";
-			 $scope.file.archivePeriod="";
+			 //$scope.file.joinKeys=""; 
+			// $scope.file.serverIP="";
+			// $scope.file.rowTag  ="";
+			// $scope.file.archivePeriod="";
 			
 			//required
 			
@@ -175,7 +175,7 @@ angular.module('utilityApp').controller('FileController',
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.joinKeysRequired=false;
-			$scope.archivePeriodRequired =false; 
+	
 			
 			
 			}
@@ -190,14 +190,14 @@ angular.module('utilityApp').controller('FileController',
 			$scope.joinKeys=false;
 			$scope.archivePeriod =false; 
 			
-				$scope.file.fileSchemaPath="";
-				$scope.file.filePath="" ;
+				//$scope.file.fileSchemaPath="";
+				//$scope.file.filePath="" ;
 				$scope.file.fileDelimeter="";
 				$scope.file.calculateDeltaOn="" ;
-				$scope.file.joinKeys=""; 
-				$scope.file.rowTag  ="";
-				$scope.file.archivePeriod="";
-				$scope.file.serverIP="";
+				//$scope.file.joinKeys=""; 
+				//$scope.file.rowTag  ="";
+				//$scope.file.archivePeriod="";
+				//$scope.file.serverIP="";
 			
 			//required
 			$scope.filePathRequired=false;
@@ -205,7 +205,7 @@ angular.module('utilityApp').controller('FileController',
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.joinKeysRequired=false;
-			$scope.archivePeriodRequired =false; 
+			 
 		}
 		else if($scope.file.fileType=="DELIMITED")
 			{
@@ -218,14 +218,14 @@ angular.module('utilityApp').controller('FileController',
 			$scope.joinKeys=false;
 			$scope.archivePeriod =false; 
 			
-			$scope.file.fileSchemaPath="";
-			$scope.file.filePath="" ;
-			$scope.file.fileDelimeter="";
-			$scope.file.calculateDeltaOn="" ;
-			$scope.file.joinKeys=""; 
+			//$scope.file.fileSchemaPath="";
+			//$scope.file.filePath="" ;
+			//$scope.file.fileDelimeter="";
+			//$scope.file.calculateDeltaOn="" ;
+			//$scope.file.joinKeys=""; 
 			$scope.file.rowTag  ="";
-			$scope.file.archivePeriod="";
-			$scope.file.serverIP="";
+			//$scope.file.archivePeriod="";
+			//$scope.file.serverIP="";
 			
 			//required
 			$scope.filePathRequired=true;
@@ -233,7 +233,7 @@ angular.module('utilityApp').controller('FileController',
 			$scope.rowTagRequired=false;
 			$scope.fileDelimeterRequired=true;
 			$scope.joinKeysRequired=true;
-			$scope.archivePeriodRequired =true; 
+		 
 			
 			}
 		else
