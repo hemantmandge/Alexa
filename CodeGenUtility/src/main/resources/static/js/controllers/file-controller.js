@@ -35,6 +35,7 @@ angular.module('utilityApp').controller('FileController',
 	 */
 	$scope.pageLoadDataFile = function() {
 		$rootScope.homeRadioBtn = "Files";
+		$rootScope.currentSelected = "Files";
 		$scope.file.sourceSystem = "FILE";
 		$scope.file.loadType = "FULL";
 	

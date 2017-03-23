@@ -50,6 +50,7 @@ angular.module('utilityApp').controller(
 			$scope.pageLoadDataRDBMS = function() {
                 //load calls for dropdown and init functions
 				$rootScope.homeRadioBtn = "RDBMS";
+				$rootScope.currentSelected = "RDBMS";
 				ResourceService.findByTypeAndName("DATASOURCE", "RDBMS").then(
 						function(response) {
 							$scope.datadbsrc = response.data;

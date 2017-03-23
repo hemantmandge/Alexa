@@ -88,15 +88,23 @@ app.controller('utilityCtrl', ['$scope', '$rootScope','$window', '$location', '$
 	};
 	
 	 $rootScope.redirectToPage = function(homeRadioBtn){
-	     if (homeRadioBtn == 'RDBMS') {
-	         $location.path('/RDBMS');
-	     } else if (homeRadioBtn == 'Hadoop') {
-	         $location.path('/Hadoop');
-	     } else if (homeRadioBtn == 'Files') {
-	         $location.path('/Files');
-	     } else if (homeRadioBtn == 'S3') {
-	         $location.path('/S3');
-	     }
+		 if (($scope.rdbmsForm && $scope.rdbmsForm.$dirty)
+				 || ($scope.hadoopForm && $scope.hadoopForm.$dirty) 
+				 || ($scope.fileForm && $scope.fileForm.$dirty)) {
+	     		var isNavigate = confirm("Are you sure!");
+	     		if(!isNavigate) {
+	     			$rootScope.homeRadioBtn = $rootScope.currentSelected;
+	     			event.preventDefault();
+	     		    return;
+	     		}
+		 }
+		 if (homeRadioBtn == 'RDBMS') {
+			 $location.path('/RDBMS');
+		 } else if (homeRadioBtn == 'Hadoop') {
+			 $location.path('/Hadoop');
+		 } else if (homeRadioBtn == 'Files') {
+			 $location.path('/Files');
+		 }
 	 };
 }]);
 app.run(['$rootScope', '$cookies', '$location',function ($rootScope, $cookies, $location) {
