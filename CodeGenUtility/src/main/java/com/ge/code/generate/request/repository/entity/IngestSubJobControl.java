@@ -3,12 +3,16 @@ package com.ge.code.generate.request.repository.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "ingest_sub_job_cntl")
 	public class IngestSubJobControl {
 	
+	@EmbeddedId
+	@Id
+	private IngestSubJobControlPrimaryKey ingestSubJobControlPrimaryKey;
 	@Column(name = "master_job_n")
 	private String masterJobName;
 	@Column(name = "script_n")
@@ -17,9 +21,6 @@ import javax.persistence.Id;
 	private String scriptLocation;
 	@Column(name = "`source`")
 	private String source;
-	@Id
-	@Column(name = "tgt_tbl_n")
-	private String targetTableName;
 	@Column(name = "join_key")
 	private String joinKey;
 	@Column(name = "XREF_VER_COL_N")
@@ -42,7 +43,12 @@ import javax.persistence.Id;
 	private String ingestBatchId;
 	@Column(name = "THRESHOLD_LIMIT")
 	private Long thresholdLimit;
-	
+	public IngestSubJobControlPrimaryKey getIngestSubJobControlPrimaryKey() {
+		return ingestSubJobControlPrimaryKey;
+	}
+	public void setIngestSubJobControlPrimaryKey(IngestSubJobControlPrimaryKey ingestSubJobControlPrimaryKey) {
+		this.ingestSubJobControlPrimaryKey = ingestSubJobControlPrimaryKey;
+	}
 	public String getMasterJobName() {
 		return masterJobName;
 	}
@@ -66,12 +72,6 @@ import javax.persistence.Id;
 	}
 	public void setSource(String source) {
 		this.source = source;
-	}
-	public String getTargetTableName() {
-		return targetTableName;
-	}
-	public void setTargetTableName(String targetTableName) {
-		this.targetTableName = targetTableName;
 	}
 	public String getJoinKey() {
 		return joinKey;
@@ -139,5 +139,4 @@ import javax.persistence.Id;
 	public void setThresholdLimit(Long thresholdLimit) {
 		this.thresholdLimit = thresholdLimit;
 	}
-	
 }

@@ -201,6 +201,7 @@ angular.module('utilityApp').controller(
 				 
 				  ResourceService.getTables(username,password,host , database , rdbmsName , dbschema )
 				  .then(function(response) {
+					  $scope.showUnionKeySelectAll=false;
 				  $scope.tables = response.data; // ajax request to fetch
 													// data into $scope.data
 				   $rootScope.dataLoading = false;
@@ -211,10 +212,18 @@ angular.module('utilityApp').controller(
 					   $scope.tables.splice(0, 0, "Select All");
 					   }
 				   $scope.cols = null;
-				  });
+				  }).catch(function (data) {
+
+					  $rootScope.dataLoading = false;
+					  $rootScope.loadingBackgronud = false;
+						
+				});
 				 };
 				 
 				 $scope.getCols = function(username, password, host, database, rdbmsName, tableName, dbschema) {
+					 
+					 $rootScope.dataLoading = true;
+					 $rootScope.loadingBackgronud = true;
 					  var tbllen =tableName.length;
 
 					  $scope.cols = []; // declare an empty array
@@ -222,6 +231,10 @@ angular.module('utilityApp').controller(
 						  
 					   ResourceService.getColumns(username, password , host , database, rdbmsName, tableName , dbschema)
 					   .then(function(response) {
+						   $scope.showUnionKeySelectAll=false;
+						   $rootScope.dataLoading = false;
+							 $rootScope.loadingBackgronud = false;
+							 
 					    $scope.cols = response.data; // ajax request to fetch
 														// data into $scope.data
 					    if(tbllen==1&&   $scope.cols.length>1){
@@ -230,7 +243,12 @@ angular.module('utilityApp').controller(
 					      $scope.cols.splice(0, 0, "Select All");
 					    }
 					   
-					   });
+					   }).catch(function (data) {
+
+							  $rootScope.dataLoading = false;
+							  $rootScope.loadingBackgronud = false;
+								
+						});
 					  }
 					 };
 					 
@@ -242,7 +260,7 @@ angular.module('utilityApp').controller(
 							if (selectedItem.length > 1) {
 								$scope.showUnionKeySelectAll=true;
 							} else {
-								$scope.showUnionKeySelectAll=true;
+								$scope.showUnionKeySelectAll=false;
 							}
 						 };
 					$scope.onSelctedJoinKey = function(selectedItem) {
@@ -261,6 +279,9 @@ angular.module('utilityApp').controller(
 						 
 						 $scope.disableDrop = function(selectedItem) {
 							  if (selectedItem.length >= 2) {
+								  $rootScope.dataLoading = false;
+								  $rootScope.loadingBackgronud = false;
+								  
 							   $scope.disabledMultiple = true;
 							   $scope.isdisabled = true;
 							   $scope.codeGenRequest.hiveTableType ="NON-PARTITIONED";
@@ -410,6 +431,7 @@ angular.module('utilityApp').controller(
 													
 													  $scope.tables =null;
 													  $scope.cols=null;
+													  $scope.showUnionKeySelectAll=false;
 													  //$scope.showbuttonDisc=false;
 													 // $scope.showbutton=true;
 													  $scope.srcTypeDisble =false;
@@ -503,6 +525,7 @@ angular.module('utilityApp').controller(
 													 $scope.toggleAll = true;
 														$scope.dbconnectionDisble=true;
 														 $scope.dbnameDisble=true;
+														  $scope.showUnionKeySelectAll=false;
 												 }
 
 		});

@@ -39,28 +39,29 @@
 		</header>
 
 		<nav class="navbar navbar-default navbar-fixed-side nav" ng-show="isAuthenticated">
-			<center>
-			<ul>
-				<li style="padding-top: 28%;height: 56px;">
-					<a>
-						<div class="menuIcon"></div>
-						<div class="menuIcon"></div>
-						<div class="menuIcon"></div> 
-					</a>
-				</li>
-				<li style="height: 58px;padding-top: 23%;" ng-class="activeClass" onclick="">
-					<a href="" class="btn-lg">
-			          <span class="glyphicon glyphicon-dashboard" style="font-size: 26px;color: white;"></span>
-			        </a>
-				</li>
-				<li style="height: 58px;padding-top: 23%;" ng-class="activeClass">
-					<a href="" class="btn-lg">
-			          <span class="glyphicon glyphicon-briefcase" style="font-size: 26px;color: white;"></span>
-			        </a>
-			    </li>
-			</ul>
-			</center>
-		</nav>
+              <center>
+              <ul>
+                    <li style="padding-top: 28%;height: 56px;">
+                           <a>
+                                  <div class="menuIcon"></div>
+                                  <div class="menuIcon"></div>
+                                  <div class="menuIcon"></div> 
+                           </a>
+                    </li>
+                    <li ng-class="'activeNavbar'">
+                           <a ng-click="redirectToRDBMS()" class="btn-lg">
+                        <span class="glyphicon glyphicon-dashboard codegenIcons"></span>
+                      </a>
+                    </li>
+                    <li ng-class="''">
+                           <a ng-click="redirectToJobStatus()" class="btn-lg">
+                        <span class="glyphicon glyphicon-briefcase codegenIcons"></span>
+                      </a>
+                  </li>
+              </ul>
+              </center>
+       </nav> 
+
 
 		<div class="article">
 		<!-- <div class="outerContainer" style="padding-bottom:0"> apply for align-->

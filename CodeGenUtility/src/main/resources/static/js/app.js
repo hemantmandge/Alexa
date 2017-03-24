@@ -120,6 +120,6 @@ app.run(['$rootScope', '$cookies', '$location',function ($rootScope, $cookies, $
 }]);
 angular.module('utilityApp').controller('PopupCont', function($scope, $uibModalInstance){
 	$scope.close = function() {
-	$uibModalInstance.dismiss('cancel');
+	$uibModalInstance.close(); 
 };
 });

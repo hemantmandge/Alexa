@@ -18,6 +18,7 @@ import com.ge.code.generate.request.repository.IngestSubJobControlRepository;
 import com.ge.code.generate.request.repository.entity.BatchControlMaster;
 import com.ge.code.generate.request.repository.entity.BatchControlMasterPrimaryKey;
 import com.ge.code.generate.request.repository.entity.IngestSubJobControl;
+import com.ge.code.generate.request.repository.entity.IngestSubJobControlPrimaryKey;
 import com.ge.code.generate.request.repository.entity.RequestHistory;
 import com.ge.code.generate.request.service.CodeGenRequestService;
 import com.ge.code.generate.request.service.ResourceRequestService;
@@ -127,11 +128,14 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			batchControlMaster.setUpdateTimeStamp(currentDate);
 			
 			IngestSubJobControl ingestSubJobControl;
+			IngestSubJobControlPrimaryKey ingestSubJobControlPrimaryKey = new IngestSubJobControlPrimaryKey();
+			ingestSubJobControlPrimaryKey.setTargetTableName(targetTableName);
+			ingestSubJobControlPrimaryKey.setTargetDBName(codeGenRequest.getTargetDBName());
 			
-			ingestSubJobControl = ingestSubJobControlRepository.findOne(targetTableName);
+			ingestSubJobControl = ingestSubJobControlRepository.findOne(ingestSubJobControlPrimaryKey);
 			if (ingestSubJobControl == null) {
 				ingestSubJobControl = new IngestSubJobControl();
-				ingestSubJobControl.setTargetTableName(targetTableName);
+				ingestSubJobControl.setIngestSubJobControlPrimaryKey(ingestSubJobControlPrimaryKey);
 				ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
 				ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 				
@@ -284,11 +288,14 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		batchControlMaster.setUpdateTimeStamp(currentDate);
 		
 		IngestSubJobControl ingestSubJobControl;
+		IngestSubJobControlPrimaryKey ingestSubJobControlPrimaryKey = new IngestSubJobControlPrimaryKey();
+		ingestSubJobControlPrimaryKey.setTargetTableName(targetTableName);
+		ingestSubJobControlPrimaryKey.setTargetDBName(codeGenRequest.getTargetDBName());
 		
-		ingestSubJobControl = ingestSubJobControlRepository.findOne(targetTableName);
+		ingestSubJobControl = ingestSubJobControlRepository.findOne(ingestSubJobControlPrimaryKey);
 		if (ingestSubJobControl == null) {
 			ingestSubJobControl = new IngestSubJobControl();
-			ingestSubJobControl.setTargetTableName(targetTableName);
+			ingestSubJobControl.setIngestSubJobControlPrimaryKey(ingestSubJobControlPrimaryKey);
 			ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
@@ -424,10 +431,14 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		
 		IngestSubJobControl ingestSubJobControl;
 		
-		ingestSubJobControl = ingestSubJobControlRepository.findOne(targetTableName);
+		IngestSubJobControlPrimaryKey ingestSubJobControlPrimaryKey = new IngestSubJobControlPrimaryKey();
+		ingestSubJobControlPrimaryKey.setTargetTableName(targetTableName);
+		ingestSubJobControlPrimaryKey.setTargetDBName(codeGenRequest.getTargetDBName());
+		
+		ingestSubJobControl = ingestSubJobControlRepository.findOne(ingestSubJobControlPrimaryKey);
 		if (ingestSubJobControl == null) {
 			ingestSubJobControl = new IngestSubJobControl();
-			ingestSubJobControl.setTargetTableName(targetTableName);
+			ingestSubJobControl.setIngestSubJobControlPrimaryKey(ingestSubJobControlPrimaryKey);
 			ingestSubJobControl.setEpocIdCurrent(ConstantUtils.UNIX_TIME_STAMP);
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
@@ -457,7 +468,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			//ingestSubJobControl.setHiveSQLLocation("");//NA
 		}
 		
-		//TODO
 		if (codeGenRequest.getJoinKeys()!= null && codeGenRequest.getJoinKeys().size() > 0) {
 			ingestSubJobControl.setJoinKey(StringUtils.join(codeGenRequest.getJoinKeys().toArray(new String[codeGenRequest.getJoinKeys().size()]), ","));
 		}

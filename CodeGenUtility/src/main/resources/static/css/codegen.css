@@ -370,7 +370,7 @@ body.myMainBody{
 .rightHoverHelp
 {
 	color: #425866;
-	cursor: help;
+	cursor: help !important;
 }
 .loginInputField{
     margin-bottom: 15px;
@@ -425,3 +425,12 @@ body.myMainBody{
  /* margin-left: 46px;*/
   color: red;
 }
+.codegenIcons{
+       font-size: 26px;
+    color: white;
+    margin-bottom: 25%;
+    margin-top: 23%;
+}
+.activeNavbar{
+       background: #086e87;
+} 
