@@ -171,11 +171,11 @@ angular.module('utilityApp').controller('FileController',
 			
 			//required
 			
-			$scope.filePathRequired=false;
+			$scope.filePathRequired=true;
 			$scope.fileSchemaPathRequired=true;
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
-			$scope.joinKeysRequired=false;
+			$scope.joinKeysRequired=true;
 	
 			
 			
@@ -201,11 +201,11 @@ angular.module('utilityApp').controller('FileController',
 				//$scope.file.serverIP="";
 			
 			//required
-			$scope.filePathRequired=false;
+			$scope.filePathRequired=true;
 			$scope.fileSchemaPathRequired=true;
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
-			$scope.joinKeysRequired=false;
+			$scope.joinKeysRequired=true;
 			 
 		}
 		else if($scope.file.fileType=="DELIMITED")

@@ -48,17 +48,11 @@
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">HADOOP
 								SOURCE CONNECTION</label> <select class="customDropDown"
-								id="hadoopSrcConnection" name="hadoopSrcConnection" required
+								id="hadoopSrcConnection" name="hadoopSrcConnection" 
 								ng-model="hadoop.serverIP">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in SFTPserverIPListHadoop ">{{src.value}}</option>
 							</select>
-							<div ng-show="showValidationErrors">
-								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg"
-									ng-show="hadoopForm.hadoopSrcConnection.$error.required">This
-									is required. </span>
-							</div>
 						</div>
 
 					</div>

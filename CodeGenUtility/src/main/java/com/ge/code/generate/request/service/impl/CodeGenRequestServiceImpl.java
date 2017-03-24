@@ -3,6 +3,7 @@ package com.ge.code.generate.request.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.ge.code.generate.request.controller.ConstantUtils;
 import com.ge.code.generate.request.repository.BatchControlMasterRepository;
 import com.ge.code.generate.request.repository.IngestSubJobControlRepository;
+import com.ge.code.generate.request.repository.RequestHistoryRepository;
 import com.ge.code.generate.request.repository.entity.BatchControlMaster;
 import com.ge.code.generate.request.repository.entity.BatchControlMasterPrimaryKey;
 import com.ge.code.generate.request.repository.entity.IngestSubJobControl;
@@ -32,14 +34,27 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 	IngestSubJobControlRepository ingestSubJobControlRepository; 
 	@Autowired
 	ResourceRequestService resourceRequestService;
+	@Autowired
+	RequestHistoryRepository requestHistoryRepository;
+	
 
 	@Override
-	public List<BatchControlMaster> getAllCodeGenRequests() {
-		List<BatchControlMaster> batchControlMasterList = new ArrayList<BatchControlMaster>();
-		// batchControlMasterRepository.findAll().forEach(batchControlMasterList
-		// :: add);
-		batchControlMasterRepository.findBySourceSystem("MSSQL").forEach(batchControlMasterList::add);
-		return batchControlMasterList;
+	public List<RequestHistory> getAllCodeGenRequests(String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType,Date fromDate, Date toDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fromDate);
+		calendar.set(Calendar.HOUR_OF_DAY,0);
+		calendar.set(Calendar.MINUTE,0);
+		calendar.set(Calendar.SECOND,0);
+		calendar.set(Calendar.MILLISECOND,0);
+		fromDate = calendar.getTime();
+		
+		calendar.setTime(toDate);
+		calendar.set(Calendar.HOUR_OF_DAY,23);
+		calendar.set(Calendar.MINUTE,59);
+		calendar.set(Calendar.SECOND,59);
+		calendar.set(Calendar.MILLISECOND,999);
+		toDate = calendar.getTime();
+		return requestHistoryRepository.findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqual(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate);
 	}
 
 	@Override
@@ -271,7 +286,9 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
 		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
-		batchControlMaster.setFillerOne("\\\\" + codeGenRequest.getFileDelimeter());
+		if (StringUtils.isNotEmpty(codeGenRequest.getFileDelimeter())) {
+			batchControlMaster.setFillerOne("\\" + codeGenRequest.getFileDelimeter());
+		}
 		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
 		batchControlMaster.setFillerThree(codeGenRequest.getFileSchemaPath());
 		
@@ -414,7 +431,9 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
 		batchControlMaster.setSource(codeGenRequest.getServerIp());
 		batchControlMaster.setSourceDirectory(codeGenRequest.getFilePath());
-		batchControlMaster.setFillerOne("\\\\" + codeGenRequest.getFileDelimeter());
+		if (StringUtils.isNotEmpty(codeGenRequest.getFileDelimeter())) {
+			batchControlMaster.setFillerOne("\\" + codeGenRequest.getFileDelimeter());
+		}
 		batchControlMaster.setFillerTwo(codeGenRequest.getRowTag());
 		batchControlMaster.setFillerThree(codeGenRequest.getFileSchemaPath());
 		//batchControlMaster.setWhereCondition(codeGenRequest.getWhereCondition());//NA

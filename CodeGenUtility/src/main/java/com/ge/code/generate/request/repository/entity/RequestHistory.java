@@ -5,6 +5,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity(name = "JOB_REQ")
 public class RequestHistory {
@@ -55,8 +60,11 @@ public class RequestHistory {
 	@Column(name = "LOAD_TYPE")
 	private String loadType;
 	@Column(name = "CRTE_TMSP")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="yyyy-MM-dd HH:MM:SS")
 	private Date createTimeStamp;
 	@Column(name = "UPDT_TMSP")
+	@JsonFormat(pattern="yyyy-MM-dd HH:MM:SS")
 	private Date updateTimeStamp;
 	
 	public Integer getRequestId() {
