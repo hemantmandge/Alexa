@@ -28,8 +28,7 @@ public class ResourceRequestController {
 	private ResourceRequestService resourceRequestService;
 
 	 @RequestMapping("/jar")
-	    public void downloadPDFResource( HttpServletRequest request, 
-	                                     HttpServletResponse response) 
+	    public void downloadBuild(HttpServletRequest request, HttpServletResponse response) 
 	    {
 	        //If user is not authorized - he should be thrown out from here itself
 	         
