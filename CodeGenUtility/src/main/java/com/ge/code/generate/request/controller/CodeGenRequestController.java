@@ -46,7 +46,7 @@ public class CodeGenRequestController {
 		codeGenRequestService.create(codeGenRequest);
 	}
 	
-	@RequestMapping("/requests")
+	@RequestMapping("/generateReport")
 	public void generateReport(HttpServletRequest request, HttpServletResponse response, String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, @RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate) throws FileNotFoundException, IOException {
 		List<RequestHistory> requestHistories =  codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate);
 		Workbook workbook = new XSSFWorkbook();
@@ -59,11 +59,11 @@ public class CodeGenRequestController {
 	        writeBook(requestHistory, row);
 	    }
 	 
-	    workbook.close();
-	    response.setContentType("application/xls");
+	    response.setContentType("application/vnd.ms-excel");
         response.addHeader("Content-Disposition", "attachment; filename="+"Job Request Report.xlsx");
-        workbook.write(response.getOutputStream());
+        workbook.write( response.getOutputStream());
         response.getOutputStream().flush();
+        workbook.close();
 	}
 	
 	private void writeBook(RequestHistory requestHistory, Row row) {
