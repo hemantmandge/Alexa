@@ -52,7 +52,8 @@ public class CodeGenRequestController {
 	}	
 	@RequestMapping("/generateReport")
 	public void generateReport(HttpServletRequest request, HttpServletResponse response, String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, @RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate, Pageable pageable) throws FileNotFoundException, IOException {
-		List<RequestHistory> requestHistories =  null;/*codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);*/
+		Page<RequestHistory> requestHistoriesPages =  codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
+		List<RequestHistory> requestHistories =  requestHistoriesPages.getContent();
 		Workbook workbook = new XSSFWorkbook();
 	    Sheet sheet = workbook.createSheet();
 	    createHeaderRow(sheet);
