@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ge.code.generate.request.controller.ConstantUtils;
@@ -38,7 +40,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 	
 
 	@Override
-	public List<RequestHistory> getAllCodeGenRequests(String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType,Date fromDate, Date toDate) {
+	public Page<RequestHistory> getAllCodeGenRequests(String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType,Date fromDate, Date toDate, Pageable pageable) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(fromDate);
 		calendar.set(Calendar.HOUR_OF_DAY,0);
@@ -53,7 +55,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		calendar.set(Calendar.SECOND,59);
 		calendar.set(Calendar.MILLISECOND,999);
 		toDate = calendar.getTime();
-		return requestHistoryRepository.findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqual(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate);
+		return requestHistoryRepository.findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqual(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
 	}
 
 	@Override

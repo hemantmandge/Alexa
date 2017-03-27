@@ -17,6 +17,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,8 +40,10 @@ public class CodeGenRequestController {
 	private CodeGenRequestService codeGenRequestService;
 	
 	@RequestMapping("/requests")
-	public List<RequestHistory> getAllCodeGenRequests(String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, @RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate) {
-		return codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate);
+	public Page<RequestHistory> getAllCodeGenRequests(String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, 
+			@RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") 
+	@DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate, Pageable pageable) {
+		return codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
@@ -47,8 +51,8 @@ public class CodeGenRequestController {
 		codeGenRequestService.create(codeGenRequest);
 	}	
 	@RequestMapping("/generateReport")
-	public void generateReport(HttpServletRequest request, HttpServletResponse response, String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, @RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate) throws FileNotFoundException, IOException {
-		List<RequestHistory> requestHistories =  codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate);
+	public void generateReport(HttpServletRequest request, HttpServletResponse response, String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, @RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate, Pageable pageable) throws FileNotFoundException, IOException {
+		List<RequestHistory> requestHistories =  null;/*codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);*/
 		Workbook workbook = new XSSFWorkbook();
 	    Sheet sheet = workbook.createSheet();
 	    createHeaderRow(sheet);
