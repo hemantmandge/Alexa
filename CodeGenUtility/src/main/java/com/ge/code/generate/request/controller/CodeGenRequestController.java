@@ -67,76 +67,76 @@ public class CodeGenRequestController {
 	}
 	
 	private void writeBook(RequestHistory requestHistory, Row row) {
-	    Cell cell = row.createCell(1);
+	    Cell cell = row.createCell(0);
 	    cell.setCellValue(requestHistory.getRequestId());
 	 
-	    cell = row.createCell(2);
+	    cell = row.createCell(1);
 	    cell.setCellValue(requestHistory.getSourceType());
 	 
-	    cell = row.createCell(3);
+	    cell = row.createCell(2);
 	    cell.setCellValue(requestHistory.getSourceSystem());
 	    
-	    cell = row.createCell(4);
+	    cell = row.createCell(3);
 	    cell.setCellValue(requestHistory.getDbConnection());
 	    
-	    cell = row.createCell(5);
+	    cell = row.createCell(4);
 	    cell.setCellValue(requestHistory.getDbName());
 	    
-	    cell = row.createCell(6);
+	    cell = row.createCell(5);
 	    cell.setCellValue(requestHistory.getSource());
 	    
-	    cell = row.createCell(7);
+	    cell = row.createCell(6);
 	    cell.setCellValue(requestHistory.getSourceTableName());
 	    
-	    cell = row.createCell(8);
+	    cell = row.createCell(7);
 	    cell.setCellValue(requestHistory.getLoadType());
 	    
-	    cell = row.createCell(9);
+	    cell = row.createCell(8);
 	    cell.setCellValue(requestHistory.getTargetConnection());
 	    
-	    cell = row.createCell(10);
+	    cell = row.createCell(9);
 	    cell.setCellValue(requestHistory.getTargetDBName());
 	    
-	    cell = row.createCell(11);
+	    cell = row.createCell(10);
 	    cell.setCellValue(requestHistory.getTargetTableName());
 	    
-	    cell = row.createCell(12);
+	    cell = row.createCell(11);
 	    cell.setCellValue(requestHistory.getTargetTableType());
 	    
-	    cell = row.createCell(13);
+	    cell = row.createCell(12);
 	    cell.setCellValue(requestHistory.getTargetPartitionKey());
 	    
-	    cell = row.createCell(14);
+	    cell = row.createCell(13);
 	    CellStyle cellStyle = row.getSheet().getWorkbook().createCellStyle();
 	    CreationHelper createHelper = row.getSheet().getWorkbook().getCreationHelper();
 	    cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 	    cell.setCellValue(requestHistory.getCreateTimeStamp());
 	    
-	    cell = row.createCell(15);
+	    cell = row.createCell(14);
 	    cell.setCellValue(requestHistory.getSourceColumnName());
 	    
-	    cell = row.createCell(16);
+	    cell = row.createCell(15);
 	    cell.setCellValue(requestHistory.getCalculateDeltaOn());
 	    
-	    cell = row.createCell(17);
+	    cell = row.createCell(16);
 	    cell.setCellValue(requestHistory.getJoinKey());
 	    
-	    cell = row.createCell(18);
+	    cell = row.createCell(17);
 	    cell.setCellValue(requestHistory.getWhereCondition());
 	    
-	    cell = row.createCell(19);
+	    cell = row.createCell(18);
 	    cell.setCellValue(requestHistory.getSourceDirectory());
 	    
-	    cell = row.createCell(20);
+	    cell = row.createCell(19);
 	    cell.setCellValue(requestHistory.getFillerThree());
 	    
-	    cell = row.createCell(21);
+	    cell = row.createCell(20);
 	    cell.setCellValue(requestHistory.getArchivePeriod());
 	    
-	    cell = row.createCell(22);
+	    cell = row.createCell(21);
 	    cell.setCellValue(requestHistory.getFillerOne());
 	    
-	    cell = row.createCell(23);
+	    cell = row.createCell(22);
 	    cell.setCellValue(requestHistory.getFillerThree());
 	}
 	
@@ -150,99 +150,95 @@ public class CodeGenRequestController {
 	 
 	    Row headerRow = sheet.createRow(0);
 	    
-	    Cell requestIdCell = headerRow.createCell(1);
+	    Cell requestIdCell = headerRow.createCell(0);
 	    requestIdCell.setCellStyle(cellStyle);
 	    requestIdCell.setCellValue("REQUEST ID");
 	 
-	    Cell dataSourceCell = headerRow.createCell(2);
+	    Cell dataSourceCell = headerRow.createCell(1);
 	    dataSourceCell.setCellStyle(cellStyle);
 	    dataSourceCell.setCellValue("DATASOURCE");
 	 
-	    Cell dataSourceTypeCell = headerRow.createCell(3);
+	    Cell dataSourceTypeCell = headerRow.createCell(2);
 	    dataSourceTypeCell.setCellStyle(cellStyle);
 	    dataSourceTypeCell.setCellValue("DATASOURCE TYPE");
 	    
-	    Cell sourceServerCell = headerRow.createCell(4);
+	    Cell sourceServerCell = headerRow.createCell(3);
 	    sourceServerCell.setCellStyle(cellStyle);
 	    sourceServerCell.setCellValue("SOURCE SERVER");
 	    
-	    Cell sourceDbNameCell = headerRow.createCell(5);
+	    Cell sourceDbNameCell = headerRow.createCell(4);
 	    sourceDbNameCell.setCellStyle(cellStyle);
 	    sourceDbNameCell.setCellValue("SOURCE DB NAME / SID");
 	    
-	    Cell sourceDBSchemaCell = headerRow.createCell(6);
+	    Cell sourceDBSchemaCell = headerRow.createCell(5);
 	    sourceDBSchemaCell.setCellStyle(cellStyle);
 	    sourceDBSchemaCell.setCellValue("SOURCE DB SCHEMA");
 	    
-	    Cell sourceTableCell = headerRow.createCell(7);
+	    Cell sourceTableCell = headerRow.createCell(6);
 	    sourceTableCell.setCellStyle(cellStyle);
 	    sourceTableCell.setCellValue("SOURCE TABLE");
 	    
-	    Cell loadTypeCell = headerRow.createCell(8);
+	    Cell loadTypeCell = headerRow.createCell(7);
 	    loadTypeCell.setCellStyle(cellStyle);
 	    loadTypeCell.setCellValue("LOAD TYPE");
 	    
-	    Cell targetServerCell = headerRow.createCell(9);
+	    Cell targetServerCell = headerRow.createCell(8);
 	    targetServerCell.setCellStyle(cellStyle);
 	    targetServerCell.setCellValue("TARGET SERVER");
 	    
-	    Cell hiveDBCell = headerRow.createCell(10);
+	    Cell hiveDBCell = headerRow.createCell(9);
 	    hiveDBCell.setCellStyle(cellStyle);
 	    hiveDBCell.setCellValue("HIVE DB");
 	    
-	    Cell hiveTableCell = headerRow.createCell(11);
+	    Cell hiveTableCell = headerRow.createCell(10);
 	    hiveTableCell.setCellStyle(cellStyle);
 	    hiveTableCell.setCellValue("HIVE TABLE");
 	    
-	    Cell hiveTableTypeCell = headerRow.createCell(12);
+	    Cell hiveTableTypeCell = headerRow.createCell(11);
 	    hiveTableTypeCell.setCellStyle(cellStyle);
 	    hiveTableTypeCell.setCellValue("HIVE TABLE TYPE");
 	    
-	    Cell hivePartitionKeyCell = headerRow.createCell(13);
+	    Cell hivePartitionKeyCell = headerRow.createCell(12);
 	    hivePartitionKeyCell.setCellStyle(cellStyle);
 	    hivePartitionKeyCell.setCellValue("HIVE PARTITION KEY");
 	    
-	    Cell submittedOnCell = headerRow.createCell(14);
+	    Cell submittedOnCell = headerRow.createCell(13);
 	    submittedOnCell.setCellStyle(cellStyle);
 	    submittedOnCell.setCellValue("SUBMITTED ON");
 	    
-	    Cell sourceColumnCell = headerRow.createCell(15);
+	    Cell sourceColumnCell = headerRow.createCell(14);
 	    sourceColumnCell.setCellStyle(cellStyle);
 	    sourceColumnCell.setCellValue("SOURCE COLUMNS");
 	    
-	    Cell calculateDeltaOncell = headerRow.createCell(16);
+	    Cell calculateDeltaOncell = headerRow.createCell(15);
 	    calculateDeltaOncell.setCellStyle(cellStyle);
 	    calculateDeltaOncell.setCellValue("CALCULATE DELTA ON");
 	    
-	    Cell uniqueKeyCell = headerRow.createCell(17);
+	    Cell uniqueKeyCell = headerRow.createCell(16);
 	    uniqueKeyCell.setCellStyle(cellStyle);
 	    uniqueKeyCell.setCellValue("UNIQUE KEY");
 	    
-	    Cell whereConditionCell = headerRow.createCell(18);
+	    Cell whereConditionCell = headerRow.createCell(17);
 	    whereConditionCell.setCellStyle(cellStyle);
 	    whereConditionCell.setCellValue("WHERE CONDITION");
 	    
-	    Cell sourceDirectoryCell = headerRow.createCell(19);
+	    Cell sourceDirectoryCell = headerRow.createCell(18);
 	    sourceDirectoryCell.setCellStyle(cellStyle);
 	    sourceDirectoryCell.setCellValue("SOURCE DIRECTORY");
 	    
-	    Cell sourceFileSchemaPath = headerRow.createCell(20);
+	    Cell sourceFileSchemaPath = headerRow.createCell(19);
 	    sourceFileSchemaPath.setCellStyle(cellStyle);
 	    sourceFileSchemaPath.setCellValue("SOURCE FILE SCHEMA PATH");
 	    
-	    Cell cell = headerRow.createCell(21);
-	    cell.setCellStyle(cellStyle);
-	    cell.setCellValue("SOURCE SERVER");
-	    
-	    Cell archivalPeriodCell = headerRow.createCell(22);
+	    Cell archivalPeriodCell = headerRow.createCell(20);
 	    archivalPeriodCell.setCellStyle(cellStyle);
 	    archivalPeriodCell.setCellValue("ARCHIVE PERIOD");
 	    
-	    Cell fileDelimiterCell = headerRow.createCell(23);
+	    Cell fileDelimiterCell = headerRow.createCell(21);
 	    fileDelimiterCell.setCellStyle(cellStyle);
 	    fileDelimiterCell.setCellValue("FILE DELIMITER");
 	    
-	    Cell rowTagCell = headerRow.createCell(23);
+	    Cell rowTagCell = headerRow.createCell(22);
 	    rowTagCell.setCellStyle(cellStyle);
 	    rowTagCell.setCellValue("ROW TAG");
 	    
