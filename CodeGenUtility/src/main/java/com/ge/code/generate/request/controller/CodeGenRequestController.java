@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -44,8 +45,7 @@ public class CodeGenRequestController {
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
 	public void create(@RequestBody CodeGenRequest codeGenRequest){
 		codeGenRequestService.create(codeGenRequest);
-	}
-	
+	}	
 	@RequestMapping("/generateReport")
 	public void generateReport(HttpServletRequest request, HttpServletResponse response, String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, @RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate) throws FileNotFoundException, IOException {
 		List<RequestHistory> requestHistories =  codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate);
@@ -107,6 +107,9 @@ public class CodeGenRequestController {
 	    cell.setCellValue(requestHistory.getTargetPartitionKey());
 	    
 	    cell = row.createCell(14);
+	    CellStyle cellStyle = row.getSheet().getWorkbook().createCellStyle();
+	    CreationHelper createHelper = row.getSheet().getWorkbook().getCreationHelper();
+	    cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 	    cell.setCellValue(requestHistory.getCreateTimeStamp());
 	    
 	    cell = row.createCell(15);
@@ -142,7 +145,7 @@ public class CodeGenRequestController {
 	    CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
 	    Font font = sheet.getWorkbook().createFont();
 	    font.setBold(true);
-	    font.setFontHeightInPoints((short) 16);
+	    font.setFontHeightInPoints((short) 12);
 	    cellStyle.setFont(font);
 	 
 	    Row headerRow = sheet.createRow(0);
