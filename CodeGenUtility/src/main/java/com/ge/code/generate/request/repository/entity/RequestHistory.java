@@ -61,10 +61,11 @@ public class RequestHistory {
 	private String loadType;
 	@Column(name = "CRTE_TMSP")
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern="yyyy-MM-dd HH:MM:SS")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="IST")
 	private Date createTimeStamp;
 	@Column(name = "UPDT_TMSP")
-	@JsonFormat(pattern="yyyy-MM-dd HH:MM:SS")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="IST")
 	private Date updateTimeStamp;
 	
 	public Integer getRequestId() {
