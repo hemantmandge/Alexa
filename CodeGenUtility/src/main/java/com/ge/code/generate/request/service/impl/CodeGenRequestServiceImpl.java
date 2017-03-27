@@ -233,6 +233,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			
 			batchControlMasterRepository.save(batchControlMaster);
 			ingestSubJobControlRepository.save(ingestSubJobControl);
+			requestHistoryRepository.save(requestHistory);
 		}
 	}
 	
@@ -376,6 +377,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		
 		batchControlMasterRepository.save(batchControlMaster);
 		ingestSubJobControlRepository.save(ingestSubJobControl);
+		requestHistoryRepository.save(requestHistory);
 	}
 	
 	@Transactional
@@ -521,5 +523,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		
 		batchControlMasterRepository.save(batchControlMaster);
 		ingestSubJobControlRepository.save(ingestSubJobControl);
+		requestHistoryRepository.save(requestHistory);
 	}
 }
