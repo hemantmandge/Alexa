@@ -12,7 +12,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.ge.code.generate.request.repository.entity.RequestHistory;
 
 public interface RequestHistoryRepository extends PagingAndSortingRepository<RequestHistory, String>{
-	Page<RequestHistory> findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqual
+	Page<RequestHistory> findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqualOrderByRequestIdDesc
 	(String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, 
 			@Temporal(TemporalType.TIMESTAMP) Date fromDate, @Temporal(TemporalType.TIMESTAMP)Date toDate, Pageable pageable);
 }
