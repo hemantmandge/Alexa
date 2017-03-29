@@ -55,7 +55,10 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		calendar.set(Calendar.SECOND,59);
 		calendar.set(Calendar.MILLISECOND,999);
 		toDate = calendar.getTime();
-		return requestHistoryRepository.findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqualOrderByRequestIdDesc(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
+		//return requestHistoryRepository.findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqualOrderByRequestIdDesc(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
+		//return requestHistoryRepository.getAllCodeGenRequests(", null, null, null, null, null, null, pageable);
+		//return requestHistoryRepository.getAllCodeGenRequests("", "FILE", null, null, null, null, null, pageable);
+		return requestHistoryRepository.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
 	}
 
 	@Override
