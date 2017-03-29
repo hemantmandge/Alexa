@@ -42,23 +42,29 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 	@Override
 	public Page<RequestHistory> getAllCodeGenRequests(String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType,Date fromDate, Date toDate, Pageable pageable) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(fromDate);
-		calendar.set(Calendar.HOUR_OF_DAY,0);
-		calendar.set(Calendar.MINUTE,0);
-		calendar.set(Calendar.SECOND,0);
-		calendar.set(Calendar.MILLISECOND,0);
-		fromDate = calendar.getTime();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConstantUtils.DATE_FORMAT);
+		String fromDateStr = null, toDateStr = null;
+		if (null != fromDate) {
+			calendar.setTime(fromDate);
+			calendar.set(Calendar.HOUR_OF_DAY,0);
+			calendar.set(Calendar.MINUTE,0);
+			calendar.set(Calendar.SECOND,0);
+			calendar.set(Calendar.MILLISECOND,0);
+			fromDate = calendar.getTime();
+			fromDateStr = simpleDateFormat.format(fromDate);
+		}
+		if (null != toDate) {
+			calendar.setTime(toDate);
+			calendar.set(Calendar.HOUR_OF_DAY,23);
+			calendar.set(Calendar.MINUTE,59);
+			calendar.set(Calendar.SECOND,59);
+			calendar.set(Calendar.MILLISECOND,999);
+			toDate = calendar.getTime();
+			toDateStr = simpleDateFormat.format(toDate);
+		}
 		
-		calendar.setTime(toDate);
-		calendar.set(Calendar.HOUR_OF_DAY,23);
-		calendar.set(Calendar.MINUTE,59);
-		calendar.set(Calendar.SECOND,59);
-		calendar.set(Calendar.MILLISECOND,999);
-		toDate = calendar.getTime();
 		//return requestHistoryRepository.findBySourceTypeAndSourceSystemAndDbConnectionAndDbNameAndLoadTypeAndCreateTimeStampGreaterThanEqualAndCreateTimeStampLessThanEqualOrderByRequestIdDesc(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
-		//return requestHistoryRepository.getAllCodeGenRequests(", null, null, null, null, null, null, pageable);
-		//return requestHistoryRepository.getAllCodeGenRequests("", "FILE", null, null, null, null, null, pageable);
-		return requestHistoryRepository.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);
+		return requestHistoryRepository.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDateStr, toDateStr, pageable);
 	}
 
 	@Override

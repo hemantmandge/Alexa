@@ -38,5 +38,5 @@ public interface RequestHistoryRepository extends PagingAndSortingRepository<Req
 		    nativeQuery = false)
 	Page<RequestHistory> getAllCodeGenRequests(@Param("sourceType")String sourceType, @Param("sourceSystem")String sourceSystem, 
 			@Param("dbConnection")String dbConnection, @Param("dbName")String dbName, @Param("loadType")String loadType, 
-			@Param("fromDate")Date fromDate, @Param("toDate")Date toDate, @Param("pageable")Pageable pageable);
+			@Param("fromDate")String fromDate, @Param("toDate")String toDate, @Param("pageable")Pageable pageable);
 }
