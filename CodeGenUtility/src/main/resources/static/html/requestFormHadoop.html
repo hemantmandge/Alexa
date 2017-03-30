@@ -204,8 +204,8 @@
 						<div class="col-md-3">
 							<label class="labelSubHeader">HIVE TABLE TYPE</label> <select
 								name="hivetabltt" class="customDropDown" id="hivetabletype"
-								ng-model="hadoop.hiveTableType"
-								ng-change="onChangeTableType(hadoop.hiveTableType)">
+								ng-model="hadoop.targetTableType"
+								ng-change="onChangeTableType(hadoop.targetTableType)">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in hiveTableType">{{src.value}}</option>
 							</select>

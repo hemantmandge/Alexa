@@ -251,8 +251,8 @@
 							<label class="labelSubHeader">HIVE TABLE TYPE</label> <select
 								name="hivetabletype" class="customDropDown" id="hivetabletype"
 								required ng-init="loadHiveTableType()"
-								ng-model="file.hiveTableType"
-								ng-change="changeTableType(file.hiveTableType)"
+								ng-model="file.targetTableType"
+								ng-change="changeTableType(file.targetTableType)"
 								ng-disabled="disabled">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in hiveTableType">{{src.value}}</option>

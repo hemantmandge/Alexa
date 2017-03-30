@@ -285,7 +285,7 @@ angular.module('utilityApp').controller(
 								  
 							   $scope.disabledMultiple = true;
 							   $scope.isdisabled = true;
-							   $scope.codeGenRequest.hiveTableType ="NON-PARTITIONED";
+							   $scope.codeGenRequest.targetTableType ="NON-PARTITIONED";
 							  
 							  } else {
 							   $scope.disabledMultiple = false;
@@ -326,7 +326,7 @@ angular.module('utilityApp').controller(
 								 
 								 $scope.onSelcted2 = function(selectedItem) {
 									  if (selectedItem == 'Select All') {
-									   $scope.codeGenRequest.hiveTableType = "NON-PARTITIONED";
+									   $scope.codeGenRequest.targetTableType = "NON-PARTITIONED";
 									   $scope.codeGenRequest.sourceTableNames = $scope.sourceTables;
 									   $scope.disabledMultiple = true;
 									   $scope.hivetabledisabled=true;

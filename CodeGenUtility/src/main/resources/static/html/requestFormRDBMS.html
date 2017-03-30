@@ -317,8 +317,8 @@
 							<select	name="hivetabltt" ng-required="toggleTable ? hiveTableTypeRequired : false"
 								ng-class="toggleTable ? 'customDropDown' : 'disabledDropDown'" id="hivetabletype"
 								ng-init="loadHiveTableType()"
-								ng-model="codeGenRequest.hiveTableType"
-								ng-change="changePartitinKey(codeGenRequest.hiveTableType)"
+								ng-model="codeGenRequest.targetTableType"
+								ng-change="changePartitinKey(codeGenRequest.targetTableType)"
 								ng-disabled="toggleTable ? disabled : true">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in hiveTableType">{{src.value}}</option>

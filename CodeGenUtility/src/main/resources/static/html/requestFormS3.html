@@ -137,8 +137,8 @@
 								name="hivetabltt" ng-required="colRequiredchk=='false'"
 								class="customDropDown" id="hivetabletype"
 								ng-init="loadHiveTableType()"
-								ng-model="codeGenRequest.hiveTableType"
-								ng-change="changePartitinKey(codeGenRequest.hiveTableType)"
+								ng-model="codeGenRequest.targetTableType"
+								ng-change="changePartitinKey(codeGenRequest.targetTableType)"
 								ng-disabled="disabled">
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in hiveTableType">{{src.value}}</option>
