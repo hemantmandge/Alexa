@@ -13,6 +13,7 @@ app.controller('utilityCtrl', [
 				$cookies, $cookieStore) {
 			$rootScope.loading = false;
 			$scope.showLoginValidationErrors = false;
+			$rootScope.isDirty = false;
 			$scope.loadinitialLogin = function() {
 				if ($rootScope.isAuthenticated) {
 					$location.path("/RDBMS");
@@ -111,16 +112,9 @@ app.controller('utilityCtrl', [
 			};
 
 			$rootScope.redirectToPage = function(homeRadioBtn) {
-				if (($scope.rdbmsForm && $scope.rdbmsForm.$dirty)
-						|| ($scope.hadoopForm && $scope.hadoopForm.$dirty)
-						|| ($scope.fileForm && $scope.fileForm.$dirty)) {
-					var isNavigate = confirm("Are you sure!");
-					if (!isNavigate) {
-						$rootScope.homeRadioBtn = $rootScope.currentSelected;
-						event.preventDefault();
-						return;
-					}
-				}
+				$rootScope.isDirty = ($scope.rdbmsForm && $scope.rdbmsForm.$dirty)
+					|| ($scope.hadoopForm && $scope.hadoopForm.$dirty)
+					|| ($scope.fileForm && $scope.fileForm.$dirty);
 				if (homeRadioBtn == 'RDBMS') {
 					$location.path('/RDBMS');
 					$rootScope.isNotJobPage = true;
@@ -143,6 +137,15 @@ app.run([ '$rootScope', '$cookies', '$location',
 					$rootScope.isAuthenticated = false;
 					$rootScope.isNotJobPage = true;
 					$location.path("/");
+				}
+				$rootScope.redirectToPage("");
+				if ($rootScope.isDirty) {
+					var isNavigate = confirm("You have made changes on the screen. If you navigate to other screen your changes will be lost. Are you sure you want to navigate ?");
+					if (!isNavigate) {
+						$rootScope.homeRadioBtn = $rootScope.currentSelected;
+						event.preventDefault();
+						return;
+					}
 				}
 			});
 		} ]);

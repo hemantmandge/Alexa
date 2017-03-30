@@ -78,6 +78,12 @@ angular.module('utilityApp').controller('JobController',
 				$scope.jobstatus.loadType,$scope.jobstatus.fromDate,$scope.jobstatus.toDate, page,size).then(function(response) {
 					$scope.testData = response.data;
 					$scope.currentPage = $scope.testData.number+1;
+					if($scope.testData.totalElements < 1){
+						var modalInstance = $uibModal.open({
+							controller: 'PopupCont',
+							templateUrl: 'html/noRecordsFound.html'
+				        });
+					}
 				});
 	
 	}
@@ -94,7 +100,7 @@ angular.module('utilityApp').controller('JobController',
 						$scope.currentPage = $scope.testData.number+1;
 					});
 		} else{
-			alert("Max Limit");
+			alert("Please enter a valid page number.");
 			$scope.currentPage = $scope.testData.number+1;
 		}
 	}

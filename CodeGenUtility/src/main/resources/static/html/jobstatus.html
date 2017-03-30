@@ -42,13 +42,13 @@
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">FROM DATE</label> 
-					<datepicker date-format="yyyy-MM-dd">
+					<datepicker date-format="yyyy-MM-dd" date-max-limit="{{jobstatus.toDate}}">
 					    <input ng-model="jobstatus.fromDate" ng-class="'customTextBox'" readonly="readonly" placeholder="Please Select Date"/>
 					</datepicker>
  				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">TO DATE</label> 
-					<datepicker date-format="yyyy-MM-dd">
+					<datepicker date-format="yyyy-MM-dd" date-min-limit="{{jobstatus.fromDate}}">
 					    <input ng-model="jobstatus.toDate" ng-class="'customTextBox'" readonly="readonly" placeholder="Please Select Date"/>
 					</datepicker>
 				</div>
