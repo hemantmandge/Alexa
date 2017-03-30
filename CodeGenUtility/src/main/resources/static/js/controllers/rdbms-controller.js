@@ -7,6 +7,7 @@ angular.module('utilityApp').controller(
 			 $scope.showbutton=true;
 			 $scope.showbuttonDisc=false;
 			 $scope.disabled = false;
+			 $rootScope.isNotJobPage = true;
 			 $scope.hivetableLabel = 'labelSubHeader';
 			 $scope.hivetableDD = 'customDropDown';
 			 $scope.class = "disabledlabel";

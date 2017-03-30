@@ -4,6 +4,7 @@ angular.module('utilityApp').controller('FileController',
 	var UtilityController = $scope.$new(); 
 	$controller('utilityCtrl',{$scope : UtilityController });
 	$scope.file = {};
+	$rootScope.isNotJobPage = true;
 	//$scope.joinKeysList = [];
 	 $scope.disabled = false;
 	//variables for file 

@@ -1,64 +1,115 @@
-<div class="container">
-
-  <div class="row">
-      <!-- Breadcrumb and page-related tools reside here: -->
-	<div class="bs-example">
-		<ul class="breadcrumb">
-		
-			<li class="breadcrumb-item"> <a href="home" class="breadcrumb-link">Home</a></li>
-			<li class="breadcrumb-item"> <a href="RDBMS" class="breadcrumb-link ">New RDBMS Request</a></li>
-			<li class="breadcrumb-item"> <a href="job" class="breadcrumb-link active">Job Status</a></li>
-		</ul>
+<div class="container-fluid" style="margin-top:-4px">
+ <div class="innerContainer2" ng-init="jobInit()" style="padding-top: 0px;">
+	<form role="form" name="jobForm" novalidate>
+		<div id="sourceSystem">
+			<div class="row dbConnection">
+				<div class="col-md-3">
+					<label class="labelSubHeader" style="padding-top: 0">DATASOURCE</label> 
+					<select name="dataSource" ng-change="dataSourceChange()"  ng-class="'customDropDown'" id="" ng-model="jobstatus.sourceType">
+						<option selected="selected" value="">Please Select</option>
+						<option ng-repeat="src in dataSourceList">{{src}}</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label ng-class="'labelSubHeader'" style="padding-top: 0">DATASOURCE TYPE</label> 
+					<select name="dataSourceType" ng-change="sourcetypeChange()"  ng-class="'customDropDown'" id="" ng-model="jobstatus.sourceSystem">
+						<option selected="selected" value="">Please Select</option>
+						<option ng-repeat="src in sourceSystemList" >{{src.value}}</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label class="labelSubHeader" style="padding-top: 0">SOURCE SERVER</label> 
+					<select name="SourceTable"  ng-change="sourceServerChange()" ng-class="'customDropDown'" id="" ng-model="jobstatus.serverIP">
+						<option selected="selected" value="">Please Select</option>
+						<option ng-repeat="src in sourceServerList">{{src.value}}</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label class="labelSubHeader" style="padding-top: 0">SOURCE DB</label> 
+					<select name="HiveDB"   ng-class="'customDropDown'" ng-disabled="sourceDbDisable" ng-required="sourceDbDisable ? false : true" ng-model="jobstatus.dbName">
+						<option selected="selected" value="">Please Select</option>
+						<option ng-repeat="src in sourceDBList">{{src.value}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+				<label class="labelSubHeader">LOAD TYPE</label> 
+				<select name="SourceType"   ng-class="'customDropDown'" id="" ng-model="jobstatus.loadType">
+					<option selected="selected" value="">Please Select</option>
+					<option ng-repeat="src in loadType">{{src.value}}</option>
+				</select>
+				</div>
+				<div class="col-md-3">
+					<label class="labelSubHeader">FROM DATE</label> 
+					<datepicker date-format="yyyy-MM-dd">
+					    <input ng-model="jobstatus.fromDate" ng-class="'customTextBox'" readonly="readonly" placeholder="Please Select Date"/>
+					</datepicker>
+ 				</div>
+				<div class="col-md-3">
+					<label class="labelSubHeader">TO DATE</label> 
+					<datepicker date-format="yyyy-MM-dd">
+					    <input ng-model="jobstatus.toDate" ng-class="'customTextBox'" readonly="readonly" placeholder="Please Select Date"/>
+					</datepicker>
+				</div>
+				<div class="col-md-3">
+					<input type="button" class="btn btn-primary myButton" value="Submit" ng-click="onSubmitPopulate(0,10)" 
+					style="margin-left: 14%;margin-top: 14%;">
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="panel panel-default" style="margin-top: 4%" ng-show="testData.totalElements > 0">
+	<div class="panel-heading">Job Details<span class="pull-right" style="margin-top: -5px;">
+			<a  href="codeGenRequests/generateReport?sourceType={{jobstatus.sourceType}}&sourceSystem={{jobstatus.sourceSystem}}&dbConnection={{jobstatus.serverIP}}&dbName={{jobstatus.dbName}}&loadType={{jobstatus.loadType}}&fromDate={{jobstatus.fromDate.toISOString().slice(0,10)}}&toDate={{jobstatus.toDate.toISOString().slice(0,10)}}&page=0&size={{testData.totalElements}}" target="_blank" class="btn btn-default btn-sm">
+          		<span class="glyphicon glyphicon-save"></span> Export To Excel
+        	</a>
+        	</span>
+    </div>
+	<div class="panel-body">
+			<table class="table table-striped table-hover myTable">
+			<thead>
+				<tr>
+					<th>Request ID</th>
+					<th>Datasource</th>
+					<th>Datasource Type</th>
+					<th>Source Server</th>
+					<th>Target Server</th>
+					<th>Hive DB</th>
+					<th>Hive Table</th>
+					<th>Load Type</th>
+					<th>Submitted On</th>
+					<th>View Details</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="job in testData.content">
+				<tr>
+					<td>{{job.requestId}}</td>
+					<td>{{job.sourceType}}</td>
+					<td>{{job.sourceSystem}}</td>
+					<td>{{job.dbConnection}}</td>
+					<td>{{job.targetConnection}}</td>
+					<td>{{job.targetDBName}}</td>
+					<td>{{job.targetTableName}}</td>
+					<td>{{job.loadType}}</td>
+					<td>{{job.createTimeStamp}}</td>
+					<td><a ng-click="clickOpenPopUp(job)"><span class="glyphicon glyphicon-eye-open" style="padding-left: 33%;"></span></a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-	  
-
-  </div>  
-  	<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th ng-click="sort('id')">Job ID
-								<span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-							<th ng-click="sort('first_name')">Created Date
-								<span class="glyphicon sort-icon" ng-show="sortKey=='first_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-							<th ng-click="sort('last_name')">Status
-								<span class="glyphicon sort-icon" ng-show="sortKey=='last_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-							<th ng-click="sort('hobby')">Data Source
-								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-							<th ng-click="sort('hobby')">Metadata File
-								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-							<th ng-click="sort('hobby')">Target Table
-								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-							<th ng-click="sort('hobby')">Load Type
-								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-							<th ng-click="sort('hobby')">User Name
-								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr dir-paginate="user in users|filter:search|itemsPerPage:10">
-							<td>{{user.id}}</td>
-							<td>{{user.first_name}}</td>
-							<td>{{user.last_name}}</td>
-							<td>{{user.hobby}}</td>
-							<td>{{user.id}}</td>
-							<td>{{user.first_name}}</td>
-							<td>{{user.last_name}}</td>
-							<td>{{user.hobby}}</td>
-						</tr>
-					</tbody>
-				</table> 
-				<dir-pagination-controls ng-if="users.length>10"
-					max-size="5"
-					direction-links="true"
-					boundary-links="true" >
-				</dir-pagination-controls>
-
+	<div class="panel-footer">
+	  <ul class="pagination pagination-sm myFooterList">
+		    <li ng-class="testData.first ? 'disabled' : 'page-item'">
+		      <a class="page-link" tabindex="-1" ng-click="onSubmit(testData.number-1,10)"><span class="glyphicon glyphicon-chevron-left"></span></a>
+		    </li>
+		    <li class="page-item"><span style="padding:2.5px;"><input type="text" ng-model="currentPage" ng-blur="onSubmit(currentPage-1,10)" style="width: 36px;text-align: center;"></span></li>
+		    <li ng-class="testData.last ? 'disabled' : 'page-item'">
+		      <a class="page-link" ng-click="testData.totalPages > testData.number+1 ? onSubmit(testData.number+1,10):''"><span class="glyphicon glyphicon-chevron-right"></span></a>
+		    </li>
+	  </ul> 
+	  <span> Showing page number {{testData.number + 1}} out of {{testData.totalPages}} pages</span>
+	</div> 
+	</div>
+  </div>
 </div>  

@@ -19,7 +19,7 @@ app.config(function($routeProvider, $locationProvider){
         })
         .when('/job',{
             templateUrl : 'html/jobstatus.html',
-            controller:'utilityCtrl'
+            controller:'JobController'
         })
         .when('/S3',{
             templateUrl : 'html/requestFormS3.html',

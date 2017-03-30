@@ -31,5 +31,9 @@ app.factory('ResourceService',function($http) {
 			   return $http.get("/resources/getColumns?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + database + "&rdbmsName=" + rdbmsName + "&tableName=" + tableName + "&schema=" + dbschema);
 		}
 		
+		resources.getJobRequests = function(sourceType,sourceSystem,dbConnection,dbname,loadType,fromDate,toDate,page,size) {
+			return $http.get("codeGenRequests/requests?sourceType="+sourceType+"&sourceSystem="+sourceSystem+"&dbConnection="+dbConnection+"&dbName="+dbname+"&loadType="+loadType+"&fromDate="+fromDate+"&toDate="+toDate+"&page="+page+"&size="+size)
+		}
+		
 		return resources;
 });

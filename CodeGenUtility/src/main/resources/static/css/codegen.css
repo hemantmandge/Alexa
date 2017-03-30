@@ -273,6 +273,9 @@ body.myMainBody{
 { /* Firefox 18- */
   color: #cacaca;
 }
+.disabled{
+	 cursor: not-allowed;
+}
 .disabledTextBox {
 	color: #cacaca;
 	border-radius: 0px !important;
@@ -434,3 +437,7 @@ body.myMainBody{
 .activeNavbar{
        background: #086e87;
 } 
+.myFooterList{
+	margin-bottom: -7px;
+	margin-top:0;
+}

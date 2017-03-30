@@ -9,16 +9,19 @@
 <!-- <meta charset="utf-8"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="css/main.css">
+ -->
+ <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/codegen.css">
 <link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/angular-datepicker.css" />
 
 <script src="js/angular.js"></script>
 <script src="js/app.js"></script>
 <script src="js/ng-pattern-restrict.js"></script>
 <script src="js/angular-route.js"></script>
 <script src="js/angular-cookies.min.js"></script>
+<script src="js/angular-datepicker.js"></script>
 <script src="js/route.js"></script>
 <script src="lib/dirPagination.js"></script>
 <script src="js/config.js"></script>
@@ -27,7 +30,7 @@
 <script src="js/controllers/file-controller.js"></script>
 <script src="js/controllers/rdbms-controller.js"></script>
 <script src="js/controllers/hadoop-controller.js"></script>
-
+<script src="js/controllers/job-controller.js"></script>
 
 </head>
 <body  class="myMainBody">
@@ -48,13 +51,13 @@
                                   <div class="menuIcon"></div> 
                            </a>
                     </li>
-                    <li ng-class="'activeNavbar'">
-                           <a ng-click="" class="btn-lg">
+                    <li ng-class="isNotJobPage?'activeNavbar':''">
+                           <a href="/" class="btn-lg">
                         <span class="glyphicon glyphicon-dashboard codegenIcons"></span>
                       </a>
                     </li>
-                    <li ng-class="''">
-                           <a ng-click="" class="btn-lg">
+                    <li ng-class="isNotJobPage?'':'activeNavbar'">
+                           <a href="#job" class="btn-lg">
                         <span class="glyphicon glyphicon-briefcase codegenIcons"></span>
                       </a>
                   </li>
@@ -80,7 +83,7 @@
 				</div>
 			</div>
 			<div class="container-fluid outerContainer">
-				<div class="innerContainer1" ng-show="isAuthenticated">
+				<div class="innerContainer1" ng-show="isAuthenticated && isNotJobPage">
 					<div class="row titleDiv">
 						<div class="col-md-12 titleDesc">
 							SOURCE TYPE

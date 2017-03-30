@@ -5,6 +5,7 @@ angular.module('utilityApp').controller('HadoopController',
 	$controller('utilityCtrl',{$scope : UtilityController });
 	$scope.hadoop={};
 	$scope.rowtagDisable=true;
+	$rootScope.isNotJobPage = true;
 	$scope.fileDelimeter=true;
 	$scope.rowTagRequired=false;
 	$scope.fileDelimeterRequired=false;
