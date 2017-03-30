@@ -166,7 +166,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				
 				ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
 				//ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
-				if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getHiveTableType())) {
+				if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getTargetTableType())) {
 					ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 				}
 				else {
@@ -235,7 +235,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				targetTableName = codeGenRequest.getTargetTableName();
 			}
 			requestHistory.setTargetTableName(targetTableName);
-			requestHistory.setTargetTableType(codeGenRequest.getTargetType());
+			requestHistory.setTargetTableType(codeGenRequest.getTargetTableType());
 			requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
 			requestHistory.setLoadType(batchControlMaster.getLoadType());
 			requestHistory.setCreateTimeStamp(currentDate);
@@ -328,7 +328,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
 			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE);
-			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getHiveTableType())) {
+			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getTargetTableType())) {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 			}
 			else {
@@ -364,7 +364,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistory.setSourceType(ConstantUtils.FILE);
 		requestHistory.setSourceSystem(codeGenRequest.getFileType());
 		requestHistory.setDbConnection(codeGenRequest.getServerIp());
-		//requestHistory.setSourceTableName(codeGenRequest.getFileName());
+		requestHistory.setSourceTableName(codeGenRequest.getFileName());
 		//requestHistory.setDbName(codeGenRequest.getDbName()); N.A. for File
 		//requestHistory.setSource(codeGenRequest.getSource()); N.A. for File
 		//requestHistory.setSourceColumnName(sourceColumnName); N.A. for File
@@ -379,7 +379,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistory.setTargetConnection(codeGenRequest.getTargetConnection());
 		requestHistory.setTargetDBName(codeGenRequest.getTargetDBName());
 		requestHistory.setTargetTableName(codeGenRequest.getTargetTableName());
-		requestHistory.setTargetTableType(codeGenRequest.getTargetType());
+		requestHistory.setTargetTableType(codeGenRequest.getTargetTableType());
 		requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
 		requestHistory.setLoadType(batchControlMaster.getLoadType());
 		requestHistory.setCreateTimeStamp(currentDate);
@@ -474,7 +474,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
 			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE); 
-			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getHiveTableType())) {
+			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getTargetTableType())) {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 			}
 			else {
@@ -507,10 +507,10 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
 		
 		RequestHistory requestHistory = new RequestHistory();
-		requestHistory.setSourceType(ConstantUtils.FILE);
+		requestHistory.setSourceType(ConstantUtils.HADOOP);
 		requestHistory.setSourceSystem(codeGenRequest.getFileType());
 		requestHistory.setDbConnection(codeGenRequest.getServerIp());
-		//requestHistory.setSourceTableName(codeGenRequest.getFileName());
+		requestHistory.setSourceTableName(codeGenRequest.getFileName());
 		//requestHistory.setDbName(codeGenRequest.getDbName()); N.A. for File
 		//requestHistory.setSource(codeGenRequest.getSource()); N.A. for File
 		//requestHistory.setSourceColumnName(sourceColumnName); N.A. for File
@@ -525,7 +525,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistory.setTargetConnection(codeGenRequest.getTargetConnection());
 		requestHistory.setTargetDBName(codeGenRequest.getTargetDBName());
 		requestHistory.setTargetTableName(codeGenRequest.getTargetTableName());
-		requestHistory.setTargetTableType(codeGenRequest.getTargetType());
+		requestHistory.setTargetTableType(codeGenRequest.getTargetTableType());
 		requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
 		requestHistory.setLoadType(batchControlMaster.getLoadType());
 		requestHistory.setCreateTimeStamp(currentDate);

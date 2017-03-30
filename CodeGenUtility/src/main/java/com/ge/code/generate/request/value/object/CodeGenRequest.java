@@ -50,7 +50,7 @@ public class CodeGenRequest {
 	 */
 	private String targetTableName;
 	private String targetConnection;
-	private String hiveTableType;
+	private String targetTableType;
 
 	private String targetPartitionKey;
 	/**
@@ -172,11 +172,11 @@ public class CodeGenRequest {
 	public void setTargetConnection(String targetConnection) {
 		this.targetConnection = targetConnection;
 	}
-	public String getHiveTableType() {
-		return hiveTableType;
+	public String getTargetTableType() {
+		return targetTableType;
 	}
-	public void setHiveTableType(String hiveTableType) {
-		this.hiveTableType = hiveTableType;
+	public void setTargetTableType(String targetTableType) {
+		this.targetTableType = targetTableType;
 	}
 	public String getTargetPartitionKey() {
 		return targetPartitionKey;
