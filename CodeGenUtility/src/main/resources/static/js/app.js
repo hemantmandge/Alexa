@@ -29,7 +29,7 @@ app.controller('utilityCtrl', [
 					var today = new Date();
 					var expirationTime = new Date(today);
 					// Set 'expires' option in 15 minute
-					expirationTime.setMinutes(today.getMinutes() + 15);
+					expirationTime.setMinutes(today.getMinutes() + 30);
 					$cookies.putObject('userName', loginData.data, {
 						expires : expirationTime
 					});
@@ -152,6 +152,7 @@ angular.module('utilityApp').controller('PopupCont',
 				$uibModalInstance.close();
 			};
 			$scope.navigateToJobStatusPage = function() {
+				$uibModalInstance.close();
 				$location.path("/job");
 			};
 		});

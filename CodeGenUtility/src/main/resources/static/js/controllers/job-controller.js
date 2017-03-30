@@ -111,7 +111,7 @@ angular.module('utilityApp').controller('JobController',
 
 	$scope.jobInit = function() {
 		$rootScope.isNotJobPage = false;
-		$scope.jobstatus.loadType = "FULL";
+		//$scope.jobstatus.loadType = "FULL";
 		$scope.currentPage=1;
 		ResourceService.findByType("LOADTYPE").then(function(response) {
 			$scope.loadType = response.data;
