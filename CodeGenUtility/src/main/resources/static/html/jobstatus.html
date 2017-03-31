@@ -60,7 +60,7 @@
 		</div>
 	</form>
 	<div class="panel panel-default" style="margin-top: 4%" ng-show="testData.totalElements > 0">
-	<div class="panel-heading">Job Details<span class="pull-right" style="margin-top: -5px;">
+	<div class="panel-heading"><b>Job Details</b><span class="pull-right" style="margin-top: -5px;">
 			<a  href="codeGenRequests/generateReport?sourceType={{jobstatus.sourceType}}&sourceSystem={{jobstatus.sourceSystem}}&dbConnection={{jobstatus.serverIP}}&dbName={{jobstatus.dbName}}&loadType={{jobstatus.loadType}}&fromDate={{jobstatus.fromDate.toISOString().slice(0,10)}}&toDate={{jobstatus.toDate.toISOString().slice(0,10)}}&page=0&size={{testData.totalElements}}" target="_blank" class="btn btn-default btn-sm">
           		<span class="glyphicon glyphicon-save"></span> Export To Excel
         	</a>
@@ -76,7 +76,7 @@
 					<th>Source Server</th>
 					<th>Target Server</th>
 					<th>Hive DB</th>
-					<th>Hive Table</th>
+					<!-- <th>Hive Table</th> -->
 					<th>Load Type</th>
 					<th>Submitted On</th>
 					<th>View Details</th>
@@ -90,7 +90,7 @@
 					<td>{{job.dbConnection}}</td>
 					<td>{{job.targetConnection}}</td>
 					<td>{{job.targetDBName}}</td>
-					<td>{{job.targetTableName}}</td>
+					<!-- <td>{{job.targetTableName}}</td> -->
 					<td>{{job.loadType}}</td>
 					<td>{{job.createTimeStamp}}</td>
 					<td><a ng-click="clickOpenPopUp(job)"><span class="glyphicon glyphicon-eye-open" style="padding-left: 33%;"></span></a></td>
@@ -108,7 +108,9 @@
 		      <a class="page-link" ng-click="testData.totalPages > testData.number+1 ? onSubmit(testData.number+1,10):''"><span class="glyphicon glyphicon-chevron-right"></span></a>
 		    </li>
 	  </ul> 
-	  <span> Showing page number {{testData.number + 1}} out of {{testData.totalPages}} pages</span>
+	  <span> Showing page number {{testData.number + 1}} out of {{testData.totalPages}} pages
+	  	<span class="pull-right" style="margin-top:7px">(Total {{testData.totalElements}} records found)</span>
+	  </span>
 	</div> 
 	</div>
   </div>
