@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 
 @Entity(name = "JOB_REQ")
 public class RequestHistory {
@@ -64,11 +62,9 @@ public class RequestHistory {
 	private String loadType;
 	@Column(name = "CRTE_TMSP")
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="IST")
 	private Date createTimeStamp;
 	@Column(name = "UPDT_TMSP")
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="IST")
 	private Date updateTimeStamp;
 	
 	public Integer getRequestId() {
