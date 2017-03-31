@@ -34,11 +34,11 @@ public class ResourceRequestController {
          
         //Authorized user will download the file
         String dataDirectory = "C:/Users/hemant.mandge/workspace/CodeGenUtility/target";
-        Path file = Paths.get(dataDirectory, "CodeGenUtility-0.0.1-SNAPSHOT.jar");
+        Path file = Paths.get(dataDirectory, "CodeGenUtility-0.0.1-SNAPSHOT.war");
         if (Files.exists(file)) 
         {
             response.setContentType("application/pdf");
-            response.addHeader("Content-Disposition", "attachment; filename="+"CodeGenUtility.jar");
+            response.addHeader("Content-Disposition", "attachment; filename="+"CodeGenUtility.war");
             try
             {
                 Files.copy(file, response.getOutputStream());
