@@ -111,6 +111,25 @@ app.controller('utilityCtrl', [
 				});
 			};
 
+			$rootScope.callHome =function()
+			{
+				$rootScope.isDirty=false;
+			}
+		
+			$rootScope.callJobStatus=function()
+			{
+				if(($scope.rdbmsForm && $scope.rdbmsForm.$dirty)
+				|| ($scope.hadoopForm && $scope.hadoopForm.$dirty)
+				|| ($scope.fileForm && $scope.fileForm.$dirty))
+					{
+					 $rootScope.isDirty=true;
+					}
+				else
+					{
+					 $rootScope.isDirty=false;
+					}
+			};
+			
 			$rootScope.redirectToPage = function(homeRadioBtn) {
 				$rootScope.isDirty = ($scope.rdbmsForm && $scope.rdbmsForm.$dirty)
 					|| ($scope.hadoopForm && $scope.hadoopForm.$dirty)
@@ -138,7 +157,7 @@ app.run([ '$rootScope', '$cookies', '$location',
 					$rootScope.isNotJobPage = true;
 					$location.path("/");
 				}
-				$rootScope.redirectToPage("");
+			//	$rootScope.redirectToPage("");
 				if ($rootScope.isDirty) {
 					var isNavigate = confirm("You have made changes on the screen. If you navigate to other screen your changes will be lost. Are you sure you want to navigate ?");
 					if (!isNavigate) {

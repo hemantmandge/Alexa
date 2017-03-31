@@ -51,12 +51,12 @@
                            </a>
                     </li>
                     <li ng-class="isNotJobPage?'activeNavbar':''">
-                           <a href="/" class="btn-lg">
+                           <a href="/" class="btn-lg" ng-click="callHome()">
                         <span class="glyphicon glyphicon-dashboard codegenIcons"></span>
                       </a>
                     </li>
                     <li ng-class="isNotJobPage?'':'activeNavbar'">
-                           <a href="#job" class="btn-lg">
+                           <a href="#job" class="btn-lg" ng-click="callJobStatus()">
                         <span class="glyphicon glyphicon-briefcase codegenIcons"></span>
                       </a>
                   </li>
