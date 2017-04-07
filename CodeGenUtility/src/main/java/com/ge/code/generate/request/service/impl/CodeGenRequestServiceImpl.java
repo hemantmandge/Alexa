@@ -634,5 +634,6 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		batchControlMasterRepository.save(batchControlMaster);
 		ingestSubJobControlRepository.save(ingestSubJobControl);
 		requestHistoryRepository.save(requestHistory);
+	
 	}
 }

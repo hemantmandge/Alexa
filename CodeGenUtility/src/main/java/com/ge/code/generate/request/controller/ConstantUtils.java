@@ -38,5 +38,4 @@ public interface ConstantUtils {
 	String NON_PARTITIONED = "NON-PARTITIONED";
 	String SCRIPT_NAME_SCDTYPE= "scdtype2inc.pig";
 	String PARAMETER_FILE_LOCATION_SCDPARAM="scdparam_generic.txt";	
-
 }

@@ -160,6 +160,7 @@ app.controller('utilityCtrl', [
 				}
 			};
 		} ]);
+		
 app.run([ '$rootScope', '$cookies', '$location',
 		function($rootScope, $cookies, $location) {
 			$rootScope.$on('$routeChangeStart', function(event) {
