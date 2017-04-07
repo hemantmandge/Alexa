@@ -29,7 +29,7 @@ angular.module('utilityApp').controller('FileController',
 	$scope.joinKeysRequired=false;
  
 	$scope.hivepartionkeyrequired=false;
-	
+	//new comment
 //	$scope.toggleFileResources = false;v
 	/**
 	 * calling web services for File Data source Start
