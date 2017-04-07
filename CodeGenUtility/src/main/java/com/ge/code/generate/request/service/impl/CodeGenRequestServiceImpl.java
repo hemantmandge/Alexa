@@ -100,8 +100,17 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			Date currentDate = new Date();
 			if (batchControlMaster == null) {
 				batchControlMaster = new BatchControlMaster(batchControlMasterPrimaryKey);
-				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
-				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+				if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())|| 
+						ConstantUtils.LOAD_TYPE_FULL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType()))
+					{
+						batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
+						batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+					}
+				else
+					{
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_FIRSTLOAD);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+					}
 				batchControlMaster.setLastRunLoadTimestamp(currentDate);
 				batchControlMaster.setCreateTimeStamp(currentDate);
 				
@@ -128,10 +137,22 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
 					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
 					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
-				} else {
+				} else if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())) {
 					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_APPEND);
 					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL);
+				} else if(ConstantUtils.LOAD_TYPE_FULL_HISTORY.equalsIgnoreCase(codeGenRequest.getLoadType())) {
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_SCDFULL);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
 				}
+				 else if(ConstantUtils.LOAD_TYPE_ONETIME_HISTORY.equalsIgnoreCase(codeGenRequest.getLoadType())) {
+						batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_FIRSTLOAD);
+						batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+					}
+				 else
+				 {
+					 	batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_SCDINC);
+						batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL); 
+				 }
 			}
 			batchControlMaster.setSource(codeGenRequest.getSource());// DBschema name
 			batchControlMaster.setSourceTableName(sourceTableName.toUpperCase());
@@ -166,13 +187,24 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				
 				ingestSubJobControl.setMasterJobName(codeGenRequest.getDbName() + "-" + ConstantUtils.ORACLE_TEMPLATE);
 				//ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
+				if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())|| 
+						ConstantUtils.LOAD_TYPE_FULL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType()))
+				{
 				if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getTargetTableType())) {
 					ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 				}
 				else {
 					ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_PARTIOTION);
 				}
+				
 				ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
+				}
+				else
+				{
+					ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_SCDTYPE);
+					ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION_SCDPARAM);
+				}
+				
 				Date date;
 				try {
 					SimpleDateFormat format = new SimpleDateFormat(ConstantUtils.DATE_FORMAT); 
@@ -237,7 +269,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			requestHistory.setTargetTableName(targetTableName);
 			requestHistory.setTargetTableType(codeGenRequest.getTargetTableType());
 			requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey().toUpperCase());
-			requestHistory.setLoadType(batchControlMaster.getLoadType());
+			requestHistory.setLoadType(codeGenRequest.getLoadType());
 			requestHistory.setCreateTimeStamp(currentDate);
 			requestHistory.setUpdateTimeStamp(currentDate);
 			
@@ -261,8 +293,17 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		Date currentDate = new Date();
 		if (batchControlMaster == null) {
 			batchControlMaster = new BatchControlMaster(batchControlMasterPrimaryKey);
+			if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())|| 
+					ConstantUtils.LOAD_TYPE_FULL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType()))
+				{
 			batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
 			batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+				}
+			else
+				{
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_FIRSTLOAD);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+				}
 			batchControlMaster.setLastRunLoadTimestamp(currentDate);
 			batchControlMaster.setCreateTimeStamp(currentDate);
 			
@@ -288,10 +329,24 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
 				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
 				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
-			} else {
+			} else  if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())) {
 				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_APPEND);
 				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL);
 			}
+			else if(ConstantUtils.LOAD_TYPE_FULL_HISTORY.equalsIgnoreCase(codeGenRequest.getLoadType())) {
+				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_SCDFULL);
+				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+			}
+			 else if(ConstantUtils.LOAD_TYPE_ONETIME_HISTORY.equalsIgnoreCase(codeGenRequest.getLoadType())) {
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_FIRSTLOAD);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+				}
+			 else
+			 {
+				 	batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_SCDINC);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL); 
+			 }
+		
 		}
 		
 		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
@@ -328,13 +383,25 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
 			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE);
+			
+			if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())|| 
+					ConstantUtils.LOAD_TYPE_FULL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType()))
+			{
 			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getTargetTableType())) {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 			}
 			else {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_PARTIOTION);
 			}
+			
 			ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
+			}
+			else
+			{
+				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_SCDTYPE);
+				ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION_SCDPARAM);
+
+			}
 			Date date;
 			try {
 				SimpleDateFormat format = new SimpleDateFormat(ConstantUtils.DATE_FORMAT); 
@@ -381,7 +448,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistory.setTargetTableName(codeGenRequest.getTargetTableName());
 		requestHistory.setTargetTableType(codeGenRequest.getTargetTableType());
 		requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
-		requestHistory.setLoadType(batchControlMaster.getLoadType());
+		requestHistory.setLoadType(codeGenRequest.getLoadType());
 		requestHistory.setCreateTimeStamp(currentDate);
 		requestHistory.setUpdateTimeStamp(currentDate);
 		
@@ -407,8 +474,17 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		Date currentDate = new Date();
 		if (batchControlMaster == null) {
 			batchControlMaster = new BatchControlMaster(batchControlMasterPrimaryKey);
-			batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
-			batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+			if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())|| 
+					ConstantUtils.LOAD_TYPE_FULL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType()))
+				{
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+				}
+			else
+				{
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_FIRSTLOAD);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+				}
 			batchControlMaster.setLastRunLoadTimestamp(currentDate);
 			batchControlMaster.setCreateTimeStamp(currentDate);
 			
@@ -434,10 +510,23 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			if (codeGenRequest.getLoadType().equalsIgnoreCase(ConstantUtils.LOAD_TYPE_FULL_LOAD)) {
 				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_OVERWRITE);
 				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
-			} else {
+			} else if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())) {
 				batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_APPEND);
 				batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL);
 			}
+			 else if(ConstantUtils.LOAD_TYPE_FULL_HISTORY.equalsIgnoreCase(codeGenRequest.getLoadType())) {
+					batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_SCDFULL);
+					batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+				}
+				 else if(ConstantUtils.LOAD_TYPE_ONETIME_HISTORY.equalsIgnoreCase(codeGenRequest.getLoadType())) {
+						batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_FIRSTLOAD);
+						batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_FULL);
+					}
+				 else
+				 {
+					 	batchControlMaster.setLoadType(ConstantUtils.LOAD_TYPE_SCDINC);
+						batchControlMaster.setRefreshType(ConstantUtils.REFRESH_TYPE_PARTIAL); 
+				 }
 		}
 		
 		batchControlMaster.setSourceTableName(codeGenRequest.getFileName());
@@ -474,6 +563,10 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 			ingestSubJobControl.setEpocIdTemp(ConstantUtils.UNIX_TIME_STAMP);
 			
 			ingestSubJobControl.setMasterJobName(ConstantUtils.FILE_TEMPLATE); 
+			
+			if(ConstantUtils.LOAD_TYPE_INCREMENTAL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType())|| 
+					ConstantUtils.LOAD_TYPE_FULL_LOAD.equalsIgnoreCase(codeGenRequest.getLoadType()))
+			{
 			if(ConstantUtils.NON_PARTITIONED.equalsIgnoreCase(codeGenRequest.getTargetTableType())) {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME);
 			}
@@ -481,6 +574,13 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_PARTIOTION);
 			}
 			ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION);
+			}
+			else
+			{
+				ingestSubJobControl.setScriptName(ConstantUtils.SCRIPT_NAME_SCDTYPE);
+				ingestSubJobControl.setParameterFileLocation(ConstantUtils.PARAMETER_FILE_LOCATION_SCDPARAM);
+
+			}
 			Date date;
 			try {
 				SimpleDateFormat format = new SimpleDateFormat(ConstantUtils.DATE_FORMAT); 
@@ -527,7 +627,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistory.setTargetTableName(codeGenRequest.getTargetTableName());
 		requestHistory.setTargetTableType(codeGenRequest.getTargetTableType());
 		requestHistory.setTargetPartitionKey(codeGenRequest.getTargetPartitionKey());
-		requestHistory.setLoadType(batchControlMaster.getLoadType());
+		requestHistory.setLoadType(codeGenRequest.getLoadType());
 		requestHistory.setCreateTimeStamp(currentDate);
 		requestHistory.setUpdateTimeStamp(currentDate);
 		

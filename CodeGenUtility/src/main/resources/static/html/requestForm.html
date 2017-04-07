@@ -17,7 +17,7 @@
 						</div>
 					</div>
 					<div class="row dbConnection">
-						<div class="col-md-3">
+						<!-- <div class="col-md-3">
 							<label
 								ng-class="toggleFileResources  ? 'labelSubHeader' : 'disabledlabel'"
 								style="padding-top: 0">SOURCE TYPE</label> <input type="text"
@@ -28,6 +28,22 @@
 								<div style="line-height: 3px">&nbsp;</div>
 								<span class="errmsg"
 									ng-show="fileForm.datasrc.$error.required">This is
+									required. </span>
+							</div>
+						</div> -->
+						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">FILE
+								TYPE</label> <select class="customDropDown" id="fileType"
+								ng-change="onChangeOfFileType()" name="fileType"
+								ng-required="fileTypeRequired" ng-model="file.fileType">
+								<option selected="selected" value="">Please Select</option>
+								<option ng-repeat="src in fileType">{{src.value}}</option>
+
+							</select>
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="errmsg"
+									ng-show="fileForm.fileType.$error.required">This is
 									required. </span>
 							</div>
 						</div>
@@ -48,22 +64,6 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">FILE
-								TYPE</label> <select class="customDropDown" id="fileType"
-								ng-change="onChangeOfFileType()" name="fileType"
-								ng-required="fileTypeRequired" ng-model="file.fileType">
-								<option selected="selected" value="">Please Select</option>
-								<option ng-repeat="src in fileType">{{src.value}}</option>
-
-							</select>
-							<div ng-show="showValidationErrors">
-								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg"
-									ng-show="fileForm.fileType.$error.required">This is
-									required. </span>
-							</div>
-						</div>
-						<div class="col-md-3">
 							<label ng-class="serverIP  ? 'disabledlabel':'labelSubHeader'"
 								style="padding-top: 0">FILE SERVER CONNECTION</label> <select
 								id="serverIP"
@@ -73,19 +73,11 @@
 								<option selected="selected" value="">Please Select</option>
 								<option ng-repeat="src in SFTPserverIPList">{{src.value}}</option>
 							</select>
-							<!-- <div ng-show="showValidationErrors">
-									<div style="line-height: 3px">&nbsp;</div>
-									<span class="errmsg"
-										ng-show="fileForm.serverIP.$error.required">This is
-										required. </span>
-								</div> -->
 						</div>
-					</div>
-
-					<div class="row">
 						<div class="col-md-3">
 							<label
-								ng-class=" fileDelimeter ? 'disabledlabel' : 'labelSubHeader'">FILE
+								ng-class=" fileDelimeter ? 'disabledlabel' : 'labelSubHeader'" 
+								style="padding-top: 0">FILE
 								DELIMITER <span
 								class="pull-right glyphicon glyphicon-info-sign rightHoverHelp"
 								data-toggle="tooltip" title="comma(,) , Semicolon(;), Pipe(|)"></span>
@@ -101,6 +93,9 @@
 									required. </span>
 							</div>
 						</div>
+					</div>
+
+					<div class="row">
 						<div class="col-md-3">
 							<label ng-class="filePath  ? 'disabledlabel' : 'labelSubHeader'">FILE
 								PATH</label> <input type="text" id="filepath" name="filepath"
@@ -144,12 +139,8 @@
 									required. </span>
 							</div>
 						</div>
-					</div>
-
-					<div class="row lastRowDiv">
 						<div class="col-md-3">
-							<label ng-class="rowTag  ? 'disabledlabel' : 'labelSubHeader'"
-								style="padding-top: 0">ROW TAG</label> <input type="text"
+							<label ng-class="rowTag  ? 'disabledlabel' : 'labelSubHeader'">ROW TAG</label> <input type="text"
 								id="rowtag"
 								ng-class="rowTag ? 'disabledTextBox' : 'customTextBox'"
 								name="rowtag" ng-required="rowTagRequired" ng-readonly="rowTag"
@@ -161,16 +152,22 @@
 									required. </span>
 							</div>
 						</div>
+					</div>
+
+					<div class="row lastRowDiv">
 						<div class="col-md-3">
 							<label
 								ng-class="archivePeriod  ? 'disabledlabel' : 'labelSubHeader'"
 								style="padding-top: 0">ARCHIVE PERIOD (DAYS)</label> <input
-								type="text" ng-pattern-restrict="^[0-9]*$" name="archiveper"
+								type="text" ng-pattern-restrict="[1-9][0-9]{0,2}$" ng-blur="checkarchivePeriod(file.archivePeriod)" name="archiveper"
 								 ng-readonly="archivePeriod"
 								id="archive"
 								ng-class="archivePeriod ? 'disabledTextBox' : 'customTextBox'"
 								placeholder="Please Enter" ng-model="file.archivePeriod">
-
+								<div ng-show="showArchiveValidation">
+									<div style="line-height: 3px">&nbsp;</div>
+									<span class="errmsg">Archive Period should be in between 1 to 365</span>
+								</div>
 							
 						</div>
 					</div>

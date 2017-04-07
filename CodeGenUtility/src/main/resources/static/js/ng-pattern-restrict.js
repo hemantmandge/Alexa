@@ -161,7 +161,7 @@ angular.module('ngPatternRestrict', [])
               revertToPreviousValue();
             } else if (regex.test(newValue)) {
               DEBUG && showDebugInfo("New value passed validation against", regex, newValue);
-              updateCurrentValue(newValue);
+            //  updateCurrentValue(newValue);
             } else {
               DEBUG && showDebugInfo("New value did NOT pass validation against", regex, newValue, "Reverting back to:", oldValue);
               evt.preventDefault();

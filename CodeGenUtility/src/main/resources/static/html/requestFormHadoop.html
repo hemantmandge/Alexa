@@ -15,21 +15,11 @@
 						</div>
 					</div>
 					<div class="row dbConnection">
-						<div class="col-md-3">
+						<!-- <div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">SOURCE
 								TYPE</label> <input readonly="readonly" type="text"
 								class="customTextBox" ng-model="hadoop.sourceSystem">
-						</div>
-						<div class="col-md-3">
-							<label class="labelSubHeader" style="padding-top: 0">FILE NAME</label>
-							<input type="text"	class="customTextBox" id="fileName" name="fileName" required ng-model="hadoop.fileName"> 
-							<div ng-show="showValidationErrors">
-								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg"
-									ng-show="hadoopForm.fileName.$error.required">This is
-									required. </span>
-							</div>
-						</div>
+						</div> -->
 						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">FILE
 								TYPE</label> <select class="customDropDown" id="fileTypeHdp"
@@ -46,6 +36,16 @@
 							</div>
 						</div>
 						<div class="col-md-3">
+							<label class="labelSubHeader" style="padding-top: 0">FILE NAME</label>
+							<input type="text"	class="customTextBox" id="fileName" name="fileName" required ng-model="hadoop.fileName"> 
+							<div ng-show="showValidationErrors">
+								<div style="line-height: 3px">&nbsp;</div>
+								<span class="errmsg"
+									ng-show="hadoopForm.fileName.$error.required">This is
+									required. </span>
+							</div>
+						</div>
+						<div class="col-md-3">
 							<label class="labelSubHeader" style="padding-top: 0">HADOOP
 								SOURCE CONNECTION</label> <select class="customDropDown"
 								id="hadoopSrcConnection" name="hadoopSrcConnection" 
@@ -54,12 +54,8 @@
 								<option ng-repeat="src in SFTPserverIPListHadoop ">{{src.value}}</option>
 							</select>
 						</div>
-
-					</div>
-					<div id="disabledDiv">
-						<div class="row">
 							<div class="col-md-3">
-								<label class="labelSubHeader">FILE PATH</label> <input
+								<label class="labelSubHeader" style="padding-top: 0">FILE PATH</label> <input
 									type="text" class="customTextBox" id="filepath" name="filepath"
 									required ng-model="hadoop.filePath" placeholder="Please Enter">
 								<div ng-show="showValidationErrors">
@@ -69,6 +65,9 @@
 										required. </span>
 								</div>
 							</div>
+					</div>
+					<div id="disabledDiv">
+						<div class="row">
 							<div class="col-md-3">
 								<label class="labelSubHeader">FILE SCHEMA PATH</label> <input
 									type="text" class="customTextBox" required
@@ -84,7 +83,7 @@
 							<div class="col-md-3">
 								<label ng-class="fileDelimeter ? 'disabledlabel' : 'labelSubHeader'">FILE DELIMITER<span
 									class="pull-right glyphicon glyphicon-info-sign rightHoverHelp"
-									data-toggle="tooltip" title="comma(,) , Semicolon(;), Pipe(|)"></span>
+									data-toggle="tooltip" title="Please enter the Delimiter like '|',';' etc."></span>
 								</label> 
 								<input
 									type="text" ng-class="fileDelimeter ? 'disabledTextBox' : 'customTextBox'"
@@ -113,8 +112,6 @@
 										required. </span>
 								</div>
 							</div>
-						</div>
-						<div class="row" style="padding-bottom: 24px;">
 							<div class="col-md-3">
 								<label ng-class="joinKeys  ? 'disabledlabel' : 'labelSubHeader'">UNIQUE
 									KEY</label> <input type="text" name="joinkey" required
@@ -128,14 +125,19 @@
 										required. </span>
 								</div>
 							</div>
+						</div>
+						<div class="row" style="padding-bottom: 24px;">
 							<div class="col-md-3">
 								<label
-									ng-class="archivePeriod  ? 'disabledlabel' : 'labelSubHeader'">ARCHIEVE
-									KEY (DAYS)</label> <input type="text" ng-pattern-restrict="^[0-9]*$"
-									name="archiveperiod"  id="archive"
+									ng-class="archivePeriod  ? 'disabledlabel' : 'labelSubHeader'">Archive Period (Days)
+									</label> <input type="text" ng-pattern-restrict="[1-9][0-9]{0,2}$" ng-blur="checkarchivePeriod(hadoop.archivePeriod)"
+									name="archiveperiod"  id="archive" maxlength="3"
 									ng-class="archivePeriod ? 'disabledTextBox' : 'customTextBox'"
 									placeholder="Please Enter" ng-model="hadoop.archivePeriod">
-							
+								<div ng-show="showArchiveValidation">
+									<div style="line-height: 3px">&nbsp;</div>
+									<span class="errmsg">Archive Period should be in between 1 to 365</span>
+								</div>
 							</div>
 						</div>
 					</div>

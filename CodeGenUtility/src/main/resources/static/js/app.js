@@ -14,6 +14,7 @@ app.controller('utilityCtrl', [
 			$rootScope.loading = false;
 			$scope.showLoginValidationErrors = false;
 			$rootScope.isDirty = false;
+			$rootScope.showArchiveValidation=false;
 			$scope.loadinitialLogin = function() {
 				if ($rootScope.isAuthenticated) {
 					$location.path("/RDBMS");
@@ -114,9 +115,23 @@ app.controller('utilityCtrl', [
 			$rootScope.callHome =function()
 			{
 				$rootScope.isDirty=false;
-			}
+			};
 		
-			$rootScope.callJobStatus=function()
+			$rootScope.checkarchivePeriod=function(archivePeriod)
+			{
+				//alert("hi------"+archivePeriod);
+				if(Number(archivePeriod)>Number(365))
+					{
+		//		alert("Archive Period should be in between 1 to 365" +$rootScope.showArchiveValidation);
+				$rootScope.showArchiveValidation=true;
+					}
+				else
+					{
+					$rootScope.showArchiveValidation=false;
+					}
+			};
+		
+				$rootScope.callJobStatus=function()
 			{
 				if(($scope.rdbmsForm && $scope.rdbmsForm.$dirty)
 				|| ($scope.hadoopForm && $scope.hadoopForm.$dirty)
@@ -129,7 +144,6 @@ app.controller('utilityCtrl', [
 					 $rootScope.isDirty=false;
 					}
 			};
-			
 			$rootScope.redirectToPage = function(homeRadioBtn) {
 				$rootScope.isDirty = ($scope.rdbmsForm && $scope.rdbmsForm.$dirty)
 					|| ($scope.hadoopForm && $scope.hadoopForm.$dirty)
