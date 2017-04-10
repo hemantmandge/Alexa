@@ -14,80 +14,80 @@
 			<div class="row">
 				<div class="col-md-3">
 					<label class="labelSubHeader">REQUEST ID</label> 
-					<input type="text" class="customTextBox" ng-model="job.requestId" readonly="readonly" title="{{job.requestId}}">
+					<input type="text" class="customTextBox" ng-model="job.requestId" readonly="readonly" style="cursor:help;" title="{{job.requestId}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">DATASOURCE</label> 
-					<input type="text" class="customTextBox" ng-model="job.sourceType" readonly="readonly"  title="{{job.sourceType}}">
+					<input type="text" class="customTextBox" ng-model="job.sourceType" readonly="readonly"   style="cursor:help;" title="{{job.sourceType}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">DATASOURCE TYPE</label> 
-					<input type="text" class="customTextBox" ng-model="job.sourceSystem" readonly="readonly"  title="{{job.sourceSystem}}">
+					<input type="text" class="customTextBox" ng-model="job.sourceSystem" readonly="readonly"   style="cursor:help;" title="{{job.sourceSystem}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">SOURCE SERVER</label> 
-					<input type="text" class="customTextBox" ng-model="job.dbConnection" readonly="readonly"  title="{{job.dbConnection}}">
+					<input type="text" class="customTextBox" ng-model="job.dbConnection" readonly="readonly"   style="cursor:help;" title="{{job.dbConnection}}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<label class="labelSubHeader">SOURCE DB NAME / SID</label> 
-					<input type="text" class="customTextBox" ng-model="job.dbName" readonly="readonly"  title="{{job.dbName}}">
+					<input type="text" class="customTextBox" ng-model="job.dbName" readonly="readonly"   style="cursor:help;" title="{{job.dbName}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">SOURCE DB SCHEMA</label> 
-					<input type="text" class="customTextBox" ng-model="job.source" readonly="readonly"  title="{{job.source}}">
+					<input type="text" class="customTextBox" ng-model="job.source" readonly="readonly"   style="cursor:help;" title="{{job.source}}">
 				</div>
 				<div class="col-md-3">
 					<label ng-show="job.sourceType !='RDBMS'" class="labelSubHeader">FILE NAME</label> 
 					<label ng-show="job.sourceType =='RDBMS'" class="labelSubHeader">SOURCE TABLE</label> 
-					<input type="text" class="customTextBox" ng-model="job.sourceTableName" readonly="readonly" title="{{job.sourceTableName}}">
+					<input type="text" class="customTextBox" ng-model="job.sourceTableName" readonly="readonly"  style="cursor:help;" title="{{job.sourceTableName}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">SOURCE COLUMNS</label> 
-					<input type="text" class="customTextBox" ng-model="job.sourceColumnName" readonly="readonly"  title="{{job.sourceColumnName}}">
+					<input type="text" class="customTextBox" ng-model="job.sourceColumnName" readonly="readonly"   style="cursor:help;" title="{{job.sourceColumnName}}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<label class="labelSubHeader">UNIQUE KEY</label> 
-					<input type="text" class="customTextBox" ng-model="job.joinKey" readonly="readonly"  title="{{job.joinKey}}">
+					<input type="text" class="customTextBox" ng-model="job.joinKey" readonly="readonly"   style="cursor:help;" title="{{job.joinKey}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">CALCULATE DELTA ON</label> 
-					<input type="text" class="customTextBox" ng-model="job.calculateDeltaOn" readonly="readonly"  title="{{job.calculateDeltaOn}}">
+					<input type="text" class="customTextBox" ng-model="job.calculateDeltaOn" readonly="readonly"   style="cursor:help;" title="{{job.calculateDeltaOn}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">WHERE CONDITION</label> 
-					<input type="text" class="customTextBox" ng-model="job.whereCondition" readonly="readonly"  title="{{job.whereCondition}}">
+					<input type="text" class="customTextBox" ng-model="job.whereCondition" readonly="readonly"   style="cursor:help;" title="{{job.whereCondition}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">ARCHIVE PERIOD (DAYS)</label> 
-					<input type="text" class="customTextBox" ng-model="job.archivePeriod" readonly="readonly"  title="{{job.archivePeriod}}">
+					<input type="text" class="customTextBox" ng-model="job.archivePeriod" readonly="readonly"   style="cursor:help;" title="{{job.archivePeriod}}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<label class="labelSubHeader">SOURCE DIRECTORY</label> 
-					<input type="text" class="customTextBox" ng-model="job.sourceDirectory" readonly="readonly"  title="{{job.sourceDirectory}}">
+					<input type="text" class="customTextBox" ng-model="job.sourceDirectory" readonly="readonly"   style="cursor:help;" title="{{job.sourceDirectory}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">FILE SCHEMA PATH</label> 
-					<input type="text" class="customTextBox" ng-model="job.fillerThree" readonly="readonly"  title="{{job.fillerThree}}">
+					<input type="text" class="customTextBox" ng-model="job.fillerThree" readonly="readonly"   style="cursor:help;" title="{{job.fillerThree}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">FILE DELIMITER</label> 
-					<input type="text" class="customTextBox" ng-model="job.fillerOne" readonly="readonly"  title="{{job.fillerOne}}">
+					<input type="text" class="customTextBox" ng-model="job.fillerOne" readonly="readonly"   style="cursor:help;" title="{{job.fillerOne}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">ROW TAG</label> 
-					<input type="text" class="customTextBox" ng-model="job.fillerTwo" readonly="readonly"  title="{{job.fillerTwo}}">
+					<input type="text" class="customTextBox" ng-model="job.fillerTwo" readonly="readonly"   style="cursor:help;" title="{{job.fillerTwo}}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<label class="labelSubHeader">SUBMITTED ON</label> 
-					<input type="text" class="customTextBox" ng-model="job.updateTimeStamp" readonly="readonly"  title="{{job.updateTimeStamp}}">
+					<input type="text" class="customTextBox" ng-model="job.updateTimeStamp" readonly="readonly"   style="cursor:help;" title="{{job.updateTimeStamp}}">
 				</div>
 			</div>
 			<div class="row titleDiv" style="margin-top: 3%;">
@@ -100,29 +100,29 @@
 			<div class="row">
 				<div class="col-md-3">
 					<label class="labelSubHeader">LOAD TYPE</label> 
-					<input type="text" class="customTextBox" ng-model="job.loadType" readonly="readonly"  title="{{job.loadType}}">
+					<input type="text" class="customTextBox" ng-model="job.loadType" readonly="readonly"   style="cursor:help;" title="{{job.loadType}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">TARGET SERVER</label> 
-					<input type="text" class="customTextBox" ng-model="job.targetConnection" readonly="readonly"  title="{{job.targetConnection}}">
+					<input type="text" class="customTextBox" ng-model="job.targetConnection" readonly="readonly"   style="cursor:help;" title="{{job.targetConnection}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">HIVE DB</label> 
-					<input type="text" class="customTextBox" ng-model="job.targetDBName" readonly="readonly"  title="{{job.targetDBName}}">
+					<input type="text" class="customTextBox" ng-model="job.targetDBName" readonly="readonly"   style="cursor:help;" title="{{job.targetDBName}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">HIVE TABLE</label> 
-					<input type="text" class="customTextBox" ng-model="job.targetTableName" readonly="readonly"  title="{{job.targetTableName}}">
+					<input type="text" class="customTextBox" ng-model="job.targetTableName" readonly="readonly"   style="cursor:help;" title="{{job.targetTableName}}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<label class="labelSubHeader">HIVE TABLE TYPE</label> 
-					<input type="text" class="customTextBox" ng-model="job.targetTableType" readonly="readonly"  title="{{job.targetTableType}}">
+					<input type="text" class="customTextBox" ng-model="job.targetTableType" readonly="readonly"   style="cursor:help;" title="{{job.targetTableType}}">
 				</div>
 				<div class="col-md-3">
 					<label class="labelSubHeader">HIVE PARTITION KEY</label> 
-					<input type="text" class="customTextBox" ng-model="job.targetPartitionKey" readonly="readonly"  title="{{job.targetPartitionKey}}">
+					<input type="text" class="customTextBox" ng-model="job.targetPartitionKey" readonly="readonly"   style="cursor:help;" title="{{job.targetPartitionKey}}">
 				</div>
 			</div>
 		</div>
