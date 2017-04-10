@@ -69,20 +69,14 @@
 					<div id="disabledDiv">
 						<div class="row">
 							<div class="col-md-3">
-								<label class="labelSubHeader">FILE SCHEMA PATH</label> <input
-									type="text" class="customTextBox" required
-									ng-model="hadoop.fileSchemaPath" id="fileschemapath"
+								<label class="disabledlabel">FILE SCHEMA PATH</label> <input
+									type="text" class="disabledTextBox" title="{{hadoop.fileSchemaPath}}" style="cursor: help;"
+									ng-model="hadoop.fileSchemaPath" id="fileschemapath" readonly="readonly"
 									name="fileschemapath" placeholder="Please Enter">
-								<div ng-show="showValidationErrors">
-									<div style="line-height: 3px">&nbsp;</div>
-									<span class="errmsg"
-										ng-show="hadoopForm.fileschemapath.$error.required">This
-										is required. </span>
-								</div>
 							</div>
 							<div class="col-md-3">
 								<label ng-class="fileDelimeter ? 'disabledlabel' : 'labelSubHeader'">FILE DELIMITER<span
-									class="pull-right glyphicon glyphicon-info-sign rightHoverHelp"
+									class="pull-right glyphicon glyphicon-info-sign rightHoverHelp" style="cursor: help;"
 									data-toggle="tooltip" title="Please enter the Delimiter like '|',';' etc."></span>
 								</label> 
 								<input

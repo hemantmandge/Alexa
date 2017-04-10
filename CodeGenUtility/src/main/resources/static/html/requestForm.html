@@ -78,7 +78,7 @@
 							<label
 								ng-class=" fileDelimeter ? 'disabledlabel' : 'labelSubHeader'" 
 								style="padding-top: 0">FILE
-								DELIMITER <span
+								DELIMITER <span style="cursor: help;"
 								class="pull-right glyphicon glyphicon-info-sign rightHoverHelp"
 								data-toggle="tooltip" title="Please enter the Delimiter like '|',';' etc."></span>
 							</label> <input type="text" id="filedel"
@@ -111,18 +111,13 @@
 						</div>
 						<div class="col-md-3">
 							<label
-								ng-class="fileSchemaPath  ?  'disabledlabel' : 'labelSubHeader'">FILE
+								ng-class="'disabledlabel'">FILE
 								SCHEMA PATH</label> <input type="text" id="fileschpath"
-								ng-class="fileSchemaPath ? 'disabledTextBox' : 'customTextBox'"
-								name="fileschpath" ng-required="fileSchemaPathRequired"
-								ng-model="file.fileSchemaPath" ng-readonly="fileSchemaPath"
+								ng-class="'disabledTextBox'" style="cursor: help;"
+								name="fileschpath"  title="{{file.fileSchemaPath}}"
+								ng-model="file.fileSchemaPath" readonly="readonly"
 								placeholder="Please Enter">
-							<div ng-show="showValidationErrors">
-								<div style="line-height: 3px">&nbsp;</div>
-								<span class="errmsg"
-									ng-show="fileForm.fileschpath.$error.required">This
-									is required. </span>
-							</div>
+							
 						</div>
 						<div class="col-md-3">
 							<label ng-class="joinKeys  ? 'disabledlabel' : 'labelSubHeader'">UNIQUE KEY</label> 

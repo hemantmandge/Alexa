@@ -36,12 +36,16 @@ angular.module('utilityApp').controller('HadoopController',
 		ResourceService.findByType("TARGETCONNECTION").then( function(response) {
 			$scope.targetcon = response.data;
 		});
+		ResourceService.findByName("FILESCHEMAPATH").then(function(response) {
+			$scope.fileSchemaPathStart = response.data[0].value;
+		});
 	};
 
 	
 	$scope.changeFileType=function() {
 		if($scope.hadoop.fileType=="XML")
 			{
+			$scope.hadoop.fileSchemaPath = $scope.fileSchemaPathStart+"/HADOOP_XML";
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.rowtagDisable=false;
@@ -49,13 +53,15 @@ angular.module('utilityApp').controller('HadoopController',
 			$scope.hadoop.fileDelimeter="";
 			}
 		else if ($scope.hadoop.fileType=="DELIMITED") {
+			$scope.hadoop.fileSchemaPath = $scope.fileSchemaPathStart+"/HADOOP_DELIMITED";
 			$scope.fileDelimeter=false;
 			$scope.fileDelimeterRequired=true;
 			$scope.rowtagDisable=true;
 			$scope.hadoop.rowTag="";
 			$scope.rowTagRequired=false;
 			}
-		else {
+		else if ($scope.hadoop.fileType=="JSON"){
+			$scope.hadoop.fileSchemaPath = $scope.fileSchemaPathStart+"/HADOOP_JSON";
 			$scope.rowtagDisable=false;
 			$scope.fileDelimeter=true;
 			$scope.rowTagRequired=true;
@@ -63,6 +69,14 @@ angular.module('utilityApp').controller('HadoopController',
 			$scope.hadoop.fileDelimeter="";
 		//	$scope.hadoop.rowTag="";
 			}
+		else{
+			$scope.hadoop.fileSchemaPath = "";
+			$scope.hadoop.fileDelimeter="";
+			$scope.rowtagDisable=true;
+			$scope.fileDelimeter=true;
+			$scope.rowTagRequired=false;
+			$scope.fileDelimeterRequired=false;
+		}
 		
 	};
 	

@@ -9,7 +9,7 @@ angular.module('utilityApp').controller('FileController',
 	 $scope.disabled = false;
 	//variables for file 
 	$scope.filePath=true;
-	$scope.fileSchemaPath=true;
+	//$scope.fileSchemaPath=true;
 	$scope.hivepartionkeydisabled=false;
 	//$scope.fileType =false;
 	$scope.serverIP=true;
@@ -23,7 +23,7 @@ angular.module('utilityApp').controller('FileController',
 	//variables for required check 
 	$scope.fileTypeRequired=true;
 	$scope.filePathRequired=false;
-	$scope.fileSchemaPathRequired=false;
+	 //$scope.fileSchemaPath=false;
 	$scope.rowTagRequired=false;
 	$scope.fileDelimeterRequired=false;
 	$scope.joinKeysRequired=false;
@@ -58,6 +58,10 @@ angular.module('utilityApp').controller('FileController',
 				function(response) {
 					$scope.targetcon = response.data;
 				});
+		
+		ResourceService.findByName("FILESCHEMAPATH").then(function(response) {
+			$scope.fileSchemaPathStart = response.data[0].value;
+		});
 	
 	};
 	
@@ -100,7 +104,7 @@ angular.module('utilityApp').controller('FileController',
 			 $scope.disabled = false;
 			//variables for file 
 			$scope.filePath=true;
-			$scope.fileSchemaPath=true;
+		//	$scope.fileSchemaPath=true;
 			$scope.hivepartionkeydisabled=false;
 			//$scope.fileType =false;
 			$scope.serverIP=true;
@@ -114,7 +118,7 @@ angular.module('utilityApp').controller('FileController',
 			//variables for required check 
 			$scope.fileTypeRequired=true;
 			$scope.filePathRequired=false;
-			$scope.fileSchemaPathRequired=false;
+			 //$scope.fileSchemaPath=false;
 			$scope.rowTagRequired=false;
 			$scope.fileDelimeterRequired=false;
 			$scope.joinKeysRequired=false;
@@ -152,8 +156,9 @@ angular.module('utilityApp').controller('FileController',
 	
 		if($scope.file.fileType=="XML")
 			{
+			$scope.file.fileSchemaPath = ""+$scope.fileSchemaPathStart+"/FILE_XML";
 			$scope.filePath=false;
-			$scope.fileSchemaPath=false;
+		//	$scope.fileSchemaPath=false;
 			$scope.serverIP=false;
 			$scope.rowTag=false;
 			$scope.fileDelimeter=true;
@@ -173,7 +178,7 @@ angular.module('utilityApp').controller('FileController',
 			//required
 			
 			$scope.filePathRequired=true;
-			$scope.fileSchemaPathRequired=true;
+			 //$scope.fileSchemaPath=true;
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.joinKeysRequired=true;
@@ -183,8 +188,10 @@ angular.module('utilityApp').controller('FileController',
 			}
 		else if($scope.file.fileType=="JSON")
 		{
+			$scope.file.fileSchemaPath= ""+$scope.fileSchemaPathStart+"/FILE_JSON";
+
 			$scope.filePath=false;
-			$scope.fileSchemaPath=false;
+		//	$scope.fileSchemaPath=false;
 			$scope.serverIP=false;
 			$scope.rowTag=false;
 			$scope.fileDelimeter=true;
@@ -203,7 +210,7 @@ angular.module('utilityApp').controller('FileController',
 			
 			//required
 			$scope.filePathRequired=true;
-			$scope.fileSchemaPathRequired=true;
+			 //$scope.fileSchemaPath=true;
 			$scope.rowTagRequired=true;
 			$scope.fileDelimeterRequired=false;
 			$scope.joinKeysRequired=true;
@@ -211,8 +218,10 @@ angular.module('utilityApp').controller('FileController',
 		}
 		else if($scope.file.fileType=="DELIMITED")
 			{
+			$scope.file.fileSchemaPath= ""+$scope.fileSchemaPathStart+"/FILE_DELIMITED";
+
 			$scope.filePath=false;
-			$scope.fileSchemaPath=false;
+		//	$scope.fileSchemaPath=false;
 			$scope.serverIP=false;
 			$scope.rowTag=true;
 			$scope.fileDelimeter=false;
@@ -231,7 +240,7 @@ angular.module('utilityApp').controller('FileController',
 			
 			//required
 			$scope.filePathRequired=true;
-			$scope.fileSchemaPathRequired=true;
+			 //$scope.fileSchemaPath=true;
 			$scope.rowTagRequired=false;
 			$scope.fileDelimeterRequired=true;
 			$scope.joinKeysRequired=true;
@@ -240,8 +249,9 @@ angular.module('utilityApp').controller('FileController',
 			}
 		else
 			{
+			$scope.file.fileSchemaPath= "";
 			$scope.filePath=true;
-			$scope.fileSchemaPath=true;
+		//	$scope.fileSchemaPath=true;
 			//$scope.fileType =false;
 			$scope.serverIP=true;
 			$scope.rowTag=true;
@@ -249,6 +259,15 @@ angular.module('utilityApp').controller('FileController',
 			$scope.calculateDeltaOn=true;
 			$scope.joinKeys=true;
 			$scope.archivePeriod =true; 
+			
+			$scope.fileTypeRequired=true;
+			$scope.filePathRequired=false;
+			 //$scope.fileSchemaPath=false;
+			$scope.rowTagRequired=false;
+			$scope.fileDelimeterRequired=false;
+			$scope.joinKeysRequired=false;
+		 
+			$scope.hivepartionkeyrequired=false;
 		
 			}
 	};
