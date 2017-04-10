@@ -110,6 +110,10 @@ angular.module('utilityApp').controller('HadoopController',
 			$scope.showValidationErrors = true; 
 			return false;
 		}
+	if($rootScope.showArchiveValidation)
+	{
+	return false;
+	}
 		$rootScope.dataLoading = true;
 		$rootScope.loadingBackgronud = true;
 		$scope.submitted = true;

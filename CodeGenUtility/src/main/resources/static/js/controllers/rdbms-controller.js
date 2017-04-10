@@ -403,6 +403,11 @@ angular.module('utilityApp').controller(
 														$scope.showValidationErrors = true;
 														return false;
 												}
+												 
+												 if($rootScope.showArchiveValidation)
+													{
+													return false;
+													}
 												 $rootScope.dataLoading = true;
 												 $rootScope.loadingBackgronud = true;
 														   $rootScope.submitted = true;

@@ -73,6 +73,10 @@ angular.module('utilityApp').controller('FileController',
 			$scope.showValidationErrors = true; 
 			return false;
 		}
+		if($rootScope.showArchiveValidation)
+		{
+		return false;
+		}
 		$rootScope.dataLoading = true;
 		$rootScope.loadingBackgronud = true;
 		$scope.submitted = true;
