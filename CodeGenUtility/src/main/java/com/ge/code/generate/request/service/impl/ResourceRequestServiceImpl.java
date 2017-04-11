@@ -173,11 +173,11 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.MSSQL)) {
-				Class.forName("com.microsoft.sqlserver.jdbc.SqlServerDriver");
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
 				Class.forName("com.teradata.jdbc.TeraDriver");
 			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Class.forName("org.postgresql.Driver");
 			}  
 		} catch (ClassNotFoundException e) {
 
