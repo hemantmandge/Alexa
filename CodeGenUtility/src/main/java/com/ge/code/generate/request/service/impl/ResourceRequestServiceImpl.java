@@ -52,6 +52,7 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 		try {
 			DatabaseMetaData metaData = connection.getMetaData();
 			schemas = metaData.getSchemas();
+			System.out.println("Schema:"+schemas);
 			while (schemas.next()) {
 				String tableSchema = schemas.getString(1);    // "TABLE_SCHEM"
 				String tableCatalog = schemas.getString(2); //"TABLE_CATALOG"
@@ -167,6 +168,24 @@ public class ResourceRequestServiceImpl implements ResourceRequestService {
 
 		System.out.println("-------- JDBC Connection Testing ------");
 		Connection connection = null;
+		
+		try {
+			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.MSSQL)) {
+				Class.forName("com.microsoft.sqlserver.jdbc.SqlServerDriver");
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.TERADATA)) {
+				Class.forName("com.teradata.jdbc.TeraDriver");
+			} else if (rdbmsName.equalsIgnoreCase(ConstantUtils.GREENPLUM)) {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+			}  
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("JDBC Driver ?");
+			e.printStackTrace();
+		}
+
+		System.out.println("Oracle JDBC Driver Registered!");
 
 		try {
 			if (rdbmsName.equalsIgnoreCase(ConstantUtils.ORACLE)) {
