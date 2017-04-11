@@ -604,7 +604,7 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		}
 		
 		//ingestSubJobControl.setSource(codeGenRequest.getSourceSystem());
-		ingestSubJobControl.setSource(ConstantUtils.FILE_TYPE+codeGenRequest.getFileType());
+		ingestSubJobControl.setSource(ConstantUtils.HADOOP_TYPE+codeGenRequest.getFileType());
 		
 		RequestHistory requestHistory = new RequestHistory();
 		requestHistory.setSourceType(ConstantUtils.HADOOP);
