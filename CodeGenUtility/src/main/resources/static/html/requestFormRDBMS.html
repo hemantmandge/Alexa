@@ -150,7 +150,7 @@
 									ng-change="onSelctedColumns(codeGenRequest.sourceColumnNames)">
 									<!-- ng-class="{warning: (codeGenRequest.sourceColumnNames == 'Select All'), ok: (codeGenRequest.sourceColumnNames != 'Select All')}" -->
 									<!--<option selected="selected" value="">Please Select</option>-->
-									<option ng-repeat="src in cols">{{src}}</option>
+									<option ng-repeat="src in cols" value="{{src}}">{{src}}{{pkList.indexOf(src) > -1 ? '*':''}}</option>
 								</select>
 								<div ng-show="showValidationErrors">
 									<div style="line-height: 3px">&nbsp;</div>

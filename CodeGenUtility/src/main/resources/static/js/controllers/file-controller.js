@@ -82,11 +82,35 @@ angular.module('utilityApp').controller('FileController',
 		$scope.submitted = true;
 		var joinKeysList = [];
 		var data = requestData;
-		joinKeysList.push(data.joinKeys);
+		joinKeysList.push(data.joinKeyString);
 		data.joinKeys = joinKeysList;
-		ResourceService.createCodeGenRequest(data)
-			.then($scope.fileSuccess, UtilityController.createCodeGenRequestFailed)
-			.catch(UtilityController.catchCreateCodeGenRequestError);
+		
+		ResourceService.isExists(data).then(function(response) {
+			//$scope.isExist=response.data;
+			var isCreateRecord=false;
+			if(response.data) {
+				$rootScope.dataLoading = false;
+				$rootScope.loadingBackgronud = false;
+			   	var isOverride = confirm("This record Exists. Do you want to override?");
+			   	if(isOverride){
+			   		isCreateRecord=true;
+			   	}
+			} else {
+				isCreateRecord = true;
+			}
+		   if(isCreateRecord){
+			   ResourceService.createCodeGenRequest(data)
+				.then($scope.fileSuccess, UtilityController.createCodeGenRequestFailed)
+				.catch(UtilityController.catchCreateCodeGenRequestError);
+		   }
+		   }).catch(function (data) {
+				  $rootScope.dataLoading = false;
+				  $rootScope.loadingBackgronud = false;
+					
+			});
+		   
+		
+		
 	
 	};
 	

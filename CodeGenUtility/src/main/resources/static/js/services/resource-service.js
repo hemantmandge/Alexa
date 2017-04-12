@@ -29,11 +29,19 @@ app.factory('ResourceService',function($http) {
 		
 		resources.getColumns = function(username, password , host , database, rdbmsName, tableName , dbschema) {
 			   return $http.get("resources/getColumns?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + database + "&rdbmsName=" + rdbmsName + "&tableName=" + tableName + "&schema=" + dbschema);
-		}
+		};
 		
 		resources.getJobRequests = function(sourceType,sourceSystem,dbConnection,dbname,loadType,fromDate,toDate,page,size) {
 			return $http.get("codeGenRequests/requests?sourceType="+sourceType+"&sourceSystem="+sourceSystem+"&dbConnection="+dbConnection+"&dbName="+dbname+"&loadType="+loadType+"&fromDate="+fromDate+"&toDate="+toDate+"&page="+page+"&size="+size)
-		}
+		};
+		
+		resources.isExists = function(requestData) {
+			return $http.post("codeGenRequests/isExists", angular.fromJson(requestData));
+		};
+		
+		resources.getPrimaryKey = function(username, password , host , database, rdbmsName, tableName , dbschema) {
+			   return $http.get("resources/getPrimaryKey?userid=" + username + "&password=" + password + "&host=" + host + "&database=" + database + "&rdbmsName=" + rdbmsName + "&tableName=" + tableName + "&schema=" + dbschema);
+		};
 		
 		return resources;
 });

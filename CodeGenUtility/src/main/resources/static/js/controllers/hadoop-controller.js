@@ -119,11 +119,35 @@ angular.module('utilityApp').controller('HadoopController',
 		$scope.submitted = true;
 	 var joinKeysList = [];
 		var data = requestData;
-		joinKeysList.push(data.joinKeys);
+		joinKeysList.push(data.joinKeyString);
 		data.joinKeys = joinKeysList;
-		ResourceService.createCodeGenRequest(data)
-			.then($scope.hadoopSuccess, UtilityController.createCodeGenRequestFailed)
-			.catch(UtilityController.catchCreateCodeGenRequestError);
+		
+		ResourceService.isExists(data).then(function(response) {
+			$scope.isExist=response.data;
+			if($scope.isExist)
+			   {
+			   //popup
+			   	var isRecordFound = confirm("This record Exists. Do you want to override?");
+			   	if(isRecordFound){
+			   		$scope.isExist = false;
+			   	}
+			    $rootScope.dataLoading = false;
+				$rootScope.loadingBackgronud = false;
+			   }
+		   if(!$scope.isExist)
+			   {
+			   ResourceService.createCodeGenRequest(data)
+				.then($scope.hadoopSuccess, UtilityController.createCodeGenRequestFailed)
+				.catch(UtilityController.catchCreateCodeGenRequestError);
+			   }
+		   }).catch(function (data) {
+
+				  $rootScope.dataLoading = false;
+				  $rootScope.loadingBackgronud = false;
+					
+			});
+		
+		
 	};
 	
 	$scope.hadoopSuccess=function(data)

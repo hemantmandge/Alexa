@@ -47,7 +47,7 @@ angular.module('utilityApp').controller(
 			$scope.disableCreateButton=true;
 			$scope.dbconnectionDisble=true;
 			 $scope.dbnameDisble=true;
-
+			 $scope.pkList = [];
 			$scope.pageLoadDataRDBMS = function() {
                 //load calls for dropdown and init functions
 				$rootScope.homeRadioBtn = "RDBMS";
@@ -230,6 +230,10 @@ angular.module('utilityApp').controller(
 					  $scope.cols = []; // declare an empty array
 					  if (tableName.length <= 1) {
 						  
+					   ResourceService.getPrimaryKey(username, password , host , database, rdbmsName, tableName , dbschema)
+					    .then(function(response) {
+					    	$scope.pkList = response.data;
+					    });
 					   ResourceService.getColumns(username, password , host , database, rdbmsName, tableName , dbschema)
 					   .then(function(response) {
 						   $scope.showUnionKeySelectAll=false;
@@ -412,9 +416,34 @@ angular.module('utilityApp').controller(
 												 $rootScope.loadingBackgronud = true;
 														   $rootScope.submitted = true;
 														   var data = codeGenRequest;
-														   ResourceService.createCodeGenRequest(data)
-															.then($scope.RDBMS_success, UtilityController.createCodeGenRequestFailed)
-															.catch(UtilityController.catchCreateCodeGenRequestError);
+														   
+														   ResourceService.isExists(data).then(function(response) {
+															$scope.isExist=response.data;
+															if($scope.isExist)
+															   {
+															   //popup
+															   	var isRecordFound = confirm("This record Exists. Do you want to override?");
+															   	if(isRecordFound){
+															   		$scope.isExist = false;
+															   	}
+															    $rootScope.dataLoading = false;
+																 $rootScope.loadingBackgronud = false;
+															   }
+														   if(!$scope.isExist)
+															   {
+															   ResourceService.createCodeGenRequest(data)
+																.then($scope.RDBMS_success, UtilityController.createCodeGenRequestFailed)
+																.catch(UtilityController.catchCreateCodeGenRequestError);
+															   }
+														   }).catch(function (data) {
+
+																  $rootScope.dataLoading = false;
+																  $rootScope.loadingBackgronud = false;
+																	
+															});
+														   
+														   
+														
 											 };
 											 
 											

@@ -95,6 +95,14 @@ public class ResourceRequestController {
 			@RequestParam("schema") String schema) {
 		return resourceRequestService.getColumns(userid, password, host, database, rdbmsName, tableName, schema);
 	}
+	
+	@RequestMapping("/getPrimaryKey")
+	public List<String> getPrimaryKey(@RequestParam("userid") String userid, @RequestParam("password") String password,
+			@RequestParam("host") String host, @RequestParam("database") String database,
+			@RequestParam("rdbmsName") String rdbmsName, @RequestParam("tableName") String tableName,
+			@RequestParam("schema") String schema) {
+		return resourceRequestService.getPrimaryKey(userid, password, host, database, rdbmsName, tableName, schema);
+	}
 	/*
 	 * @RequestMapping("/getRequestLoadType") public String getRequestLoadType()
 	 * { return codeGenRequestService.getAllCodeGenRequests(); }
