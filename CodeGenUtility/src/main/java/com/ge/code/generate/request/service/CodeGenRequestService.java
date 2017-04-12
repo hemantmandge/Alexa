@@ -12,4 +12,5 @@ public interface CodeGenRequestService {
 	public Page<RequestHistory> getAllCodeGenRequests(String sourceType, String sourceSystem, String dbConnection, 
 			String dbName, String loadType, Date fromDate, Date toDate, Pageable pageable);
 	public void create(CodeGenRequest codeGenRequest);
+	public boolean isExists(CodeGenRequest codeGenRequest);
 }

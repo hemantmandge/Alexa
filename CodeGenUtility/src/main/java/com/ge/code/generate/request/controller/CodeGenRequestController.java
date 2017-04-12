@@ -49,7 +49,12 @@ public class CodeGenRequestController {
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
 	public void create(@RequestBody CodeGenRequest codeGenRequest){
 		codeGenRequestService.create(codeGenRequest);
-	}	
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/isExists")
+	public boolean isExists(@RequestBody CodeGenRequest codeGenRequest){
+		return codeGenRequestService.isExists(codeGenRequest);
+	}
 	@RequestMapping("/generateReport")
 	public void generateReport(HttpServletRequest request, HttpServletResponse response, String sourceType, String sourceSystem, String dbConnection, String dbName, String loadType, @RequestParam("fromDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern="yyyy-MM-dd")  Date toDate, Pageable pageable) throws FileNotFoundException, IOException {
 		Page<RequestHistory> requestHistoriesPages =  codeGenRequestService.getAllCodeGenRequests(sourceType, sourceSystem, dbConnection, dbName, loadType, fromDate, toDate, pageable);

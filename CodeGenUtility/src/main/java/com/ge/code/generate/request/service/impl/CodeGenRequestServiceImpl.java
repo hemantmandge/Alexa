@@ -636,4 +636,20 @@ public class CodeGenRequestServiceImpl implements CodeGenRequestService {
 		requestHistoryRepository.save(requestHistory);
 	
 	}
+
+	@Override
+	public boolean isExists(CodeGenRequest codeGenRequest) {
+		BatchControlMaster batchControlMaster;
+		BatchControlMasterPrimaryKey batchControlMasterPrimaryKey = new BatchControlMasterPrimaryKey();
+		batchControlMasterPrimaryKey.setDefaultInstance(1);
+		batchControlMasterPrimaryKey.setSubjectArea(codeGenRequest.getTargetDBName());	
+		batchControlMasterPrimaryKey.setTargetTableName(codeGenRequest.getTargetTableName().toLowerCase());
+
+		batchControlMaster = batchControlMasterRepository.findOne(batchControlMasterPrimaryKey);
+		if (batchControlMaster == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }
